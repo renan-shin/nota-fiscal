@@ -1,0 +1,33 @@
+{
+  "calendario" : {
+    "criacao" : "2025-08-29T11:43:04.59Z",
+    "dataDeVencimento" : "2025-09-02",
+    "validadeAposVencimento" : 30
+  },
+  "status" : "ATIVA",
+  "txid" : "202536283FC00AB9E36F145C586E39D0E58",
+  "revisao" : 0,
+  "devedor" : {
+    "cnpj" : "38304613000195",
+    "nome" : "JONATAS ARCANJO DE OLIVEIRA"
+  },
+  "recebedor" : {
+    "cnpj" : "04601804000105",
+    "nome" : "COMERCIAL STARTE LTDA",
+    "logradouro" : "RUA RETIRO 84 , MARANHAO",
+    "cidade" : "SAO PAULO",
+    "uf" : "SP",
+    "cep" : "03073005"
+  },
+  "valor" : {
+    "original" : "6289.00"
+  },
+  "chave" : "04601804000105",
+  "loc" : {
+    "id" : 7754324581373927588,
+    "location" : "api.itau/pix/qr/v2/cobv/9de0e3ac-90cf-4403-9972-7ce819c2a348",
+    "tipoCob" : "cobv",
+    "criacao" : "2025-08-29T11:43:04.760Z"
+  },
+  "pixCopiaECola" : "00020101021226820014BR.GOV.BCB.PIX2560api.itau/pix/qr/v2/cobv/9de0e3ac-90cf-4403-9972-7ce819c2a3485204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304711A"
+}

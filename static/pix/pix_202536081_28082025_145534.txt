@@ -1,0 +1,33 @@
+{
+  "calendario" : {
+    "criacao" : "2025-08-28T14:55:33.80Z",
+    "dataDeVencimento" : "2025-09-02",
+    "validadeAposVencimento" : 30
+  },
+  "status" : "ATIVA",
+  "txid" : "202536081CD09F1D6C1E44E6694D51A9A2C",
+  "revisao" : 0,
+  "devedor" : {
+    "cnpj" : "20213826000146",
+    "nome" : "TEODORA ANGELA LOBO SILVA ALENCAR 83973788391"
+  },
+  "recebedor" : {
+    "cnpj" : "48929567000173",
+    "nome" : "LIBERTY MAQUINAS E PECAS LTDA",
+    "logradouro" : "BR DE CAPANEMA 112 APTO 1301, CERQUEIRA CESAR",
+    "cidade" : "CINGAPURA",
+    "uf" : "SP",
+    "cep" : "01411010"
+  },
+  "valor" : {
+    "original" : "5890.00"
+  },
+  "chave" : "48929567000173",
+  "loc" : {
+    "id" : 6302970159130390049,
+    "location" : "api.itau/pix/qr/v2/cobv/64e44e98-1da2-4899-be24-01ffa100c746",
+    "tipoCob" : "cobv",
+    "criacao" : "2025-08-28T14:55:33.943Z"
+  },
+  "pixCopiaECola" : "00020101021226820014BR.GOV.BCB.PIX2560api.itau/pix/qr/v2/cobv/64e44e98-1da2-4899-be24-01ffa100c7465204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304E44F"
+}

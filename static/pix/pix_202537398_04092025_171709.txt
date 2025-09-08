@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T17:17:08.91Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537398DCA56FD796C1487593F0B3EB9D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "690363310505621053",
+    "location" : "api.itau/pix/qr/v2/bf5baf8c-6024-4f16-8e9c-e985c3f2a19d",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T17:17:09.087402"
+  },
+  "location" : "api.itau/pix/qr/v2/bf5baf8c-6024-4f16-8e9c-e985c3f2a19d",
+  "devedor" : {
+    "cnpj" : "37141079000180",
+    "nome" : "UNIAO MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "4330.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/bf5baf8c-6024-4f16-8e9c-e985c3f2a19d5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304440B"
+}

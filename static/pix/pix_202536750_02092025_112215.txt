@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-02T11:22:14.82Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "202536750937DF115F3494913B900059AC3",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7296448144931912089",
+    "location" : "api.itau/pix/qr/v2/8baa9a2d-df5f-40e0-823a-53952b2566be",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-02T11:22:15.007036"
+  },
+  "location" : "api.itau/pix/qr/v2/8baa9a2d-df5f-40e0-823a-53952b2566be",
+  "devedor" : {
+    "cnpj" : "19309672000101",
+    "nome" : "COMERCIO DE MAQUINAS DE COSTURA MAIORMAQ LTDA ME"
+  },
+  "valor" : {
+    "original" : "3485.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8baa9a2d-df5f-40e0-823a-53952b2566be5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304916A"
+}

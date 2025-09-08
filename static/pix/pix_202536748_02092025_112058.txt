@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-02T11:20:58.33Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025367480DCCF6B1EC334A20AB393634A4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4422801267946376617",
+    "location" : "api.itau/pix/qr/v2/12d8f1c7-549b-4ebd-be27-36132546530c",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-02T11:20:58.471808"
+  },
+  "location" : "api.itau/pix/qr/v2/12d8f1c7-549b-4ebd-be27-36132546530c",
+  "devedor" : {
+    "cnpj" : "43673675000104",
+    "nome" : "DEBORA DE NAZARE SILVA BORDALO 71983490210"
+  },
+  "valor" : {
+    "original" : "1655.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/12d8f1c7-549b-4ebd-be27-36132546530c5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304957E"
+}

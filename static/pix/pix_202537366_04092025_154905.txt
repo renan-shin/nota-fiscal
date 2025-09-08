@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T15:49:04.83Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253736605220AFD52874A0B953503C77B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3539971984101613159",
+    "location" : "api.itau/pix/qr/v2/442c1206-cb68-48d5-98e3-415564487ece",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T15:49:05.031053"
+  },
+  "location" : "api.itau/pix/qr/v2/442c1206-cb68-48d5-98e3-415564487ece",
+  "devedor" : {
+    "cnpj" : "47675706000117",
+    "nome" : "SITIOMAQ COMERCIO DE MAQUINAS E EQUIPAMENTOS LTDA"
+  },
+  "valor" : {
+    "original" : "3020.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/442c1206-cb68-48d5-98e3-415564487ece5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63042831"
+}

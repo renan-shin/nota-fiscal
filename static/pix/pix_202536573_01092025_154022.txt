@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-01T15:40:22.29Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202536573216426839C1043BE90B162F13B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4046176246550462224",
+    "location" : "api.itau/pix/qr/v2/35637169-efca-4c5d-9ed8-5b92e8779ffa",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-01T15:40:22.428442"
+  },
+  "location" : "api.itau/pix/qr/v2/35637169-efca-4c5d-9ed8-5b92e8779ffa",
+  "devedor" : {
+    "cnpj" : "33513130000187",
+    "nome" : "ALUIZIO OLIVEIRA DE MORAIS"
+  },
+  "valor" : {
+    "original" : "7170.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/35637169-efca-4c5d-9ed8-5b92e8779ffa5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630403E2"
+}

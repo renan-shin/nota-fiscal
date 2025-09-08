@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-02T17:14:31.68Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253691113CDCC8745BC44029FB8703F2B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7921265045938820299",
+    "location" : "api.itau/pix/qr/v2/188690a9-cff7-4ff3-8095-338cc818d07b",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-02T17:14:31.858394"
+  },
+  "location" : "api.itau/pix/qr/v2/188690a9-cff7-4ff3-8095-338cc818d07b",
+  "devedor" : {
+    "cpf" : "14733326807",
+    "nome" : "VANDERLEI SILVA FILHO"
+  },
+  "valor" : {
+    "original" : "8840.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/188690a9-cff7-4ff3-8095-338cc818d07b5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042B4F"
+}

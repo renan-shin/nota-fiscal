@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-08-29T17:10:02.53Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253636922B168C92FAF4A26ABCB740398",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5693571546601957654",
+    "location" : "api.itau/pix/qr/v2/5e07fe01-2476-4dda-a1bb-98ca03e728ed",
+    "tipoCob" : "cob",
+    "criacao" : "2025-08-29T17:10:02.669331"
+  },
+  "location" : "api.itau/pix/qr/v2/5e07fe01-2476-4dda-a1bb-98ca03e728ed",
+  "devedor" : {
+    "cpf" : "01076072470",
+    "nome" : "MARILIA FERREIRA BARACUHY"
+  },
+  "valor" : {
+    "original" : "8775.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/5e07fe01-2476-4dda-a1bb-98ca03e728ed5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63045743"
+}

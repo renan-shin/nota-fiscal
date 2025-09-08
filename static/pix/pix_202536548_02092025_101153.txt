@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-02T10:11:53.16Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253654884DCAD9F27F54369A097833902",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6614564002503056193",
+    "location" : "api.itau/pix/qr/v2/12b827d6-d425-4366-b6ab-4b54d66e514f",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-02T10:11:53.340936"
+  },
+  "location" : "api.itau/pix/qr/v2/12b827d6-d425-4366-b6ab-4b54d66e514f",
+  "devedor" : {
+    "cnpj" : "06881518000168",
+    "nome" : "JAMARI MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "3450.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/12b827d6-d425-4366-b6ab-4b54d66e514f5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304E198"
+}

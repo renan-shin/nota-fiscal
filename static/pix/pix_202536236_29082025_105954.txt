@@ -1,0 +1,33 @@
+{
+  "calendario" : {
+    "criacao" : "2025-08-29T10:59:54.40Z",
+    "dataDeVencimento" : "2025-09-01",
+    "validadeAposVencimento" : 30
+  },
+  "status" : "ATIVA",
+  "txid" : "2025362369A8055E52C5E48B2905204FE34",
+  "revisao" : 0,
+  "devedor" : {
+    "cnpj" : "46544207000128",
+    "nome" : "PATRICIO PEREIRA DA SILVA 08450513421"
+  },
+  "recebedor" : {
+    "cnpj" : "48929567000173",
+    "nome" : "LIBERTY MAQUINAS E PECAS LTDA",
+    "logradouro" : "BR DE CAPANEMA 112 APTO 1301, CERQUEIRA CESAR",
+    "cidade" : "CINGAPURA",
+    "uf" : "SP",
+    "cep" : "01411010"
+  },
+  "valor" : {
+    "original" : "2200.00"
+  },
+  "chave" : "48929567000173",
+  "loc" : {
+    "id" : 7735524804504479623,
+    "location" : "api.itau/pix/qr/v2/cobv/d1e10a17-f953-445d-b25f-e8d359c92b65",
+    "tipoCob" : "cobv",
+    "criacao" : "2025-08-29T10:59:54.581Z"
+  },
+  "pixCopiaECola" : "00020101021226820014BR.GOV.BCB.PIX2560api.itau/pix/qr/v2/cobv/d1e10a17-f953-445d-b25f-e8d359c92b655204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630441E2"
+}

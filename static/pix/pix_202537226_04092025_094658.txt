@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T09:46:58.29Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537226CD37A7B76D2C407C82F4C0329A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2545150619723096810",
+    "location" : "api.itau/pix/qr/v2/c2115156-1d21-4dd1-80f1-f94a543cae00",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T09:46:58.487542"
+  },
+  "location" : "api.itau/pix/qr/v2/c2115156-1d21-4dd1-80f1-f94a543cae00",
+  "devedor" : {
+    "cnpj" : "28586807000177",
+    "nome" : "WF FLORES"
+  },
+  "valor" : {
+    "original" : "2500.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c2115156-1d21-4dd1-80f1-f94a543cae005204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040409"
+}

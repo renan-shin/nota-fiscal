@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-08-29T17:09:13.51Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253596595420EEC789F4C6BAA4BB2C5B4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "596113836269300459",
+    "location" : "api.itau/pix/qr/v2/3976f0e9-74a9-48fa-9183-bc2382934802",
+    "tipoCob" : "cob",
+    "criacao" : "2025-08-29T17:09:13.707137"
+  },
+  "location" : "api.itau/pix/qr/v2/3976f0e9-74a9-48fa-9183-bc2382934802",
+  "devedor" : {
+    "cpf" : "11184854408",
+    "nome" : "UELTON DE LIMA COSTA"
+  },
+  "valor" : {
+    "original" : "8775.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/3976f0e9-74a9-48fa-9183-bc23829348025204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046B87"
+}

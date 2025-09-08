@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-03T10:24:59.82Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537005A4E26283DA8A4E3D945A6E2733",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4245919842516027945",
+    "location" : "api.itau/pix/qr/v2/85dc804f-92c6-4349-bf87-3ad467179c0e",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-03T10:25:00.005818"
+  },
+  "location" : "api.itau/pix/qr/v2/85dc804f-92c6-4349-bf87-3ad467179c0e",
+  "devedor" : {
+    "cnpj" : "45959961000166",
+    "nome" : "FAIBERFLEX INDUSTRIA E COMERCIO DE FIBRAS E COLCHÕES LTDA"
+  },
+  "valor" : {
+    "original" : "3690.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/85dc804f-92c6-4349-bf87-3ad467179c0e5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304FCE9"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T10:21:24.01Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025372312B3FB71656C84CC58C38F91F27",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "402940709527070962",
+    "location" : "api.itau/pix/qr/v2/86d505bc-5249-4a2b-bdd0-4ee1a1e2ef43",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T10:21:24.201748"
+  },
+  "location" : "api.itau/pix/qr/v2/86d505bc-5249-4a2b-bdd0-4ee1a1e2ef43",
+  "devedor" : {
+    "cnpj" : "02904763000192",
+    "nome" : "A MAC MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "11070.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/86d505bc-5249-4a2b-bdd0-4ee1a1e2ef435204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304E42C"
+}

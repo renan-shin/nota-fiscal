@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.3.1/datatables.min.css" rel="stylesheet" 
+            integrity="sha384-rcK/Hw0a8czqNV8XiNNbA2kqXBypz/reTTu9ewJiCYQRES16Xpl47dKudYItkU7M" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/colreorder/2.1.0/css/colReorder.dataTables.css" rel="stylesheet">
+{% endblock %}
+{% block title %}Nota Fiscal{% endblock %}
+
+{% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-lg-2">
+            <div class="input-group input-group-sm mb-2">
+                <span class="input-group-text">Empresa:</span>
+                <select class="form-select form-select-sm" id="empresas">
+                    <option value="" selected></option>
+                    {% for e in empresas %}
+                    <option value="{{e.EmpresaFilial}}">{{e.Mnemonico}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" id="btnModal">Status SEFAZ</button>
+            <button type="button" class="btn btn-primary btn-sm mb-2" id="btnBoleto">Boleto</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-sm display" id="notas-fiscais">
+            <thead>
+                <tr>
+                    <th>Pedido</th>
+                    <th>NFe</th>
+                    <th>Status</th>
+                    <th>Serie</th>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Pedido</th>
+                    <th>NFe</th>
+                    <th>Status</th>
+                    <th>Serie</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalStatus" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalStatusLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Status SEFAZ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="textoModal"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.datatables.net/v/bs5/dt-2.3.1/datatables.min.js" 
+    integrity="sha384-BE8jgQ18lLIDRFU5irQ26MTXl+tzWCKvu313il+U+Wo2wVTDr47xBIDmggcM21dh" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.dataTables.js"></script>
+<script src="https://cdn.datatables.net/colreorder/2.1.0/js/dataTables.colReorder.js"></script>
+<script src="https://cdn.datatables.net/colreorder/2.1.0/js/colReorder.dataTables.js"></script>
+<script src="{% static 'js/core.js' %}"></script>
+{% endblock %}

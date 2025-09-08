@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T14:27:28.80Z",
+    "expiracao" : "86400"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537259395305BAD7D646AFBEAC9BF942",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2367343302640161668",
+    "location" : "api.itau/pix/qr/v2/e9af0144-73fd-4864-9007-0d92b1a61513",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T14:27:28.948014"
+  },
+  "location" : "api.itau/pix/qr/v2/e9af0144-73fd-4864-9007-0d92b1a61513",
+  "devedor" : {
+    "cnpj" : "49663074000105",
+    "nome" : "BARBOSAS MANUTENCAO E COMERCIO DE MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "6560.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e9af0144-73fd-4864-9007-0d92b1a615135204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304ED7E"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-02T08:50:28.14Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "202536637347275C37BC04AF59EDAD4DB87",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1614931633910798362",
+    "location" : "api.itau/pix/qr/v2/2a7093ef-ce87-4034-8028-33819729b82d",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-02T08:50:28.31975"
+  },
+  "location" : "api.itau/pix/qr/v2/2a7093ef-ce87-4034-8028-33819729b82d",
+  "devedor" : {
+    "cnpj" : "33513130000187",
+    "nome" : "ALUIZIO OLIVEIRA DE MORAIS"
+  },
+  "valor" : {
+    "original" : "8490.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2a7093ef-ce87-4034-8028-33819729b82d5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63046699"
+}

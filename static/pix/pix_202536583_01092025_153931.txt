@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-01T15:39:31.07Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202536583D8C73FC0133B4087BDCB69D61B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "69230551526932488",
+    "location" : "api.itau/pix/qr/v2/60a7288f-ced0-4828-8493-22864c87fc7a",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-01T15:39:31.231797"
+  },
+  "location" : "api.itau/pix/qr/v2/60a7288f-ced0-4828-8493-22864c87fc7a",
+  "devedor" : {
+    "cpf" : "06005009770",
+    "nome" : "THAMIRES DA SILVA CORTES TEIXEIRA"
+  },
+  "valor" : {
+    "original" : "1695.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/60a7288f-ced0-4828-8493-22864c87fc7a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040D2B"
+}

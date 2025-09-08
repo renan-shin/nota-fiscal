@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-08T08:44:00.86Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025376559FEF5716409B4AD58A8F37924D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3393175826845767116",
+    "location" : "api.itau/pix/qr/v2/2929ab4c-0693-486e-85f6-2a09e789b418",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-08T08:44:01.062807"
+  },
+  "location" : "api.itau/pix/qr/v2/2929ab4c-0693-486e-85f6-2a09e789b418",
+  "devedor" : {
+    "cpf" : "10312499400",
+    "nome" : "MARIA JOSE SOUZA DUARTE"
+  },
+  "valor" : {
+    "original" : "4360.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2929ab4c-0693-486e-85f6-2a09e789b4185204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046E59"
+}

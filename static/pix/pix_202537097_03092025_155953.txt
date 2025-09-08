@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-03T15:59:53.31Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537097A06FAED344534A529F13C4A9C6",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6817566746027155816",
+    "location" : "api.itau/pix/qr/v2/7939e4d8-c1e1-41aa-bf49-7da77f8a6f31",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-03T15:59:53.473052"
+  },
+  "location" : "api.itau/pix/qr/v2/7939e4d8-c1e1-41aa-bf49-7da77f8a6f31",
+  "devedor" : {
+    "cpf" : "10614725585",
+    "nome" : "LUCAS JESUS VASCONCELOS"
+  },
+  "valor" : {
+    "original" : "7903.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/7939e4d8-c1e1-41aa-bf49-7da77f8a6f315204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63043278"
+}

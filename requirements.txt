@@ -1,0 +1,16 @@
+asgiref==3.8.1
+certifi==2025.8.3
+charset-normalizer==3.4.2
+Django==5.0.14
+idna==3.10
+mssql-django==1.5
+pillow==11.3.0
+pyodbc==5.2.0
+pytz==2025.2
+pywin32==310
+reportlab==4.4.3
+requests==2.32.4
+sqlparse==0.5.3
+tzdata==2025.2
+urllib3==2.5.0
+whitenoise==6.9.0

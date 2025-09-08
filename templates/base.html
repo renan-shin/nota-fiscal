@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    {% include 'partials/_head.html' %}
+    {% block css %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body class="bg-light">
+    {% include 'partials/_nav.html' %}
+    {% block conteudo %}{% endblock %}
+
+    {% include 'partials/_footer.html' %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

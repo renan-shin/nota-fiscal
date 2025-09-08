@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-03T15:14:27.26Z",
+    "expiracao" : "172800"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537117B1C6FB97D72E475489A98A7CE1",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4411634514124440781",
+    "location" : "api.itau/pix/qr/v2/74e9b192-4bce-4056-b2b4-4643bf898b78",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-03T15:14:27.41243"
+  },
+  "location" : "api.itau/pix/qr/v2/74e9b192-4bce-4056-b2b4-4643bf898b78",
+  "devedor" : {
+    "cnpj" : "37553073000110",
+    "nome" : "MF CONFECCOES COMERCIO VESTUARIO E ACESSORIOS LTDA"
+  },
+  "valor" : {
+    "original" : "2225.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/74e9b192-4bce-4056-b2b4-4643bf898b785204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040D47"
+}

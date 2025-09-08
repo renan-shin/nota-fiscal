@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T14:50:17.99Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202537334C1365114F8B547E88FE6281978",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2775628224663789647",
+    "location" : "api.itau/pix/qr/v2/754d5609-8052-4190-8bb8-537ccb14863a",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T14:50:18.182573"
+  },
+  "location" : "api.itau/pix/qr/v2/754d5609-8052-4190-8bb8-537ccb14863a",
+  "devedor" : {
+    "cnpj" : "35718402000100",
+    "nome" : "R.J.SOUZA"
+  },
+  "valor" : {
+    "original" : "5130.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/754d5609-8052-4190-8bb8-537ccb14863a5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040288"
+}

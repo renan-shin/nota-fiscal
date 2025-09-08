@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-05T11:33:30.23Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253747783ED0EDAAF4E42499763AEE60C",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9130979794716571574",
+    "location" : "api.itau/pix/qr/v2/c9742f36-874e-413b-84fd-ec4209acf2db",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-05T11:33:30.397999"
+  },
+  "location" : "api.itau/pix/qr/v2/c9742f36-874e-413b-84fd-ec4209acf2db",
+  "devedor" : {
+    "cnpj" : "35943221000188",
+    "nome" : "ROSANE NUNES RAFAEL 95195599904"
+  },
+  "valor" : {
+    "original" : "2218.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c9742f36-874e-413b-84fd-ec4209acf2db5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304D8B0"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-04T12:10:08.60Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025372946EB1F18E6CA94D0A9188C3021E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4463874555360572392",
+    "location" : "api.itau/pix/qr/v2/4d498d7a-b251-4731-a2f8-25833d658580",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-04T12:10:08.782834"
+  },
+  "location" : "api.itau/pix/qr/v2/4d498d7a-b251-4731-a2f8-25833d658580",
+  "devedor" : {
+    "cnpj" : "41038680000110",
+    "nome" : "E DOS SANTOS MAQUINAS DE COSTURA"
+  },
+  "valor" : {
+    "original" : "1785.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/4d498d7a-b251-4731-a2f8-25833d6585805204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042C85"
+}
