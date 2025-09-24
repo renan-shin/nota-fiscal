@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-18T10:01:19.08Z",
+    "expiracao" : "86400"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025400146D7AAF833DC3440E9D6E71D306",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7054673031087729941",
+    "location" : "api.itau/pix/qr/v2/08595656-c9a4-4a22-9ecc-19109e65f5e5",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-18T10:01:19.280485"
+  },
+  "location" : "api.itau/pix/qr/v2/08595656-c9a4-4a22-9ecc-19109e65f5e5",
+  "devedor" : {
+    "cnpj" : "62192384000149",
+    "nome" : "JOSE FERREIRA DA SILVA"
+  },
+  "valor" : {
+    "original" : "10188.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/08595656-c9a4-4a22-9ecc-19109e65f5e55204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304FD71"
+}

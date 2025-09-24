@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T08:35:40.29Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "202538856B328238067A244EC90BE54D586",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6941492341580230191",
+    "location" : "api.itau/pix/qr/v2/d9408437-323f-4434-86d7-6e045198ff13",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T08:35:40.4645"
+  },
+  "location" : "api.itau/pix/qr/v2/d9408437-323f-4434-86d7-6e045198ff13",
+  "devedor" : {
+    "cnpj" : "32532290000100",
+    "nome" : "ADEMIR RIBEIRO NEVES 03598337809"
+  },
+  "valor" : {
+    "original" : "850.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d9408437-323f-4434-86d7-6e045198ff135204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630438D7"
+}

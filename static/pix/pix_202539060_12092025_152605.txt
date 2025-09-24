@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T15:26:04.65Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025390609AAD9F8FC7674F869D89697F3E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8448388189714946641",
+    "location" : "api.itau/pix/qr/v2/6f7c043a-64a2-464d-b93b-a12bcc3552fe",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T15:26:04.782251"
+  },
+  "location" : "api.itau/pix/qr/v2/6f7c043a-64a2-464d-b93b-a12bcc3552fe",
+  "devedor" : {
+    "cnpj" : "23154785000152",
+    "nome" : "TAINAH MARIANE DE SOUZA 45714157885"
+  },
+  "valor" : {
+    "original" : "3050.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6f7c043a-64a2-464d-b93b-a12bcc3552fe5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304E4C1"
+}

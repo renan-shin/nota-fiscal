@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-10T11:51:28.89Z",
+    "expiracao" : "172800"
+  },
+  "status" : "ATIVA",
+  "txid" : "202538423ECB9CD073C4C449EB592AC2266",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "599067040535586009",
+    "location" : "api.itau/pix/qr/v2/8347f0c1-6bb4-4e29-af60-2cb31db96794",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-10T11:51:29.026918"
+  },
+  "location" : "api.itau/pix/qr/v2/8347f0c1-6bb4-4e29-af60-2cb31db96794",
+  "devedor" : {
+    "cpf" : "12236434847",
+    "nome" : "LUIS ANTONIO ALVES"
+  },
+  "valor" : {
+    "original" : "1076.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8347f0c1-6bb4-4e29-af60-2cb31db967945204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304BC7A"
+}

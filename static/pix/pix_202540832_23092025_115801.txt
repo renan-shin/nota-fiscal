@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-23T11:57:46.27Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "202540832DA0BEE437EA14B019B7A801636",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "111791814972416253",
+    "location" : "api.itau/pix/qr/v2/dd9ee63d-60a5-4134-8ae4-a7d1884591ed",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-23T11:57:46.449191"
+  },
+  "location" : "api.itau/pix/qr/v2/dd9ee63d-60a5-4134-8ae4-a7d1884591ed",
+  "devedor" : {
+    "cnpj" : "07572659000161",
+    "nome" : "VIP COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "4332.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/dd9ee63d-60a5-4134-8ae4-a7d1884591ed5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304A52C"
+}

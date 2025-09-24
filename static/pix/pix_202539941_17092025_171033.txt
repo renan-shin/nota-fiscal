@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-17T17:10:32.79Z",
+    "expiracao" : "172800"
+  },
+  "status" : "ATIVA",
+  "txid" : "202539941442E6E64C63B4BC09D71976B24",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6907845578939935316",
+    "location" : "api.itau/pix/qr/v2/b97247b3-c9f7-4c30-90ec-47a16561958a",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-17T17:10:32.964032"
+  },
+  "location" : "api.itau/pix/qr/v2/b97247b3-c9f7-4c30-90ec-47a16561958a",
+  "devedor" : {
+    "cpf" : "28028172806",
+    "nome" : "SIRLENE CRISTINA DA SILVA"
+  },
+  "valor" : {
+    "original" : "3020.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b97247b3-c9f7-4c30-90ec-47a16561958a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63041718"
+}

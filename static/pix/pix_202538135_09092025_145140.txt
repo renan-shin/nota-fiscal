@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-09T14:51:40.23Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "202538135F5B82A41BF0C496296EC8809A5",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9064116293032917978",
+    "location" : "api.itau/pix/qr/v2/dfcb94bd-a444-4717-81b6-8e3f53c3163c",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-09T14:51:40.432745"
+  },
+  "location" : "api.itau/pix/qr/v2/dfcb94bd-a444-4717-81b6-8e3f53c3163c",
+  "devedor" : {
+    "cnpj" : "28934337000195",
+    "nome" : "ENOELZA DOS SANTOS SILVA LTDA"
+  },
+  "valor" : {
+    "original" : "6040.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/dfcb94bd-a444-4717-81b6-8e3f53c3163c5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63041535"
+}

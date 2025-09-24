@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-08T15:12:49.50Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025378638B405E19394E45DBB392D4895E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3932824504492453499",
+    "location" : "api.itau/pix/qr/v2/97a541f0-712e-4a60-83be-b4e8fc7eef15",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-08T15:12:49.682349"
+  },
+  "location" : "api.itau/pix/qr/v2/97a541f0-712e-4a60-83be-b4e8fc7eef15",
+  "devedor" : {
+    "cpf" : "01167503678",
+    "nome" : "JOAO EDUARDO GOMES BATISTA"
+  },
+  "valor" : {
+    "original" : "5187.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/97a541f0-712e-4a60-83be-b4e8fc7eef155204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630403EF"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T09:09:20.44Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253887839D612264EF945B4B1FC211A08",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2193473968106641514",
+    "location" : "api.itau/pix/qr/v2/1a5f1951-b6d6-4dbf-97b6-07abc694364d",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T09:09:20.609092"
+  },
+  "location" : "api.itau/pix/qr/v2/1a5f1951-b6d6-4dbf-97b6-07abc694364d",
+  "devedor" : {
+    "cpf" : "45945947865",
+    "nome" : "Gustavo Gabriel Silva Mota"
+  },
+  "valor" : {
+    "original" : "2830.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1a5f1951-b6d6-4dbf-97b6-07abc694364d5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304D54A"
+}

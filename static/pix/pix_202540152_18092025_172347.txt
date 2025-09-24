@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-18T17:23:46.79Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202540152C28BCA24FEFF407085FC76BE7C",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7516401647937535985",
+    "location" : "api.itau/pix/qr/v2/1e80a1db-c2b7-4102-b298-eb83b1a39cde",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-18T17:23:46.984054"
+  },
+  "location" : "api.itau/pix/qr/v2/1e80a1db-c2b7-4102-b298-eb83b1a39cde",
+  "devedor" : {
+    "cnpj" : "05513771000104",
+    "nome" : "J T PINHEIRO COMERCIAL DE MAQUINAS DE COSTURA"
+  },
+  "valor" : {
+    "original" : "8217.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1e80a1db-c2b7-4102-b298-eb83b1a39cde5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630467E0"
+}

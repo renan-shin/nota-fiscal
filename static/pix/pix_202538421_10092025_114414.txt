@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-10T11:44:14.16Z",
+    "expiracao" : "172800"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253842189DD5A8E39C643FAACE8639047",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6046317342928731763",
+    "location" : "api.itau/pix/qr/v2/b75157a2-8513-46f3-88a1-7a8c16eec62a",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-10T11:44:14.3403"
+  },
+  "location" : "api.itau/pix/qr/v2/b75157a2-8513-46f3-88a1-7a8c16eec62a",
+  "devedor" : {
+    "cpf" : "23050602899",
+    "nome" : "DIEGO JUNIOR DE OLIVEIRA"
+  },
+  "valor" : {
+    "original" : "3720.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b75157a2-8513-46f3-88a1-7a8c16eec62a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304709D"
+}

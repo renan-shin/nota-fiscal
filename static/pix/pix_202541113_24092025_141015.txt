@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-24T14:10:00.71Z",
+    "expiracao" : "467383"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025411134EA03B9E430946D1AA316A8FC0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6347004384042033970",
+    "location" : "api.itau/pix/qr/v2/89d27e19-0560-439e-8aba-5cad06dedda5",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-24T14:10:00.859098"
+  },
+  "location" : "api.itau/pix/qr/v2/89d27e19-0560-439e-8aba-5cad06dedda5",
+  "devedor" : {
+    "cnpj" : "22645350000148",
+    "nome" : "GOLD MAQUINAS COMERCIO E MANUTENÇAO EIRELI"
+  },
+  "valor" : {
+    "original" : "4380.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/89d27e19-0560-439e-8aba-5cad06dedda55204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63048644"
+}

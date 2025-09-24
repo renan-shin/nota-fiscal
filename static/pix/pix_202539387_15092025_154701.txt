@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-15T15:47:01.37Z",
+    "expiracao" : "604800"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253938775FB5B3189014459854BA21D05",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "70163895003671898",
+    "location" : "api.itau/pix/qr/v2/7160620d-854d-4f0f-be80-06cc3441a9a9",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-15T15:47:01.552158"
+  },
+  "location" : "api.itau/pix/qr/v2/7160620d-854d-4f0f-be80-06cc3441a9a9",
+  "devedor" : {
+    "cnpj" : "58815304000197",
+    "nome" : "JOSUE DE SOUZA DE OLIVEIRA"
+  },
+  "valor" : {
+    "original" : "4047.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/7160620d-854d-4f0f-be80-06cc3441a9a95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304E121"
+}

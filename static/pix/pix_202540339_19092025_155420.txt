@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-19T15:54:20.50Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025403395801B3A7BC964A60B805CD6918",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6187691129303397743",
+    "location" : "api.itau/pix/qr/v2/5327744f-4f60-4701-bcbd-3ef52c464ea8",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-19T15:54:20.660535"
+  },
+  "location" : "api.itau/pix/qr/v2/5327744f-4f60-4701-bcbd-3ef52c464ea8",
+  "devedor" : {
+    "cnpj" : "11590477000190",
+    "nome" : "DINAIR PEREIRA 64262529134"
+  },
+  "valor" : {
+    "original" : "4360.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/5327744f-4f60-4701-bcbd-3ef52c464ea85204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046378"
+}

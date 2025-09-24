@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-24T10:51:23.86Z",
+    "expiracao" : "479300"
+  },
+  "status" : "ATIVA",
+  "txid" : "202540895D77D3566CCB747B1946DA3445E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3036482958128149909",
+    "location" : "api.itau/pix/qr/v2/ca3aea1e-8fe0-4d31-9323-110408173f19",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-24T10:51:24.015332"
+  },
+  "location" : "api.itau/pix/qr/v2/ca3aea1e-8fe0-4d31-9323-110408173f19",
+  "devedor" : {
+    "cpf" : "56507194620",
+    "nome" : "Regina Aparecida Dantas Eufrasio"
+  },
+  "valor" : {
+    "original" : "3970.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ca3aea1e-8fe0-4d31-9323-110408173f195204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042EB0"
+}

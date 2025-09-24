@@ -198,7 +198,7 @@ def consulta_webhook():
 def consulta_pix_by_id():
     conta_lanmax = Conta.objects.using('lanmax').get(Conta='Starte-I')
     # url = "https://secure.api.itau/pix_recebimentos/v2/cob/20253646000209F64A4DA4C29B4B7860E6F"
-    url = "https://secure.api.itau/pix_recebimentos/v2/pix/2025372312B3FB71656C84CC58C38F91F27"
+    url = "https://secure.api.itau/pix_recebimentos/v2/pix/2025369373EB666B8111046F682CC8F94F2"
     token_itau = get_token_itau(1001)
 
     headers = {
@@ -307,9 +307,9 @@ def gerar_chave_pix(cod_pedido, num_parcela):
                 f.write(r.text)
 
 def cancelar_chave_pix():
-    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Starte-I')
-    url = "https://secure.api.itau/pix_recebimentos/v2/cob/2025372312B3FB71656C84CC58C38F91F27"
-    token_itau = get_token_itau(1001)
+    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Rio-I')
+    url = "https://secure.api.itau/pix_recebimentos/v2/cob/2025371196B8E5AD74A594B9A8FFC9756C5"
+    token_itau = get_token_itau(8001)
 
     headers = {
         'x-itau-apikey': '96decebf-5c47-4410-95bf-0c4b803e4bb2',

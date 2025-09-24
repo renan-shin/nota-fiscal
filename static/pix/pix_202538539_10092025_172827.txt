@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-10T17:28:26.75Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025385395515A14A74B34805B985A4F255",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4936580825270983190",
+    "location" : "api.itau/pix/qr/v2/e1f63e07-f677-491a-91d8-b642a490d566",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-10T17:28:26.941807"
+  },
+  "location" : "api.itau/pix/qr/v2/e1f63e07-f677-491a-91d8-b642a490d566",
+  "devedor" : {
+    "cpf" : "23724828829",
+    "nome" : "MONICA TICONA YANQUINE"
+  },
+  "valor" : {
+    "original" : "6170.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e1f63e07-f677-491a-91d8-b642a490d5665204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63045CB9"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-23T10:55:49.29Z",
+    "expiracao" : "518400"
+  },
+  "status" : "ATIVA",
+  "txid" : "202540806900DE2A9B6584A97B9BAEFC38E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3284159886596268634",
+    "location" : "api.itau/pix/qr/v2/c479c0b2-9101-49af-9d7a-ad93778d0ea4",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-23T10:55:49.469872"
+  },
+  "location" : "api.itau/pix/qr/v2/c479c0b2-9101-49af-9d7a-ad93778d0ea4",
+  "devedor" : {
+    "cnpj" : "26015730000150",
+    "nome" : "PLASTIFIX - EMBALAGENS, HORTIFRUTI E TRANSPORTES LTDA"
+  },
+  "valor" : {
+    "original" : "3570.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c479c0b2-9101-49af-9d7a-ad93778d0ea45204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046AB8"
+}

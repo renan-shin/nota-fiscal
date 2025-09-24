@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-11T11:58:57.82Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025386949227B077DB5F412194D9AC12AA",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5658995021386787479",
+    "location" : "api.itau/pix/qr/v2/23b9e27f-042f-48f3-b335-7cbc05ffd4e2",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-11T11:58:57.969046"
+  },
+  "location" : "api.itau/pix/qr/v2/23b9e27f-042f-48f3-b335-7cbc05ffd4e2",
+  "devedor" : {
+    "cnpj" : "48033993000124",
+    "nome" : "PENHAMIX COMERCIAL LTDA"
+  },
+  "valor" : {
+    "original" : "4274.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/23b9e27f-042f-48f3-b335-7cbc05ffd4e25204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C901"
+}

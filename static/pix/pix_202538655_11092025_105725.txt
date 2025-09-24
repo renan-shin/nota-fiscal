@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-11T10:57:25.44Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202538655D53D833E531A4E3CA22589B82D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3301210275055311962",
+    "location" : "api.itau/pix/qr/v2/a2163268-5f70-409e-8594-2cded3b00a16",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-11T10:57:25.635523"
+  },
+  "location" : "api.itau/pix/qr/v2/a2163268-5f70-409e-8594-2cded3b00a16",
+  "devedor" : {
+    "cnpj" : "47923926000112",
+    "nome" : "FRANCISCO ALVES NETO"
+  },
+  "valor" : {
+    "original" : "2185.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/a2163268-5f70-409e-8594-2cded3b00a165204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042EE1"
+}

@@ -11,7 +11,7 @@ from reportlab.lib.pagesizes import A4
 from .reports import *
 from pathlib import Path
 from nfe_util_2g.utils import *
-from datetime import datetime, date
+from datetime import datetime, date, time
 import shutil, requests, os
 from .pix import *
 
@@ -264,8 +264,8 @@ def gerar_pix(request):
 
     if cod_pedido <= 9999999:
         cursor.execute(
-            "SELECT c.RazaoSocial, c.CNPJ, pa.Vencimento, pa.Valor_, ef.ContaCobranca, ef.CNPJ FROM GreenMotor.dbo.Pagamentos pa INNER JOIN GreenMotor.dbo.Pedidos p ON pa.CodPedido = p.CodPedido " \
-            "INNER JOIN GreenMotor.dbo.Clientes c ON p.CodCliente = c.CodCliente INNER JOIN GreenMotor.dbo.EmpresaFilial ef ON p.EmpresaFilial = ef.EmpresaFilial " \
+            "SELECT c.RazaoSocial, c.CNPJ, pa.Vencimento, pa.Valor_, pa.Conta FROM GreenMotor.dbo.Pagamentos pa INNER JOIN GreenMotor.dbo.Pedidos p ON pa.CodPedido = p.CodPedido " \
+            "INNER JOIN GreenMotor.dbo.Clientes c ON p.CodCliente = c.CodCliente " \
             "WHERE (StatusPed = %s OR StatusPed LIKE %s) AND pa.CodPedido = %s AND NumParcela = %s AND Forma = %s AND Status IS NULL",
             ['Inicial', 'Pend%', cod_pedido, num_parcela, 'Pix',]
         )
@@ -273,8 +273,8 @@ def gerar_pix(request):
         txid = f'{str(cod_pedido)}{uuid.uuid4().hex[:28].upper()}'
     else:
         cursor.execute(
-            "SELECT c.RazaoSocial, c.CNPJ, pa.Vencimento, pa.Valor_, ef.ContaCobranca, ef.CNPJ FROM Lanmax.dbo.Pagamentos pa INNER JOIN Lanmax.dbo.Pedidos p ON pa.CodPedido = p.CodPedido " \
-            "INNER JOIN Lanmax.dbo.Clientes c ON p.CodCliente = c.CodCliente INNER JOIN Lanmax.dbo.EmpresaFilial ef ON p.EmpresaFilial = ef.EmpresaFilial " \
+            "SELECT c.RazaoSocial, c.CNPJ, pa.Vencimento, pa.Valor_, pa.Conta FROM Lanmax.dbo.Pagamentos pa INNER JOIN Lanmax.dbo.Pedidos p ON pa.CodPedido = p.CodPedido " \
+            "INNER JOIN Lanmax.dbo.Clientes c ON p.CodCliente = c.CodCliente " \
             "WHERE (StatusPed = %s OR StatusPed LIKE %s) AND pa.CodPedido = %s AND NumParcela = %s AND Forma = %s AND Status IS NULL",
             ['Inicial', 'Pend%', cod_pedido, num_parcela, 'Pix',]
         )
@@ -286,7 +286,7 @@ def gerar_pix(request):
     if not result:
         return JsonResponse({'erro': True, 'mensagem': 'Título PIX não encontrado!'})
 
-    keys = ('razao_social', 'cnpj', 'vencimento', 'valor', 'conta', 'cnpj_empresa')
+    keys = ('razao_social', 'cnpj', 'vencimento', 'valor', 'conta')
     titulo_pix = dict(zip(keys, result))
 
     conta_lanmax = Conta.objects.using('lanmax').get(Conta=titulo_pix.get('conta'))
@@ -297,8 +297,8 @@ def gerar_pix(request):
     if not token_itau:
         return JsonResponse({'erro': True, 'mensagem': 'Token Itaú não foi gerado!'})
 
-    # vencimento_formatado = titulo_pix.get('vencimento').strftime('%Y-%m-%d')
-    diferenca = titulo_pix.get('vencimento').date() - date.today()
+    vencimento = datetime.combine(titulo_pix.get('vencimento').date(), time(23, 59, 59))
+    diferenca = vencimento - datetime.now()
     expiracao = int(diferenca.total_seconds())
 
     cgc_devedor = str(titulo_pix.get('cnpj')).zfill(14) if len(str(titulo_pix.get('cnpj'))) > 11 else str(titulo_pix.get('cnpj')).zfill(11)
@@ -315,7 +315,7 @@ def gerar_pix(request):
     data = '{' \
         '"calendario": {"expiracao": "'+str(expiracao)+'"},' \
         '"devedor": {' + strjson_cgc_devedor + '"nome": "'+titulo_pix.get('razao_social')+'"},' \
-        '"valor": {"original": "'+str(valor)+'"},' \
+        '"valor": {"original": "'+str(titulo_pix.get('valor'))+'"},' \
         '"chave": "'+empresa_filial.cnpj+'"' \
     '}'
 
@@ -342,6 +342,8 @@ def gerar_pix(request):
                 [pix_json.get('txid'), pix_json.get('pixCopiaECola'), cod_pedido, num_parcela, 'PIX']
             )
 
+        connection.commit()
+
         return JsonResponse({'erro': False, 'mensagem': 'PIX gerado com sucesso!'})
 
     return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao gerar a chave PIX.'})
@@ -351,13 +353,11 @@ def consulta_pix(request, conta):
     conta_lanmax = Conta.objects.using('lanmax').get(Conta=conta)
     empresa = EmpresaFilial.objects.using('lanmax').get(empresa_filial=conta_lanmax.Empresa)
     id_conta = f'60701190{str(conta_lanmax.Ag).zfill(4)}{str(conta_lanmax.CC).zfill(13)}'
-    # url = "https://secure.api.itau/pix_recebimentos/v2/pix?inicio=2025-08-28T00:00:00Z&fim=2025-08-31T23:59:59Z"
-    # url = "https://secure.api.itau/pix_recebimentos/v2/cobv/202536155CE191A2D2CDB40099085B7EF0D"
-    url = "https://secure.api.itau/pix_recebimentos_conciliacoes/v2/lancamentos_pix?id_conta="+id_conta+"&chaves="+empresa.cnpj+"&data_criacao_lancamento=2025-08-29T00:00,2025-08-31T23:59"
+    url = "https://secure.api.itau/pix_recebimentos/v2/pix?inicio=2025-09-22T00:00:00Z&fim=2025-09-22T23:59:59Z"
     token_itau = get_token_itau(conta_lanmax.Empresa)
     
     headers = {
-        'x-itau-correlationID': 'bc4d8712-904a-47af-a3a0-63751ddb7e56',
+        # 'x-itau-correlationID': 'bc4d8712-904a-47af-a3a0-63751ddb7e56',
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + token_itau
@@ -365,62 +365,13 @@ def consulta_pix(request, conta):
 
     r = requests.get(url, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
 
-    with open('C:\\Users\\rmizukosi\\Desktop\\consulta.txt', 'w', encoding='utf-8') as f:
-        f.write(r.text)
-
-    return JsonResponse({'erro': False, 'mensagem': 'Consulta realizada com sucesso!'})
+    print(r.status_code, r.text)
 
     if r.status_code == 200:
-        pix_json = json.loads(r.text)
-        cursor = connection.cursor()
-
-        for pix in pix_json['pix']:
-            if pix.get('txid'):
-                print(pix.get('txid'), pix.get('valor'))
-                # cursor.execute("UPDATE GreenMotor.dbo.Pagamentos SET Status = %s WHERE Forma = %s AND txid = %s AND Valor_ = %s", ['OK', 'PIX', pix.get('txid'), pix.get('valor')])
-                # cursor.execute("UPDATE Lanmax.dbo.Pagamentos SET Status = %s WHERE Forma = %s AND txid = %s AND Valor_ = %s", ['OK', 'PIX', pix.get('txid'), pix.get('valor')])
+        with open('C:\\Users\\rmizukosi\\Desktop\\consulta.txt', 'w', encoding='utf-8') as f:
+            f.write(r.text)
 
         return JsonResponse({'erro': False, 'mensagem': 'Sucesso!'})
-
-    return JsonResponse({'erro': True, 'mensagem': pix_json['detail']})
-
-@csrf_exempt
-def consulta_pix(request, conta):
-    conta_lanmax = Conta.objects.using('lanmax').get(Conta=conta)
-    empresa = EmpresaFilial.objects.using('lanmax').get(empresa_filial=conta_lanmax.Empresa)
-    id_conta = f'60701190{str(conta_lanmax.Ag).zfill(4)}{str(conta_lanmax.CC).zfill(13)}'
-    url = "https://secure.api.itau/pix_recebimentos/v2/pix?inicio=2025-09-01T00:00:00Z&fim=2025-09-01T23:59:59Z"
-    # url = "https://secure.api.itau/pix_recebimentos/v2/cobv/202536155CE191A2D2CDB40099085B7EF0D"
-    # url = "https://secure.api.itau/pix_recebimentos_conciliacoes/v2/lancamentos_pix?id_conta="+id_conta+"&chaves="+empresa.cnpj+"&data_criacao_lancamento=2025-08-29T00:00,2025-08-31T23:59"
-    token_itau = get_token_itau(conta_lanmax.Empresa)
-    
-    headers = {
-        'x-itau-correlationID': 'bc4d8712-904a-47af-a3a0-63751ddb7e56',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token_itau
-    }
-
-    r = requests.get(url, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
-
-    with open('C:\\Users\\rmizukosi\\Desktop\\consulta.txt', 'w', encoding='utf-8') as f:
-        f.write(r.text)
-
-    return JsonResponse({'erro': False, 'mensagem': 'Consulta realizada com sucesso!'})
-
-    if r.status_code == 200:
-        pix_json = json.loads(r.text)
-        cursor = connection.cursor()
-
-        for pix in pix_json['pix']:
-            if pix.get('txid'):
-                print(pix.get('txid'), pix.get('valor'))
-                # cursor.execute("UPDATE GreenMotor.dbo.Pagamentos SET Status = %s WHERE Forma = %s AND txid = %s AND Valor_ = %s", ['OK', 'PIX', pix.get('txid'), pix.get('valor')])
-                # cursor.execute("UPDATE Lanmax.dbo.Pagamentos SET Status = %s WHERE Forma = %s AND txid = %s AND Valor_ = %s", ['OK', 'PIX', pix.get('txid'), pix.get('valor')])
-
-        return JsonResponse({'erro': False, 'mensagem': 'Sucesso!'})
-
-    return JsonResponse({'erro': True, 'mensagem': pix_json['detail']})
 
 @csrf_exempt
 def cancelar_pix(request):

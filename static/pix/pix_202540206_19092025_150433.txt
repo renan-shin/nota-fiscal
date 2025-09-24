@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-19T15:04:33.02Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "202540206285D3C26E91E4021B2D0DEE9A4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1597429652617666527",
+    "location" : "api.itau/pix/qr/v2/fc003c77-a3da-438f-b0c7-8afa93cff62f",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-19T15:04:33.20214"
+  },
+  "location" : "api.itau/pix/qr/v2/fc003c77-a3da-438f-b0c7-8afa93cff62f",
+  "devedor" : {
+    "cnpj" : "38144301000161",
+    "nome" : "JORGE JULIO PEREIRA"
+  },
+  "valor" : {
+    "original" : "4800.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/fc003c77-a3da-438f-b0c7-8afa93cff62f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041EC1"
+}

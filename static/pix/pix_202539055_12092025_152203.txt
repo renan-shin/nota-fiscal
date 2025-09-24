@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T15:22:03.31Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202539055CD314E318B9141DEAD84028870",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "454507766833813318",
+    "location" : "api.itau/pix/qr/v2/b8edebe2-0207-4511-aa09-13cf87a1d876",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T15:22:03.496241"
+  },
+  "location" : "api.itau/pix/qr/v2/b8edebe2-0207-4511-aa09-13cf87a1d876",
+  "devedor" : {
+    "cnpj" : "13850743000100",
+    "nome" : "ERIVAN CUNHA DE ALBUQUERQUE 30810809400"
+  },
+  "valor" : {
+    "original" : "1000.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b8edebe2-0207-4511-aa09-13cf87a1d8765204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304CC1A"
+}

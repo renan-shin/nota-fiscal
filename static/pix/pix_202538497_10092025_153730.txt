@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-10T15:37:30.31Z",
+    "expiracao" : "432000"
+  },
+  "status" : "ATIVA",
+  "txid" : "202538497BF44401C96A74D3CADA825CCA3",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8913093163728488801",
+    "location" : "api.itau/pix/qr/v2/9ca7fbcb-0812-4806-8e3a-7e4193a36cd4",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-10T15:37:30.481294"
+  },
+  "location" : "api.itau/pix/qr/v2/9ca7fbcb-0812-4806-8e3a-7e4193a36cd4",
+  "devedor" : {
+    "cnpj" : "04030259000136",
+    "nome" : "L C LIRANCO COMERCIO"
+  },
+  "valor" : {
+    "original" : "6190.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9ca7fbcb-0812-4806-8e3a-7e4193a36cd45204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630483E3"
+}

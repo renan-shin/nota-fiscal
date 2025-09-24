@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-15T16:05:11.23Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "202539386BB4943E3466A4E0EBD02B666F2",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6564513604546163911",
+    "location" : "api.itau/pix/qr/v2/3f672bcb-59cc-4238-a475-a370e974feac",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-15T16:05:11.407353"
+  },
+  "location" : "api.itau/pix/qr/v2/3f672bcb-59cc-4238-a475-a370e974feac",
+  "devedor" : {
+    "cnpj" : "55244026000177",
+    "nome" : "MULT MAQUINAS PEÇAS E ACESSORIOS LTDA"
+  },
+  "valor" : {
+    "original" : "12009.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/3f672bcb-59cc-4238-a475-a370e974feac5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304AA40"
+}

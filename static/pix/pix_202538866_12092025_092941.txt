@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T09:29:41.02Z",
+    "expiracao" : "259200"
+  },
+  "status" : "ATIVA",
+  "txid" : "20253886622005B09709A4708A3A0B986A1",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3297343909251911002",
+    "location" : "api.itau/pix/qr/v2/e007e34b-2baa-4fa4-8d82-5f04bb069bea",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T09:29:41.21125"
+  },
+  "location" : "api.itau/pix/qr/v2/e007e34b-2baa-4fa4-8d82-5f04bb069bea",
+  "devedor" : {
+    "cnpj" : "24237561000177",
+    "nome" : "MATHEUS DA SILVA MENDES - CONFECCOES"
+  },
+  "valor" : {
+    "original" : "2447.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e007e34b-2baa-4fa4-8d82-5f04bb069bea5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040A8E"
+}

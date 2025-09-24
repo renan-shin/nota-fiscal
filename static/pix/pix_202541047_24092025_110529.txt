@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-24T11:05:14.10Z",
+    "expiracao" : "478471"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025410471152B3E682F54127B535DE7AB5",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5114058271441457744",
+    "location" : "api.itau/pix/qr/v2/91c5f9d8-41ed-4bd1-b80e-a0f5ba20a6ff",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-24T11:05:14.36593"
+  },
+  "location" : "api.itau/pix/qr/v2/91c5f9d8-41ed-4bd1-b80e-a0f5ba20a6ff",
+  "devedor" : {
+    "cnpj" : "32555627000103",
+    "nome" : "32.555.627 IVANIR FERREIRA DIAS JUNIOR"
+  },
+  "valor" : {
+    "original" : "575.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/91c5f9d8-41ed-4bd1-b80e-a0f5ba20a6ff5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304F90C"
+}

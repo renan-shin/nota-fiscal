@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-24T14:33:37.62Z",
+    "expiracao" : "465966"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025410877EBEF257E22A4BAAA3C5E5637B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4638807263215015737",
+    "location" : "api.itau/pix/qr/v2/641768b8-e6a1-4c0d-a5b4-55ab060bb452",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-24T14:33:37.79991"
+  },
+  "location" : "api.itau/pix/qr/v2/641768b8-e6a1-4c0d-a5b4-55ab060bb452",
+  "devedor" : {
+    "cpf" : "80327826720",
+    "nome" : "JANETE DIAS DE OLIVEIRA"
+  },
+  "valor" : {
+    "original" : "4360.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/641768b8-e6a1-4c0d-a5b4-55ab060bb4525204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044583"
+}

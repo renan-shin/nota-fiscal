@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-12T17:15:19.00Z",
+    "expiracao" : "345600"
+  },
+  "status" : "ATIVA",
+  "txid" : "202539123B70F07058AAA4DC1BBDA72C4DE",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5609152804285409749",
+    "location" : "api.itau/pix/qr/v2/94544798-4a98-41bc-bd67-71909261370a",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-12T17:15:19.19307"
+  },
+  "location" : "api.itau/pix/qr/v2/94544798-4a98-41bc-bd67-71909261370a",
+  "devedor" : {
+    "cnpj" : "51911302000152",
+    "nome" : "SP MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "8548.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/94544798-4a98-41bc-bd67-71909261370a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304F9E0"
+}

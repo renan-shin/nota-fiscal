@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2025-09-22T11:17:56.97Z",
+    "expiracao" : "172800"
+  },
+  "status" : "ATIVA",
+  "txid" : "2025405452B5E71AB8D6C46019BEC28C536",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "591355497414999860",
+    "location" : "api.itau/pix/qr/v2/061e71d2-11e5-45cb-a25e-60873de99ca2",
+    "tipoCob" : "cob",
+    "criacao" : "2025-09-22T11:17:57.146319"
+  },
+  "location" : "api.itau/pix/qr/v2/061e71d2-11e5-45cb-a25e-60873de99ca2",
+  "devedor" : {
+    "cnpj" : "34515413000120",
+    "nome" : "ANTONIO FONSECA NETO"
+  },
+  "valor" : {
+    "original" : "2160.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/061e71d2-11e5-45cb-a25e-60873de99ca25204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304FCE6"
+}
