@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T09:31:17.01Z",
+    "expiracao" : "484122"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026078333E61DDCCAA3E4D7BBE5AE819F9",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2249598239650240179",
+    "location" : "api.itau/pix/qr/v2/c49d2b4c-f609-4450-bf7a-07c075a577d5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T09:31:17.156495"
+  },
+  "location" : "api.itau/pix/qr/v2/c49d2b4c-f609-4450-bf7a-07c075a577d5",
+  "devedor" : {
+    "cnpj" : "05579930000165",
+    "nome" : "B & B COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "5972.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c49d2b4c-f609-4450-bf7a-07c075a577d55204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C20C"
+}

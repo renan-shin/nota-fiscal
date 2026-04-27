@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-17T12:09:52.51Z",
+    "expiracao" : "301806"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261203581B15E422CA54DD1B472C7A810",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6361421744337472766",
+    "location" : "api.itau/pix/qr/v2/ccad97ef-7261-4efe-ade9-5863f873ac45",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-17T12:09:52.657373"
+  },
+  "location" : "api.itau/pix/qr/v2/ccad97ef-7261-4efe-ade9-5863f873ac45",
+  "devedor" : {
+    "cnpj" : "49679668000104",
+    "nome" : "CARLILI DA SILVA NASCIMENTO"
+  },
+  "valor" : {
+    "original" : "11501.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ccad97ef-7261-4efe-ade9-5863f873ac455204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040103"
+}

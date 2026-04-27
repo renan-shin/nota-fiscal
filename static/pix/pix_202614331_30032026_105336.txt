@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-30T10:53:36.59Z",
+    "expiracao" : "306382"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261433134D1BC2DCCC14DFD89D0AEF2D4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1133250151758090903",
+    "location" : "api.itau/pix/qr/v2/6ba8be94-0e27-47a7-a4d5-d82a18125dc8",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-30T10:53:36.761673"
+  },
+  "location" : "api.itau/pix/qr/v2/6ba8be94-0e27-47a7-a4d5-d82a18125dc8",
+  "devedor" : {
+    "cnpj" : "51798426000173",
+    "nome" : "OLINDA MAQUINAS E SERVICOS LTDA"
+  },
+  "valor" : {
+    "original" : "3998.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6ba8be94-0e27-47a7-a4d5-d82a18125dc85204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304FB73"
+}

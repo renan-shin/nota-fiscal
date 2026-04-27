@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-10T10:52:04.89Z",
+    "expiracao" : "306474"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026164562B4E2D5776B748D48235DBDA72",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9083019876269843015",
+    "location" : "api.itau/pix/qr/v2/ee8fd20b-e236-4cd8-90e6-5ebad23138d7",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-10T10:52:05.069135"
+  },
+  "location" : "api.itau/pix/qr/v2/ee8fd20b-e236-4cd8-90e6-5ebad23138d7",
+  "devedor" : {
+    "cnpj" : "40660851000185",
+    "nome" : "DMF MODA INTIMA LTDA-ME"
+  },
+  "valor" : {
+    "original" : "13290.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ee8fd20b-e236-4cd8-90e6-5ebad23138d75204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041362"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-26T15:34:42.89Z",
+    "expiracao" : "635116"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608208F19DA74A28EC4CBFA4CC50D9E3",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5182440585014902193",
+    "location" : "api.itau/pix/qr/v2/9a6d8a15-70a7-4f19-b4ae-c191dc4669b0",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-26T15:34:43.044159"
+  },
+  "location" : "api.itau/pix/qr/v2/9a6d8a15-70a7-4f19-b4ae-c191dc4669b0",
+  "devedor" : {
+    "cpf" : "11838300929",
+    "nome" : "Wesley Felipe Batista"
+  },
+  "valor" : {
+    "original" : "4250.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9a6d8a15-70a7-4f19-b4ae-c191dc4669b05204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304050E"
+}

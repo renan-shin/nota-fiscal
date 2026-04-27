@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T10:27:49.33Z",
+    "expiracao" : "394330"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616112452A7487BFD64759A20C520956",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9148483997555568315",
+    "location" : "api.itau/pix/qr/v2/1ba2471e-6fb1-41ad-897d-9ebed3de1e5a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T10:27:49.522475"
+  },
+  "location" : "api.itau/pix/qr/v2/1ba2471e-6fb1-41ad-897d-9ebed3de1e5a",
+  "devedor" : {
+    "cnpj" : "49057734000104",
+    "nome" : "ELIAS RIBEIRO CARDOSO"
+  },
+  "valor" : {
+    "original" : "684.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1ba2471e-6fb1-41ad-897d-9ebed3de1e5a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630426EC"
+}

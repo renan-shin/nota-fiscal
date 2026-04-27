@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-02T08:34:52.70Z",
+    "expiracao" : "401106"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615023333E696833CD4595B73F935002",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3440843986321745342",
+    "location" : "api.itau/pix/qr/v2/1816afd8-49e6-4ce4-8033-c85287b3a1dc",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-02T08:34:52.878731"
+  },
+  "location" : "api.itau/pix/qr/v2/1816afd8-49e6-4ce4-8033-c85287b3a1dc",
+  "devedor" : {
+    "cpf" : "12919356496",
+    "nome" : "THAIS QUEIROZ DE FARIAS"
+  },
+  "valor" : {
+    "original" : "10800.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1816afd8-49e6-4ce4-8033-c85287b3a1dc5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044A53"
+}

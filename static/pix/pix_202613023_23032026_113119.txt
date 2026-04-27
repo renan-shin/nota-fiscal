@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-23T11:31:18.97Z",
+    "expiracao" : "390520"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613023C69A069022DF4302A1D60F68C8",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8710500016066280113",
+    "location" : "api.itau/pix/qr/v2/8876f1e3-d95d-42f8-82a5-6cd7b75962de",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-23T11:31:19.130332"
+  },
+  "location" : "api.itau/pix/qr/v2/8876f1e3-d95d-42f8-82a5-6cd7b75962de",
+  "devedor" : {
+    "cnpj" : "09073980000127",
+    "nome" : "SOUSA & GARRETO LTDA ME"
+  },
+  "valor" : {
+    "original" : "6060.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8876f1e3-d95d-42f8-82a5-6cd7b75962de5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304E8E2"
+}

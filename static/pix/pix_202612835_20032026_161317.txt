@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-20T16:13:17.11Z",
+    "expiracao" : "460002"
+  },
+  "status" : "ATIVA",
+  "txid" : "202612835B9680D9230BD431C83E23CE3AF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9050034911453413824",
+    "location" : "api.itau/pix/qr/v2/d369130a-6a54-4c74-b322-c120a560708b",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-20T16:13:17.287021"
+  },
+  "location" : "api.itau/pix/qr/v2/d369130a-6a54-4c74-b322-c120a560708b",
+  "devedor" : {
+    "cnpj" : "54600973000190",
+    "nome" : "TEX COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "6530.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d369130a-6a54-4c74-b322-c120a560708b5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630477A0"
+}

@@ -87,7 +87,7 @@ class Empresa(models.Model):
         db_table = 'Empresas'
 
     def __str__(self):
-        return str(self.empresa_filial) + '|'  + self.mnemonico
+        return str(self.EmpresaFilial) + '|'  + self.Mnemonico
 
 class NFe(models.Model):
     id_nfe = models.AutoField(primary_key=True)
@@ -176,6 +176,9 @@ class NFe(models.Model):
     entrega_fone = models.CharField(null=True, max_length=14)
     entrega_email = models.CharField(null=True, max_length=60)
     entrega_IE = models.CharField(null=True, max_length=14)
+    exporta_UFSaidaPais = models.CharField(null=True, max_length=2)
+    exporta_xLocEmbarq = models.CharField(null=True, max_length=60)
+    exporta_xLocDespacho_Opc = models.CharField(null=True, max_length=60)
     TotalICMS_vBC = models.FloatField(null=True)
     TotalICMS_vICMS = models.FloatField(null=True)
     TotalICMS_vBCST = models.FloatField(null=True)
@@ -227,6 +230,77 @@ class NFe(models.Model):
     NFeRef_refNFe_AAMM = models.CharField(null=True, max_length=4)
     NFeRef_refNFe_serie = models.IntegerField(null=True)
     NFeRef_refNFe_nNF = models.CharField(null=True, max_length=255)
+    totalISS_vServ_Opc = models.FloatField(null=True)
+    totalISS_vBC_Opc = models.FloatField(null=True)
+    totalISS_vISS_Opc = models.FloatField(null=True)
+    totalISS_vPIS_Opc = models.FloatField(null=True)
+    totalISS_vCOFINS_Opc = models.FloatField(null=True)
+    totalISS_dCompet = models.CharField(null=True, max_length=10)
+    totalISS_vDeducao_Opc = models.FloatField(null=True)
+    totalISS_vOutro_Opc = models.FloatField(null=True)
+    totalISS_vDescIncond_Opc = models.FloatField(null=True)
+    totalISS_vDescCond_Opc = models.FloatField(null=True)
+    totalISS_vISSRet_Opc = models.FloatField(null=True)
+    totalISS_cRegTrib_Opc = models.CharField(null=True, max_length=1)
+    ECFRef_mod = models.CharField(null=True, max_length=2)
+    ECFRef_nECF = models.IntegerField(null=True)
+    ECFRef_nCOO = models.IntegerField(null=True)
+    Caixa_Altura = models.FloatField(null=True)
+    Caixa_Largura = models.FloatField(null=True)
+    Caixa_Comprimento = models.FloatField(null=True)
+    Transmitir = models.BooleanField(null=True, default=False)
+    CCe = models.BooleanField(null=True, default=False)
+    Cancelar = models.BooleanField(null=True, default=False)
+    DataEmissao = models.DateTimeField(null=True, default=timezone.now)
+    Usuario = models.CharField(null=True, max_length=50)
+    XML_Transmitido = models.BooleanField(null=True, default=False)
+    QRCode = models.TextField(null=True)
+    ide_cMunFGIBS_Opc = models.CharField(null=True, max_length=7)
+    ide_tpNFDebito_Opc = models.IntegerField(null=True)
+    ide_tpNFCredito_Opc = models.IntegerField(null=True)
+    ide_dPrevEntrega_Opc = models.CharField(null=True, max_length=10)
+    compraGov_tpEnteGov = models.IntegerField(null=True)
+    compraGov_pRedutor = models.FloatField(null=True)
+    compraGov_tpOperGov = models.IntegerField(null=True)
+    totalICMS_qBCMono_Opc = models.FloatField(null=True)
+    totalICMS_vICMSMono_Opc = models.FloatField(null=True)
+    totalICMS_qBCMonoReten_Opc = models.FloatField(null=True)
+    totalICMS_vICMSMonoReten_Opc = models.FloatField(null=True)
+    totalICMS_qBCMonoRet_Opc = models.FloatField(null=True)
+    totalICMS_vICMSMonoRet_Opc = models.FloatField(null=True)
+    IBSCBSTot_vBCIBSCBS = models.FloatField(null=True)
+    IBSTot_vDif_UF = models.FloatField(null=True)
+    IBSTot_vDevTrib_UF = models.FloatField(null=True)
+    IBSTot_vIBS_UF = models.FloatField(null=True)
+    IBSTot_vDif_Mun = models.FloatField(null=True)
+    IBSTot_vDevTrib_Mun = models.FloatField(null=True)
+    IBSTot_vIBS_Mun = models.FloatField(null=True)
+    IBSTot_vIBS = models.FloatField(null=True)
+    IBSTot_vCredPres = models.FloatField(null=True)
+    IBSTot_vCredPresCondSus = models.FloatField(null=True)
+    CBSTot_vDif = models.FloatField(null=True)
+    CBSTot_vDevTrib = models.FloatField(null=True)
+    CBSTot_vCBS = models.FloatField(null=True)
+    CBSTot_vCredPres = models.FloatField(null=True)
+    CBSTot_vCredPresCondSus = models.FloatField(null=True)
+    MonoTot_vIBSMono = models.FloatField(null=True)
+    MonoTot_vCBSMono = models.FloatField(null=True)
+    MonoTot_vIBSMonoReten = models.FloatField(null=True)
+    MonoTot_vCBSMonoReten = models.FloatField(null=True)
+    MonoTot_vIBSMonoRet = models.FloatField(null=True)
+    MonoTot_vCBSMonoRet = models.FloatField(null=True)
+    EstornoCred_vIBSEstCred = models.FloatField(null=True)
+    EstornoCred_vCBSEstCred = models.FloatField(null=True)
+    totalRTC_vIS = models.FloatField(null=True)
+    totalRTC_vNFTot = models.FloatField(null=True)
+    tribRet_vRetPIS = models.FloatField(null=True)
+    tribRet_vRetCOFINS = models.FloatField(null=True)
+    tribRet_vRetCSLL = models.FloatField(null=True)
+    tribRet_vBCIRRF = models.FloatField(null=True)
+    tribRet_vIRRF = models.FloatField(null=True)
+    tribRet_vBCRetPrev = models.FloatField(null=True)
+    tribRet_vRetPrev = models.FloatField(null=True)
+    NFAntePgto_chaveNFe = models.CharField(null=True, max_length=255)
 
     class Meta:
         abstract = True
@@ -328,6 +402,11 @@ class Starte_SC_NFE_400(NFe):
     class Meta:
         managed = False
         db_table = 'Starte_SC_NFE_400'
+
+class Starte_MG_NFE_400(NFe):
+    class Meta:
+        managed = False
+        db_table = 'Starte_MG_NFE_400'
 
 class TNL_Blumenau_NFE_400(NFe):
     class Meta:
@@ -481,6 +560,101 @@ class NFeItens(models.Model):
     CodProd = models.IntegerField(null=True)
     icms_indDeduzDeson = models.IntegerField(null=True)
     icms_cBenefRBC = models.CharField(null=True, max_length=255)
+    indBemMovelUsado_Opc = models.IntegerField(null=True)
+    tpCredPresIBSZFM_Opc = models.IntegerField(null=True)
+    det_vItem = models.FloatField(null=True)
+    chaveAcessoRef = models.CharField(null=True, max_length=255)
+    cCredPresumido = models.CharField(null=True, max_length=255)
+    pCredPresumido = models.FloatField(null=True)
+    vCredPresumido = models.FloatField(null=True)
+    IS_CST = models.CharField(null=True, max_length=255)
+    IS_cClassTrib = models.CharField(null=True, max_length=255)
+    IS_vBC = models.FloatField(null=True)
+    IS_pIS = models.FloatField(null=True)
+    IS_vIS = models.FloatField(null=True)
+    IS_pISEspec_Opc = models.FloatField(null=True)
+    IS_uTrib_Opc = models.CharField(null=True, max_length=255)
+    IS_qTrib_Opc = models.FloatField(null=True)
+    IBSCBS_CST = models.CharField(null=True, max_length=255)
+    IBSCBS_cClassTrib = models.CharField(null=True, max_length=255)
+    IBSCBS_indDoacao_Opc = models.CharField(null=True, max_length=255)
+    IBSCBS_vBC = models.FloatField(null=True)
+    gIBSUF_pIBSUF = models.FloatField(null=True)
+    gIBSUF_pDif_Opc = models.FloatField(null=True)
+    gIBSUF_vDif_Opc = models.FloatField(null=True)
+    gIBSUF_vDevTrib_Opc = models.FloatField(null=True)
+    gIBSUF_pRedAliq_Opc = models.FloatField(null=True)
+    gIBSUF_pAliqEfet_Opc = models.FloatField(null=True)
+    gIBSUF_vIBSUF = models.FloatField(null=True)
+    gIBSMun_pIBSMun = models.FloatField(null=True)
+    gIBSMun_pDif_Opc = models.FloatField(null=True)
+    gIBSMun_vDif_Opc = models.FloatField(null=True)
+    gIBSMun_vDevTrib_Opc = models.FloatField(null=True)
+    gIBSMun_pRedAliq_Opc = models.FloatField(null=True)
+    gIBSMun_pAliqEfet_Opc = models.FloatField(null=True)
+    gIBSMun_vIBSMun = models.FloatField(null=True)
+    IBSCBS_vIBS = models.FloatField(null=True)
+    gCBS_pCBS = models.FloatField(null=True)
+    gCBS_pDif_Opc = models.FloatField(null=True)
+    gCBS_vDif_Opc = models.FloatField(null=True)
+    gCBS_vDevTrib_Opc = models.FloatField(null=True)
+    gCBS_pRedAliq_Opc = models.FloatField(null=True)
+    gCBS_pAliqEfet_Opc = models.FloatField(null=True)
+    gCBS_vCBS = models.FloatField(null=True)
+    gTribRegular_CSTReg = models.CharField(null=True, max_length=255)
+    gTribRegular_cClassTribReg = models.CharField(null=True, max_length=255)
+    gTribRegular_pAliqEfetRegIBSUF = models.FloatField(null=True)
+    gTribRegular_vTribRegIBSUF = models.FloatField(null=True)
+    gTribRegular_pAliqEfetRegIBSMun = models.FloatField(null=True)
+    gTribRegular_vTribRegIBSMun = models.FloatField(null=True)
+    gTribRegular_pAliqEfetRegCBS = models.FloatField(null=True)
+    gTribRegular_vTribRegCBS = models.FloatField(null=True)
+    gTribCompraGov_pAliqIBSUF = models.FloatField(null=True)
+    gTribCompraGov_vTribIBSUF = models.FloatField(null=True)
+    gTribCompraGov_pAliqIBSMun = models.FloatField(null=True)
+    gTribCompraGov_vTribIBSMun = models.FloatField(null=True)
+    gTribCompraGov_pAliqCBS = models.FloatField(null=True)
+    gTribCompraGov_vTribCBS = models.FloatField(null=True)
+    gIBSCBSMono_qBCMono_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemIBS_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemCBS_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vIBSMono_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vCBSMono_Opc = models.FloatField(null=True)
+    gIBSCBSMono_qBCMonoReten_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemIBSReten_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vIBSMonoReten_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemCBSReten_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vCBSMonoReten_Opc = models.FloatField(null=True)
+    gIBSCBSMono_qBCMonoRet_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemIBSRet_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vIBSMonoRet_Opc = models.FloatField(null=True)
+    gIBSCBSMono_adRemCBSRet_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vCBSMonoRet_Opc = models.FloatField(null=True)
+    gIBSCBSMono_pDifIBS_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vIBSMonoDif_Opc = models.FloatField(null=True)
+    gIBSCBSMono_pDifCBS_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vCBSMonoDif_Opc = models.FloatField(null=True)
+    gIBSCBSMono_vTotIBSMonoItem = models.FloatField(null=True)
+    gIBSCBSMono_vTotCBSMonoItem = models.FloatField(null=True)
+    gTransfCred_vIBS = models.FloatField(null=True)
+    gTransfCred_vCBS = models.FloatField(null=True)
+    gAjusteCompet_competApur = models.CharField(null=True, max_length=255)
+    gAjusteCompet_vIBS = models.FloatField(null=True)
+    gAjusteCompet_vCBS = models.FloatField(null=True)
+    gEstornoCred_vIBSEstCred = models.FloatField(null=True)
+    gEstornoCred_vCBSEstCred = models.FloatField(null=True)
+    gCredPresOper_vBCCredPres = models.FloatField(null=True)
+    gCredPresOper_cCredPres = models.CharField(null=True, max_length=255)
+    gCredPresOper_pIBSCredPres_Opc = models.FloatField(null=True)
+    gCredPresOper_vIBSCredPres_Opc = models.FloatField(null=True)
+    gCredPresOper_vIBSCredPresCondSus_Opc = models.FloatField(null=True)
+    gCredPresOper_pCBSCredPres_Opc = models.FloatField(null=True)
+    gCredPresOper_vCBSCredPres_Opc = models.FloatField(null=True)
+    gCredPresOper_vCBSCredPresCondSus_Opc = models.FloatField(null=True)
+    gCredPresIBSZFM_competApur = models.CharField(null=True, max_length=255)
+    gCredPresIBSZFM_tpCredPresIBSZFM = models.FloatField(null=True)
+    gCredPresIBSZFM_vCredPresIBSZFM = models.FloatField(null=True)
+    ref_nItem = models.IntegerField(null=True)
 
     class Meta:
         abstract = True
@@ -497,6 +671,11 @@ class Starte_SC_NFEItens_400(NFeItens):
     class Meta:
         managed = False
         db_table = 'Starte_SC_NFEItens_400'
+
+class Starte_MG_NFEItens_400(NFeItens):
+    class Meta:
+        managed = False
+        db_table = 'Starte_MG_NFEItens_400'
 
 class TNL_NFEItens_400(NFeItens):
     class Meta:
@@ -517,6 +696,11 @@ class Maxipecas_NFEItens_400(NFeItens):
     class Meta:
         managed = False
         db_table = 'Maxipecas_NFEItens_400'
+
+class Maxipecas_Filial_NFEItens_400(NFeItens):
+    class Meta:
+        managed = False
+        db_table = 'Maxipecas_Filial_NFEItens_400'
 
 class LanmaxPecas_NFEItens_400(NFeItens):
     class Meta:
@@ -642,3 +826,162 @@ class Intermediador(models.Model):
 
     def __str__(self):
         return self.CNPJ
+
+class GNRE_DetalhamentoReceitas(models.Model):
+    ID = models.AutoField(primary_key=True)
+    Codigo = models.CharField(max_length=6)
+    UF = models.CharField(max_length=2)
+    Receita = models.BigIntegerField()
+    Descricao = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_DetalhamentoReceitas_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_Receitas(models.Model):
+    ID = models.AutoField(primary_key=True)
+    UF = models.CharField(max_length=2)
+    Codigo = models.BigIntegerField()
+    Descricao = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_Receitas_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_DocumentosOrigem(models.Model):
+    ID = models.AutoField(primary_key=True)
+    Codigo = models.BigIntegerField()
+    UF = models.CharField(max_length=2)
+    Receita = models.BigIntegerField()
+    Descricao = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_DocumentosOrigem_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_Produtos(models.Model):
+    ID = models.AutoField(primary_key=True)
+    UF = models.CharField(max_length=2)
+    Codigo = models.BigIntegerField()
+    Receita = models.BigIntegerField()
+    Descricao = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_Produtos_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_CamposVisiveis(models.Model):
+    ID = models.AutoField(primary_key=True)
+    UF = models.CharField(max_length=2)
+    Receita = models.BigIntegerField()
+    TemPeriodoRef = models.BooleanField(default=False)
+    TemPeriodo = models.BooleanField(default=False)
+    TemInfoDest = models.BooleanField(default=False)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_CamposVisiveis_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_CamposAdicionais(models.Model):
+    ID = models.AutoField(primary_key=True)
+    UF = models.CharField(max_length=2)
+    Receita = models.BigIntegerField()
+    Codigo = models.BigIntegerField()
+    Titulo = models.CharField(max_length=100)
+    Tipo = models.CharField(max_length=1)
+    Obrigatorio = models.BooleanField(default=False)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_CamposAdicionais_200'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_InfBoleto(models.Model):
+    Protocolo = models.CharField(max_length=20)
+    UF_Favorecida = models.CharField(max_length=2)
+    Receita = models.CharField(max_length=6)
+    emit_CGC = models.CharField(max_length=16)
+    emit_RazaoSocial = models.CharField(max_length=100)
+    emit_Endereco = models.CharField(max_length=100)
+    emit_Municipio = models.CharField(max_length=50)
+    emit_UF = models.CharField(max_length=2)
+    emit_CEP = models.CharField(max_length=8)
+    emit_Tel = models.CharField(max_length=11)
+    dest_CGC = models.CharField(max_length=16)
+    dest_Municipio = models.CharField(max_length=50)
+    Produto = models.CharField(max_length=100)
+    Data_Vencto = models.CharField(max_length=10)
+    Data_Pagto = models.CharField(max_length=10)
+    NFe = models.CharField(max_length=9)
+    MesAnoRef = models.CharField(max_length=7)
+    InfCompl = models.CharField(max_length=300)
+    Valor = models.FloatField()
+    Att_Mon = models.FloatField()
+    Juros = models.FloatField()
+    Multa = models.FloatField()
+    ValorGNRE = models.FloatField()
+    LinhaDigitavel = models.CharField(max_length=60)
+    CodBar = models.CharField(max_length=50)
+    NumControle = models.CharField(max_length=16)
+    qtdVias = models.CharField(max_length=1)
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_InfBoleto'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class GNRE_QtdVias(models.Model):
+    UF = models.CharField(max_length=2)
+    Receita = models.BigIntegerField()
+    QtdVias = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'GNRE_QtdVias'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class TabMunicipios(models.Model):
+    ID = models.AutoField(primary_key=True)
+    IDUF = models.CharField(max_length=2)
+    NOME = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'TAB_MUNICIPIOS'
+
+    def __str__(self):
+        return str(self.ID)
+    
+class TabUF(models.Model):
+    ID = models.AutoField(primary_key=True)
+    NOME = models.CharField(max_length=50)
+    UF = models.CharField(max_length=2)
+    ATIVO_GNRE = models.BooleanField(default=0)
+
+    class Meta:
+        managed = False
+        db_table = 'TAB_UF'
+
+    def __str__(self):
+        return str(self.ID)

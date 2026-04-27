@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T14:57:11.97Z",
+    "expiracao" : "550967"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260865250121CE5E5D343DD94AB5494B9",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1431752382582972257",
+    "location" : "api.itau/pix/qr/v2/80b3377e-3103-4abc-8e5c-088def116bc2",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T14:57:12.124824"
+  },
+  "location" : "api.itau/pix/qr/v2/80b3377e-3103-4abc-8e5c-088def116bc2",
+  "devedor" : {
+    "cnpj" : "49277105000181",
+    "nome" : "JG MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "11872.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/80b3377e-3103-4abc-8e5c-088def116bc25204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304A51B"
+}

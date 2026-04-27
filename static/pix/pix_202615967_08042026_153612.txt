@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-08T15:36:12.60Z",
+    "expiracao" : "462227"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615967D9C57A70F60E43F3A1B6BB2C6E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5676557057879601403",
+    "location" : "api.itau/pix/qr/v2/a6e1027f-9356-4621-bab7-707f9e901f86",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-08T15:36:12.80911"
+  },
+  "location" : "api.itau/pix/qr/v2/a6e1027f-9356-4621-bab7-707f9e901f86",
+  "devedor" : {
+    "cnpj" : "43739035000150",
+    "nome" : "J V SANTOS LTDA"
+  },
+  "valor" : {
+    "original" : "5315.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/a6e1027f-9356-4621-bab7-707f9e901f865204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630453E0"
+}

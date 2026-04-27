@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-26T16:51:19.13Z",
+    "expiracao" : "457720"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613984D8E2D516785D4D2A80B1AAC9FC",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2349282129226765973",
+    "location" : "api.itau/pix/qr/v2/d9b85e73-679e-49b0-bf12-0fac78036a2d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-26T16:51:19.287046"
+  },
+  "location" : "api.itau/pix/qr/v2/d9b85e73-679e-49b0-bf12-0fac78036a2d",
+  "devedor" : {
+    "cnpj" : "51517369000107",
+    "nome" : "51.517.369 VALDETE GONCALVES DA SILVA"
+  },
+  "valor" : {
+    "original" : "1909.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d9b85e73-679e-49b0-bf12-0fac78036a2d5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63045AFF"
+}

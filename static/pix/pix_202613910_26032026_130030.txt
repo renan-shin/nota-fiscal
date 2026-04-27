@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-26T13:00:30.53Z",
+    "expiracao" : "385168"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026139102A30D9304C5D41A79D6EB85B45",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5691813430189924626",
+    "location" : "api.itau/pix/qr/v2/dab2bfa9-5b47-477d-9282-c34f04b2eccf",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-26T13:00:30.658722"
+  },
+  "location" : "api.itau/pix/qr/v2/dab2bfa9-5b47-477d-9282-c34f04b2eccf",
+  "devedor" : {
+    "cnpj" : "48290295000104",
+    "nome" : "DENILSON BATISTA DO NASCIMENTO"
+  },
+  "valor" : {
+    "original" : "6500.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/dab2bfa9-5b47-477d-9282-c34f04b2eccf5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63046BA1"
+}

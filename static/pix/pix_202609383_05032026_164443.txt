@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-05T16:44:43.78Z",
+    "expiracao" : "371715"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609383A057F115C669429A96D7FC8843",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6341172676720345138",
+    "location" : "api.itau/pix/qr/v2/39c744ef-acb8-4984-b84d-8d513cc05e65",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-05T16:44:43.934238"
+  },
+  "location" : "api.itau/pix/qr/v2/39c744ef-acb8-4984-b84d-8d513cc05e65",
+  "devedor" : {
+    "cnpj" : "38337189000266",
+    "nome" : "TECNEO IMPORTACAO E EXPORTACAO LTDA"
+  },
+  "valor" : {
+    "original" : "2270.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/39c744ef-acb8-4984-b84d-8d513cc05e655204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A98A"
+}

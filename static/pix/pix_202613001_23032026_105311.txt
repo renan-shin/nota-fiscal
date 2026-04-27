@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-23T10:53:10.98Z",
+    "expiracao" : "392808"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613001FAF31F2993194B4F8AB6CA1937",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8269256170952511449",
+    "location" : "api.itau/pix/qr/v2/a4338d94-8675-4bf6-94c7-082082f6cf38",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-23T10:53:11.122163"
+  },
+  "location" : "api.itau/pix/qr/v2/a4338d94-8675-4bf6-94c7-082082f6cf38",
+  "devedor" : {
+    "cnpj" : "40987560000104",
+    "nome" : "D. DOS SANTOS SILVA"
+  },
+  "valor" : {
+    "original" : "2825.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/a4338d94-8675-4bf6-94c7-082082f6cf385204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304EC83"
+}

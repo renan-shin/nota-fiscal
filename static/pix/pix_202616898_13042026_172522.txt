@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T17:25:22.65Z",
+    "expiracao" : "282876"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026168983218818774254D338697C39B1B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3987333407829261284",
+    "location" : "api.itau/pix/qr/v2/9fa3d60f-0edb-4625-a4e2-38f28abfbae6",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T17:25:22.831445"
+  },
+  "location" : "api.itau/pix/qr/v2/9fa3d60f-0edb-4625-a4e2-38f28abfbae6",
+  "devedor" : {
+    "cnpj" : "50152283000165",
+    "nome" : "CECI MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "5915.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9fa3d60f-0edb-4625-a4e2-38f28abfbae65204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044F95"
+}

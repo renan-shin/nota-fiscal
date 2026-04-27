@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T16:41:01.83Z",
+    "expiracao" : "544737"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615001C52756E9A157485C976F346295",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3050456406896336584",
+    "location" : "api.itau/pix/qr/v2/949bfdda-4a93-44a8-8ffd-675eff7776db",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T16:41:02.072805"
+  },
+  "location" : "api.itau/pix/qr/v2/949bfdda-4a93-44a8-8ffd-675eff7776db",
+  "devedor" : {
+    "cnpj" : "23488865000144",
+    "nome" : "LILIA NUNES DA SILVA"
+  },
+  "valor" : {
+    "original" : "2276.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/949bfdda-4a93-44a8-8ffd-675eff7776db5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040D6B"
+}

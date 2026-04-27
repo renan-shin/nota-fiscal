@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-30T08:29:00.98Z",
+    "expiracao" : "660658"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614222B5A2463190334A979FCFE57321",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1150515873855233143",
+    "location" : "api.itau/pix/qr/v2/12e022e6-f913-4956-86c5-0b27cd83e65b",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-30T08:29:01.154241"
+  },
+  "location" : "api.itau/pix/qr/v2/12e022e6-f913-4956-86c5-0b27cd83e65b",
+  "devedor" : {
+    "cnpj" : "50298715000140",
+    "nome" : "ROSEMILDO VIEIRA DE MENDONCA"
+  },
+  "valor" : {
+    "original" : "2570.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/12e022e6-f913-4956-86c5-0b27cd83e65b5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630480EE"
+}

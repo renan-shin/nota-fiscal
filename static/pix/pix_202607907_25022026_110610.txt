@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T11:06:10.10Z",
+    "expiracao" : "219229"
+  },
+  "status" : "ATIVA",
+  "txid" : "202607907729630FAB4614E93B209EB53E4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1541568970015295279",
+    "location" : "api.itau/pix/qr/v2/0db99467-a54c-4c0b-8f13-6e29980e0a97",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T11:06:10.248062"
+  },
+  "location" : "api.itau/pix/qr/v2/0db99467-a54c-4c0b-8f13-6e29980e0a97",
+  "devedor" : {
+    "cnpj" : "03527706000102",
+    "nome" : "LOJA E LOCADORA DE ROUPAS SONHO DE NOIVA LTDA"
+  },
+  "valor" : {
+    "original" : "2079.55",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/0db99467-a54c-4c0b-8f13-6e29980e0a975204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304D582"
+}

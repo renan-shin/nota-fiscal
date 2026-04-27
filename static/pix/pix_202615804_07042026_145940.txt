@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-07T14:59:40.06Z",
+    "expiracao" : "291619"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615804722464DA6AEA4C94BB68AA7045",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3584865724332840219",
+    "location" : "api.itau/pix/qr/v2/5370dcd3-d9c0-4c79-8031-e3e6a6fcbe1a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-07T14:59:40.235042"
+  },
+  "location" : "api.itau/pix/qr/v2/5370dcd3-d9c0-4c79-8031-e3e6a6fcbe1a",
+  "devedor" : {
+    "cnpj" : "57618198000199",
+    "nome" : "FABIANO DA SILVA"
+  },
+  "valor" : {
+    "original" : "9930.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/5370dcd3-d9c0-4c79-8031-e3e6a6fcbe1a5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304DEEB"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T14:58:45.15Z",
+    "expiracao" : "378074"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608653B5C4F05966E34293A46DA31CBF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6886690679398171166",
+    "location" : "api.itau/pix/qr/v2/13896ddc-3223-4ac8-8c91-1ca86689298e",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T14:58:45.299851"
+  },
+  "location" : "api.itau/pix/qr/v2/13896ddc-3223-4ac8-8c91-1ca86689298e",
+  "devedor" : {
+    "cnpj" : "10361463000132",
+    "nome" : "DOUGLAS LOPES DE BRITO ME"
+  },
+  "valor" : {
+    "original" : "2175.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/13896ddc-3223-4ac8-8c91-1ca86689298e5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304D9E5"
+}

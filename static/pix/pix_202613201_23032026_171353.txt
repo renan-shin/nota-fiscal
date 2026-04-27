@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-23T17:13:52.82Z",
+    "expiracao" : "369966"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613201D8AC52F1FB8541FE87F78BCA8F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3147744820895714935",
+    "location" : "api.itau/pix/qr/v2/ef6b927c-b0f9-45d6-821d-9a3235068adf",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-23T17:13:52.964549"
+  },
+  "location" : "api.itau/pix/qr/v2/ef6b927c-b0f9-45d6-821d-9a3235068adf",
+  "devedor" : {
+    "cnpj" : "49585971000130",
+    "nome" : "49.585.971 NILSON ALEXANDRE DO CARMO MERGULHAO"
+  },
+  "valor" : {
+    "original" : "3820.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ef6b927c-b0f9-45d6-821d-9a3235068adf5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A72C"
+}

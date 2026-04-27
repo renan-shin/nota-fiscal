@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-14T09:13:46.70Z",
+    "expiracao" : "312372"
+  },
+  "status" : "ATIVA",
+  "txid" : "202617046537C33019F404B5BAEFF5F445D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4027193045075545557",
+    "location" : "api.itau/pix/qr/v2/2cb3139a-9e12-4e5c-a59a-e8d523b0c15f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-14T09:13:46.869688"
+  },
+  "location" : "api.itau/pix/qr/v2/2cb3139a-9e12-4e5c-a59a-e8d523b0c15f",
+  "devedor" : {
+    "cnpj" : "08415504000184",
+    "nome" : "RUBENS ALVES MARTINS"
+  },
+  "valor" : {
+    "original" : "2162.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2cb3139a-9e12-4e5c-a59a-e8d523b0c15f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304F434"
+}

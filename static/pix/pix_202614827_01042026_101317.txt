@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T10:13:17.54Z",
+    "expiracao" : "481601"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614827ECA1F255E6EF4817AE63423712",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6181063765292888377",
+    "location" : "api.itau/pix/qr/v2/24366baf-ea56-40fa-81ec-fd6543a00042",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T10:13:17.739136"
+  },
+  "location" : "api.itau/pix/qr/v2/24366baf-ea56-40fa-81ec-fd6543a00042",
+  "devedor" : {
+    "cnpj" : "47439565000133",
+    "nome" : "RCA INDUSTRIA E COMERCIO DE MODA INTIMA LTDA"
+  },
+  "valor" : {
+    "original" : "2215.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/24366baf-ea56-40fa-81ec-fd6543a000425204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041F52"
+}

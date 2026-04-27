@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-25T10:55:45.46Z",
+    "expiracao" : "479053"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613595EF93975B2A6F4FA58F146B94D5",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3869969765542160933",
+    "location" : "api.itau/pix/qr/v2/221fea06-8a5a-4522-9c86-98647bf985df",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-25T10:55:45.597809"
+  },
+  "location" : "api.itau/pix/qr/v2/221fea06-8a5a-4522-9c86-98647bf985df",
+  "devedor" : {
+    "cnpj" : "42111532000146",
+    "nome" : "R C comercio de maquinas e acessorios"
+  },
+  "valor" : {
+    "original" : "2220.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/221fea06-8a5a-4522-9c86-98647bf985df5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630494C2"
+}

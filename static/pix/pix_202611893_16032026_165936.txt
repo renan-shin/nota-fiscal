@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-16T16:59:36.46Z",
+    "expiracao" : "284422"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026118937D0B8D64B929484390239FF891",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2113295355080326710",
+    "location" : "api.itau/pix/qr/v2/2e7b8e86-af90-4659-a3a9-bf6165374f6e",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-16T16:59:36.60437"
+  },
+  "location" : "api.itau/pix/qr/v2/2e7b8e86-af90-4659-a3a9-bf6165374f6e",
+  "devedor" : {
+    "cnpj" : "43449055000196",
+    "nome" : "LUCIANO PIRES DE SOUZA"
+  },
+  "valor" : {
+    "original" : "2219.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2e7b8e86-af90-4659-a3a9-bf6165374f6e5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630478BE"
+}

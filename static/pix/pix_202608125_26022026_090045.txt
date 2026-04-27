@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-26T09:00:45.14Z",
+    "expiracao" : "399554"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260812500AEABDC2B684A70A3C6C37E02",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "140813870632919220",
+    "location" : "api.itau/pix/qr/v2/9103918e-75f0-45fa-b0dd-63467cfacae1",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-26T09:00:45.299641"
+  },
+  "location" : "api.itau/pix/qr/v2/9103918e-75f0-45fa-b0dd-63467cfacae1",
+  "devedor" : {
+    "cnpj" : "28345054000108",
+    "nome" : "ANTONIO FERREIRA DE LIMA 40785700463"
+  },
+  "valor" : {
+    "original" : "3185.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9103918e-75f0-45fa-b0dd-63467cfacae15204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630476F2"
+}

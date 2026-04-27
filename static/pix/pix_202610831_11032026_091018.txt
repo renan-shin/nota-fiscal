@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-11T09:10:18.09Z",
+    "expiracao" : "485381"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026108315A7366AC529443BBB522EABFFA",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4557872502900460545",
+    "location" : "api.itau/pix/qr/v2/e1d67304-3b4e-4409-a88d-031c0cf97776",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-11T09:10:18.247585"
+  },
+  "location" : "api.itau/pix/qr/v2/e1d67304-3b4e-4409-a88d-031c0cf97776",
+  "devedor" : {
+    "cpf" : "07607737421",
+    "nome" : "Jaqueline Alvino de Oliveira"
+  },
+  "valor" : {
+    "original" : "5795.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e1d67304-3b4e-4409-a88d-031c0cf977765204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046F76"
+}

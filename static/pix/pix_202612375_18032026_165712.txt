@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-18T16:57:12.39Z",
+    "expiracao" : "457366"
+  },
+  "status" : "ATIVA",
+  "txid" : "202612375951C4E3A2F4B4A9DBA573B99D0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7318429805994604394",
+    "location" : "api.itau/pix/qr/v2/657bca55-d9f5-4dc7-a496-d18ead7d3c54",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-18T16:57:12.548087"
+  },
+  "location" : "api.itau/pix/qr/v2/657bca55-d9f5-4dc7-a496-d18ead7d3c54",
+  "devedor" : {
+    "cnpj" : "13771615000163",
+    "nome" : "J. C. DE SOUZA LIMA MAQUINAS"
+  },
+  "valor" : {
+    "original" : "2170.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/657bca55-d9f5-4dc7-a496-d18ead7d3c545204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A577"
+}

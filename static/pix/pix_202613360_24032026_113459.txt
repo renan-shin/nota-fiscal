@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-24T11:34:58.80Z",
+    "expiracao" : "563100"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613360230F55521358477FAE5629CBED",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6865874631858569013",
+    "location" : "api.itau/pix/qr/v2/529b587a-06d3-4dea-b7f7-0cd3dbc1128f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-24T11:34:58.945046"
+  },
+  "location" : "api.itau/pix/qr/v2/529b587a-06d3-4dea-b7f7-0cd3dbc1128f",
+  "devedor" : {
+    "cnpj" : "63047244000140",
+    "nome" : "BLUE MAQ COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "1675.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/529b587a-06d3-4dea-b7f7-0cd3dbc1128f5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044D44"
+}

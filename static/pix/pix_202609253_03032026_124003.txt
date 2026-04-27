@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-03T12:40:03.40Z",
+    "expiracao" : "213595"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026092538F2B7FAB52F447DBB1DAB478CD",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5380633459764791131",
+    "location" : "api.itau/pix/qr/v2/9edd1f99-ca9d-4e16-81d9-fd810ae8ab2b",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-03T12:40:03.566431"
+  },
+  "location" : "api.itau/pix/qr/v2/9edd1f99-ca9d-4e16-81d9-fd810ae8ab2b",
+  "devedor" : {
+    "cnpj" : "38652926000134",
+    "nome" : "FRANCISCO MARCILIO DA SILVA"
+  },
+  "valor" : {
+    "original" : "4830.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9edd1f99-ca9d-4e16-81d9-fd810ae8ab2b5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041396"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-05T09:48:18.43Z",
+    "expiracao" : "396700"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609757FA1C5A5CD61F47AB9259B36684",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1152427867244513592",
+    "location" : "api.itau/pix/qr/v2/8c576c8a-b242-4066-86e2-4894ec067544",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-05T09:48:18.581347"
+  },
+  "location" : "api.itau/pix/qr/v2/8c576c8a-b242-4066-86e2-4894ec067544",
+  "devedor" : {
+    "cnpj" : "21439142000120",
+    "nome" : "Antonio José Araujo de Sousa ME"
+  },
+  "valor" : {
+    "original" : "2470.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8c576c8a-b242-4066-86e2-4894ec0675445204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63048693"
+}

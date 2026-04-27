@@ -1,0 +1,390 @@
+FlexDocs Documentos Eletrônicos
+
+DLL de utilidades da NF-e - NFe_Util_2G_v5.00n (C) 2008-2025 - Todos os direitos reservados
+
+Vide guia on-line, disponível em www.flexdocs.net/guiaNFe
+
+2025-11-08
+
+   * [RTC-5.0.0n-001] - correção da geração do grupo guiaTransito
+
+2025-11-04 - 5.0.0m
+
+   * [RTC-5.0.0m-001] - alteração da tag nItemDFeRef do grupo gConsumo para nItem  
+   * [RTC-5.0.0m-002] - correção do IBSCBSv130 para gerar gEstornoCred quando informado
+   * [RTC-5.0.0m-003] - eliminação do gIBSCredPres e gCBSCredPres da geração do gIBSCBS
+
+     string gIBSCBSv130(double vBC, string gIBSUF, string gIBSMun, double vIBS, string gCBS, string gTribRegular_Opc, string gTribCompraGov_Opc)
+
+   * [RTC-5.0.0m-004] - correção nos nomes das tag vCredPres no gCredPresOper
+
+
+2025-10-28 - 5.0.0l
+
+   * [RTC-5.0.0l-001] - correção da quantidade de casas decimais da tag qConsumo do grupo qConsumo para 11v4 
+
+   * [RTC-5.0.0l-002] - correção da quantidade de casas decimais da tag qPerecimento do grupo gPerecimento para 11v4 
+
+   * [RTC-5.0.0l-003] - correção da quantidade de casas decimais da tag qImobilizado do grupo gImobilizacao para 11v4 
+
+   * [RTC-5.0.0l-004] - correção da quantidade de casas decimais da tag qComb do grupo gConsumoComb para 11v4 
+
+   * [RTC-5.0.0l-005] - correção da quantidade de casas decimais da tag qNaoFornecida do grupo gItemNaoFornecido para 11v4 
+
+   * [RTC-5.0.0l-006] - correção da quantidade de casas decimais da tag qtde do grupo gConsumoZFM para 11v4
+
+   * [RTC-5.0.0l-007] - correção da quantidade de casas decimais da tag qPerecimento do grupo gPerecimentoCIF para 11v4
+
+   * [RTC-5.0.0l-008] - alteração da tag nItem do grupo gConsumo para nItemDFeRef 
+
+   * [RTC-5.0.0l-009] - alteração para aceitar o tpAutor=1 no ev211110_credPresumido
+
+   * [RTC-5.0.0l-010] - correção da tag vCredPres do grupo gCredPres para vBC 
+
+   * [RTC-5.0.0l-011] - alteração para gerar o grupo gRed do grupo IBSMun quando pRedAliq > 0 ou pAliqEfet > 0
+
+   * [RTC-5.0.0l-012] - alteração para gerar o grupo gRed do grupo CBS quando pRedAliq > 0 ou pAliqEfet > 0
+
+   * [RTC-5.0.0l-013] - Criação do identificadorRTCv130 para acréscimo da tag dPrevEntrega no grupo ide 
+
+     string identificadorRTCv130(int cUF, int cNF, string natOp, int mod, int serie, int nNF, string dhEmi, string dhSaiEnt, int tpNF, int idDest, string cMunFG, string NFref_Opc, int tpImp, int tpEmis, int cDV, int tpAmb, int finNFe, int indFinal, int indPres, int procEmi, string verProc, string dhCont, string xJust, int indIntermed_Opc, string cMunFGIBS_Opc, string tpNFDebito_Opc, string tpNFCredito_Opc, string gCompraGov_Opc, string NFePagAntecipado_Opc, string dPrevEntrega_Opc)
+
+   * [RTC-5.0.0l-014] - acréscimo da tag tpCredPresIBSZFM no grupo prod
+
+     string produtoRTCv130(string cProd, string cEAN, string xProd, string NCM, string NVE_Opc, string CEST_Opc, string indEscala_Opc, string CNPJFab_Opc, string cBenef_Opc, string EXTIPI_Opc, int CFOP, string uCom, string qCom, string vUnCom, double vProd, string cEANTrib, string uTrib, string qTrib, string vUnTrib, double vFrete, double vSeg, double vDesc, double vOutro, int indTot, string DI_Opc, string detExport_Opc, string DetEspecifico_Opc, string xPed_Opc, string nItemPed_Opc, string nFCI_Opc, string rastro_Opc, string credPresumido_Opc, int indBemMovelUsado_Opc, string tpCredPresIBSZFM_Opc)
+
+   * [RTC-5.0.0l-015] - criação do IBSCBSv130 para acréscimo da tag indDoacao no grupo IBSCBS e gAjusteCompet, gEstornoCred e gCredPresOper 
+
+     string IBSCBSv130(string CST, string cClassTrib, string indDoacao_Opc, string gTributo, string gEstornoCred_Opc, string gCredPresumido_Opc)
+
+   * [RTC-5.0.0l-016] - criação do gAjusteCompet
+
+     string gAjusteCompet(string competApur, double vIBS, double vCBS)
+
+   * [RTC-5.0.0l-017] - criação do gEstornoCred
+
+     string gEstornoCred(double vIBSEstCred, double vCBSEstCred)
+
+   * [RTC-5.0.0l-018] - criação do gCredPresOper
+
+     string gCredPresOper(double vBCCredPres, string cCredPres, double pIBSCredPres_Opc, double vIBSCredPres_Opc, double vIBSCredPresCondSus_Opc, double pCBSCredPres_Opc, double vCBSCredPres_Opc, double vCBSCredPresCondSus_Opc)
+
+   * [RTC-5.0.0l-019] - criação do gCredPresIBSZFMv130
+
+     string gCredPresIBSZFMv130(string competApur, int tpCredPresIBSZFM, double vCredPresIBSZFM)
+
+   * [RTC-5.0.0l-020] - criação do IBSCBSTotv130 para acréscimo do gEstornoCred
+
+     string IBSCBSTotv130(double vBCIBSCBS, string gIBS_Opc, string gCBS_Opc, string gMono_Opc, string gEstornoCred)
+
+   * [RTC-5.0.0l-021] - Evento 112150 Atualização da Data de Previsão de Entrega Emitente
+
+     string ev112150_atualizaDataPrevEntrega(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string dPrevEntrega, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+   * [RTC-5.0.0l-022] - acréscimo da tag tpCredPresIBSZFM no grupo produto400VFP
+
+     camposv400 = "indEscala | CNPJFab | cBenef | nFCI | rastro | credPresumido | indBemMovelUsado | tpCredPresIBSZFM" 
+
+   * [RTC-5.0.0l-023] - eliminação do tpAutor no XML do evento 110001 cancelamento
+
+   * [RTC-5.0.0l-024] - acréscimo da tag dPrevEntrega no identificadorRTCVFP
+
+     camposRTC_Opc = "cMunFGIBS | tpNFDebito | tpNFCredito | gCompraGov | gPagAntecipado | dPrevEntrega"
+
+   * [RTC-5.0.0l-025] - correção da geração do grupo agropecuario para permitir múltiplas ocorrências do grupo defensivo
+
+2025-09-10 - 5.0.0k
+
+   * [RTC-5.0.0k-001] - alteração para não gerar o vItem quando = 0 no detalheRTC
+   * [RTC-5.0.0k-002] - alteração para considerar o cStat=150 como Autorização de Uso Válida
+   * [RTC-5.0.0k-003] - correção dos nome das tag vCredIBS e vCredCBS no gCredito
+   * [RTC-5.0.0k-004] - correção do descEvento do evento 212110 - Manifestação sobre Pedido de Transferência de Crédito de IBS em Operação de Sucessão
+   * [RTC-5.0.0k-005] - correção do descEvento do evento 212120 - Manifestação sobre Pedido de Transferência de Crédito de CBS em Operação de Sucessão
+   * [RTC-5.0.0k-006] - alteração para tratar a rejeição por falha de schema XML cStat=225
+   * [RTC-5.0.0k-007] - alteração para sempre gerar o vIBS do grupo gIBSCBS
+
+2025-08-30 - 5.0.0j
+
+   * [RTC-5.0.0j-001] - correção da quantidade de casas decimais da tag pISEspec do grupo IS para 3v2-4 
+   * [RTC-5.0.0j-002] - correção da quantidade de casas decimais da tag pAliqEfet do grupo gIBSUF para 3v2-4 
+   * [RTC-5.0.0j-003] - correção da quantidade de casas decimais da tag pAliqEfet do grupo gIBSMun para 3v2-4 
+   * [RTC-5.0.0j-004] - correção da quantidade de casas decimais da tag pAliqEfet do grupo gCBS para 3v2-4 
+
+2025-08-15 - 5.0.0i
+
+   * [RTC-5.0.0i-001] AssinarNFCe400 - correção da assinatura do QRCode da versão 3
+
+2025-08-10 - 5.0.0h
+
+   * [RTC-5.0.0h-001] acréscimo da tag vIBS no gIBSCBS
+
+     string gIBSCBS(double vBC, string gIBSUF, string gIBSMun, double vIBS, string gCBS, string gTribRegular_Opc, string gIBSCredPres_Opc, string gCBSCredPres_Opc, string gTribCompraGov_Opc)
+
+      A tag vIBS só está sendo gerada quando o conteúdo > 0, caso precise gerar a tag com conteúdo zero, informe vIBS=0.001 para gerar a tag <vIBS>0.00</vIBS>
+
+   * [RTC-5.0.0h-002] alteração da estrutura do grupo gIBSCBSMono
+
+   * [RTC-5.0.0h-003] alteração do nItem para atributo no gCredPres
+
+   * [RTC-5.0.0h-004] alteração do nItem para atributo e dos nomes das tags do DFeReferenciado do gConsumo
+
+     string gConsumo(int nItem, double vIBS, double vCBS, double qConsumo, string uConsumo, string DFeRef, int nItemDFeRef)
+
+   * [RTC-5.0.0h-005] alteração do nItem para atributo no gImobilizacao
+
+   * [RTC-5.0.0h-006] alteração do nItem para atributo no gConsumoComb
+
+   * [RTC-5.0.0h-007] alteração na descrição do evento 211124
+
+   * [RTC-5.0.0h-008] alteração do nItem para atributo no gPerecimento
+
+   * [RTC-5.0.0h-009] alteração na descrição do evento 112130
+
+   * [RTC-5.0.0h-010] alteração do nItem para atributo no gCredito
+
+   * [RTC-5.0.0h-011] alteração do nItem para atributo no gItemNaoFornecido
+
+   * [RTC-5.0.0h-012] alteração do nItem para atributo no gConsumoZFM
+
+   * [RTC-5.0.0h-013] Evento 112130 - gera grupo gPerecimento com estorno
+
+     string gPerecimentoCIF(int nItem, double vIBS, double vCBS, double qPerecimento, string uPerecimento, double vEstornoIBS, double vEstornoCBS)
+
+
+2025-07-31 - 5.0.0g
+
+   * [RTC-5.0.0g-001] correção para permitir a omissão das tags do IBSCBSMono
+
+2025-07-24 - 5.0.0f
+
+   * [RTC-5.0.0f-001] correção do tpEvento e nome do método de 412120 para 212110
+
+   * [RTC-5.0.0f-002] correção do tpEvento e nome do método de 412130 para 212120
+
+2025-07-08 - 5.0.0e
+
+   * [RTC-5.0.0e-001] correção para não gerar as tags vIS e vNFTot no grupo total quando o valor = 0
+
+   * [RTC-5.0.0e-002] grupo identificadorRTCVFP
+
+     string identificadorRTCVFP(int cUF, int cNF, string natOp, int mod, int serie, int nNF, string dhEmi, string dhSaiEnt, int tpNF, int idDest, string cMunFG, string NFref_Opc, int tpImp, int tpEmis, int cDV, int tpAmb, int finNFe, int indFinal, int indPres, int procEmi, string verProc, string dhCont, string xJust, int indIntermed_Opc, string camposRTC_Opc)
+
+     camposRTC_Opc = "cMunFGIBS | tpNFDebito | tpNFCredito | gCompraGov | gPagAntecipado"
+
+     produto400VFP - acréscimo de indBemMovelUsado
+
+     camposv400 = "indEscala | CNPJFab | cBenef | nFCI | rastro | credPresumido | indBemMovelUsado" 
+
+2025-07-04 - 5.0.0d
+
+   * [RTC-5.0.0d-001] permitir nProt com 15 ou 17 dígitos no cancelamento e outros eventos que exigem o nProt
+
+2025-07-02 - v5.0.0c
+
+   * [RTC-5.0.0c-001] correção no nome do grupo ISTot do grupo totalRTC
+
+   * [RTC-5.0.0c-002] correção no nome da tag vBCIBSCBS do grupo IBSCBSTot
+
+
+2025-07-01 - v5.00b
+
+   * [RTC-5.0.2-001] modificação da geração do qTrib do grupo IS para formato com 4 casas decimais
+
+   * [RTC-5.0.2-002] modificação da geração do qBCMono do gIBSCBSMono para formato com 4 casas decimais
+
+   * [RTC-5.0.2-003] modificação da geração do qBCMonoReten do gIBSCBSMono para formato com 4 casas decimais
+
+   * [RTC-5.0.2-004] modificação da geração do qBCMonoRet do gIBSCBSMono para formato com 4 casas decimais
+
+
+2025-06-26 - v5.00a
+
+   * [RTC-5.0.0-047] produtoRTC    
+
+  string produtoRTC(string cProd, string cEAN, string xProd, string NCM, string NVE_Opc, string CEST_Opc, string indEscala_Opc, string CNPJFab_Opc, string cBenef_Opc, string EXTIPI_Opc, int CFOP, string uCom, string qCom, string vUnCom, double vProd, string cEANTrib, string uTrib, string qTrib, string vUnTrib, double vFrete, double vSeg, double vDesc, double vOutro, int indTot, string DI_Opc, string detExport_Opc, string DetEspecifico_Opc, string xPed_Opc, string nItemPed_Opc, string nFCI_Opc, string rastro_Opc, string credPresumido_Opc, int indBemMovelUsado_Opc)
+
+2025-06-18 - v5.00
+
+  * [RTC-5.0.0-001] grupo ide com novas tags RTC
+  
+     string identificadorRTC(int cUF, int cNF, string natOp, int mod, int serie, int nNF, string dhEmi, string dhSaiEnt, int tpNF, int idDest, string cMunFG, string NFref_Opc, int tpImp, int tpEmis, int cDV, int tpAmb, int finNFe, int indFinal, int indPres, int procEmi, string verProc, string dhCont, string xJust, int indIntermed_Opc, string cMunFGIBS_Opc, string tpNFDebito_Opc, string tpNFCredito_Opc, string gCompraGov_Opc, string NFePagAntecipado_Opc)
+
+  * [RTC-5.0.0-002] grupo gCompraGov
+
+     string gCompraGov(int tpEnteGov, double pRedutor, int tpOperGov)
+
+  * [RTC-5.0.0-003] grupo IS
+
+     string IS(string CSTIS, string cClassTribIS, double vBCIS, double pIS, double pISEspec_Opc, string uTrib_Opc, double qTrib_Opc, double vIS)
+
+  * [RTC-5.0.0-004] grupo IBSCBS
+
+     string IBSCBS(string CST, string cClassTrib, string gTributo, string gCredPresIBSZFM_Opc)
+
+  * [RTC-5.0.0-005] grupo gIBSUF
+
+     string gIBSUF(double pIBSUF, double pDif_Opc, double vDif_Opc, double vDevTrib_Opc, double pRedAliq_Opc, double pAliqEfet_Opc, double vIBSUF)
+
+  * [RTC-5.0.0-006] grupo gIBSMun
+
+     string gIBSMun(double pIBSMun, double pDif_Opc, double vDif_Opc, double vDevTrib_Opc, double pRedAliq_Opc, double pAliqEfet_Opc, double vIBSMun)
+
+  * [RTC-5.0.0-007] grupo gCBS
+
+     string gCBS(double pCBS, double pDif_Opc, double vDif_Opc, double vDevTrib_Opc, double pRedAliq_Opc, double pAliqEfet_Opc, double vCBS)
+
+  * [RTC-5.0.0-008] grupo gTribRegular
+
+     string gTribRegular(string CSTReg, string cClassTribReg, double pAliqEfetRegIBSUF, double vTribRegIBSUF, double pAliqEfetRegIBSMun, double vTribRegIBSMun, double pAliqEfetRegCBS, double vTribRegCBS)
+
+  * [RTC-5.0.0-009] grupo gIBSCredPres
+           
+     string gIBSCredPres(string cCredPres, double pCredPres, double vCredPres_Alt, double vCredPresCondSus_Alt)
+
+  * [RTC-5.0.0-010] grupo gCBSCredPres
+
+     string gCBSCredPres(string cCredPres, double pCredPres, double vCredPres_Alt, double vCredPresCondSus_Alt)
+
+  * [RTC-5.0.0-011] grupo gIBSCBSMono 
+
+     string gIBSCBSMono(double qBCMono, double adRemIBS, double adRemCBS, double vIBSMono, double vCBSMono, double qBCMonoReten_Opc, double adRemIBSReten_Opc, double vIBSMonoReten_Opc, double adRemCBSReten_Opc, double vCBSMonoReten_Opc, double qBCMonoRet_Opc, double adRemIBSRet_Opc, double vIBSMonoRet_Opc, double adRemCBSRet_Opc, double vCBSMonoRet_Opc, double pDifIBS_Opc, double vIBSMonoDif_Opc, double pDifCBS_Opc, double vCBSMonoDif_Opc, double vTotIBSMonoItem, double vTotCBSMonoItem)
+
+  * [RTC-5.0.0-012] grupo DFeReferenciado
+
+     string DFeReferenciado(string chaveAcesso, int nItem)
+
+  * [RTC-5.0.0-013] grupo gIBSCBS
+
+     string gIBSCBS(double vBC, string gIBSUF, string gIBSMun, string gCBS, string gTribRegular_Opc, string gIBSCredPres_Opc, string gCBSCredPres_Opc, string gTribCompraGov_Opc)
+
+  * [RTC-5.0.0-014] permite informar os novos grupos de tributos da RTC: IS e IBSCBS
+
+     string impostoRTC(double vTotTrib, string Grupo_Icms, string Grupo_Ipi, string Grupo_Ii, string Grupo_Pis, string Grupo_Pisst, string Grupo_Cofins, string Grupo_Cofinsst, string Grupo_Issqn, string Grupo_ICMSUFDest, string Grupo_IS, string Grupo_IBSCBS)
+
+  * [RTC-5.0.0-015] grupo gIBS do total
+
+     string gIBSTot(double vDif_UF, double vDevTrib_UF, double vIBSUF, double vDif_Mun, double vDevTrib_Mun, double vIBSMun, double vIBS, double vCredPres, double vCredPresCondSus)
+
+  * [RTC-5.0.0-016] grupo gCBS do total 
+
+     string gCBSTot(double vDif, double vDevTrib, double vCBS, double vCredPres, double vCredPresCondSus)
+
+  * [RTC-5.0.0-017] grupo gMono do total 
+
+     string gMonoTot(double vIBSMono, double vCBSMono, double vIBSMonoReten, double vCBSMonoReten, double vIBSMonoRet, double vCBSMonoRet)
+
+  * [RTC-5.0.0-018] grupo IBSCBSTot
+
+     string IBSCBSTot(double vBCIBSCBS, string gIBS_Opc, string gCBS_Opc, string gMono_Opc)
+
+  * [RTC-5.0.0-019] grupo totalRTC
+
+     string totalRTC(string ICMSTot, string ISSQNtot, string retTrib, double vIS, string IBSCBSTot, double vNFTot)
+
+  * [RTC-5.0.0-020] permite informar os novso campos da RTC: vItem e DFeReferenciado
+
+     string detalheRTC(int nItem, string produto, string imposto, string infAdProd_Opc, double pDevol_Opc, double vIPIDevol_Opc, string obsContItem_Opc, string obsFiscoItem_Opc, double vItem, string DFeReferenciado_Opc)
+
+  * [RTC-5.0.0-021] Evento 112110 - Informação efetivo pagamento integral para liberar crédito presumido do adquirente
+
+     string ev112110_informaPagto(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string detEvento, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-022] Evento 211110 - Solicitação de Apropriação de crédito presumido
+
+     string ev211110_credPresumido(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gCredPres, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-023] Evento 211110 - gera grupo gCredPres
+
+     string gCredPres(int nItem, double vBC, string cCredPresIBS_Opc, double pCredPresIBS_Opc, double vCredPresIBS_Opc, string cCredPresCBS_Opc, double pCredPresCBS_Opc, double vCredPresCBS_Opc)
+
+  * [RTC-5.0.0-024] Evento 211120 - Destinação de item para consumo pessoal
+
+     string ev211120_destConsumo(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gConsumo, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-025] Evento 211120 - gera grupo gConsumo
+
+     string gConsumo(int nItem, double vIBS, double vCBS, double qConsumo, string uConsumo, string refNF, int nItemRefNFe);
+
+  * [RTC-5.0.0-026] Evento 211124 - Perecimento, perda, roubo ou furto durante o transporte contratado pelo adquirente
+
+     string ev211124_perdaFOB(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gPerecimento, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-027] Evento 211124 - gera grupo gPerecimento
+
+     string gPerecimento(int nItem, double vIBS, double vCBS, double qPerecimento, string uPerecimento)
+
+  * [RTC-5.0.0-028] Evento 211128 - Aceite de débito na apuração por emissão de nota de crédito
+
+     string ev211128_aceiteDebito(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string indAceitacao, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-029] Evento 211130 - Imobilização de Item
+
+     string ev211130_imobilizaItem(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gImobilizacao, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-030] Evento 211130 - gera grupo gImobilizacao
+
+     string gImobilizacao(int nItem, double vIBS, double vCBS, double qImobilizado, string uImobilizado)
+
+  * [RTC-5.0.0-031] Evento 211140 - Solicitação de Apropriação de Crédito de Combustível
+
+     string ev211140_credCombustivel(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gConsumoComb, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-032] Evento 211140 - gera grupo gConsumoComb
+
+     string gConsumoComb(int nItem, double vIBS, double vCBS, double qComb, string uComb);
+
+  * [RTC-5.0.0-033] Evento 211150 - Solicitação de Apropriação de Crédito para bens e serviços que dependem de atividade do adquirente
+
+     string ev211150_credBensServicos(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gCredito, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-034] Evento 211150 - gera grupo gCredito
+
+     string gCredito(int nItem, double vIBS, double vCBS);
+
+  * [RTC-5.0.0-035] Evento 412120 - Manifestação sobre Pedido de Transferência de Crédito de IBS em Operações de Sucessão
+
+     string ev412120_transCredIBS(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string indAceitacao, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+  
+  * [RTC-5.0.0-036] Evento 412130 - Manifestação sobre Pedido de Transferência de Crédito de CBS em Operações de Sucessão
+
+     string ev412130_transCredCBS(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string indAceitacao, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+    
+  * [RTC-5.0.0-037] Evento 110001 - Cancelamento de Evento
+
+     string ev110001_cancEvento(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string tpEventoAut, string nProtEvento, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-038] grupo refNFe
+
+     string refNFe(string chaveNFe)
+
+  * [RTC-5.0.0-039] grupo gTransfCred
+
+     string gTransfCred(double vIBS, double vCBS);
+
+  * [RTC-5.0.0-040] grupo gTribCompraGov
+
+     string gTribCompraGov(double pAliqIBSUF, double vTribIBSUF, double pAliqIBSMun, double vTribIBSMun, double pAliqCBS, double vTribCBS);
+       
+  * [RTC-5.0.0-041] grupo gCredPresIBSZFM
+
+     string gCredPresIBSZFM(int tpCredPresIBSZFM, double vCredPresIBSZFM);
+
+  * [RTC-5.0.0-042] Evento 112130 - Perecimento, perda, roubo ou furto durante o transporte contratado pelo fornecedor
+
+     string ev112130_perdaCIF(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gPerecimento, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca)
+
+  * [RTC-5.0.0-043] Evento 112120 - Importação em ALC/ZFM não convertida em isenção
+
+     string ev112120_ImpALCZFM(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gPerecimento, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-044] Evento 112140 - Fornecimento não realizado com pagamento antecipado
+
+     string ev112140_naoOcFornPagAnt(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, int tpAutor, string CNPJAutor, string cOrgaoAutor, string chaveNFe, string dhEvento, int nSeqEvento, string verAplic, string gItemNaoFornecido, out string nProtocolo, out string dProtocolo, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string proxy, string usuario, string senha, string licenca);
+
+  * [RTC-5.0.0-045] Evento 112140 - gera grupo gItemNaoFornecido
+
+     string gItemNaoFornecido(int nItem, double vIBS, double vCBS, double qNaoFornecida, string uNaoFornecida)
+
+  * [RTC-5.0.0-046] Evento 112120 - gera grupo gConsumoZFM
+
+     string gConsumoZFM(int nItem, double vIBS, double vCBS, double qtde, string unidade)

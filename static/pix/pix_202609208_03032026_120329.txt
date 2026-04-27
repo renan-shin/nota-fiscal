@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-03T12:03:29.63Z",
+    "expiracao" : "561389"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609208039504602B044F3CB73F2BD818",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9005098642569011054",
+    "location" : "api.itau/pix/qr/v2/b8b59ef4-9ab7-44a1-9894-b2e77675f531",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-03T12:03:29.771908"
+  },
+  "location" : "api.itau/pix/qr/v2/b8b59ef4-9ab7-44a1-9894-b2e77675f531",
+  "devedor" : {
+    "cnpj" : "61586660000190",
+    "nome" : "LEANDRO DUARTE CENTURIAN"
+  },
+  "valor" : {
+    "original" : "470.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b8b59ef4-9ab7-44a1-9894-b2e77675f5315204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304FA33"
+}

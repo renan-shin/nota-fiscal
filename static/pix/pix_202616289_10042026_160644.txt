@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-10T16:06:43.86Z",
+    "expiracao" : "287595"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026162897C8AB0A73BB942C9B674BC5D70",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6758542733839364006",
+    "location" : "api.itau/pix/qr/v2/30701d6d-3e62-495b-98dc-6e6aab7350d3",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-10T16:06:44.040569"
+  },
+  "location" : "api.itau/pix/qr/v2/30701d6d-3e62-495b-98dc-6e6aab7350d3",
+  "devedor" : {
+    "cnpj" : "22317550000171",
+    "nome" : "M DESIGNER CITY EIRELI"
+  },
+  "valor" : {
+    "original" : "10475.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/30701d6d-3e62-495b-98dc-6e6aab7350d35204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304DC00"
+}

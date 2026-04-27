@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-26T16:39:58.97Z",
+    "expiracao" : "372000"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613980349E543E7AFA490C93327297B6",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2032141259775789112",
+    "location" : "api.itau/pix/qr/v2/36c5f641-38ad-407d-9e32-5ac50dbaa21e",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-26T16:39:59.082686"
+  },
+  "location" : "api.itau/pix/qr/v2/36c5f641-38ad-407d-9e32-5ac50dbaa21e",
+  "devedor" : {
+    "cnpj" : "24627660000165",
+    "nome" : "IVYSON DE SOUZA MAQUINAS DE COSTURA"
+  },
+  "valor" : {
+    "original" : "2133.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/36c5f641-38ad-407d-9e32-5ac50dbaa21e5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63043A28"
+}

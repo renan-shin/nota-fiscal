@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T14:47:24.49Z",
+    "expiracao" : "378754"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616288176E5F036FF640F69B036E3DFF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1367088972760073681",
+    "location" : "api.itau/pix/qr/v2/ced168fa-7292-494b-a769-7d4e8597d76c",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T14:47:24.689668"
+  },
+  "location" : "api.itau/pix/qr/v2/ced168fa-7292-494b-a769-7d4e8597d76c",
+  "devedor" : {
+    "cnpj" : "13635956000101",
+    "nome" : "M ANDRADE NUMERIANO FILHO ME"
+  },
+  "valor" : {
+    "original" : "4135.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ced168fa-7292-494b-a769-7d4e8597d76c5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304A79A"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-27T16:43:53.48Z",
+    "expiracao" : "285366"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614202E4B3B162971841C383BBC0B8D2",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1387692128243458535",
+    "location" : "api.itau/pix/qr/v2/e377eac8-8966-4dcf-bbdc-cb3d104c55f5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-27T16:43:53.664603"
+  },
+  "location" : "api.itau/pix/qr/v2/e377eac8-8966-4dcf-bbdc-cb3d104c55f5",
+  "devedor" : {
+    "cnpj" : "47117018000131",
+    "nome" : "TUDAO VARIEDADES LTDA"
+  },
+  "valor" : {
+    "original" : "3975.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e377eac8-8966-4dcf-bbdc-cb3d104c55f55204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63048173"
+}

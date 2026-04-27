@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-16T16:37:07.05Z",
+    "expiracao" : "631372"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611886F12647A0140F4BEF9399C8E5CA",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6813024986184103602",
+    "location" : "api.itau/pix/qr/v2/7b929116-6771-417a-aecf-6de2b71d6a88",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-16T16:37:07.184097"
+  },
+  "location" : "api.itau/pix/qr/v2/7b929116-6771-417a-aecf-6de2b71d6a88",
+  "devedor" : {
+    "cnpj" : "09003838000103",
+    "nome" : "CATAMAQ IMPORTACAO E EXPORTACAO DE MAQUINAS DE COSTURA INDUSTRIAIS LTD"
+  },
+  "valor" : {
+    "original" : "2225.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/7b929116-6771-417a-aecf-6de2b71d6a885204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044028"
+}

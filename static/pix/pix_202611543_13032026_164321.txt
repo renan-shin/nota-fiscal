@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T16:43:20.75Z",
+    "expiracao" : "285398"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611543B89D460FE2AC44EAB2E7513B94",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4200074379040864644",
+    "location" : "api.itau/pix/qr/v2/6c6ca7f3-1070-483e-95fb-604022f79fbe",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T16:43:20.90337"
+  },
+  "location" : "api.itau/pix/qr/v2/6c6ca7f3-1070-483e-95fb-604022f79fbe",
+  "devedor" : {
+    "cnpj" : "48706970000133",
+    "nome" : "BOM SUCESSO MAQUINAS E PECAS LTDA"
+  },
+  "valor" : {
+    "original" : "10497.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6c6ca7f3-1070-483e-95fb-604022f79fbe5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63045E23"
+}

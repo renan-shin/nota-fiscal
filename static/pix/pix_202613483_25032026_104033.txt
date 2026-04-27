@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-25T10:40:32.92Z",
+    "expiracao" : "220766"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613483D982D2C00BA244BEAF0AAF3C68",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1734511672465362454",
+    "location" : "api.itau/pix/qr/v2/16cc348a-0df8-41fe-a494-ff42ddaab23a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-25T10:40:33.153018"
+  },
+  "location" : "api.itau/pix/qr/v2/16cc348a-0df8-41fe-a494-ff42ddaab23a",
+  "devedor" : {
+    "cpf" : "46380575863",
+    "nome" : "AILTON DE OLIVEIRA JUNIOR"
+  },
+  "valor" : {
+    "original" : "1016.12",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/16cc348a-0df8-41fe-a494-ff42ddaab23a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63049A2C"
+}

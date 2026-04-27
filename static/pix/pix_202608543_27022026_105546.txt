@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T10:55:46.04Z",
+    "expiracao" : "565453"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608543704A9D9D740644B1848B912B0F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5746313545237206297",
+    "location" : "api.itau/pix/qr/v2/dfa035f4-b590-43c7-86ab-839241f7efc0",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T10:55:46.181224"
+  },
+  "location" : "api.itau/pix/qr/v2/dfa035f4-b590-43c7-86ab-839241f7efc0",
+  "devedor" : {
+    "cnpj" : "59700144000101",
+    "nome" : "NATHALIA GONTIJO ANDRADE MARTINS"
+  },
+  "valor" : {
+    "original" : "7519.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/dfa035f4-b590-43c7-86ab-839241f7efc05204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304B164"
+}

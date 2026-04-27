@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T11:23:51.81Z",
+    "expiracao" : "477367"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026157802A81B24B83E849A29B021D6A0F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1372173193546044867",
+    "location" : "api.itau/pix/qr/v2/68941a57-29b8-4d10-a0b6-372d48028cac",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T11:23:52.074259"
+  },
+  "location" : "api.itau/pix/qr/v2/68941a57-29b8-4d10-a0b6-372d48028cac",
+  "devedor" : {
+    "cnpj" : "55480565000105",
+    "nome" : "MANOEL SEVERINO DA SILVA"
+  },
+  "valor" : {
+    "original" : "3850.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/68941a57-29b8-4d10-a0b6-372d48028cac5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63044257"
+}

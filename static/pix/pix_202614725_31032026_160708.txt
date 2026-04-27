@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-31T16:07:08.09Z",
+    "expiracao" : "546771"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614725F4719B164B35498793196262D1",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3955302073097839777",
+    "location" : "api.itau/pix/qr/v2/3701f242-d4cc-40d5-9333-f6a72b4b72dd",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-31T16:07:08.289579"
+  },
+  "location" : "api.itau/pix/qr/v2/3701f242-d4cc-40d5-9333-f6a72b4b72dd",
+  "devedor" : {
+    "cnpj" : "57349056000173",
+    "nome" : "COMERCIAL SÃO MATHEUS MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "5121.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/3701f242-d4cc-40d5-9333-f6a72b4b72dd5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044A79"
+}

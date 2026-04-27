@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-19T09:00:57.94Z",
+    "expiracao" : "399541"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261243921A2978B2EF64BC3B350969751",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7833967394743636628",
+    "location" : "api.itau/pix/qr/v2/fb65d249-9d88-4a61-a2d3-ab22a848076d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-19T09:00:58.072689"
+  },
+  "location" : "api.itau/pix/qr/v2/fb65d249-9d88-4a61-a2d3-ab22a848076d",
+  "devedor" : {
+    "cnpj" : "54693938000163",
+    "nome" : "M C DA S NUMERIANO"
+  },
+  "valor" : {
+    "original" : "8880.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/fb65d249-9d88-4a61-a2d3-ab22a848076d5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630489E1"
+}

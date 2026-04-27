@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T09:34:50.40Z",
+    "expiracao" : "224709"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616734F30E562E5A2E40E9B80698C96D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4042714540720792056",
+    "location" : "api.itau/pix/qr/v2/a08cd1de-b1b6-4878-8a39-46a829f3574d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T09:34:50.583977"
+  },
+  "location" : "api.itau/pix/qr/v2/a08cd1de-b1b6-4878-8a39-46a829f3574d",
+  "devedor" : {
+    "cnpj" : "54792172000174",
+    "nome" : "VAGNA CRISTINA DA SILVA"
+  },
+  "valor" : {
+    "original" : "1830.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/a08cd1de-b1b6-4878-8a39-46a829f3574d5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304CF25"
+}

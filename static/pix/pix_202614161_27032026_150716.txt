@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-27T15:07:16.37Z",
+    "expiracao" : "291163"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261416101A23522A72F4032894E09270A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3205268764080565476",
+    "location" : "api.itau/pix/qr/v2/92e69ebc-0c03-44e6-88a5-90adcb40dfe9",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-27T15:07:16.556873"
+  },
+  "location" : "api.itau/pix/qr/v2/92e69ebc-0c03-44e6-88a5-90adcb40dfe9",
+  "devedor" : {
+    "cnpj" : "27076353000121",
+    "nome" : "ANA PAULA SOUZA SILVA  40223521833"
+  },
+  "valor" : {
+    "original" : "2163.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/92e69ebc-0c03-44e6-88a5-90adcb40dfe95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046375"
+}

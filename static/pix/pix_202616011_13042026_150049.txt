@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T15:00:48.82Z",
+    "expiracao" : "291550"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616011494B5552212A461D9BDF239F61",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7142788449909627007",
+    "location" : "api.itau/pix/qr/v2/6a33827c-18bd-495c-a2f0-bb36924eb4f9",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T15:00:49.036334"
+  },
+  "location" : "api.itau/pix/qr/v2/6a33827c-18bd-495c-a2f0-bb36924eb4f9",
+  "devedor" : {
+    "cnpj" : "11454439000100",
+    "nome" : "GILSON EVANGELISTA DE SOUZA - ME"
+  },
+  "valor" : {
+    "original" : "6620.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6a33827c-18bd-495c-a2f0-bb36924eb4f95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63047281"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-09T17:00:56.32Z",
+    "expiracao" : "284343"
+  },
+  "status" : "ATIVA",
+  "txid" : "202610323A285BD8057A3440EAB8E32F44C",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8364079152018499024",
+    "location" : "api.itau/pix/qr/v2/c019d618-1b9a-40d4-8a57-8439cf75b773",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-09T17:00:56.474371"
+  },
+  "location" : "api.itau/pix/qr/v2/c019d618-1b9a-40d4-8a57-8439cf75b773",
+  "devedor" : {
+    "cnpj" : "51165453000109",
+    "nome" : "FLEX TOP COLCHOES IND E COMERCIO LTDA"
+  },
+  "valor" : {
+    "original" : "4960.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c019d618-1b9a-40d4-8a57-8439cf75b7735204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304AABA"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T15:33:33.85Z",
+    "expiracao" : "462385"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260800212FDC3A30DD14129A1770B6979",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1143993543996584401",
+    "location" : "api.itau/pix/qr/v2/8cfe1628-e6e7-4ab2-ab7b-7d60d1c9efa5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T15:33:34.012415"
+  },
+  "location" : "api.itau/pix/qr/v2/8cfe1628-e6e7-4ab2-ab7b-7d60d1c9efa5",
+  "devedor" : {
+    "cnpj" : "62551780000115",
+    "nome" : "V A NUMERIANO FERREIRA"
+  },
+  "valor" : {
+    "original" : "12480.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8cfe1628-e6e7-4ab2-ab7b-7d60d1c9efa55204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304F870"
+}

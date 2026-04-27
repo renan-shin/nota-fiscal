@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-20T10:26:36.12Z",
+    "expiracao" : "308003"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261275109C437221C334D659676088F90",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9048253982359636473",
+    "location" : "api.itau/pix/qr/v2/3b8614c6-4e91-4f34-ae58-973893b025d4",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-20T10:26:36.27126"
+  },
+  "location" : "api.itau/pix/qr/v2/3b8614c6-4e91-4f34-ae58-973893b025d4",
+  "devedor" : {
+    "cnpj" : "29468116000131",
+    "nome" : "B K DOS SANTOS MARTINS"
+  },
+  "valor" : {
+    "original" : "3310.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/3b8614c6-4e91-4f34-ae58-973893b025d45204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630481B8"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-24T17:34:06.98Z",
+    "expiracao" : "282352"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613433D67CCBE590FA42379011D707E6",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3944924789901615204",
+    "location" : "api.itau/pix/qr/v2/d3d1854b-32fa-418d-ad25-550fedb376c9",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-24T17:34:07.114238"
+  },
+  "location" : "api.itau/pix/qr/v2/d3d1854b-32fa-418d-ad25-550fedb376c9",
+  "devedor" : {
+    "cpf" : "59679522920",
+    "nome" : "VALMIR CARDOSO"
+  },
+  "valor" : {
+    "original" : "2218.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d3d1854b-32fa-418d-ad25-550fedb376c95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63041FCF"
+}

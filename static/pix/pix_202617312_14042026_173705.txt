@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-14T17:37:05.21Z",
+    "expiracao" : "195775"
+  },
+  "status" : "ATIVA",
+  "txid" : "202617312AFBF673B42F049CEA3FBC7469C",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4971734260227884956",
+    "location" : "api.itau/pix/qr/v2/ef1bd19c-5773-4173-9be3-a3ec843295c8",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-14T17:37:05.397363"
+  },
+  "location" : "api.itau/pix/qr/v2/ef1bd19c-5773-4173-9be3-a3ec843295c8",
+  "devedor" : {
+    "cnpj" : "01830253000155",
+    "nome" : "ALEX SANDER FAGUNDES FRANCA ME"
+  },
+  "valor" : {
+    "original" : "20286.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "07728412000191",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ef1bd19c-5773-4173-9be3-a3ec843295c85204000053039865802BR5925RIO DOCE AUTO PECAS E SER6015MOGI DAS CRUZES62070503***6304070D"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-16T12:58:11.84Z",
+    "expiracao" : "385307"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026116758DDE4C6CB26D468D89ED7C0B88",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7746046150549132628",
+    "location" : "api.itau/pix/qr/v2/45d2a2d6-c3e2-4579-8c4e-088812e5e43a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-16T12:58:12.000458"
+  },
+  "location" : "api.itau/pix/qr/v2/45d2a2d6-c3e2-4579-8c4e-088812e5e43a",
+  "devedor" : {
+    "cpf" : "23397801877",
+    "nome" : "Ariel Zarza Vera"
+  },
+  "valor" : {
+    "original" : "1820.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/45d2a2d6-c3e2-4579-8c4e-088812e5e43a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304698A"
+}

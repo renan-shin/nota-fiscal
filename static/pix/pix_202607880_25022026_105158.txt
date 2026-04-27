@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T10:51:58.02Z",
+    "expiracao" : "479281"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026078805D68C14D048E4C46B5CC4B62EB",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6544181863174567592",
+    "location" : "api.itau/pix/qr/v2/31f5f2ef-538b-45fd-a579-909407d098b1",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T10:51:58.201802"
+  },
+  "location" : "api.itau/pix/qr/v2/31f5f2ef-538b-45fd-a579-909407d098b1",
+  "devedor" : {
+    "cnpj" : "21082337000165",
+    "nome" : "EDIMILSON ESTEVAO DA SILVA"
+  },
+  "valor" : {
+    "original" : "2080.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/31f5f2ef-538b-45fd-a579-909407d098b15204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304478D"
+}

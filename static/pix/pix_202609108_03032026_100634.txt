@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-03T10:06:34.36Z",
+    "expiracao" : "309205"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026091081CE9EF4EF1B342D2898E56A6F9",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8605606948489603199",
+    "location" : "api.itau/pix/qr/v2/f96d482b-dc61-4599-b49e-34263cc64e11",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-03T10:06:34.503128"
+  },
+  "location" : "api.itau/pix/qr/v2/f96d482b-dc61-4599-b49e-34263cc64e11",
+  "devedor" : {
+    "cpf" : "80184693772",
+    "nome" : "FATIMA ALVES DE SOUZA"
+  },
+  "valor" : {
+    "original" : "2095.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f96d482b-dc61-4599-b49e-34263cc64e115204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304CE83"
+}

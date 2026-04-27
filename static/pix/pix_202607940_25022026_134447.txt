@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T13:44:47.54Z",
+    "expiracao" : "468911"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026079401BE2D8FC45D6434A97210B9CA2",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1757214875574133213",
+    "location" : "api.itau/pix/qr/v2/200d1c64-55e9-4db6-81c5-1e136aa6f10f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T13:44:47.697637"
+  },
+  "location" : "api.itau/pix/qr/v2/200d1c64-55e9-4db6-81c5-1e136aa6f10f",
+  "devedor" : {
+    "cnpj" : "39836967000143",
+    "nome" : "REGINALDO ANTONIO DE LIMA FILHO"
+  },
+  "valor" : {
+    "original" : "3847.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/200d1c64-55e9-4db6-81c5-1e136aa6f10f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63046B45"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-02T12:51:47.56Z",
+    "expiracao" : "385691"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026089649D94339E0BF742ECA22602F12B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5068983500464142791",
+    "location" : "api.itau/pix/qr/v2/5f390b29-9515-4789-9be0-a697adbb4847",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-02T12:51:47.694976"
+  },
+  "location" : "api.itau/pix/qr/v2/5f390b29-9515-4789-9be0-a697adbb4847",
+  "devedor" : {
+    "cnpj" : "61286341000160",
+    "nome" : "TECNOCORTE MANUTENCOES LTDA"
+  },
+  "valor" : {
+    "original" : "2550.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/5f390b29-9515-4789-9be0-a697adbb48475204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304F757"
+}

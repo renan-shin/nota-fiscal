@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-25T17:13:35.91Z",
+    "expiracao" : "197183"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261359798289E903E924603AB6957596F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4833804914197959544",
+    "location" : "api.itau/pix/qr/v2/6517c18c-81a3-4a0d-b4ee-37272d8454ad",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-25T17:13:36.10276"
+  },
+  "location" : "api.itau/pix/qr/v2/6517c18c-81a3-4a0d-b4ee-37272d8454ad",
+  "devedor" : {
+    "cnpj" : "31551267000109",
+    "nome" : "RICARDO RAMOS TEIXEIRA"
+  },
+  "valor" : {
+    "original" : "7789.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6517c18c-81a3-4a0d-b4ee-37272d8454ad5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304966E"
+}

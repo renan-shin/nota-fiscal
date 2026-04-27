@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T09:53:42.66Z",
+    "expiracao" : "396377"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026152277607D13CA24C4514AAAB27FE99",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4328443296856653515",
+    "location" : "api.itau/pix/qr/v2/ade178f0-cf75-4b31-8a77-c0c2bf0088eb",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T09:53:42.855102"
+  },
+  "location" : "api.itau/pix/qr/v2/ade178f0-cf75-4b31-8a77-c0c2bf0088eb",
+  "devedor" : {
+    "cnpj" : "09398243000102",
+    "nome" : "EVA MALHAS LTDA"
+  },
+  "valor" : {
+    "original" : "5000.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ade178f0-cf75-4b31-8a77-c0c2bf0088eb5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A357"
+}

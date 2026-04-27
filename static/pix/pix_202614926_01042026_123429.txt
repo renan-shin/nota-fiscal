@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T12:34:29.15Z",
+    "expiracao" : "645930"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026149266C9701C763664BF498ED764BE4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3884631950354057912",
+    "location" : "api.itau/pix/qr/v2/3a24b98a-5387-4c88-a6db-356323bd9b60",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T12:34:29.317447"
+  },
+  "location" : "api.itau/pix/qr/v2/3a24b98a-5387-4c88-a6db-356323bd9b60",
+  "devedor" : {
+    "cnpj" : "47117018000131",
+    "nome" : "TUDAO VARIEDADES LTDA"
+  },
+  "valor" : {
+    "original" : "13250.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "07728412000191",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/3a24b98a-5387-4c88-a6db-356323bd9b605204000053039865802BR5925RIO DOCE AUTO PECAS E SER6015MOGI DAS CRUZES62070503***63048D43"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-09T15:15:08.75Z",
+    "expiracao" : "204290"
+  },
+  "status" : "ATIVA",
+  "txid" : "202610452933A86501C4144CFBD7CFCDA92",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "946735538468098345",
+    "location" : "api.itau/pix/qr/v2/b47d7920-abfe-41d1-8ca0-1715f916c0ab",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-09T15:15:08.954731"
+  },
+  "location" : "api.itau/pix/qr/v2/b47d7920-abfe-41d1-8ca0-1715f916c0ab",
+  "devedor" : {
+    "cpf" : "47389140810",
+    "nome" : "Izadora Gimenez Nonato"
+  },
+  "valor" : {
+    "original" : "6703.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b47d7920-abfe-41d1-8ca0-1715f916c0ab5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C1CF"
+}

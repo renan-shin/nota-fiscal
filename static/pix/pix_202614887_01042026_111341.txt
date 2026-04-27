@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T11:13:40.80Z",
+    "expiracao" : "477978"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614887CF49C84E837E4232B3B893B094",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8620972714560201646",
+    "location" : "api.itau/pix/qr/v2/6a1dcd72-dd92-4b46-a46d-583c7c861530",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T11:13:40.976122"
+  },
+  "location" : "api.itau/pix/qr/v2/6a1dcd72-dd92-4b46-a46d-583c7c861530",
+  "devedor" : {
+    "cnpj" : "05144103000149",
+    "nome" : "FORTMAK COMERCIO E SERVICOS DE MAQUINAS LTDA."
+  },
+  "valor" : {
+    "original" : "3163.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6a1dcd72-dd92-4b46-a46d-583c7c8615305204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630474B6"
+}

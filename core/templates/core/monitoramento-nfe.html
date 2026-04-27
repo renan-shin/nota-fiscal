@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.3.1/datatables.min.css" rel="stylesheet" 
+            integrity="sha384-rcK/Hw0a8czqNV8XiNNbA2kqXBypz/reTTu9ewJiCYQRES16Xpl47dKudYItkU7M" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/colreorder/2.1.0/css/colReorder.dataTables.css" rel="stylesheet">
+{% endblock %}
+{% block title %}Monitoramento NF-e{% endblock %}
+
+{% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-1">
+        {% for nfe in nfes %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <a class="link-info link-offset-2 link-underline link-underline-opacity-0" href="{% url 'core_nfe_edit' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}">
+                        <h6 class="card-title">Pedido: {{nfe.pedido}} / NF-e: {{nfe.ide_nnf}}</h6>
+                    </a>
+                    <div>
+                        <label class="fw-bold"><font size="2">Status:</font></label> <font size="2">{{nfe.status_sefaz}}</font>
+                    </div>
+                    <div>
+                        <label class="fw-bold"><font size="2">Data Emissão:</font></label> <font size="2">{{ nfe.data_emissao|date:"d/m/Y H:i:s" }}</font>
+                    </div>
+                    <div>
+                        <label class="fw-bold"><font size="2">Tempo:</font></label> <font size="2">{{ nfe.tempo }}</font>
+                    </div>
+                    <p class="card-text"><font size="2">{{nfe.frg_xml|default:''}}</font></p>
+                    <hr/>
+                    {% if nfe.transmitir %}
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-sm btn-primary btn-transmitir" href="{% url 'core_retransmitir' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}">Transmitir</a>
+                    </div>
+                    {% endif %}
+                    {% if nfe.cce %}
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-sm btn-success btn-cce">CC-e</button>
+                    </div>
+                    {% endif %}
+                    {% if nfe.cancelar %}
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-sm btn-danger btn-cancelar">Cancelar</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!--
+    <div class="table-responsive mt-3">
+        <table class="table table-hover table-bordered table-sm display" id="notas-fiscais">
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Pedido</th>
+                    <th>NF-e</th>
+                    <th>Status</th>
+                    <th>Data Emissão</th>
+                    <th>Tempo</th>
+                    <th>Transmitir</th>
+                    <th>CC-e</th>
+                    <th>Cancelar</th>
+                    <th>GNRE</th>
+                    <th>DIFAL</th>
+                    <th>FCP</th>
+                    <th>Retorno</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for nfe in nfes %}
+                <tr>
+                    <td>{{ nfe.empresa }}</td>
+                    <td>{{ nfe.pedido }}</td>
+                    <td>{{ nfe.ide_nnf }}</td>
+                    <td>{{ nfe.status_sefaz }}</td>
+                    <td>{{ nfe.data_emissao|date:"d/m/Y H:i:s" }}</td>
+                    <td>{{ nfe.tempo }}</td>
+                    <td>
+                        {% if nfe.transmitir %}
+                        <div class="d-flex justify-content-center">
+                            <a class="btn btn-sm btn-primary btn-transmitir" href="{% url 'core_retransmitir' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}">Transmitir</a>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if nfe.cce %}
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-sm btn-success btn-cce">CC-e</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if nfe.cancelar %}
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-sm btn-danger btn-cancelar">Cancelar</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if nfe.gnre_nf %}
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-sm btn-danger btn-gnre">GNRE</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if nfe.difal_nf %}
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-sm btn-danger btn-difal">DIFAL</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if nfe.fcp_nf %}
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-sm btn-danger btn-fcp">FCP</button>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>{{ nfe.frg_xml|default:'' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    -->
+</div>
+
+<div class="modal fade" id="modalGenerico" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalGenericoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mensagem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="textoModal"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/monitoramento_nfe.js' %}"></script>
+{% endblock %}

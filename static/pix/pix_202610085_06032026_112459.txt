@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-06T11:24:59.16Z",
+    "expiracao" : "477300"
+  },
+  "status" : "ATIVA",
+  "txid" : "202610085D67651AB776E49368A878110E0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7732645301810572552",
+    "location" : "api.itau/pix/qr/v2/b8857422-3613-4bf3-b6f9-4310b470af86",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-06T11:24:59.297864"
+  },
+  "location" : "api.itau/pix/qr/v2/b8857422-3613-4bf3-b6f9-4310b470af86",
+  "devedor" : {
+    "cnpj" : "53640914000183",
+    "nome" : "NEW CENTURIAN COMERCIO E MANUTENCAO DE MAQUINAS DE COSTURAS LTDA"
+  },
+  "valor" : {
+    "original" : "3309.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b8857422-3613-4bf3-b6f9-4310b470af865204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304031C"
+}

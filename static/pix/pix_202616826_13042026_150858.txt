@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T15:08:57.94Z",
+    "expiracao" : "636661"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261682639C8C55B79F64D7289FF861584",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7769759820589819552",
+    "location" : "api.itau/pix/qr/v2/cb97054f-28a1-4a52-a83e-8b9c97aff2c9",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T15:08:58.122979"
+  },
+  "location" : "api.itau/pix/qr/v2/cb97054f-28a1-4a52-a83e-8b9c97aff2c9",
+  "devedor" : {
+    "cnpj" : "49723608000133",
+    "nome" : "VERA LUCIA FELIZARDO"
+  },
+  "valor" : {
+    "original" : "3740.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/cb97054f-28a1-4a52-a83e-8b9c97aff2c95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304BFE0"
+}

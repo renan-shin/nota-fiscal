@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-17T10:58:02.05Z",
+    "expiracao" : "219717"
+  },
+  "status" : "ATIVA",
+  "txid" : "202612025949F4357EF1C42618947FAB28A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7438054808981523957",
+    "location" : "api.itau/pix/qr/v2/f1d9f227-f27e-4994-ab24-4593057c614b",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-17T10:58:02.209563"
+  },
+  "location" : "api.itau/pix/qr/v2/f1d9f227-f27e-4994-ab24-4593057c614b",
+  "devedor" : {
+    "cpf" : "43509816838",
+    "nome" : "Gabriela Leal Mendes"
+  },
+  "valor" : {
+    "original" : "2350.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f1d9f227-f27e-4994-ab24-4593057c614b5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630492B4"
+}

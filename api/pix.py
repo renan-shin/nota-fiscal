@@ -36,8 +36,8 @@ def get_token_itau(empresa_filial):
     }
 
     conta_lanmax = Conta.objects.using('lanmax').filter(Empresa=empresa_filial).first()
-
     form = 'grant_type=client_credentials&client_id='+conta_lanmax.client_id+'&client_secret='+conta_lanmax.client_secret
+    
     r = requests.post(url, data=form, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
     token_details = json.loads(r.text)
 
@@ -307,9 +307,11 @@ def gerar_chave_pix(cod_pedido, num_parcela):
                 f.write(r.text)
 
 def cancelar_chave_pix():
-    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Rio-I')
-    url = "https://secure.api.itau/pix_recebimentos/v2/cob/2025371196B8E5AD74A594B9A8FFC9756C5"
-    token_itau = get_token_itau(8001)
+    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Lib-I')
+    url = "https://secure.api.itau/pix_recebimentos/v2/cob/202611557AB5B0369231941D2B3312FF36B"
+    token_itau = get_token_itau(2800)
+
+    print(url)
 
     headers = {
         'x-itau-apikey': '96decebf-5c47-4410-95bf-0c4b803e4bb2',
@@ -327,7 +329,7 @@ def cancelar_chave_pix():
 
     if r.status_code == 200:
         cursor = connection.cursor()
-        cursor.execute("UPDATE Lanmax.dbo.Pagamentos SET txid = NULL, pixCopiaECola = NULL WHERE CodPedido = %s", [202537231,])
+        cursor.execute("UPDATE Lanmax.dbo.Pagamentos SET txid = NULL, pixCopiaECola = NULL WHERE CodPedido = %s", [202611557,])
         
         with open("C:\\Users\\rmizukosi\\Desktop\\pix_cancelado.txt", 'w', encoding='utf-8') as f:
             f.write(r.text)

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-31T12:33:04.02Z",
+    "expiracao" : "559616"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614670EC5E89CB6E854E719BBC2B3DCF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5416740587476833239",
+    "location" : "api.itau/pix/qr/v2/f318b893-93a6-4d8e-8a3c-78ec2e41947f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-31T12:33:04.206991"
+  },
+  "location" : "api.itau/pix/qr/v2/f318b893-93a6-4d8e-8a3c-78ec2e41947f",
+  "devedor" : {
+    "cnpj" : "30212057000115",
+    "nome" : "WILLIAN SIRQUEIRA FERNANDES ALVARENGA 10583232612"
+  },
+  "valor" : {
+    "original" : "3480.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f318b893-93a6-4d8e-8a3c-78ec2e41947f5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304DF2A"
+}

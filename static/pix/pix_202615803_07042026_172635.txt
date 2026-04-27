@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-07T17:26:35.12Z",
+    "expiracao" : "282804"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026158032DC0CAF645B342F2B55762BF01",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1578124429190286708",
+    "location" : "api.itau/pix/qr/v2/2f3cb8a2-496c-4340-bdc3-e276f09e8c5f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-07T17:26:35.320149"
+  },
+  "location" : "api.itau/pix/qr/v2/2f3cb8a2-496c-4340-bdc3-e276f09e8c5f",
+  "devedor" : {
+    "cnpj" : "12347728000173",
+    "nome" : "MEF SERVICOS E MANUTENCAO MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "2560.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2f3cb8a2-496c-4340-bdc3-e276f09e8c5f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304F9CB"
+}

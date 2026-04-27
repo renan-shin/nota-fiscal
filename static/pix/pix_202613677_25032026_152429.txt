@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-25T15:24:28.85Z",
+    "expiracao" : "462930"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261367763C7A7414B3D417CAAC489890F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3647338171909145594",
+    "location" : "api.itau/pix/qr/v2/522dbfbf-8de4-40e0-a5c2-d209e3744b1f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-25T15:24:29.023675"
+  },
+  "location" : "api.itau/pix/qr/v2/522dbfbf-8de4-40e0-a5c2-d209e3744b1f",
+  "devedor" : {
+    "cnpj" : "29591753000109",
+    "nome" : "JOSE DEIVID SILVA B. LEMOS  CONFECCAO LTDA"
+  },
+  "valor" : {
+    "original" : "11755.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/522dbfbf-8de4-40e0-a5c2-d209e3744b1f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304CE7C"
+}

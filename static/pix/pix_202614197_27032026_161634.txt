@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-27T16:16:34.01Z",
+    "expiracao" : "373405"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614197FFFA34A423FB49328C7B72083A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8618738303177775723",
+    "location" : "api.itau/pix/qr/v2/aec3fd31-68c6-45d4-b00c-265e0ff81059",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-27T16:16:34.206901"
+  },
+  "location" : "api.itau/pix/qr/v2/aec3fd31-68c6-45d4-b00c-265e0ff81059",
+  "devedor" : {
+    "cnpj" : "49707715000178",
+    "nome" : "HJP MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "3300.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/aec3fd31-68c6-45d4-b00c-265e0ff810595204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63045A2D"
+}

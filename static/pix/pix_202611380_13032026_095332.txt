@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T09:53:32.52Z",
+    "expiracao" : "569186"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611380AEF6C615002E49388CB29B02D7",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3167704373626848926",
+    "location" : "api.itau/pix/qr/v2/cc9e87fa-7022-465c-84a0-5b27f8f3b21b",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T09:53:32.702417"
+  },
+  "location" : "api.itau/pix/qr/v2/cc9e87fa-7022-465c-84a0-5b27f8f3b21b",
+  "devedor" : {
+    "cnpj" : "19169971000198",
+    "nome" : "TENDENCIA CONFECCOES LTDA"
+  },
+  "valor" : {
+    "original" : "4560.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/cc9e87fa-7022-465c-84a0-5b27f8f3b21b5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046C97"
+}

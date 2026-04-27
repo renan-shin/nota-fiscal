@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T16:19:10.91Z",
+    "expiracao" : "286848"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608701646DFD841F53433B893E10EE21",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9129654215305700044",
+    "location" : "api.itau/pix/qr/v2/73584e73-ae65-40ad-a915-ab2688e2e8c8",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T16:19:11.053544"
+  },
+  "location" : "api.itau/pix/qr/v2/73584e73-ae65-40ad-a915-ab2688e2e8c8",
+  "devedor" : {
+    "cnpj" : "50527345000176",
+    "nome" : "SANDRA CARNAUBA DA COSTA"
+  },
+  "valor" : {
+    "original" : "2132.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/73584e73-ae65-40ad-a915-ab2688e2e8c85204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304C18F"
+}

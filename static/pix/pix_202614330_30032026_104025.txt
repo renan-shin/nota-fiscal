@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-30T10:40:24.98Z",
+    "expiracao" : "652774"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026143307463F5CFBBC54B238799AE34E0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2509494296839125820",
+    "location" : "api.itau/pix/qr/v2/b92039a1-6e5d-4f40-aca4-463372e3c64a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-30T10:40:25.160455"
+  },
+  "location" : "api.itau/pix/qr/v2/b92039a1-6e5d-4f40-aca4-463372e3c64a",
+  "devedor" : {
+    "cnpj" : "14965375000109",
+    "nome" : "J BERTOLDO DOS SANTOS MAQUINAS E ACESSORIOS PARA COSTURA - ME"
+  },
+  "valor" : {
+    "original" : "14290.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b92039a1-6e5d-4f40-aca4-463372e3c64a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63043138"
+}

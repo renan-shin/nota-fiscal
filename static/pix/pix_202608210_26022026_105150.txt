@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-26T10:51:49.79Z",
+    "expiracao" : "392889"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608210CDB3EED928CE4448B2A184F1B4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5438594731665674961",
+    "location" : "api.itau/pix/qr/v2/b9e6854f-c7f3-4187-bd63-f7a32d5d4deb",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-26T10:51:49.954041"
+  },
+  "location" : "api.itau/pix/qr/v2/b9e6854f-c7f3-4187-bd63-f7a32d5d4deb",
+  "devedor" : {
+    "cnpj" : "63994332000159",
+    "nome" : "JONAS FERREIRA LIMA"
+  },
+  "valor" : {
+    "original" : "8310.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b9e6854f-c7f3-4187-bd63-f7a32d5d4deb5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630431E2"
+}

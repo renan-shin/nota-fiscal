@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-10T09:47:09.14Z",
+    "expiracao" : "310370"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616399C36933ACA9A14EF2BC5E5883C7",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5210595264632174000",
+    "location" : "api.itau/pix/qr/v2/fff4b8e2-9cfa-4e62-bf55-38f279aaf4ad",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-10T09:47:09.344083"
+  },
+  "location" : "api.itau/pix/qr/v2/fff4b8e2-9cfa-4e62-bf55-38f279aaf4ad",
+  "devedor" : {
+    "cnpj" : "58657099000189",
+    "nome" : "CASA DAS MAQUINAS DE MATAO LTDA - ME"
+  },
+  "valor" : {
+    "original" : "1790.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/fff4b8e2-9cfa-4e62-bf55-38f279aaf4ad5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042162"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-11T17:10:13.12Z",
+    "expiracao" : "456586"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611046828A74271FD541A49A2E65600C",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1687706617394380421",
+    "location" : "api.itau/pix/qr/v2/1b4725f1-a115-4806-bd93-789657239f19",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-11T17:10:13.269621"
+  },
+  "location" : "api.itau/pix/qr/v2/1b4725f1-a115-4806-bd93-789657239f19",
+  "devedor" : {
+    "cnpj" : "42425325000166",
+    "nome" : "MARCUS ANTONIO DE SOUZA 35237390803"
+  },
+  "valor" : {
+    "original" : "3315.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1b4725f1-a115-4806-bd93-789657239f195204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63049EB4"
+}

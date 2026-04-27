@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-16T14:44:33.83Z",
+    "expiracao" : "206125"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261184633566D2F336E45FF92C635F2F4",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1184240986830849273",
+    "location" : "api.itau/pix/qr/v2/0dddbaac-a26f-4944-871e-6a9038c31953",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-16T14:44:33.954554"
+  },
+  "location" : "api.itau/pix/qr/v2/0dddbaac-a26f-4944-871e-6a9038c31953",
+  "devedor" : {
+    "cnpj" : "43612075000136",
+    "nome" : "LESSAS CONFECCAO E ESTAMPARIA LTDA"
+  },
+  "valor" : {
+    "original" : "4486.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/0dddbaac-a26f-4944-871e-6a9038c319535204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63042181"
+}

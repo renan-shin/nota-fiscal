@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-17T09:34:26.11Z",
+    "expiracao" : "311133"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026119654F744993853145C09CB79CE326",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7045526713599642915",
+    "location" : "api.itau/pix/qr/v2/6bfaf683-5b73-4f01-95f2-3a0d49a9c661",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-17T09:34:26.258367"
+  },
+  "location" : "api.itau/pix/qr/v2/6bfaf683-5b73-4f01-95f2-3a0d49a9c661",
+  "devedor" : {
+    "cnpj" : "61434131000171",
+    "nome" : "SAO GONCALO INDUSTRIA DE ESPUMAS E COLCHOES LTDA"
+  },
+  "valor" : {
+    "original" : "1650.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6bfaf683-5b73-4f01-95f2-3a0d49a9c6615204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63048898"
+}

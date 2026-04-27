@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-06T15:07:56.80Z",
+    "expiracao" : "204722"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615507E9796673794B41BBA6FC50BB41",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1499729001641044121",
+    "location" : "api.itau/pix/qr/v2/837fab59-f398-463b-87e7-6a114c5a3898",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-06T15:07:56.997932"
+  },
+  "location" : "api.itau/pix/qr/v2/837fab59-f398-463b-87e7-6a114c5a3898",
+  "devedor" : {
+    "cpf" : "28329956830",
+    "nome" : "Eliseu Ferreira de Rezende"
+  },
+  "valor" : {
+    "original" : "3708.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/837fab59-f398-463b-87e7-6a114c5a38985204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304F40B"
+}

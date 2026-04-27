@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-05T09:15:18.05Z",
+    "expiracao" : "657881"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260971814E3417D8DEE4D9695B8AFA055",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5542380921438889402",
+    "location" : "api.itau/pix/qr/v2/7977f9ab-fa96-43ae-926b-d4b1231052c2",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-05T09:15:18.247645"
+  },
+  "location" : "api.itau/pix/qr/v2/7977f9ab-fa96-43ae-926b-d4b1231052c2",
+  "devedor" : {
+    "cnpj" : "17706340000135",
+    "nome" : "RANNIERE MODESTO DE OLIVEIRA 09684826435"
+  },
+  "valor" : {
+    "original" : "1770.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/7977f9ab-fa96-43ae-926b-d4b1231052c25204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304A360"
+}

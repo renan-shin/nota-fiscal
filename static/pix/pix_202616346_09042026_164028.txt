@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T16:40:28.13Z",
+    "expiracao" : "371971"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616346BC6E83F13EF3494284F15AB2DE",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "364624132783546227",
+    "location" : "api.itau/pix/qr/v2/695b1be0-428a-4d25-857d-9544a4a63109",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T16:40:28.307861"
+  },
+  "location" : "api.itau/pix/qr/v2/695b1be0-428a-4d25-857d-9544a4a63109",
+  "devedor" : {
+    "cnpj" : "46399662000187",
+    "nome" : "LIDJIA PEREIRA RAPOSO"
+  },
+  "valor" : {
+    "original" : "4960.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/695b1be0-428a-4d25-857d-9544a4a631095204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63047175"
+}

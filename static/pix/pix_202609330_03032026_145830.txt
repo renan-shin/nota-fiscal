@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-03T14:58:30.78Z",
+    "expiracao" : "550888"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609330BCDEABB0C2324ACBAE7D990E59",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6565246920622519854",
+    "location" : "api.itau/pix/qr/v2/9d962620-e657-4654-b833-f69b670ea5cb",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-03T14:58:30.917904"
+  },
+  "location" : "api.itau/pix/qr/v2/9d962620-e657-4654-b833-f69b670ea5cb",
+  "devedor" : {
+    "cnpj" : "49707715000178",
+    "nome" : "H J P TRANSPORTES LTDA"
+  },
+  "valor" : {
+    "original" : "3875.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9d962620-e657-4654-b833-f69b670ea5cb5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630404AA"
+}

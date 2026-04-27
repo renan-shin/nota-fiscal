@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T16:11:32.20Z",
+    "expiracao" : "373707"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260870636A49505318C40CF8E7F9D5CF7",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4096738205889269433",
+    "location" : "api.itau/pix/qr/v2/4fa62981-8f0d-497b-b24d-440bb55b531a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T16:11:32.362108"
+  },
+  "location" : "api.itau/pix/qr/v2/4fa62981-8f0d-497b-b24d-440bb55b531a",
+  "devedor" : {
+    "cpf" : "15341555627",
+    "nome" : "GABRIEL LAZARO RODRIGUES"
+  },
+  "valor" : {
+    "original" : "2080.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/4fa62981-8f0d-497b-b24d-440bb55b531a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63046D08"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-05T10:25:18.09Z",
+    "expiracao" : "394481"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609774408BC316A9764548B4DC2AB1C3",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6515417672840225614",
+    "location" : "api.itau/pix/qr/v2/9ad44343-0044-4bc9-a9ca-72b6e2b6f951",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-05T10:25:18.209238"
+  },
+  "location" : "api.itau/pix/qr/v2/9ad44343-0044-4bc9-a9ca-72b6e2b6f951",
+  "devedor" : {
+    "cnpj" : "09141975000104",
+    "nome" : "VIVIANE SILVA DE ARAUJO"
+  },
+  "valor" : {
+    "original" : "5525.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9ad44343-0044-4bc9-a9ca-72b6e2b6f9515204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304FD3C"
+}

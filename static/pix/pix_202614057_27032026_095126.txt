@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-27T09:51:26.54Z",
+    "expiracao" : "310112"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026140574076A3B724014B00AD5B12B396",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9215155934006656588",
+    "location" : "api.itau/pix/qr/v2/b25fddae-eca4-4383-b00b-63513a23d289",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-27T09:51:26.721701"
+  },
+  "location" : "api.itau/pix/qr/v2/b25fddae-eca4-4383-b00b-63513a23d289",
+  "devedor" : {
+    "cnpj" : "53064724000165",
+    "nome" : "EDCARLOS JOSE DE SOBRAL SILVA"
+  },
+  "valor" : {
+    "original" : "2300.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b25fddae-eca4-4383-b00b-63513a23d2895204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304A0A7"
+}

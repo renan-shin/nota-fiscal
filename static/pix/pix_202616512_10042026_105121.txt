@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-10T10:51:21.53Z",
+    "expiracao" : "306518"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616512D975BAA8DF4A45B09B9E0E4CA2",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8518109942050179944",
+    "location" : "api.itau/pix/qr/v2/8bce0228-b642-4b59-ba51-2577881caae0",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-10T10:51:21.715638"
+  },
+  "location" : "api.itau/pix/qr/v2/8bce0228-b642-4b59-ba51-2577881caae0",
+  "devedor" : {
+    "cnpj" : "09224915000155",
+    "nome" : "ESTILO A INDÚSTRIA E COMÉRCIO DE CONFECÇÕES"
+  },
+  "valor" : {
+    "original" : "5659.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8bce0228-b642-4b59-ba51-2577881caae05204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63043F91"
+}

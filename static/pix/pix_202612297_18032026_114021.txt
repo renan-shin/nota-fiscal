@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-18T11:40:21.27Z",
+    "expiracao" : "476378"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261229736ADF6E9FF694E2F9FACA5222D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2756135864394958181",
+    "location" : "api.itau/pix/qr/v2/490af13f-2435-42ce-a8bf-8468a96f19c5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-18T11:40:21.442258"
+  },
+  "location" : "api.itau/pix/qr/v2/490af13f-2435-42ce-a8bf-8468a96f19c5",
+  "devedor" : {
+    "cnpj" : "34457852000124",
+    "nome" : "R2 COMERCIAL E SERVOÇOS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "1650.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/490af13f-2435-42ce-a8bf-8468a96f19c55204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040579"
+}

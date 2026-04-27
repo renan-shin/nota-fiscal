@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T10:04:58.90Z",
+    "expiracao" : "741300"
+  },
+  "status" : "ATIVA",
+  "txid" : "202607863B6063031A4224A0AAB7CF8FD01",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7195515384889996184",
+    "location" : "api.itau/pix/qr/v2/71698743-d296-4ba3-aa62-420184b223ce",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T10:04:59.047365"
+  },
+  "location" : "api.itau/pix/qr/v2/71698743-d296-4ba3-aa62-420184b223ce",
+  "devedor" : {
+    "cnpj" : "47414767000120",
+    "nome" : "RUTIELLE DE OLIVEIRA PEREIRA 11697793444"
+  },
+  "valor" : {
+    "original" : "5972.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/71698743-d296-4ba3-aa62-420184b223ce5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63045594"
+}

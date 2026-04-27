@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-27T12:04:15.50Z",
+    "expiracao" : "388543"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026141227C3F3B93B0C24D8A886801E8BF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "446213446804595615",
+    "location" : "api.itau/pix/qr/v2/d26249d0-3c92-40a1-b3e7-a3e3d4cbcf50",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-27T12:04:15.684961"
+  },
+  "location" : "api.itau/pix/qr/v2/d26249d0-3c92-40a1-b3e7-a3e3d4cbcf50",
+  "devedor" : {
+    "cnpj" : "44416534000179",
+    "nome" : "ELIAS DIAS RESENDE 00320547183"
+  },
+  "valor" : {
+    "original" : "6680.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d26249d0-3c92-40a1-b3e7-a3e3d4cbcf505204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A339"
+}

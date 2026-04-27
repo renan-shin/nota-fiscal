@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T11:23:06.91Z",
+    "expiracao" : "477412"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616155A693368A39AE4F6DBC73748B79",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1318539201204414003",
+    "location" : "api.itau/pix/qr/v2/ae93b440-f9db-42c4-9aff-87bca9baab02",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T11:23:07.103874"
+  },
+  "location" : "api.itau/pix/qr/v2/ae93b440-f9db-42c4-9aff-87bca9baab02",
+  "devedor" : {
+    "cnpj" : "55679003000195",
+    "nome" : "MAX DOS SANTOS PEREIRA"
+  },
+  "valor" : {
+    "original" : "2120.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ae93b440-f9db-42c4-9aff-87bca9baab025204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630426B6"
+}

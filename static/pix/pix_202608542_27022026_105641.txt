@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T10:56:41.10Z",
+    "expiracao" : "565398"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608542C62817BA702040A5B122F2EC4A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1843241879680271931",
+    "location" : "api.itau/pix/qr/v2/b0fc1244-249a-4128-8ea9-6ed66295cebd",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T10:56:41.222648"
+  },
+  "location" : "api.itau/pix/qr/v2/b0fc1244-249a-4128-8ea9-6ed66295cebd",
+  "devedor" : {
+    "cnpj" : "22057017000118",
+    "nome" : "ELEOTERIO MARTINS DA CRUZ"
+  },
+  "valor" : {
+    "original" : "7519.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b0fc1244-249a-4128-8ea9-6ed66295cebd5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C12B"
+}

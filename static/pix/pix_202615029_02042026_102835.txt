@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-02T10:28:35.07Z",
+    "expiracao" : "480684"
+  },
+  "status" : "ATIVA",
+  "txid" : "202615029E1B6C9F3CD454210851DB7A8F0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4489356008785166783",
+    "location" : "api.itau/pix/qr/v2/afeb4b37-2668-47c6-aeea-43e1463296b9",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-02T10:28:35.245542"
+  },
+  "location" : "api.itau/pix/qr/v2/afeb4b37-2668-47c6-aeea-43e1463296b9",
+  "devedor" : {
+    "cnpj" : "22725074000128",
+    "nome" : "OSVALDO VERSOSA DE OLIVEIRA"
+  },
+  "valor" : {
+    "original" : "2100.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/afeb4b37-2668-47c6-aeea-43e1463296b95204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040983"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-09T10:32:50.41Z",
+    "expiracao" : "394029"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261033120BF2078D8894AE484BBCB4871",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6295318215942887879",
+    "location" : "api.itau/pix/qr/v2/fa9665e7-905b-409b-a391-dea51a32bbb1",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-09T10:32:50.542791"
+  },
+  "location" : "api.itau/pix/qr/v2/fa9665e7-905b-409b-a391-dea51a32bbb1",
+  "devedor" : {
+    "cnpj" : "61335701000176",
+    "nome" : "DOUGLAS BEZERRA COLARES"
+  },
+  "valor" : {
+    "original" : "1877.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/fa9665e7-905b-409b-a391-dea51a32bbb15204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630410DC"
+}

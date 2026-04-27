@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Nota Fiscal | Editar{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-3">
+    {% include 'partials/_messages.html' %}
+</div>
+<div class="container">
+    <button type="button" class="btn btn-primary btn-sm" id="btnBoleto" disabled="true">Boleto</button>
+    <button type="button" class="btn btn-success btn-sm" id="btnDanfe" disabled="true">DANFE</button>
+    <hr>
+    <label class="col-sm-6 col-form-label">Pedido: {{nfe.Pedido}}</label>
+    <label class="col-sm-6 col-form-label">NF-e: {{nfe.ide_nNF}}</label>
+
+    <form method="POST" action="{% url 'core_nfe_edit' empresa.EmpresaFilial nfe.id_nfe %}">
+        {% csrf_token %}
+        <ul class="nav nav-tabs" id="nfeTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="nfe-tab" data-bs-toggle="tab" data-bs-target="#nfe-tab-pane" type="button" role="tab" aria-controls="nfe-tab-pane" aria-selected="true">NF-e</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente-tab-pane" type="button" role="tab" aria-controls="cliente-tab-pane" aria-selected="false">Cliente</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="transp-tab" data-bs-toggle="tab" data-bs-target="#transp-tab-pane" type="button" role="tab" aria-controls="transp-tab-pane" aria-selected="false">Transportadora</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="info-adic-tab" data-bs-toggle="tab" data-bs-target="#info-adic-tab-pane" type="button" role="tab" aria-controls="info-adic-tab-pane" aria-selected="false">Info. Adic.</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="nfeTabContent">
+            <!-- NFe -->
+            <div class="tab-pane fade show active" id="nfe-tab-pane" role="tabpanel" aria-labelledby="nfe-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="status-nfe" class="col-sm-6 col-form-label">Status:</label>
+                        <select id="status-nfe" name="status_nfe" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for stat in status_nfe %}
+                                <option value="{{ stat }}" {% if form.status_nfe|default:nfe.status_sefaz == stat %}selected{% endif %}>{{stat}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% if nfe.ide_serie != 0 %}
+                    <div class="col">
+                        <div class="form-check form-check-inline mt-5">
+                            <input id="transmitir-check" name="transmitir_check" type="checkbox" class="form-check-input" value="True" {% if nfe.Transmitir %}checked{% endif %}>
+                            <label for="transmitir-check">Transmitir</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="cce-check" name="cce_check" type="checkbox" class="form-check-input" value="True" {% if nfe.CCe %}checked{% endif %}>
+                            <label for="cce-check">CC-e</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="cancelar-check" name="cancelar_check" type="checkbox" class="form-check-input" value="True" {% if nfe.Cancelar %}checked{% endif %}>
+                            <label for="cancelar-check">Cancelar</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="xml_transmitido-check" name="xml_transmitido_check" type="checkbox" class="form-check-input" value="True" {% if nfe.XML_Transmitido %}checked{% endif %}>
+                            <label for="xml_transmitido-check">XML Transmitido</label>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Cliente -->
+            <div class="tab-pane fade" id="cliente-tab-pane" role="tabpanel" aria-labelledby="cliente-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="opcao-envio-email" class="col-sm-6 col-form-label">Opção Envio E-mail:</label>
+                        <select id="opcao-envio-email" name="opcao_envio_email" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_envio_email %}
+                                <option value="{{ valor }}" {% if form.opcao_envio_email|default:nfe.ECFRef_mod == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="email-cliente" class="col-sm-6 col-form-label">E-mail:</label>
+                        <input id="email-cliente" name="email_cliente" type="text" class="form-control form-control-sm" placeholder="Email" aria-label="Email" value="{{ form.email_cliente|default:nfe.dest_eMail }}">
+                    </div>
+                    <div class="col">
+                        <label for="opcao-contribuinte" class="col-sm-6 col-form-label">Tipo de Contribuinte:</label>
+                        <select id="opcao-contribuinte" name="opcao_contribuinte" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_contribuinte %}
+                                <option value="{{ valor }}" {% if form.opcao_contribuinte|default:nfe.dest_indIEDest == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {% if nfe.sTP == 1 %}
+                        <label for="cpf-dest" class="col-sm-6 col-form-label">CPF:</label>
+                        <input id="cpf-dest" name="cpf_dest" type="text" class="form-control form-control-sm" placeholder="CPF" aria-label="CPF" value="{{ form.cpf_dest|default:nfe.dest_CPF }}">
+                        {% else %}
+                        <label for="cnpj-dest" class="col-sm-6 col-form-label">CNPJ:</label>
+                        <input id="cnpj-dest" name="cnpj_dest" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{{ form.cnpj_dest|default:nfe.dest_CNPJ }}">
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        <label for="ie-dest" class="col-sm-6 col-form-label">Inscrição Estadual:</label>
+                        <input id="ie-dest" name="ie_dest" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{{ form.ie_dest|default:nfe.dest_IE }}">
+                    </div>
+                    <div class="col">
+                        <label for="fone-dest" class="col-sm-6 col-form-label">Fone:</label>
+                        <input id="fone-dest" name="fone_dest" type="text" class="form-control form-control-sm" placeholder="Fone" aria-label="Fone" value="{{ form.fone_dest|default:nfe.dest_fone }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="cep-dest" class="col-sm-6 col-form-label">CEP:</label>
+                        <input id="cep-dest" name="cep_dest" type="text" class="form-control form-control-sm" placeholder="CEP" aria-label="CEP" value="{{ form.cep_dest|default:nfe.dest_CEP }}">
+                    </div>
+                    <div class="col">
+                        <label for="logradouro-dest" class="col-sm-6 col-form-label">Logradouro:</label>
+                        <input id="logradouro-dest" name="logradouro_dest" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{{ form.logradouro_dest|default:nfe.dest_xLgr }}">
+                    </div>
+                    <div class="col">
+                        <label for="numero-dest" class="col-sm-6 col-form-label">Número:</label>
+                        <input id="numero-dest" name="numero_dest" type="text" class="form-control form-control-sm" placeholder="Número" aria-label="Numero" value="{{ form.numero_dest|default:nfe.dest_nro }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="cpl-dest" class="col-sm-6 col-form-label">Complemento:</label>
+                        <input id="cpl-dest" name="cpl_dest" type="text" class="form-control form-control-sm" placeholder="Complemento" aria-label="Complemento" value="{% firstof form.cpl_dest nfe.dest_xCpl '' %}">
+                    </div>
+                    <div class="col">
+                        <label for="estados" class="col-sm-6 col-form-label">UF:</label>
+                        <select id="estados" name="estado" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for estado in estados %}
+                                <option value="{{ estado.UF }}" {% if form.estado|default:nfe.dest_UF == estado.UF %}selected{% endif %}>{{estado.UF}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+            <!-- Transportadora -->
+            <div class="tab-pane fade" id="transp-tab-pane" role="tabpanel" aria-labelledby="transp-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="opcao-modfrete" class="col-sm-6 col-form-label">Tipo de Frete:</label>
+                        <select id="opcao-modfrete" name="opcao_modfrete" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_modfrete %}
+                                <option value="{{ valor }}" {% if form.opcao_modfrete|default:nfe.transp_modFrete == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="cnpj-transp" class="col-sm-6 col-form-label">CNPJ:</label>
+                        <input id="cnpj-transp" name="cnpj_transp" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{% firstof form.cnpj_transp nfe.transporta_CNPJ '' %}">
+                    </div>
+                    <div class="col">
+                        <label for="ie-transp" class="col-sm-6 col-form-label">Inscrição Estadual:</label>
+                        <input id="ie-transp" name="ie_transp" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{% firstof form.ie_transp nfe.transporta_IE '' %}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="logradouro-transp" class="col-sm-6 col-form-label">Endereço:</label>
+                        <input id="logradouro-transp" name="logradouro_transp" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{% firstof form.logradouro_transp nfe.transporta_xEnder '' %}">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Info Adic. -->
+            <div class="tab-pane fade" id="info-adic-tab-pane" role="tabpanel" aria-labelledby="info-adic-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="adfisco" class="col-sm-6 col-form-label">Informações Adicionais ao Fisco (Máx. 250 caracteres):</label>
+                        <textarea class="form-control" id="adfisco" name="adfisco" rows="5" cols="30">{{form.adfisco|default:nfe.infAdic_infAdFisco}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="infcpl" class="col-sm-6 col-form-label">Informações Complementares da NF (Máx. 250 caracteres):</label>
+                        <textarea class="form-control" id="infcpl" name="infcpl" rows="5" cols="30">{{form.infcpl|default:nfe.infAdic_infCpl}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex mt-3">
+            <button type="submit" class="btn btn-success btn-sm me-2">Salvar</button>
+            <a href="{% url 'core_index' %}" class="btn btn-sm btn-secondary">Voltar</a>
+        </div>
+    </form>
+
+    <div class="modal fade" id="modalBoleto" tabindex="-1" aria-labelledby="modalBoletoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalBoletoLabel">Boleto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Dados -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var id_nfe = {{ nfe.id_nfe }};
+    var pedido = {{ nfe.Pedido }};
+    var ide_nnf = {{ nfe.ide_nNF }};
+    var status_nfe = "{{ nfe.status_sefaz }}";
+    var empresa = {{ empresa.EmpresaFilial }};
+    var url_tem_bol = "{% url 'api_tem_boleto' empresa_filial=0 id_nfe=0 %}"
+    var url_boleto = "{% url 'api_gerar_boleto' empresa_filial=0 id_nfe=0 %}"
+</script>
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'js/nfe_edit.js' %}"></script>
+{% endblock %}

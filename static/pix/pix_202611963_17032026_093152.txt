@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-17T09:31:52.23Z",
+    "expiracao" : "224889"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026119632250EFA92B754D2EB593B8222A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7047037716266283229",
+    "location" : "api.itau/pix/qr/v2/f1c0785a-51b9-46f6-bd1c-ee4c909e4d2f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-17T09:31:52.39224"
+  },
+  "location" : "api.itau/pix/qr/v2/f1c0785a-51b9-46f6-bd1c-ee4c909e4d2f",
+  "devedor" : {
+    "cpf" : "05977803664",
+    "nome" : "Elayne Marques Blanco Bezerra"
+  },
+  "valor" : {
+    "original" : "2162.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f1c0785a-51b9-46f6-bd1c-ee4c909e4d2f5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63044B19"
+}

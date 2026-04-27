@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-18T09:09:26.11Z",
+    "expiracao" : "226233"
+  },
+  "status" : "ATIVA",
+  "txid" : "202612218F0654B0BD1D642A299A3B0D25F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6056252422739527650",
+    "location" : "api.itau/pix/qr/v2/47dd1307-f6ba-4144-8e33-a0bab76d4d55",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-18T09:09:26.266254"
+  },
+  "location" : "api.itau/pix/qr/v2/47dd1307-f6ba-4144-8e33-a0bab76d4d55",
+  "devedor" : {
+    "cnpj" : "11956857000104",
+    "nome" : "VALE MÁQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "5472.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/47dd1307-f6ba-4144-8e33-a0bab76d4d555204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304A671"
+}

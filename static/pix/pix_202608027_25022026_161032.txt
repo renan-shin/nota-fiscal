@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T16:10:32.07Z",
+    "expiracao" : "460167"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026080274B56AA8CA4774996AD015965DB",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6074288171884166810",
+    "location" : "api.itau/pix/qr/v2/78ae2f63-3e1a-4b5c-ae27-e73c4a745056",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T16:10:32.244953"
+  },
+  "location" : "api.itau/pix/qr/v2/78ae2f63-3e1a-4b5c-ae27-e73c4a745056",
+  "devedor" : {
+    "cnpj" : "27051974000150",
+    "nome" : "DEBORA DE MORAES 41900916851"
+  },
+  "valor" : {
+    "original" : "2080.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/78ae2f63-3e1a-4b5c-ae27-e73c4a7450565204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304EF53"
+}

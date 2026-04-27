@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T09:13:31.82Z",
+    "expiracao" : "312387"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026113323FA15E4D1C1949CCA4F2EBA79D",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1957217625113656242",
+    "location" : "api.itau/pix/qr/v2/bad4add4-e1ab-42b6-8b6b-27cd63958d26",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T09:13:31.962089"
+  },
+  "location" : "api.itau/pix/qr/v2/bad4add4-e1ab-42b6-8b6b-27cd63958d26",
+  "devedor" : {
+    "cnpj" : "38246151000105",
+    "nome" : "J S DE S DA SILVA MAQUINAS"
+  },
+  "valor" : {
+    "original" : "1783.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/bad4add4-e1ab-42b6-8b6b-27cd63958d265204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040519"
+}

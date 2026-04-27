@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T10:30:43.03Z",
+    "expiracao" : "480556"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026148543ED995236B56458A81251E4E79",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7955581437354570789",
+    "location" : "api.itau/pix/qr/v2/dbad845c-182d-4ff5-bc1a-fcea9298fa16",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T10:30:43.21174"
+  },
+  "location" : "api.itau/pix/qr/v2/dbad845c-182d-4ff5-bc1a-fcea9298fa16",
+  "devedor" : {
+    "cnpj" : "65474631000198",
+    "nome" : "SOUZA MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "8531.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/dbad845c-182d-4ff5-bc1a-fcea9298fa165204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63047DA8"
+}

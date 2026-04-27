@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-02T15:59:54.46Z",
+    "expiracao" : "374404"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026090441A335DE2EC994E379241A68D71",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7937836156198966679",
+    "location" : "api.itau/pix/qr/v2/1bc1b91f-e5c9-4422-8840-7bffa91f0a30",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-02T15:59:54.610561"
+  },
+  "location" : "api.itau/pix/qr/v2/1bc1b91f-e5c9-4422-8840-7bffa91f0a30",
+  "devedor" : {
+    "cnpj" : "16551412000150",
+    "nome" : "M.B. DE SA SOUZA- MAQUINAS"
+  },
+  "valor" : {
+    "original" : "2133.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1bc1b91f-e5c9-4422-8840-7bffa91f0a305204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041129"
+}

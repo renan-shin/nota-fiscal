@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T15:54:27.06Z",
+    "expiracao" : "374732"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616336C8DBCDDDA91C418797A2D525B5",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1609596896453527881",
+    "location" : "api.itau/pix/qr/v2/493d213c-1227-45c4-84ac-cb0f12eb8b28",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T15:54:27.257905"
+  },
+  "location" : "api.itau/pix/qr/v2/493d213c-1227-45c4-84ac-cb0f12eb8b28",
+  "devedor" : {
+    "cnpj" : "21990474000106",
+    "nome" : "W DE O REZENDE COMERCIO DE MAQUINAS DE COSTURA ME"
+  },
+  "valor" : {
+    "original" : "7790.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/493d213c-1227-45c4-84ac-cb0f12eb8b285204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304BA23"
+}

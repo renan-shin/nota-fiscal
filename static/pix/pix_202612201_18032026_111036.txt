@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-18T11:10:36.52Z",
+    "expiracao" : "478162"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026122015724791CE4B145979E26886B98",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2760857735692267994",
+    "location" : "api.itau/pix/qr/v2/8d23cdeb-de87-43f9-b647-3af8828a8012",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-18T11:10:36.651975"
+  },
+  "location" : "api.itau/pix/qr/v2/8d23cdeb-de87-43f9-b647-3af8828a8012",
+  "devedor" : {
+    "cnpj" : "51621468000134",
+    "nome" : "J R P LINS JUNIOR"
+  },
+  "valor" : {
+    "original" : "3670.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8d23cdeb-de87-43f9-b647-3af8828a80125204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040D47"
+}

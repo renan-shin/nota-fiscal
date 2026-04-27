@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-17T16:05:55.56Z",
+    "expiracao" : "287643"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026121250F814A3F7742404DA7271D0696",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7200646041208630833",
+    "location" : "api.itau/pix/qr/v2/2592dd26-1cad-4d1b-9718-b10e83e3d0f6",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-17T16:05:55.705098"
+  },
+  "location" : "api.itau/pix/qr/v2/2592dd26-1cad-4d1b-9718-b10e83e3d0f6",
+  "devedor" : {
+    "cnpj" : "09189327000128",
+    "nome" : "GUARAPARI MAQUINAS DE COSTURA LTDA ME"
+  },
+  "valor" : {
+    "original" : "3310.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2592dd26-1cad-4d1b-9718-b10e83e3d0f65204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C07D"
+}

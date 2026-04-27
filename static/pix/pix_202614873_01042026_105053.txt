@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T10:50:53.15Z",
+    "expiracao" : "479346"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026148733ECAEE8DD8C646DF9D09CBAE51",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7995099936613581515",
+    "location" : "api.itau/pix/qr/v2/ee678e12-8324-4a6a-a7a8-9b36ed59ecd5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T10:50:53.387887"
+  },
+  "location" : "api.itau/pix/qr/v2/ee678e12-8324-4a6a-a7a8-9b36ed59ecd5",
+  "devedor" : {
+    "cnpj" : "12771808000151",
+    "nome" : "J N DOS SANTOS JUNIOR"
+  },
+  "valor" : {
+    "original" : "2990.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ee678e12-8324-4a6a-a7a8-9b36ed59ecd55204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630460AC"
+}

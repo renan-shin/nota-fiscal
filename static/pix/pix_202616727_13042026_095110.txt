@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T09:51:10.53Z",
+    "expiracao" : "655728"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616727DBFFC8AF6F064EB38440A0663B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1319667431213719171",
+    "location" : "api.itau/pix/qr/v2/1b810d86-6d03-4fe4-9727-bf2af169bfcf",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T09:51:10.718737"
+  },
+  "location" : "api.itau/pix/qr/v2/1b810d86-6d03-4fe4-9727-bf2af169bfcf",
+  "devedor" : {
+    "cnpj" : "45159103000137",
+    "nome" : "EVANIO RAMOS DOS SANTOS 08737459490"
+  },
+  "valor" : {
+    "original" : "2275.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/1b810d86-6d03-4fe4-9727-bf2af169bfcf5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304DC0C"
+}

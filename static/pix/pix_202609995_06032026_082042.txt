@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-06T08:20:41.68Z",
+    "expiracao" : "401957"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026099955F53D181068E4120A9A1FCDF79",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2699951691370057499",
+    "location" : "api.itau/pix/qr/v2/80ea82d5-3100-458b-a6e6-9fbbb047eda0",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-06T08:20:41.934829"
+  },
+  "location" : "api.itau/pix/qr/v2/80ea82d5-3100-458b-a6e6-9fbbb047eda0",
+  "devedor" : {
+    "cnpj" : "11986862000151",
+    "nome" : "C NEI SILVA SILVEIRA"
+  },
+  "valor" : {
+    "original" : "3820.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/80ea82d5-3100-458b-a6e6-9fbbb047eda05204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63044ABB"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-09T10:39:51.86Z",
+    "expiracao" : "393607"
+  },
+  "status" : "ATIVA",
+  "txid" : "202610322636D5DA20D824F57A31D546F50",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "9110344438008375759",
+    "location" : "api.itau/pix/qr/v2/e690b8ab-1576-47c4-b449-5d8afb83f0f0",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-09T10:39:52.015777"
+  },
+  "location" : "api.itau/pix/qr/v2/e690b8ab-1576-47c4-b449-5d8afb83f0f0",
+  "devedor" : {
+    "cnpj" : "20914753000110",
+    "nome" : "RAQUEL NADIA BARROS DA SILVA"
+  },
+  "valor" : {
+    "original" : "6968.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e690b8ab-1576-47c4-b449-5d8afb83f0f05204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63041A27"
+}

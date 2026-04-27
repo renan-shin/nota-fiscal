@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T16:57:20.78Z",
+    "expiracao" : "370958"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026113702D4F62EA7DFE437D936850A084",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1042970326428649171",
+    "location" : "api.itau/pix/qr/v2/cdc4cd62-ba4b-42f2-b75f-f9a62819aec5",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T16:57:20.947063"
+  },
+  "location" : "api.itau/pix/qr/v2/cdc4cd62-ba4b-42f2-b75f-f9a62819aec5",
+  "devedor" : {
+    "cnpj" : "51062801000112",
+    "nome" : "V. W. HARD SHOPPING LTDA"
+  },
+  "valor" : {
+    "original" : "10175.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/cdc4cd62-ba4b-42f2-b75f-f9a62819aec55204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630472FB"
+}

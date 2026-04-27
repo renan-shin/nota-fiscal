@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-16T11:12:19.90Z",
+    "expiracao" : "650859"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611725B4D2DDB4A036410FA030B1BC73",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1434731072689747206",
+    "location" : "api.itau/pix/qr/v2/2d461845-8987-4a54-ad0b-c10df72ad1bd",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-16T11:12:20.063556"
+  },
+  "location" : "api.itau/pix/qr/v2/2d461845-8987-4a54-ad0b-c10df72ad1bd",
+  "devedor" : {
+    "cnpj" : "25961266000121",
+    "nome" : "Raimundo Rodrigues De Souza Filho 22048162215"
+  },
+  "valor" : {
+    "original" : "2164.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/2d461845-8987-4a54-ad0b-c10df72ad1bd5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304D545"
+}

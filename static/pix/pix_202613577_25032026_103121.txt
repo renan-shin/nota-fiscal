@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-25T10:31:21.36Z",
+    "expiracao" : "221317"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613577A8D2751522B94D6AA75939FB09",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4876662608120178819",
+    "location" : "api.itau/pix/qr/v2/6df72368-84bd-4146-9ac5-aa5ef45b1e38",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-25T10:31:21.487018"
+  },
+  "location" : "api.itau/pix/qr/v2/6df72368-84bd-4146-9ac5-aa5ef45b1e38",
+  "devedor" : {
+    "cpf" : "46045034864",
+    "nome" : "GABRIEL HENRIQUE DE REZENDE GONÇALVES"
+  },
+  "valor" : {
+    "original" : "6703.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6df72368-84bd-4146-9ac5-aa5ef45b1e385204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304842F"
+}

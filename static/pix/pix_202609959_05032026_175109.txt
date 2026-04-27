@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-05T17:51:09.30Z",
+    "expiracao" : "367730"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026099598BC945FA758D492B8C3C78FB3B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7265809864846695233",
+    "location" : "api.itau/pix/qr/v2/247cfbb1-054c-4d8b-83f8-b229ad2ad93d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-05T17:51:09.450312"
+  },
+  "location" : "api.itau/pix/qr/v2/247cfbb1-054c-4d8b-83f8-b229ad2ad93d",
+  "devedor" : {
+    "cnpj" : "28518225000153",
+    "nome" : "D.M DOS SANTOS"
+  },
+  "valor" : {
+    "original" : "2163.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/247cfbb1-054c-4d8b-83f8-b229ad2ad93d5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040FB1"
+}

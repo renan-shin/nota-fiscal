@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-06T17:48:47.67Z",
+    "expiracao" : "367871"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261022223072DE54414495CB30F8935A0",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8106864328332487339",
+    "location" : "api.itau/pix/qr/v2/41fab2bf-d1a6-4a20-a764-fdb7ef1db79a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-06T17:48:47.857844"
+  },
+  "location" : "api.itau/pix/qr/v2/41fab2bf-d1a6-4a20-a764-fdb7ef1db79a",
+  "devedor" : {
+    "cnpj" : "53754583000102",
+    "nome" : "A P SILVA COMERCIO E SERVICOS DE MAQUINAS INDUSTRIAIS"
+  },
+  "valor" : {
+    "original" : "2015.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/41fab2bf-d1a6-4a20-a764-fdb7ef1db79a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63043BE5"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T15:08:55.21Z",
+    "expiracao" : "636664"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616826D588323407464C2F8C4AFB6066",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4272340329074627732",
+    "location" : "api.itau/pix/qr/v2/93e83e0a-660d-4b6d-9e7f-984847393d90",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T15:08:55.380249"
+  },
+  "location" : "api.itau/pix/qr/v2/93e83e0a-660d-4b6d-9e7f-984847393d90",
+  "devedor" : {
+    "cnpj" : "49723608000133",
+    "nome" : "VERA LUCIA FELIZARDO"
+  },
+  "valor" : {
+    "original" : "935.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "07728412000191",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/93e83e0a-660d-4b6d-9e7f-984847393d905204000053039865802BR5925RIO DOCE AUTO PECAS E SER6015MOGI DAS CRUZES62070503***63046028"
+}

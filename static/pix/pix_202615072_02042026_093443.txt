@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-02T09:34:42.92Z",
+    "expiracao" : "397516"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026150725017E87366224383AF78D08E1E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8497345315877790577",
+    "location" : "api.itau/pix/qr/v2/968f0d02-571b-4f69-b659-a6cf902cf6c6",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-02T09:34:43.099513"
+  },
+  "location" : "api.itau/pix/qr/v2/968f0d02-571b-4f69-b659-a6cf902cf6c6",
+  "devedor" : {
+    "cnpj" : "52975853000142",
+    "nome" : "AMARAILTON PEREIRA PAIXÃO"
+  },
+  "valor" : {
+    "original" : "930.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/968f0d02-571b-4f69-b659-a6cf902cf6c65204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304442D"
+}

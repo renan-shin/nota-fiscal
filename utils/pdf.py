@@ -5,6 +5,7 @@ from reportlab.platypus import Flowable
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
+        self.report_name = kwargs.pop('report_name', 'DANFE')
         super().__init__(*args, **kwargs)
         self._saved_page_states = []
 
@@ -28,12 +29,21 @@ class NumberedCanvas(canvas.Canvas):
         texto = f"FOLHA {self._pageNumber}/{total_pages}"
 
         text_width = self.stringWidth(texto, "Times-Roman", 6)
-        x = width/2 - text_width/2 + 7
 
-        if self._pageNumber == 1:
-            y = height - 166
-        else:
-            y = height - 97
+        if self.report_name == 'DANFE':
+            x = width/2 - text_width/2 + 7
+
+            if self._pageNumber == 1:
+                y = height - 166
+            else:
+                y = height - 97
+        elif self.report_name == 'Orcamento':
+            x = width/2 - text_width/2 + 270
+
+            if self._pageNumber == 1:
+                y = height-175
+            else:
+                y = height-20
 
         self.drawString(x, y, f"FOLHA {self._pageNumber}/{total_pages}")
 

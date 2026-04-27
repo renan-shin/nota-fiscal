@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-10T09:42:49.14Z",
+    "expiracao" : "569830"
+  },
+  "status" : "ATIVA",
+  "txid" : "202610605DF5C3D0C7FBE4D839CB999A52F",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2185907014457852093",
+    "location" : "api.itau/pix/qr/v2/6395135d-1bbc-4ff1-ba79-f75a7bbacc4a",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-10T09:42:49.308329"
+  },
+  "location" : "api.itau/pix/qr/v2/6395135d-1bbc-4ff1-ba79-f75a7bbacc4a",
+  "devedor" : {
+    "cnpj" : "14802134000130",
+    "nome" : "COSTURA BRASIL COMERCIO DE MAQUINAS DE COSTURA LTDA - ME"
+  },
+  "valor" : {
+    "original" : "2780.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6395135d-1bbc-4ff1-ba79-f75a7bbacc4a5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304F255"
+}

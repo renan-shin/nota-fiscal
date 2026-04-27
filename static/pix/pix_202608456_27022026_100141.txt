@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T10:01:40.97Z",
+    "expiracao" : "395898"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260845672688F6DFE2A4D03B261D494D2",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3580946475706157042",
+    "location" : "api.itau/pix/qr/v2/ca07f6f6-875d-4033-84a9-fd0e1ff3dab7",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T10:01:41.155745"
+  },
+  "location" : "api.itau/pix/qr/v2/ca07f6f6-875d-4033-84a9-fd0e1ff3dab7",
+  "devedor" : {
+    "cpf" : "34560279829",
+    "nome" : "OZEIAS GENERAL MOTA"
+  },
+  "valor" : {
+    "original" : "3567.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ca07f6f6-875d-4033-84a9-fd0e1ff3dab75204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304C3BB"
+}

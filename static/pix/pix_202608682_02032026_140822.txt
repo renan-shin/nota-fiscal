@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-02T14:08:22.01Z",
+    "expiracao" : "35497"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260868211AA42633D3147399157589449",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6884012003436095721",
+    "location" : "api.itau/pix/qr/v2/9526fa4d-0784-42da-80b4-a6af8a2a63b4",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-02T14:08:22.151448"
+  },
+  "location" : "api.itau/pix/qr/v2/9526fa4d-0784-42da-80b4-a6af8a2a63b4",
+  "devedor" : {
+    "cnpj" : "53532499000144",
+    "nome" : "TOP MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "24240.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/9526fa4d-0784-42da-80b4-a6af8a2a63b45204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304C91E"
+}

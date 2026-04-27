@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-27T13:05:00.39Z",
+    "expiracao" : "384899"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608621F6DAD2A4420E4144B01E38D144",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8712889234301929849",
+    "location" : "api.itau/pix/qr/v2/c59607f9-534a-433c-8bc6-bb0a2d2e0b31",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-27T13:05:00.565236"
+  },
+  "location" : "api.itau/pix/qr/v2/c59607f9-534a-433c-8bc6-bb0a2d2e0b31",
+  "devedor" : {
+    "cnpj" : "28004200000131",
+    "nome" : "LUIZ ALBERTO NASCIMENTO FELIX 04250186105"
+  },
+  "valor" : {
+    "original" : "6215.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/c59607f9-534a-433c-8bc6-bb0a2d2e0b315204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304134E"
+}

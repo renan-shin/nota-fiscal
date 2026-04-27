@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-10T10:03:55.10Z",
+    "expiracao" : "309364"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026106184ECBF9FEC6EB45038BD7E3608A",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6371372782240619009",
+    "location" : "api.itau/pix/qr/v2/a5082daa-c7ef-4ce5-9ff1-ae6eac27d2df",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-10T10:03:55.254639"
+  },
+  "location" : "api.itau/pix/qr/v2/a5082daa-c7ef-4ce5-9ff1-ae6eac27d2df",
+  "devedor" : {
+    "cnpj" : "31892547000172",
+    "nome" : "ANDERSON SEVERINO DE CARVALHO"
+  },
+  "valor" : {
+    "original" : "4324.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/a5082daa-c7ef-4ce5-9ff1-ae6eac27d2df5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63045D58"
+}

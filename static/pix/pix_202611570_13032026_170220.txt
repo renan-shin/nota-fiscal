@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T17:02:20.46Z",
+    "expiracao" : "457058"
+  },
+  "status" : "ATIVA",
+  "txid" : "202611570EFF547D3429043C4A82702B9E7",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1204939022196500374",
+    "location" : "api.itau/pix/qr/v2/44bafd61-a17f-4c17-af14-fc3b27146720",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T17:02:20.603998"
+  },
+  "location" : "api.itau/pix/qr/v2/44bafd61-a17f-4c17-af14-fc3b27146720",
+  "devedor" : {
+    "cnpj" : "06947307000180",
+    "nome" : "ANDERSON ABRANTES MARREIRA ME"
+  },
+  "valor" : {
+    "original" : "2825.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/44bafd61-a17f-4c17-af14-fc3b271467205204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63040EA7"
+}

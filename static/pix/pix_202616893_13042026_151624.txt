@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-13T15:16:24.20Z",
+    "expiracao" : "290615"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261689300BAE91FE12C44A0A0FD9C25E6",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8726219138552597488",
+    "location" : "api.itau/pix/qr/v2/60dc2bfe-e5c2-4a91-b08a-d999c1885a1c",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-13T15:16:24.459935"
+  },
+  "location" : "api.itau/pix/qr/v2/60dc2bfe-e5c2-4a91-b08a-d999c1885a1c",
+  "devedor" : {
+    "cnpj" : "42284986000119",
+    "nome" : "SEVERINO FRANSCISCO DE OLIVERIA 07665584870"
+  },
+  "valor" : {
+    "original" : "2351.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/60dc2bfe-e5c2-4a91-b08a-d999c1885a1c5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304AD45"
+}

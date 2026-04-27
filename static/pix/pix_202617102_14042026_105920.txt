@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-14T10:59:20.46Z",
+    "expiracao" : "306038"
+  },
+  "status" : "ATIVA",
+  "txid" : "202617102F8A23BB2FED7497D90F124A604",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "1573274502814367581",
+    "location" : "api.itau/pix/qr/v2/4034fc79-6126-4262-b2d0-3bd1e59dc6d8",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-14T10:59:20.641457"
+  },
+  "location" : "api.itau/pix/qr/v2/4034fc79-6126-4262-b2d0-3bd1e59dc6d8",
+  "devedor" : {
+    "cnpj" : "15710822000133",
+    "nome" : "EDIVANIA BATISTA PEREIRA"
+  },
+  "valor" : {
+    "original" : "12572.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/4034fc79-6126-4262-b2d0-3bd1e59dc6d85204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***630422EA"
+}

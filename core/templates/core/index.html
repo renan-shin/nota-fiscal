@@ -19,6 +19,9 @@
     </div>
 </div>
 
+<div class="container mt-3">
+    {% include 'partials/_messages.html' %}
+</div>
 <div class="container-fluid">
     <div class="row mt-2">
         <div class="col-lg-2">
@@ -34,8 +37,7 @@
         </div>
 
         <div class="col-lg-2">
-            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" id="btnModal">Status SEFAZ</button>
-            <button type="button" class="btn btn-primary btn-sm mb-2" id="btnBoleto">Boleto</button>
+            <button type="button" class="btn btn-primary btn-sm me-2 mb-2" id="btnStatus">Status SEFAZ</button>
         </div>
     </div>
     <div class="table-responsive">
@@ -64,7 +66,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalStatus" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalStatusLabel" aria-hidden="true">
+<div class="modal fade" id="modalGenerico" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalGenericoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,11 +85,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.datatables.net/v/bs5/dt-2.3.1/datatables.min.js" 
-    integrity="sha384-BE8jgQ18lLIDRFU5irQ26MTXl+tzWCKvu313il+U+Wo2wVTDr47xBIDmggcM21dh" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.js"></script>
-<script src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.dataTables.js"></script>
-<script src="https://cdn.datatables.net/colreorder/2.1.0/js/dataTables.colReorder.js"></script>
-<script src="https://cdn.datatables.net/colreorder/2.1.0/js/colReorder.dataTables.js"></script>
-<script src="{% static 'js/core.js' %}"></script>
+<script>
+    var url = "{% url 'core_nfe_edit' empresa_filial=0 id_nfe=0 %}"
+</script>
+<script src="{% static 'js/datatables.min.js' %}"></script>
+<script src="{% static 'js/nfe.js' %}"></script>
 {% endblock %}

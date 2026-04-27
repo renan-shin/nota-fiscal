@@ -14,7 +14,10 @@
                     {% url 'core_index' as url %}
                     <a class="nav-link {% if url == request.path %}active{% endif %}" aria-current="page" href="{% url 'core_index' %}">Home</a>
                 </li>
-                
+                <li class="nav-item">
+                    {% url 'core_monitoramento_nfe' as url %}
+                    <a class="nav-link {% if url == request.path %}active{% endif %}" aria-current="page" href="{% url 'core_monitoramento_nfe' %}">Monitoramento NF-e</a>
+                </li>
             </ul>
         </div>
 

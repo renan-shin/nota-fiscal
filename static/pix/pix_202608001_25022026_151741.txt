@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-25T15:17:41.47Z",
+    "expiracao" : "204137"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026080017D50197E20FC4D13A2F3D03477",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5048723210356720975",
+    "location" : "api.itau/pix/qr/v2/7b2f9524-f42e-4c32-9fee-e1712c7dc0b6",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-25T15:17:41.62255"
+  },
+  "location" : "api.itau/pix/qr/v2/7b2f9524-f42e-4c32-9fee-e1712c7dc0b6",
+  "devedor" : {
+    "cpf" : "22488520888",
+    "nome" : "Adriana Cristina da Silva"
+  },
+  "valor" : {
+    "original" : "3567.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/7b2f9524-f42e-4c32-9fee-e1712c7dc0b65204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040433"
+}

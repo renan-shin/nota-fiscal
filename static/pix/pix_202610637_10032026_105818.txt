@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-10T10:58:18.29Z",
+    "expiracao" : "565301"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026106370C5EBC4C352A4F969D6DCE5F1B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3475267570934575125",
+    "location" : "api.itau/pix/qr/v2/ef35ca38-67ca-40a2-a7b6-26fae8aab6fc",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-10T10:58:18.480885"
+  },
+  "location" : "api.itau/pix/qr/v2/ef35ca38-67ca-40a2-a7b6-26fae8aab6fc",
+  "devedor" : {
+    "cnpj" : "50751155000138",
+    "nome" : "PAULO CEZAR ROMANO E CIA LTDA-ME"
+  },
+  "valor" : {
+    "original" : "5466.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/ef35ca38-67ca-40a2-a7b6-26fae8aab6fc5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630421A7"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-26T18:01:09.86Z",
+    "expiracao" : "367129"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608400CEEEE3A1819943C79582C73A19",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7606643191387475427",
+    "location" : "api.itau/pix/qr/v2/52b7da5c-f576-468f-8c90-186da815b26f",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-26T18:01:09.999438"
+  },
+  "location" : "api.itau/pix/qr/v2/52b7da5c-f576-468f-8c90-186da815b26f",
+  "devedor" : {
+    "cnpj" : "61383517000100",
+    "nome" : "RB ABREU DE ALMEIDA CONFECCOES LTDA"
+  },
+  "valor" : {
+    "original" : "3695.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/52b7da5c-f576-468f-8c90-186da815b26f5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63047A84"
+}

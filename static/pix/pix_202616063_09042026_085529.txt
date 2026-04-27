@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T08:55:29.50Z",
+    "expiracao" : "399869"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616063A16F7BD6480F4F87A1F9B557D5",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3793304699934936773",
+    "location" : "api.itau/pix/qr/v2/d7f5a510-b4c4-4d8e-89be-8d95dfc03907",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T08:55:29.67489"
+  },
+  "location" : "api.itau/pix/qr/v2/d7f5a510-b4c4-4d8e-89be-8d95dfc03907",
+  "devedor" : {
+    "cpf" : "22676185837",
+    "nome" : "Diego Antônio Lourenço"
+  },
+  "valor" : {
+    "original" : "6211.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/d7f5a510-b4c4-4d8e-89be-8d95dfc039075204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63041AE8"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-26T10:49:55.31Z",
+    "expiracao" : "393004"
+  },
+  "status" : "ATIVA",
+  "txid" : "202608209E9BE658F2B3F425ABF4DBA7518",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6039532336844230481",
+    "location" : "api.itau/pix/qr/v2/f5f527f3-0674-4461-b2b6-ef34bb904b5d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-26T10:49:55.48942"
+  },
+  "location" : "api.itau/pix/qr/v2/f5f527f3-0674-4461-b2b6-ef34bb904b5d",
+  "devedor" : {
+    "cpf" : "42479193004",
+    "nome" : "ILDA SUEDEKUM"
+  },
+  "valor" : {
+    "original" : "2079.55",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f5f527f3-0674-4461-b2b6-ef34bb904b5d5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630466B3"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-11T08:44:12.78Z",
+    "expiracao" : "486946"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261079870FE8AA9280A4C4B98F48E2A16",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8186789468234237710",
+    "location" : "api.itau/pix/qr/v2/6489b1f4-3c4a-4532-b90b-87a15c50e213",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-11T08:44:12.935746"
+  },
+  "location" : "api.itau/pix/qr/v2/6489b1f4-3c4a-4532-b90b-87a15c50e213",
+  "devedor" : {
+    "cnpj" : "28374135000136",
+    "nome" : "RODOLFO RODRIGUES JUNIOR"
+  },
+  "valor" : {
+    "original" : "10275.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/6489b1f4-3c4a-4532-b90b-87a15c50e2135204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63040798"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T13:08:27.30Z",
+    "expiracao" : "471092"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261494252C07B6396E846F7BB0E09E44E",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3291166512170291530",
+    "location" : "api.itau/pix/qr/v2/012bbfd7-ba1a-49e7-a6e2-794d3c4637cd",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T13:08:27.494817"
+  },
+  "location" : "api.itau/pix/qr/v2/012bbfd7-ba1a-49e7-a6e2-794d3c4637cd",
+  "devedor" : {
+    "cnpj" : "53711710000196",
+    "nome" : "SOBRAL JALECOS LTDA"
+  },
+  "valor" : {
+    "original" : "23500.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/012bbfd7-ba1a-49e7-a6e2-794d3c4637cd5204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***6304BD2B"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-13T11:58:13.77Z",
+    "expiracao" : "475305"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026114575C3A0489CC264A8CB5E047ED40",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4242545094740650064",
+    "location" : "api.itau/pix/qr/v2/b6a96f06-30f0-4806-8602-a9f5a6db715c",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-13T11:58:13.90709"
+  },
+  "location" : "api.itau/pix/qr/v2/b6a96f06-30f0-4806-8602-a9f5a6db715c",
+  "devedor" : {
+    "cnpj" : "29287823000121",
+    "nome" : "SANDRA R. MASSMANN"
+  },
+  "valor" : {
+    "original" : "2900.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/b6a96f06-30f0-4806-8602-a9f5a6db715c5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304E0C6"
+}

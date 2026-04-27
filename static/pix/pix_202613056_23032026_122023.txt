@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-23T12:20:23.19Z",
+    "expiracao" : "646776"
+  },
+  "status" : "ATIVA",
+  "txid" : "202613056A771C7BA79D747309D5B5CA088",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2781019067709042877",
+    "location" : "api.itau/pix/qr/v2/72710c69-8865-4665-af0d-b5f8311eae0d",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-23T12:20:23.34868"
+  },
+  "location" : "api.itau/pix/qr/v2/72710c69-8865-4665-af0d-b5f8311eae0d",
+  "devedor" : {
+    "cnpj" : "00224711000140",
+    "nome" : "ANTONIO FELIX DA SILVA MAQUINAS ME"
+  },
+  "valor" : {
+    "original" : "547.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/72710c69-8865-4665-af0d-b5f8311eae0d5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63047C29"
+}

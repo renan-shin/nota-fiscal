@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T15:06:44.15Z",
+    "expiracao" : "463995"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026149695B548AC1931B42C0BAA0751CD3",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "6192891750363940791",
+    "location" : "api.itau/pix/qr/v2/726c8af1-4032-49fc-8fd6-bf2f8e0c4c98",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T15:06:44.346954"
+  },
+  "location" : "api.itau/pix/qr/v2/726c8af1-4032-49fc-8fd6-bf2f8e0c4c98",
+  "devedor" : {
+    "cnpj" : "55861234000115",
+    "nome" : "IMPERIO COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "2520.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/726c8af1-4032-49fc-8fd6-bf2f8e0c4c985204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630447E8"
+}

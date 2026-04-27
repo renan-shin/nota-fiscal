@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T15:40:06.74Z",
+    "expiracao" : "461992"
+  },
+  "status" : "ATIVA",
+  "txid" : "202616312C15B82C3457D4B2A95BC03C922",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "2226961685860922442",
+    "location" : "api.itau/pix/qr/v2/50f69fc0-18fe-499d-b9a3-5095dae25095",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T15:40:06.918862"
+  },
+  "location" : "api.itau/pix/qr/v2/50f69fc0-18fe-499d-b9a3-5095dae25095",
+  "devedor" : {
+    "cnpj" : "18698300000151",
+    "nome" : "CARLOS FERREIRA LIMA FILHO91097207153"
+  },
+  "valor" : {
+    "original" : "510.06",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/50f69fc0-18fe-499d-b9a3-5095dae250955204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304D5E3"
+}

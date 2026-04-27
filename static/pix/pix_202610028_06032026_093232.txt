@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-06T09:32:32.60Z",
+    "expiracao" : "397646"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261002865E51EAE8E6A466AACC52A99BF",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7969864173881323105",
+    "location" : "api.itau/pix/qr/v2/e14bd466-2187-487b-8470-b673e253393c",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-06T09:32:32.753528"
+  },
+  "location" : "api.itau/pix/qr/v2/e14bd466-2187-487b-8470-b673e253393c",
+  "devedor" : {
+    "cpf" : "07235156708",
+    "nome" : "ROBERTA CRISTINA BARBOSA"
+  },
+  "valor" : {
+    "original" : "4140.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e14bd466-2187-487b-8470-b673e253393c5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304EEFC"
+}

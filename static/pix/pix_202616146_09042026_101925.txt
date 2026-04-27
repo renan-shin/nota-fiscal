@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-09T10:19:25.56Z",
+    "expiracao" : "394834"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261614665EE336A39984FCB85E4EFBD01",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4717611133160032933",
+    "location" : "api.itau/pix/qr/v2/609d3620-0bb9-4bed-b516-f452e8dd7e09",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-09T10:19:25.735594"
+  },
+  "location" : "api.itau/pix/qr/v2/609d3620-0bb9-4bed-b516-f452e8dd7e09",
+  "devedor" : {
+    "cnpj" : "57267771000167",
+    "nome" : "JOSE ROBERTO DA SILVA"
+  },
+  "valor" : {
+    "original" : "4513.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/609d3620-0bb9-4bed-b516-f452e8dd7e095204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63043E23"
+}

@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-04-01T10:11:43.42Z",
+    "expiracao" : "481695"
+  },
+  "status" : "ATIVA",
+  "txid" : "202614736ACE7BE03500D46F3850E0C0F08",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "8454974168593235119",
+    "location" : "api.itau/pix/qr/v2/492246a1-2e1b-41cb-b0cf-dfb03808ae49",
+    "tipoCob" : "cob",
+    "criacao" : "2026-04-01T10:11:43.626836"
+  },
+  "location" : "api.itau/pix/qr/v2/492246a1-2e1b-41cb-b0cf-dfb03808ae49",
+  "devedor" : {
+    "cnpj" : "38065160000191",
+    "nome" : "META MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "9400.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/492246a1-2e1b-41cb-b0cf-dfb03808ae495204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630448DE"
+}

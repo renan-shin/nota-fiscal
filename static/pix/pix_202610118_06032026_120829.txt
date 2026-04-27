@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-06T12:08:29.51Z",
+    "expiracao" : "301889"
+  },
+  "status" : "ATIVA",
+  "txid" : "20261011847C1463E0B194BB6848F5DA8EA",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4511443040701480458",
+    "location" : "api.itau/pix/qr/v2/e3dcb246-7375-46d2-a1e6-8ff73708db45",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-06T12:08:29.663216"
+  },
+  "location" : "api.itau/pix/qr/v2/e3dcb246-7375-46d2-a1e6-8ff73708db45",
+  "devedor" : {
+    "cnpj" : "14716429000194",
+    "nome" : "COMERCIAL T.J.N. DE MAQUINAS DE COSTURA LTDA - ME"
+  },
+  "valor" : {
+    "original" : "2349.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e3dcb246-7375-46d2-a1e6-8ff73708db455204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***63047B0E"
+}

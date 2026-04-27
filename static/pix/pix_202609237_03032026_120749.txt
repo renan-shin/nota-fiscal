@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-03T12:07:49.08Z",
+    "expiracao" : "561130"
+  },
+  "status" : "ATIVA",
+  "txid" : "202609237B001518EEA0F403080A6E54A07",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "3189348170731001550",
+    "location" : "api.itau/pix/qr/v2/5b16a634-da5a-4d6c-9a19-6630f141f679",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-03T12:07:49.215185"
+  },
+  "location" : "api.itau/pix/qr/v2/5b16a634-da5a-4d6c-9a19-6630f141f679",
+  "devedor" : {
+    "cnpj" : "06913979000175",
+    "nome" : "SOCIO MAK COMERCIO DE MAQUINAS LTDA"
+  },
+  "valor" : {
+    "original" : "2275.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/5b16a634-da5a-4d6c-9a19-6630f141f6795204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***6304FF5F"
+}

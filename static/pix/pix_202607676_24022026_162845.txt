@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-24T16:28:45.33Z",
+    "expiracao" : "545474"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026076763F5C1F19DF78474695FB87A8E9",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "7619647690389702578",
+    "location" : "api.itau/pix/qr/v2/04ac8cc6-cf5e-4698-8d45-dbcb806039d8",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-24T16:28:45.484747"
+  },
+  "location" : "api.itau/pix/qr/v2/04ac8cc6-cf5e-4698-8d45-dbcb806039d8",
+  "devedor" : {
+    "cnpj" : "43406774000120",
+    "nome" : "PENHAMAK COMERCIO DE MAQUINAS DE COSTURA LTDA"
+  },
+  "valor" : {
+    "original" : "5544.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/04ac8cc6-cf5e-4698-8d45-dbcb806039d85204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630497A9"
+}

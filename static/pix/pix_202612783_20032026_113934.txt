@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-20T11:39:33.99Z",
+    "expiracao" : "390025"
+  },
+  "status" : "ATIVA",
+  "txid" : "2026127830D3D07F16C3A422E98F56A7008",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "5626392749460260158",
+    "location" : "api.itau/pix/qr/v2/e5eda7ea-481a-4356-be9f-2e2343a3a858",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-20T11:39:34.132268"
+  },
+  "location" : "api.itau/pix/qr/v2/e5eda7ea-481a-4356-be9f-2e2343a3a858",
+  "devedor" : {
+    "cnpj" : "50358033000186",
+    "nome" : "LG MAQUINAS COMERCIO VAREJISTA DE PECAS E SERVICOS LTDA"
+  },
+  "valor" : {
+    "original" : "6620.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/e5eda7ea-481a-4356-be9f-2e2343a3a8585204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63044104"
+}

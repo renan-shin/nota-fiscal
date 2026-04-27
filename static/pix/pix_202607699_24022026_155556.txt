@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-02-24T15:55:56.91Z",
+    "expiracao" : "806642"
+  },
+  "status" : "ATIVA",
+  "txid" : "20260769987630063D2114BB9BFF041347B",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4481668611697515383",
+    "location" : "api.itau/pix/qr/v2/8a6a283a-f6f5-47dc-ba04-a48488c69c61",
+    "tipoCob" : "cob",
+    "criacao" : "2026-02-24T15:55:57.076521"
+  },
+  "location" : "api.itau/pix/qr/v2/8a6a283a-f6f5-47dc-ba04-a48488c69c61",
+  "devedor" : {
+    "cnpj" : "57075303000190",
+    "nome" : "DIOGO ALVES DA SILVA"
+  },
+  "valor" : {
+    "original" : "3350.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "48929567000173",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/8a6a283a-f6f5-47dc-ba04-a48488c69c615204000053039865802BR5925LIBERTY MAQUINAS E PECAS 6009CINGAPURA62070503***63048314"
+}

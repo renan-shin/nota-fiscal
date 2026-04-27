@@ -1,0 +1,26 @@
+{
+  "calendario" : {
+    "criacao" : "2026-03-18T11:36:10.83Z",
+    "expiracao" : "217428"
+  },
+  "status" : "ATIVA",
+  "txid" : "202612283912649B17545458CB6293FD4AC",
+  "revisao" : 0,
+  "loc" : {
+    "id" : "4369956886870700382",
+    "location" : "api.itau/pix/qr/v2/4241e297-094a-4d9c-b658-957b999a0fec",
+    "tipoCob" : "cob",
+    "criacao" : "2026-03-18T11:36:10.975149"
+  },
+  "location" : "api.itau/pix/qr/v2/4241e297-094a-4d9c-b658-957b999a0fec",
+  "devedor" : {
+    "cnpj" : "12588099000173",
+    "nome" : "SALES MAQUINAS - COMERCIO DE MAQUINAS DE COSTURA LTDA - ME"
+  },
+  "valor" : {
+    "original" : "6058.00",
+    "modalidadeAlteracao" : 0
+  },
+  "chave" : "04601804000105",
+  "pixCopiaECola" : "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/4241e297-094a-4d9c-b658-957b999a0fec5204000053039865802BR5921COMERCIAL STARTE LTDA6009SAO PAULO62070503***630495AC"
+}
