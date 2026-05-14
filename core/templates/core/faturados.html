@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load filters %}
+{% load static %}
+
+{% block title %}Faturados{% endblock %}
+
+{% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-2">
+    {% include 'partials/_messages.html' %}
+</div>
+<div class="container">
+    <div class="d-flex justify-content-between mt-1">
+        <h2 class="text-primary">Faturados</h2>
+        <div class="ms-auto mt-3" style="color: red; font-weight: bold;" id="total-registros"></div>
+    </div>
+    <hr class="my-0"/>
+    <form action="{% url 'core_faturados' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-group mt-2">
+                <span class="input-group-text">Empresa</span>
+                <select id="empresa" name="empresa" class="form-select form-select-sm" aria-label="status">
+                    <option value=""></option>
+                    {% for empresa in empresas %}
+                    <option value="{{empresa.EmpresaFilial}}" {% if empresa.EmpresaFilial|stringformat:'s' == request.POST.empresa %}selected{% endif %}>{{empresa.Mnemonico}}</option>
+                    {% endfor %}
+                </select>
+                <span class="input-group-text">Data De:</span>
+                <input type="date" name="data_de" aria-label="Data De" class="form-control" value="{{request.POST.data_de|default:data_atual}}">
+                <span class="input-group-text">Data Até:</span>
+                <input type="date" name="data_ate" aria-label="Data Até" class="form-control" value="{{request.POST.data_ate|default:data_atual}}">
+                <button class="btn btn-primary btn-sm" type="submit">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-sm table-striped table-hover mt-3" id="tabela-faturados">
+        <thead>
+            <th>ID</th>
+            <th>Empresa</th>
+            <th>Pedido</th>
+            <th>NF-e</th>
+            <th>Status</th>
+            <th>Total NF-e</th>
+            <th>Data Emissão</th>
+        </thead>
+        <tbody>
+            {% for fat in faturamento %}
+            <tr>
+                <td><a href="{% url 'core_nfe_edit' empresa_filial=fat.empresa_filial id_nfe=fat.id_nfe %}" class="link-offset-2 link-underline link-underline-opacity-0" target="_blank" rel="noopener noreferrer">{{fat.id_nfe}}</a></td>
+                <td>{{fat.empresa}}</td>
+                <td>{{fat.Pedido}}</td>
+                <td>{{fat.ide_nNF}}</td>
+                <td>{{fat.status_sefaz}}</td>
+                <td>{{fat.TotalICMS_vNF|currency}}</td>
+                <td>{{fat.dhRecbto}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/faturados.js' %}"></script>
+{% endblock %}

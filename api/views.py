@@ -14,13 +14,13 @@ from pathlib import Path
 from nfe_util_2g.utils import *
 from datetime import datetime, time
 from io import BytesIO
-import shutil, requests, os, win32api, win32print
+import shutil, requests, os
 from .pix import *
 from email_validator import validate_email, EmailNotValidError
 from rest_framework.decorators import api_view
 from celery import shared_task
 
-empresas_greenmotor = [-3102, -3101, -2003, -2002, -2001, -1033, -1003, -1002, -1001, 8001, 8003, 8004, 8005, 8006, 8007]
+empresas_greenmotor = [-3102, -3101, -3131, -2003, -2002, -2001, -1033, -1003, -1002, -1001, 8001, 8003, 8004, 8005, 8006, 8007]
 
 @api_view(['GET'])
 def gerar_orcamento_pdf(request, cod_pedido):
@@ -42,7 +42,7 @@ def gerar_orcamento_pdf(request, cod_pedido):
     rows = cursor.fetchall()
     rows_ordenados = sorted(rows, key=lambda x: x[4])
 
-    keys = ('cod_pedido', 'func_comissao', 'valor_total', 'observacoes', 'nome_prod', 'descricao', 
+    keys = ('cod_pedido', 'func_comissao', 'valor_total', 'observacoes', 'valor_frete', 'nome_prod', 'descricao', 
             'quantidade', 'valor_unit_ref', 'valor_unit_prom', 'valor_item_ref', 'valor_item_prom', 'aliq_ipi',
             'nome', 'razao_social', 'cnpj', 'inscricao_estadual', 'nome_contato', 'cargo_contato', 'logradouro',
             'numero', 'bairro', 'municipio', 'estado', 'cep', 'telefone', 'telefone2', 'celular', 'email', 
@@ -182,7 +182,8 @@ def consulta_empresa(request, cod_pedido):
     return JsonResponse(pedido_empresa, safe=False)
 
 # @api_view(['GET'])
-def gerar_danfe(request, empresa_filial, id_nfe):
+@xframe_options_exempt
+def gerar_danfe(request, empresa_filial, id_nfe, opcao=None):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
         nome_tabela = apps.get_model('core', empresa.Tabela)
@@ -199,14 +200,20 @@ def gerar_danfe(request, empresa_filial, id_nfe):
     diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizado').first()
     xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
 
+    if int(nfe.ide_mod) == 65:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é cupom!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
     if 'Lote' in nfe.status_sefaz or nfe.status_sefaz == 'NFe não enviada':
-        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não foi emitida!'})
+        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não foi emitida!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if nfe.ide_serie == 0:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é Controle Interno!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
     if not nfe_itens:
-        return JsonResponse({'erro': True, 'mensagem': 'Itens da Nota Fiscal não encontrada!'})
+        return JsonResponse({'erro': True, 'mensagem': 'Itens da Nota Fiscal não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
     if not xml_autorizado.exists():
-        return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML Autorizado não encontrado!'})
+        return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML Autorizado não encontrado!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
     boletos = []
 
@@ -240,7 +247,7 @@ def gerar_danfe(request, empresa_filial, id_nfe):
             if not Path(diretorio.Diretorio + nfe.ide_nNF + '-danfe.pdf').exists():
                 shutil.copy(caminho_pdf, diretorio.Diretorio)
         else:
-            return JsonResponse({'erro': True, 'mensagem': 'Pasta da DANFE não encontrada!'})
+            return JsonResponse({'erro': True, 'mensagem': 'Pasta da DANFE não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
         caminho_nfe = get_path_repo(nfe, empresa)
 
@@ -253,7 +260,7 @@ def gerar_danfe(request, empresa_filial, id_nfe):
                 shutil.copy(caminho_pdf, caminho_nfe + nfe.ide_nNF + '-danfe.pdf')
         else:
             Path(caminho_nfe).mkdir(parents=True, exist_ok=True)
-            return JsonResponse({'erro': True, 'mensagem': 'Pasta da NF-e não encontrada!'})
+            return JsonResponse({'erro': True, 'mensagem': 'Pasta da NF-e não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
         
         # impressora = ''
 
@@ -266,8 +273,18 @@ def gerar_danfe(request, empresa_filial, id_nfe):
         #     0
         # )
 
-        caminho_pdf.unlink(missing_ok=True)
-        return JsonResponse({'erro': False, 'mensagem': f'DANFE gerada com sucesso!'})
+        if not opcao or opcao == '0':
+            caminho_pdf.unlink(missing_ok=True)
+            return JsonResponse({'erro': False, 'mensagem': f'DANFE gerada com sucesso!'})
+        else:
+            with open(caminho_pdf, "rb") as f:
+                buffer = BytesIO(f.read())
+
+            # return JsonResponse({'erro': False, 'arquivo': nome_arquivo, 'mensagem': 'Boleto gerado com sucesso!'})
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename="{caminho_pdf}"'
+            response.write(buffer.getvalue())
+            return response
     else:
         return JsonResponse({'erro': True, 'mensagem': 'Erro ao gerar a DANFE!'})
 
@@ -276,9 +293,8 @@ def gerar_danfe(request, empresa_filial, id_nfe):
     # response.write(pdf)
     # return response
 
-# @api_view(['GET'])
 @xframe_options_exempt
-def gerar_boleto(request, empresa_filial, id_nfe):
+def gerar_danfe_cce(request, empresa_filial, id_nfe, opcao=None):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
         nome_tabela = apps.get_model('core', empresa.Tabela)
@@ -289,6 +305,127 @@ def gerar_boleto(request, empresa_filial, id_nfe):
         nfe = nome_tabela.objects.get(id_nfe=id_nfe)
     except nome_tabela.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
+    
+    diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlcce').first()
+    xml_cce = Path(diretorio.Diretorio + nfe.ide_nNF + '-procCCe.xml')
+
+    if int(nfe.ide_mod) == 65:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é cupom!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    if 'Lote' in nfe.status_sefaz or nfe.status_sefaz == 'NFe não enviada':
+        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não foi emitida!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if 'Carta' not in nfe.status_sefaz:
+        return JsonResponse({'erro': True, 'mensagem': 'Não foi emitida CCe!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if nfe.ide_serie == 0:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é Controle Interno!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    if not xml_cce.exists():
+        return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML CCe não encontrado!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    pdf = gerar_pdf_cce(empresa, nfe)
+    caminho_pdf = Path(pdf)
+
+    if caminho_pdf.exists():
+        diretorio = get_path_repo(nfe, empresa)
+        
+        # Copia para a pasta DANFE PDF da empresa correspondente
+        if Path(diretorio).is_dir():
+            if not Path(diretorio + nfe.ide_nNF + '-' + nfe.nSeqEvento + '-danfeCCe.pdf').exists():
+                shutil.copy(caminho_pdf, diretorio)
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Pasta não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+        
+        # impressora = ''
+
+        # win32api.ShellExecute(
+        #     0,
+        #     'printto',
+        #     caminho_pdf,
+        #     f'"{impressora}"',
+        #     '.',
+        #     0
+        # )
+
+        if not opcao or opcao == '0':
+            # caminho_pdf.unlink(missing_ok=True)
+            return JsonResponse({'erro': False, 'mensagem': f'DANFE CCe gerada com sucesso!'})
+        else:
+            with open(caminho_pdf, "rb") as f:
+                buffer = BytesIO(f.read())
+
+            # return JsonResponse({'erro': False, 'arquivo': nome_arquivo, 'mensagem': 'Boleto gerado com sucesso!'})
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename="{caminho_pdf}"'
+            response.write(buffer.getvalue())
+            return response
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Erro ao gerar a DANFE CCe!'})
+    
+@xframe_options_exempt
+@csrf_exempt
+def abrir_xml(request):
+    if request.method != 'POST':
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+    
+    empresa_filial = request.POST.get('empresa_filial', 0)
+    id_nfe = request.POST.get('id_nfe', 0)
+
+    try:
+        empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+        nome_tabela = apps.get_model('core', empresa.Tabela)
+    except Empresa.DoesNotExist:
+        return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+
+    try:
+        nfe = nome_tabela.objects.get(id_nfe=id_nfe)
+    except nome_tabela.DoesNotExist:
+        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
+    
+    diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizado').first()
+    xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
+
+    if int(nfe.ide_mod) == 65:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é cupom!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    if 'Lote' in nfe.status_sefaz or nfe.status_sefaz == 'NFe não enviada':
+        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não foi emitida!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if nfe.ide_serie == 0:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é Controle Interno!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    if not xml_autorizado.exists():
+        return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML não encontrado!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    pasta_static = os.path.join(settings.BASE_DIR, 'static', 'xml')
+    nome_xml = f'{nfe.ide_nNF}-procNFe.xml'
+    xml_static = os.path.join(pasta_static, nome_xml)
+
+    if not Path(pasta_static).is_dir():
+        os.makedirs(pasta_static)
+
+    shutil.copy(xml_autorizado, pasta_static)
+
+    with open(xml_static, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/xml')
+        # 'attachment' força a janela de "Salvar como"
+        response['Content-Disposition'] = f'attachment; filename="{nome_xml}"'
+        return response
+
+# @api_view(['GET'])
+@xframe_options_exempt
+def gerar_boleto(request, empresa_filial, id_nfe):
+    try:
+        empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+        nome_tabela = apps.get_model('core', empresa.Tabela)
+    except Empresa.DoesNotExist:
+        return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    try:
+        nfe = nome_tabela.objects.get(id_nfe=id_nfe)
+    except nome_tabela.DoesNotExist:
+        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
     cursor = connection.cursor()
 
@@ -297,17 +434,17 @@ def gerar_boleto(request, empresa_filial, id_nfe):
             if temBol(nfe, empresa):
                 cursor.execute("SELECT * FROM GreenMotor.dbo.boletos WHERE CodPedido = %s AND Conta NOT LIKE %s ORDER BY NossoNum", [nfe.Pedido, 'Ometz%',])
             else:
-                return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'})
+                return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
         else:
             if temBolSemRio(nfe, empresa):
                 cursor.execute("SELECT * FROM GreenMotor.dbo.boletos WHERE CodPedido = %s AND Conta NOT LIKE %s AND Conta NOT LIKE %s ORDER BY NossoNum", [nfe.Pedido, '%Rio%', 'Ometz%',])
             else:
-                return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'})
+                return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
     else:
         if temBolSemRio(nfe, empresa):
             cursor.execute("SELECT * FROM Lanmax.dbo.boletos WHERE CodPedido = %s AND Conta NOT LIKE %s AND Conta NOT LIKE %s ORDER BY NossoNum", [nfe.Pedido, '%Rio%', 'Ometz%',])
         else:
-            return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'})
+            return JsonResponse({'erro': True, 'mensagem': 'Pedido sem boleto!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
     rows = cursor.fetchall()
     keys = (
@@ -320,7 +457,7 @@ def gerar_boleto(request, empresa_filial, id_nfe):
         boletos.append(dict(zip(keys, row)))
 
     if len(boletos) == 0:
-        return JsonResponse({'erro': True, 'arquivo': None, 'mensagem': 'Pedido sem boleto ou sem Nosso Número gerado ou já foram pagos!'})
+        return JsonResponse({'erro': True, 'arquivo': None, 'mensagem': 'Pedido sem boleto ou sem Nosso Número gerado ou já foram pagos!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
     
     pasta_repo = get_path_repo(nfe, empresa)
 
@@ -594,8 +731,8 @@ def transmitir_nfce(request):
             # return JsonResponse({'erro': False, 'status': 100, 'mensagem': 'Baixa do pedido no sistema realizado com sucesso!'})
         else:
             nfe.frg_xml = msg_retorno
-            nfe.status_sefaz = 'Lote recebido com sucesso'
-            # nfe.XML_Transmitido = True
+            # nfe.status_sefaz = 'Lote recebido com sucesso'
+            nfe.XML_Transmitido = True
             nfe.save()
             nfe.refresh_from_db()
             return JsonResponse({'erro': True, 'status': status_retorno, 'mensagem': msg_retorno})
@@ -629,6 +766,9 @@ def transmitir_nfe(request):
     
     if nfe.ide_mod != 55:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Modelo da NF-e diferente de 55!'})
+    
+    if nfe.ide_nNF == '0' or len(nfe.ide_nNF) < 9:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Número de nota inválido!'})
     
     if 'Aut' in nfe.status_sefaz or 'Carta' in nfe.status_sefaz or 'Canc' in nfe.status_sefaz:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'NF-e já foi emitida!'})
@@ -703,7 +843,7 @@ def transmitir_nfe(request):
         else:
             nfe.frg_xml = msg_retorno
             # nfe.status_sefaz = 'Lote recebido com sucesso'
-            # nfe.XML_Transmitido = True
+            nfe.XML_Transmitido = True
             nfe.save()
             nfe.refresh_from_db()
             return JsonResponse({'erro': True, 'status': status_retorno, 'mensagem': msg_retorno})
@@ -750,6 +890,9 @@ def carta_correcao(request):
     
     if 'Aut' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'NF-e não está como Autorizada!'})
+    
+    if not justificativa:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Justificativa não foi informada!'})
     
     if nfe.nSeqEvento:
         if int(nfe.nSeqEvento) > 20:
@@ -798,6 +941,9 @@ def cancelar_nfe(request):
     except nome_tabela.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Nota Fiscal não encontrada!'})
     
+    if not nfe.xJust:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Justificativa não foi informada!'})
+    
     if 'Aut' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'NF-e não está como Autorizada!'})
     
@@ -822,7 +968,64 @@ def cancelar_nfe(request):
         return JsonResponse({'erro': False, 'status': status, 'mensagem': 'Cancelamento realizado com sucesso!'})
     else:
         return JsonResponse({'erro': True, 'status': status, 'mensagem': msg_retorno})
+    
+@api_view(['POST'])
+@csrf_exempt
+def inutilizar_nfe(request):
+    if request.method != 'POST':
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
 
+    empresa_filial = int(request.POST.get('empresa'))
+    num_nfe = request.POST.get('nfe', '')
+    ide_mod = request.POST.get('modelo', '')
+
+    try:
+        empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+        nome_tabela = apps.get_model('core', empresa.TabelaInut)
+    except Empresa.DoesNotExist:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
+    
+    if num_nfe == '':
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Não foi informado o número a ser inutilizado!'})
+    
+    if num_nfe == '':
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Não foi informado o número a ser inutilizado!'})
+    
+    if not num_nfe.isdigit():
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Número da nota inválido!'})
+    
+    num_nfe = str(num_nfe).zfill(9)
+
+    try:
+        nfe_inut = nome_tabela.objects.filter(nroNFeInicial=num_nfe, Modelo=ide_mod).first()
+    except nome_tabela.DoesNotExist:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Nota Fiscal não encontrada!'})
+    
+    if ide_mod != '55' and ide_mod != '65':
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Modelo da nota inválido!'})
+    
+    if not nfe_inut:
+        nova_inutilizacao = nome_tabela.objects.get_or_create(
+            status_sefaz = None,
+            nProtocoloInut = None,
+            dProtocoloInut = None,
+            procInutNFe = None,
+            justificativa = 'OCORREU UMA FALHA NO SISTEMA QUE PULOU A SEQUENCIA DE NUMERACAO',
+            cStat = None,
+            nroNFeInicial = num_nfe,
+            nroNFeFinal = num_nfe,
+            Modelo = ide_mod
+        )
+    else:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Já existe uma inutilização com este número!'})
+    
+    status, msg_retorno = inutiliza_nfe(nova_inutilizacao, empresa)
+
+    if status == 102:
+        return JsonResponse({'erro': False, 'status': status, 'mensagem': 'Inutilização realizada com sucesso!'})
+    else:
+        return JsonResponse({'erro': True, 'status': status, 'mensagem': msg_retorno})
+    
 @api_view(['POST'])
 @csrf_exempt
 def gerar_gnre(request):
@@ -913,6 +1116,8 @@ def gerar_gnre(request):
             else:
                 nro_recibo = ''
 
+            # time.sleep(5)
+
             status_busca_gnre = busca_gnre(nfe, empresa, nro_recibo, receita)
 
             if status_busca_gnre == 402:
@@ -993,7 +1198,7 @@ def enviar_email_nfe(request):
     rows = cursor.fetchall()
     rows_ordenados = sorted(rows, key=lambda x: x[4])
 
-    keys = ('cod_pedido', 'func_comissao', 'valor_total', 'observacoes', 'nome_prod', 'descricao', 
+    keys = ('cod_pedido', 'func_comissao', 'valor_total', 'observacoes', 'valor_frete', 'nome_prod', 'descricao', 
             'quantidade', 'valor_unit_ref', 'valor_unit_prom', 'valor_item_ref', 'valor_item_prom', 'aliq_ipi',
             'nome', 'razao_social', 'cnpj', 'inscricao_estadual', 'nome_contato', 'cargo_contato', 'logradouro',
             'numero', 'bairro', 'municipio', 'estado', 'cep', 'telefone', 'telefone2', 'celular', 'email', 
@@ -1157,6 +1362,7 @@ def enviar_email_nfe(request):
     else:
         return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao gerar o Orçamento PDF!'})
 
+@xframe_options_exempt
 def gerar_cupom(request, empresa_filial, id_nfe):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
@@ -1170,6 +1376,24 @@ def gerar_cupom(request, empresa_filial, id_nfe):
         nfe_itens = nome_tabela_itens.objects.filter(id_nfe=id_nfe).order_by('id_item')
     except nome_tabela.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
+    
+    if int(nfe.ide_mod) != 65:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido não é cupom!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if 'Lote' in nfe.status_sefaz or nfe.status_sefaz == 'NFe não enviada':
+        return JsonResponse({'erro': True, 'mensagem': 'Cupom não foi emitido!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    if not nfe_itens:
+        return JsonResponse({'erro': True, 'mensagem': 'Itens da Nota Fiscal não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    if nfe.ide_serie == 0:
+        return JsonResponse({'erro': True, 'mensagem': 'Pedido é Controle Interno!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    
+    diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizadoNFCe').first()
+    xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
+
+    if not xml_autorizado.exists():
+        return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML Autorizado não encontrado!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
     
     # pasta_cupons = os.path.join(settings.BASE_DIR, 'static', 'relatorios')
     # nome_cupom = get_path_repo(nfe, empresa) + f'cupom_{nfe.ide_nNF}.pdf'
@@ -1222,25 +1446,93 @@ def gerar_cupom(request, empresa_filial, id_nfe):
     response.write(buffer.getvalue())
     return response
 
-def retransmitir(request, empresa_filial, id_nfe):
-    try:
-        empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
-    except Empresa.DoesNotExist:
-        return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+@csrf_exempt
+def calcular_formas_pagto(request):
+    if request.method == 'POST':
+        id_nfe = request.POST.get('id_nfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
 
-    try:
-        nfe = nome_tabela.objects.get(id_nfe=id_nfe)
-    except nome_tabela.DoesNotExist:
-        return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
-    
-    if 'Aut' in nfe.status_sefaz or 'Carta' in nfe.status_sefaz or 'Canc' in nfe.status_sefaz:
-        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'NF-e/NFC-e já foi emitida!'})
-    
-    nfe.Transmitir = False
-    nfe.XML_Transmitido = False
-    nfe.status_sefaz = 'NFe não enviada'
-    nfe.save()
-    nfe.refresh_from_db()
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('core', empresa.Tabela)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!', 'formas_pagto': {}})
+        
+        try:
+            nfe = nome_tabela.objects.get(id_nfe=id_nfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!', 'formas_pagto': {}})
+        
+        if int(nfe.ide_serie) == 0:
+            return JsonResponse({'erro': True, 'mensagem': 'Pedido é Controle Interno!', 'formas_pagto': {}})
+        
+        if 'Aut' in nfe.status_sefaz or 'Carta' in nfe.status_sefaz or 'Canc' in nfe.status_sefaz:
+            return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal já foi emitida!', 'formas_pagto': {}})
+        
+        cursor = connection.cursor()
+        cursor.execute("EXEC Base_NFE.dbo.setFormasPagto_NFE %s, %s", [id_nfe, empresa.ide_serie])
+        result = cursor.fetchone()
+        connection.commit()
 
-    return JsonResponse({'erro': False, 'status': 100, 'titulo': 'Retransmitir', 'mensagem': f'NF-e/NFC-e {nfe.ide_nNF} da empresa {empresa.Mnemonico} será retransmitida!'})
+        nfe.refresh_from_db()
+
+        nfe_lista = list(nome_tabela.objects.filter(id_nfe=id_nfe).values('id_nfe', 'ide_serie', 'status_sefaz', 'cobr_nFat', 'cobr_vLiq', 'cobr_vOrig'))
+
+        try:
+            formas_pagto = list(FormasPagto_NFE.objects.filter(id_nfe=id_nfe, ide_serie=empresa.ide_serie).values('id_nfe', 'ide_serie', 'pagamento_nForma', 'pagamento_indPag_Opc', 'pagamento_tPag__Descricao', 'pagamento_vPag'))
+        except FormasPagto_NFE.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Formas de Pagto não encontrada!', 'formas_pagto': {}})
+
+        return JsonResponse({'erro': False, 'mensagem': 'Cálculo das Formas de Pagto realizado com sucesso!', 'formas_pagto': formas_pagto, 'nfe': nfe_lista[0]}, safe=False)
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método não permitido!', 'formas_pagto': {}})
+    
+@csrf_exempt
+def calcular_totais_nfe(request):
+    if request.method == 'POST':
+        id_nfe = request.POST.get('id_nfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('core', empresa.Tabela)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!', 'formas_pagto': {}})
+        
+        try:
+            nfe = nome_tabela.objects.get(id_nfe=id_nfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!', 'formas_pagto': {}})
+        
+        cursor = connection.cursor()
+        cursor.execute("EXEC Base_NFE.dbo.setTotalNF %s, %s", [id_nfe, empresa.emit_CNPJ])
+        connection.commit()
+
+        nfe = nome_tabela.objects.filter(id_nfe=id_nfe).values(
+            'TotalICMS_vBC',
+            'TotalICMS_vIPI',
+            'TotalICMS_vOutro',
+            'TotalICMS_vTotTrib',
+            'IBSCBSTot_vBCIBSCBS',
+            'TotalICMS_vNF',
+            'TotalICMS_vICMS',
+            'TotalICMS_vPIS',
+            'TotalICMS_vFrete',
+            'TotalICMS_vICMSUFDest_Opc',
+            'IBSTot_vIBS_UF',
+            'totalRTC_vNFTot',
+            'TotalICMS_vBCST',
+            'TotalICMS_vCOFINS',
+            'TotalICMS_vSeg',
+            'TotalICMS_vICMSUFRemet_Opc',
+            'IBSTot_vIBS',
+            'TotalICMS_vST',
+            'TotalICMS_vProd',
+            'TotalICMS_vDesc',
+            'TotalICMS_vFCPUFDest_Opc',
+            'CBSTot_vCBS'
+        ).first()
+
+        return JsonResponse({'erro': False, 'mensagem': 'Totais da NF-e calculados com sucesso!', 'nfe': nfe}, safe=False)
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método não permitido!', 'nfe': {}})

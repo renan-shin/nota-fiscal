@@ -772,6 +772,144 @@ class Rio_MT_NFEItens_400(NFeItens):
         managed = False
         db_table = 'Rio_MT_NFEItens_400'
 
+class NFe_Inutilizacao(models.Model):
+    id_inutilizacao = models.AutoField(primary_key=True)
+    status_sefaz = models.CharField(max_length=255, null=True)
+    nProtocoloInut = models.CharField(max_length=255, null=True)
+    dProtocoloInut = models.CharField(max_length=255, null=True)
+    procInutNFe = models.TextField(null=True)
+    justificativa = models.CharField(max_length=255, null=True)
+    cStat = models.CharField(max_length=255, null=True)
+    nroNFeInicial = models.CharField(max_length=255, null=True)
+    nroNFeFinal = models.CharField(max_length=255, null=True)
+    Modelo = models.IntegerField(null=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.nroNFeInicial + '|' + str(self.Modelo)
+    
+class Starte_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Starte_Inutilizacao'
+
+class Starte_SC_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Starte_SC_Inutilizacao'
+
+class Starte_MG_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Starte_MG_Inutilizacao'
+
+class GreenMotor_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'GreenMotor_Inutilizacao'
+
+class GreenMotor_SC_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'GreenMotor_SC_Inutilizacao'
+
+class Infinity_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Infinity_Inutilizacao'
+
+class LanmaxLog_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'LanmaxLog_Inutilizacao'
+
+class LanmaxPecas_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'LanmaxPecas_Inutilizacao'
+
+class Liberty_CE_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Liberty_CE_Inutilizacao'
+
+class Liberty_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Liberty_Inutilizacao'
+
+class LPBlumenau_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'LPBlumenau_Inutilizacao'
+
+class Maxipecas_Filial_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Maxipecas_Filial_Inutilizacao'
+
+class Maxipecas_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Maxipecas_Inutilizacao'
+
+class PortoReal_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'PortoReal_Inutilizacao'
+
+class Rio_BA_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_BA_Inutilizacao'
+
+class Rio_MG_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_MG_Inutilizacao'
+
+class Rio_MT_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_MT_Inutilizacao'
+
+class Rio_PR_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_PR_Inutilizacao'
+
+class Rio_RJ_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_RJ_Inutilizacao'
+
+class Rio_RS_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Rio_RS_Inutilizacao'
+
+class TNL_Blumenau_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'TNL_Blumenau_Inutilizacao'
+
+class TNL_Caruaru_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'TNL_Caruaru_Inutilizacao'
+
+class TNL_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'TNL_Inutilizacao'
+
+class Vialuna_Inutilizacao(NFe_Inutilizacao):
+    class Meta:
+        managed = False
+        db_table = 'Vialuna_Inutilizacao'
+
 class Diretorio(models.Model):
     ID = models.AutoField(primary_key=True)
     CNPJ = models.CharField(null=False, max_length=14)
@@ -785,13 +923,25 @@ class Diretorio(models.Model):
     def __str__(self):
         return self.CNPJ
 
+class FormasPagto(models.Model):
+    id = models.AutoField(primary_key=True, db_column='ID')
+    Codigo = models.CharField(max_length=2, null=True, unique=True)
+    Descricao = models.CharField(null=False, max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'FormasPagto'
+
+    def __str__(self):
+        return str(self.id) + '|' + self.Descricao
+
 class FormasPagto_NFE(models.Model):
     id = models.AutoField(primary_key=True)
     id_nfe = models.BigIntegerField(null=False)
     ide_serie = models.CharField(null=False, max_length=2)
     pagamento_nForma = models.IntegerField(null=False)
-    pagamento_indPag_Opc = models.IntegerField(null=True)
-    pagamento_tPag = models.CharField(null=True, max_length=2)
+    pagamento_indPag_Opc = models.IntegerField(null=False)
+    pagamento_tPag = models.ForeignKey(FormasPagto, on_delete=models.CASCADE, to_field='Codigo', db_column='pagamento_tPag')
     pagamento_vPag = models.FloatField(null=True)
     pagamento_tpIntegra_Opc = models.CharField(null=True, max_length=2)
     pagamento_CNPJ_Opc = models.CharField(null=True, max_length=14)

@@ -91,7 +91,10 @@ DATABASES = {
         #'HOST': 'acesso.cavemac.com.br,1433\sqlcavemac',
         'HOST': 'landbx01\sqllanmax',
         'PORT': '1433',
-        'OPTIONS': {'driver': 'ODBC Driver 17 for SQL Server',},
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server'
+        },
+        # 'CONN_MAX_AGE': 60,
     },
     'greenmotor': {
         'ENGINE': 'mssql',
@@ -101,7 +104,9 @@ DATABASES = {
         #'HOST': 'acesso.cavemac.com.br,1433\sqlcavemac',
         'HOST': 'landbx01\sqllanmax',
         'PORT': '1433',
-        'OPTIONS': {'driver': 'ODBC Driver 17 for SQL Server',},
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server'
+        },
     },
     'lanmax': {
         'ENGINE': 'mssql',
@@ -111,7 +116,9 @@ DATABASES = {
         #'HOST': 'acesso.cavemac.com.br,1433\sqlcavemac',
         'HOST': 'landbx01\sqllanmax',
         'PORT': '1433',
-        'OPTIONS': {'driver': 'ODBC Driver 17 for SQL Server',},
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server'
+        },
     },
 }
 

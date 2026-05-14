@@ -30,7 +30,7 @@ class NumberedCanvas(canvas.Canvas):
 
         text_width = self.stringWidth(texto, "Times-Roman", 6)
 
-        if self.report_name == 'DANFE':
+        if self.report_name in('DANFE', 'DANFE CCe'):
             x = width/2 - text_width/2 + 7
 
             if self._pageNumber == 1:

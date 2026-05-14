@@ -2,12 +2,6 @@
 
 {% load static %}
 
-{% block css %}
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.3.1/datatables.min.css" rel="stylesheet" 
-            integrity="sha384-rcK/Hw0a8czqNV8XiNNbA2kqXBypz/reTTu9ewJiCYQRES16Xpl47dKudYItkU7M" crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.dataTables.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/colreorder/2.1.0/css/colReorder.dataTables.css" rel="stylesheet">
-{% endblock %}
 {% block title %}Monitoramento NF-e{% endblock %}
 
 {% block conteudo %}
@@ -20,13 +14,18 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-md-4 g-4 mt-1">
+    <div class="d-flex justify-content-between mt-1">
+        <h2 class="text-primary">Monitoramento NF-e</h2>
+        <label id="refresh_time" style="color: red; font-weight: bold;" class="ms-auto mt-3"></label>
+    </div>
+    <hr class="mt-0 mb-2"/>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for nfe in nfes %}
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <a class="link-info link-offset-2 link-underline link-underline-opacity-0" href="{% url 'core_nfe_edit' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}">
-                        <h6 class="card-title">Pedido: {{nfe.pedido}} / NF-e: {{nfe.ide_nnf}}</h6>
+                    <a class="link-info link-offset-2 link-underline link-underline-opacity-0" href="{% url 'core_nfe_edit' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}" target="_blank" rel="noopener noreferrer">
+                        <h6 class="card-title">ID: {{nfe.id_nfe}} | Pedido: {{nfe.pedido}} | NF-e: {{nfe.ide_nnf}} | {{nfe.empresa}}</h6>
                     </a>
                     <div>
                         <label class="fw-bold"><font size="2">Status:</font></label> <font size="2">{{nfe.status_sefaz}}</font>
@@ -37,7 +36,9 @@
                     <div>
                         <label class="fw-bold"><font size="2">Tempo:</font></label> <font size="2">{{ nfe.tempo }}</font>
                     </div>
-                    <p class="card-text"><font size="2">{{nfe.frg_xml|default:''}}</font></p>
+                    <div>
+                        <font size="2">{{nfe.frg_xml|default:''}}</font>
+                    </div>
                     <hr/>
                     {% if nfe.transmitir %}
                     <div class="d-flex justify-content-center">

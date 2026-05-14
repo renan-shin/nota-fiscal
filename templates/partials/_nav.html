@@ -18,6 +18,14 @@
                     {% url 'core_monitoramento_nfe' as url %}
                     <a class="nav-link {% if url == request.path %}active{% endif %}" aria-current="page" href="{% url 'core_monitoramento_nfe' %}">Monitoramento NF-e</a>
                 </li>
+                <li class="nav-item">
+                    {% url 'core_nfe_email' as url %}
+                    <a class="nav-link {% if url == request.path %}active{% endif %}" aria-current="page" href="{% url 'core_nfe_email' %}">NF-e Email</a>
+                </li>
+                <li class="nav-item">
+                    {% url 'core_faturados' as url %}
+                    <a class="nav-link {% if url == request.path %}active{% endif %}" aria-current="page" href="{% url 'core_faturados' %}">Faturados</a>
+                </li>
             </ul>
         </div>
 

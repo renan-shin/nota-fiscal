@@ -282,7 +282,8 @@ def ide(nfe, empresa):
         int(nfe.ide_indFinal) if nfe.ide_indFinal is not None else 0,
         int(nfe.ide_indPres) if nfe.ide_indPres is not None else 0,
         int(nfe.ide_procEmi) if nfe.ide_procEmi is not None else 0,
-        nfe.ide_verProc if nfe.ide_verProc else '',
+        # nfe.ide_verProc if nfe.ide_verProc else '',
+        'NFe_Util_2G',
         nfe.ide_dhCont if nfe.ide_dhCont else '',
         nfe.ide_xJust if nfe.ide_xJust else '',
         int(nfe.ide_indIntermed) if nfe.ide_indIntermed is not None else 0,
@@ -408,12 +409,12 @@ def det_prod(nfe, nfe_itens, empresa):
             item.prod_EXTIPI if item.prod_EXTIPI else '',
             item.prod_CFOP if item.prod_CFOP else '',
             item.prod_uCOM if item.prod_uCOM else 0,
-            int(item.prod_qCOM) if item.prod_qCOM else 0,
+            item.prod_qCOM if item.prod_qCOM else 0,
             round(item.prod_vUnCOM, 10) if item.prod_vUnCOM else 0,
             item.prod_vProd if item.prod_vProd else 0,
             item.prod_cEANTrib if item.prod_cEANTrib else '',
             item.prod_uTrib if item.prod_uTrib else 0,
-            int(item.prod_qTrib) if item.prod_qTrib else 0,
+            item.prod_qTrib if item.prod_qTrib else 0,
             round(item.prod_vUnTrib, 10) if item.prod_vUnTrib else 0,
             item.prod_vFrete if item.prod_vFrete else 0,
             item.prod_vSeg if item.prod_vSeg else 0,
@@ -515,7 +516,7 @@ def det_prod(nfe, nfe_itens, empresa):
             item.cofins_vAliqProd if item.cofins_vAliqProd else 0
         )
 
-        if tem_difal(nfe.id_nfe, empresa.ide_serie) and empresa.emit_CRT == 3:
+        if tem_difal(nfe.id_nfe, empresa.ide_serie) and int(nfe.ide_mod) == 55 and empresa.emit_CRT == 3:
             det_ICMSUFDest = obj_nfe_util.ICMSUFDest400(
                 item.ICMSUFDest_vBCUFDest if item.ICMSUFDest_vBCUFDest else 0,
                 item.ICMSUFDest_vBCFCPUFDest_Opc if item.ICMSUFDest_vBCFCPUFDest_Opc else 0,
@@ -1020,7 +1021,7 @@ def gera_XMLPagto(nfe, empresa):
     for fp in formas_pagto:
         pagto_detPag += obj_nfe_util.detPag(
             '',
-            fp.pagamento_tPag if fp.pagamento_tPag else '',
+            fp.pagamento_tPag.Codigo if fp.pagamento_tPag.Codigo else '',
             fp.pagamento_vPag if fp.pagamento_vPag else 0,
             fp.pagamento_tpIntegra_Opc if fp.pagamento_tpIntegra_Opc else '',
             fp.pagamento_CNPJ_Opc if fp.pagamento_CNPJ_Opc else '',
@@ -1182,7 +1183,9 @@ def gera_xml(nfe, nfe_itens, empresa):
     else:
         mintermed = ''
 
-    xml = obj_nfe_util.NFe202006(
+    magropecuario = ''
+
+    xml = obj_nfe_util.NFe2024003(
         empresa.VersaoSchema,
         nfe.chave_acesso,
         mide,
@@ -1202,7 +1205,8 @@ def gera_xml(nfe, nfe_itens, empresa):
         mcana,
         mautxml,
         mresptec,
-        mintermed
+        mintermed,
+        magropecuario
     )
 
     if nfe.ide_mod == 55:
@@ -1320,6 +1324,7 @@ def envia_nfe_sincrono(nfe, empresa):
     if cstat == 100:
         if nfe.ide_mod == 55:
             nfe.ECFRef_mod = 2
+
         nfe.Transmitir = False
         nfe.save()
         nfe.refresh_from_db()
@@ -1343,7 +1348,7 @@ def envia_nfe_sincrono(nfe, empresa):
 
             cursor = connection.cursor()
 
-            cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario <> %s ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa'])
+            cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario NOT IN(%s,%s) ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa', 'Renan'])
             result = cursor.fetchone()
 
             cursor.execute("EXEC AS LOGIN=%s; EXEC acertaNFe %s, %s", [result[0], pasta_autorizado.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
@@ -1558,6 +1563,65 @@ def cancela_nfe(nfe, empresa):
                     data = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                     status = 0
                 )
+
+    return status, msg_resultado
+
+def inutiliza_nfe(inutilizacao, empresa):
+    msg_dados = ''
+    msg_ret_ws = ''
+    status = 0
+    msg_resultado = ''
+    ano = datetime.now().strftime('%y')
+    justificativa = 'OCORREU UMA FALHA NO SISTEMA QUE PULOU A SEQUENCIA DE NUMERACAO'
+    num_protocolo = ''
+    data_protocolo = ''
+    proxy = ''
+    usuario = ''
+    senha = ''
+    xml_inutilizado = ''
+
+    procInutNFe = obj_nfe_util.InutilizaNroNF2G(
+        empresa.SiglaWebService,
+        empresa.IdentificacaoAmbiente,
+        empresa.Certificado,
+        empresa.VersaoSchema,
+        msg_dados,
+        msg_ret_ws,
+        status,
+        msg_resultado,
+        empresa.emit_cUF,
+        ano,
+        empresa.emit_CNPJ,
+        inutilizacao.Modelo,
+        empresa.ide_serie,
+        inutilizacao.nroNFeInicial,
+        inutilizacao.nroNFeInicial,
+        justificativa,
+        num_protocolo,
+        data_protocolo,
+        proxy,
+        usuario,
+        senha,
+        empresa.LicencaDLL
+    )
+
+    xml_inutilizado, msg_dados, msg_ret_ws, status, msg_resultado, num_protocolo, data_protocolo = procInutNFe
+
+    if status == 102:
+        diretorio_inutilizado = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlInutilizaNros').first()
+        caminho_xml = diretorio_inutilizado.Diretorio + inutilizacao.nroNFeInicial + '-procInutNFe.xml'
+
+        if Path(diretorio_inutilizado.Diretorio).is_dir():
+            with open(caminho_xml, 'w', encoding='utf-8') as arquivo:
+                arquivo.write(xml_inutilizado)
+                arquivo.close()
+
+        inutilizacao.nProtocoloInut = num_protocolo
+        inutilizacao.dProtocoloInut = data_protocolo
+        inutilizacao.procInutNFe = xml_inutilizado
+        inutilizacao.cStat = status
+        inutilizacao.save()
+        inutilizacao.refresh_from_db()
 
     return status, msg_resultado
 

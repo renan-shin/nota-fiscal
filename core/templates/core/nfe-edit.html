@@ -1,19 +1,30 @@
 {% extends 'base.html' %}
 
+{% load filters %}
 {% load static %}
 
 {% block title %}Nota Fiscal | Editar{% endblock %}
 
 {% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
 <div class="container mt-3">
     {% include 'partials/_messages.html' %}
 </div>
 <div class="container">
-    <button type="button" class="btn btn-primary btn-sm" id="btnBoleto" disabled="true">Boleto</button>
-    <button type="button" class="btn btn-success btn-sm" id="btnDanfe" disabled="true">DANFE</button>
-    <hr>
-    <label class="col-sm-6 col-form-label">Pedido: {{nfe.Pedido}}</label>
-    <label class="col-sm-6 col-form-label">NF-e: {{nfe.ide_nNF}}</label>
+    <button type="button" class="btn btn-primary btn-sm" id="btnBoleto">Boleto</button>
+    <button type="button" class="btn btn-success btn-sm ms-2" id="btnDanfe">DANFE</button>
+    <button type="button" class="btn btn-warning btn-sm ms-2" id="btnDanfeCCe">DANFE CCe</button>
+    <button type="button" class="btn btn-info btn-sm ms-2" id="btnCupom">CUPOM</button>
+    <button type="button" class="btn btn-secondary btn-sm ms-2" id="btnXML">XML</button>
+    <hr class="mt-2 mb-0">
+    <label class="col-sm-9 col-form-label">Pedido: {{nfe.Pedido}} | NF-e: {{nfe.ide_nNF}} | Empresa: {{empresa.Mnemonico}}</label>
 
     <form method="POST" action="{% url 'core_nfe_edit' empresa.EmpresaFilial nfe.id_nfe %}">
         {% csrf_token %}
@@ -23,6 +34,15 @@
             </li>
             <li class="nav-item">
                 <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente-tab-pane" type="button" role="tab" aria-controls="cliente-tab-pane" aria-selected="false">Cliente</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="total-tab" data-bs-toggle="tab" data-bs-target="#total-tab-pane" type="button" role="tab" aria-controls="total-tab-pane" aria-selected="false">Totais</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="produtos-tab" data-bs-toggle="tab" data-bs-target="#produtos-tab-pane" type="button" role="tab" aria-controls="produtos-tab-pane" aria-selected="false">Produtos</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="pagto-tab" data-bs-toggle="tab" data-bs-target="#pagto-tab-pane" type="button" role="tab" aria-controls="pagto-tab-pane" aria-selected="false">Formas Pagto</button>
             </li>
             <li class="nav-item">
                 <button class="nav-link" id="transp-tab" data-bs-toggle="tab" data-bs-target="#transp-tab-pane" type="button" role="tab" aria-controls="transp-tab-pane" aria-selected="false">Transportadora</button>
@@ -37,17 +57,152 @@
             <div class="tab-pane fade show active" id="nfe-tab-pane" role="tabpanel" aria-labelledby="nfe-tab" tabindex="0">
                 <div class="row">
                     <div class="col">
-                        <label for="status-nfe" class="col-sm-6 col-form-label">Status:</label>
+                        <label for="status-nfe" class="col-sm-9 col-form-label">Status:</label>
                         <select id="status-nfe" name="status_nfe" class="form-select form-select-sm" aria-label="status">
                             <option value=""></option>
                             {% for stat in status_nfe %}
-                                <option value="{{ stat }}" {% if form.status_nfe|default:nfe.status_sefaz == stat %}selected{% endif %}>{{stat}}</option>
+                                <option value="{{ stat }}" {% if nfe.status_sefaz == stat %}selected{% endif %}>{{stat}}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="col">
+                        <label for="chave-acesso" class="col-sm-9 col-form-label">Chave de Acesso:</label>
+                        <input id="chave-acesso" type="text" class="form-control form-control-sm" placeholder="Chave de Acesso" aria-label="Chave de Acesso" value="{{ nfe.chave_acesso|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="natureza-operacao" class="col-sm-9 col-form-label">Natureza Operação:</label>
+                        <input id="natureza-operacao" name="email_cliente" type="text" class="form-control form-control-sm" placeholder="Natureza Operação" aria-label="Natureza Operação" value="{{ nfe.ide_natOp|default:'' }}" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="serie" class="col-sm-9 col-form-label">Série:</label>
+                        <input id="serie" type="text" class="form-control form-control-sm" placeholder="Série" aria-label="Série" value="{{ nfe.ide_serie|default:''|floatformat:0 }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="modelo" class="col-sm-9 col-form-label">Modelo:</label>
+                        <input id="modelo" type="text" class="form-control form-control-sm" placeholder="Modelo" aria-label="Modelo" value="{{ nfe.ide_mod|default:''|floatformat:0 }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="tipo-emissao" class="col-sm-9 col-form-label">Tipo Emissão:</label>
+                        <select id="tipo-emissao" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_tipo_emissao %}
+                                <option value="{{ valor }}" {% if nfe.ide_tpEmis|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="tipo-nfe" class="col-sm-9 col-form-label">Tipo NF-e:</label>
+                        <select id="tipo-nfe" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_tipo_nf %}
+                                <option value="{{ valor }}" {% if nfe.ide_tpNF|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="finalidade-nfe" class="col-sm-9 col-form-label">Finalidade NF-e:</label>
+                        <select id="finalidade-nfe" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_finalidade_nf %}
+                                <option value="{{ valor }}" {% if nfe.ide_finNFe|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="indpres-nfe" class="col-sm-9 col-form-label">Presença Comprador:</label>
+                        <select id="indpres-nfe" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_ind_pres %}
+                                <option value="{{ valor }}" {% if nfe.ide_indPres|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="consumidor" class="col-sm-9 col-form-label">Operação com Consumidor:</label>
+                        <select id="consumidor" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_consumidor %}
+                                <option value="{{ valor }}" {% if nfe.ide_indFinal|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="operacao-local" class="col-sm-9 col-form-label">Local de Destino da Operação:</label>
+                        <select id="operacao-local" class="form-select form-select-sm" aria-label="status" disabled>
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_local_destino %}
+                                <option value="{{ valor }}" {% if nfe.ide_idDest|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="cdv" class="col-sm-9 col-form-label">cDV:</label>
+                        <input id="cdv" type="text" class="form-control form-control-sm" placeholder="cDV" aria-label="cDV" value="{{ nfe.ide_cDV|default:''|floatformat:0 }}" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="recibo" class="col-sm-9 col-form-label">Recibo:</label>
+                        <input id="recibo" type="text" class="form-control form-control-sm" placeholder="Recibo" aria-label="Recibo" value="{{ nfe.recibo_sefaz|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="protocolo" class="col-sm-9 col-form-label">Protocolo:</label>
+                        <input id="protocolo" type="text" class="form-control form-control-sm" placeholder="Protocolo" aria-label="Protocolo" value="{{ nfe.nProt|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="digito-validador" class="col-sm-9 col-form-label">Dígito Validador:</label>
+                        <input id="digito-validador" type="text" class="form-control form-control-sm" placeholder="Dígito Validador" aria-label="Dígito Validador" value="{{ nfe.digVal|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="data-horaemissao" class="col-sm-9 col-form-label">Data/Hora Emissão:</label>
+                        <input id="data-horaemissao" type="text" class="form-control form-control-sm" placeholder="Data/Hora Emissão" aria-label="Data/Hora Emissão" value="{{ nfe.ide_dhEmi|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="data-horareceb" class="col-sm-9 col-form-label">Data/Hora Recebimento:</label>
+                        <input id="data-horareceb" type="text" class="form-control form-control-sm" placeholder="Data/Hora Recebimento" aria-label="Data/Hora Recebimento" value="{{ nfe.dhRecbto|default:'' }}" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="codigo-retorno" class="col-sm-9 col-form-label">Código Retorno:</label>
+                        <input id="codigo-retorno" type="text" class="form-control form-control-sm" placeholder="Código Retorno" aria-label="Código Retorno" value="{{ nfe.cStat|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="tipo-evento" class="col-sm-9 col-form-label">Tipo Evento:</label>
+                        <input id="tipo-evento" type="text" class="form-control form-control-sm" placeholder="Tipo Evento" aria-label="Tipo Evento" value="{{ nfe.tpEvento|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="protocolo-evento" class="col-sm-9 col-form-label">Protocolo Evento:</label>
+                        <input id="protocolo-evento" type="text" class="form-control form-control-sm" placeholder="Protocolo Evento" aria-label="Protocolo Evento" value="{{ nfe.nProtEvento|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="seq-evento" class="col-sm-9 col-form-label">Seq. Evento:</label>
+                        <input id="seq-evento" type="text" class="form-control form-control-sm" placeholder="Seq. Evento" aria-label="Seq. Evento" value="{{ nfe.nSeqEvento|default:'' }}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="referenciar-nfe" class="col-sm-9 col-form-label">Referenciar NF-e?</label>
+                        <select id="referenciar-nfe" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_referenciar_nfe %}
+                                <option value="{{ valor }}" {% if nfe.referenciar_NF|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="xjust" class="col-sm-9 col-form-label">Justificativa:</label>
+                        <textarea class="form-control" id="xjust" name="xjust" rows="5" cols="30">{{nfe.xJust|default:''}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
                     {% if nfe.ide_serie != 0 %}
                     <div class="col">
-                        <div class="form-check form-check-inline mt-5">
+                        <div class="form-check form-check-inline mt-3">
                             <input id="transmitir-check" name="transmitir_check" type="checkbox" class="form-check-input" value="True" {% if nfe.Transmitir %}checked{% endif %}>
                             <label for="transmitir-check">Transmitir</label>
                         </div>
@@ -71,108 +226,388 @@
             <div class="tab-pane fade" id="cliente-tab-pane" role="tabpanel" aria-labelledby="cliente-tab" tabindex="0">
                 <div class="row">
                     <div class="col">
-                        <label for="opcao-envio-email" class="col-sm-6 col-form-label">Opção Envio E-mail:</label>
-                        <select id="opcao-envio-email" name="opcao_envio_email" class="form-select form-select-sm" aria-label="status">
+                        <label for="opcao-tipopessoa" class="col-sm-9 col-form-label">Tipo Pessoa:</label>
+                        <select id="opcao-tipopessoa" class="form-select form-select-sm" aria-label="status">
                             <option value=""></option>
-                            {% for valor, texto in opcoes_envio_email %}
-                                <option value="{{ valor }}" {% if form.opcao_envio_email|default:nfe.ECFRef_mod == valor %}selected{% endif %}>{{texto}}</option>
+                            {% for valor, texto in opcoes_tipo_pessoa %}
+                                <option value="{{ valor }}" {% if nfe.sTP|floatformat:0 == valor %}selected{% endif %}>{{texto}}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col">
-                        <label for="email-cliente" class="col-sm-6 col-form-label">E-mail:</label>
-                        <input id="email-cliente" name="email_cliente" type="text" class="form-control form-control-sm" placeholder="Email" aria-label="Email" value="{{ form.email_cliente|default:nfe.dest_eMail }}">
-                    </div>
-                    <div class="col">
-                        <label for="opcao-contribuinte" class="col-sm-6 col-form-label">Tipo de Contribuinte:</label>
+                        <label for="opcao-contribuinte" class="col-sm-9 col-form-label">Tipo de Contribuinte:</label>
                         <select id="opcao-contribuinte" name="opcao_contribuinte" class="form-select form-select-sm" aria-label="status">
                             <option value=""></option>
                             {% for valor, texto in opcoes_contribuinte %}
-                                <option value="{{ valor }}" {% if form.opcao_contribuinte|default:nfe.dest_indIEDest == valor %}selected{% endif %}>{{texto}}</option>
+                                <option value="{{ valor }}" {% if nfe.dest_indIEDest == valor %}selected{% endif %}>{{texto}}</option>
                             {% endfor %}
                         </select>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col">
                         {% if nfe.sTP == 1 %}
-                        <label for="cpf-dest" class="col-sm-6 col-form-label">CPF:</label>
-                        <input id="cpf-dest" name="cpf_dest" type="text" class="form-control form-control-sm" placeholder="CPF" aria-label="CPF" value="{{ form.cpf_dest|default:nfe.dest_CPF }}">
+                        <label for="cpf-dest" class="col-sm-9 col-form-label">CPF:</label>
+                        <input id="cpf-dest" name="cpf_dest" type="text" class="form-control form-control-sm" placeholder="CPF" aria-label="CPF" value="{{ nfe.dest_CPF|default:'' }}">
                         {% else %}
-                        <label for="cnpj-dest" class="col-sm-6 col-form-label">CNPJ:</label>
-                        <input id="cnpj-dest" name="cnpj_dest" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{{ form.cnpj_dest|default:nfe.dest_CNPJ }}">
+                        <label for="cnpj-dest" class="col-sm-9 col-form-label">CNPJ:</label>
+                        <input id="cnpj-dest" name="cnpj_dest" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{{ nfe.dest_CNPJ|default:'' }}">
                         {% endif %}
                     </div>
                     <div class="col">
-                        <label for="ie-dest" class="col-sm-6 col-form-label">Inscrição Estadual:</label>
-                        <input id="ie-dest" name="ie_dest" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{{ form.ie_dest|default:nfe.dest_IE }}">
+                        <label for="ie-dest" class="col-sm-9 col-form-label">Inscrição Estadual:</label>
+                        <input id="ie-dest" name="ie_dest" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{{ nfe.dest_IE|default:'' }}">
                     </div>
                     <div class="col">
-                        <label for="fone-dest" class="col-sm-6 col-form-label">Fone:</label>
-                        <input id="fone-dest" name="fone_dest" type="text" class="form-control form-control-sm" placeholder="Fone" aria-label="Fone" value="{{ form.fone_dest|default:nfe.dest_fone }}">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="cep-dest" class="col-sm-6 col-form-label">CEP:</label>
-                        <input id="cep-dest" name="cep_dest" type="text" class="form-control form-control-sm" placeholder="CEP" aria-label="CEP" value="{{ form.cep_dest|default:nfe.dest_CEP }}">
-                    </div>
-                    <div class="col">
-                        <label for="logradouro-dest" class="col-sm-6 col-form-label">Logradouro:</label>
-                        <input id="logradouro-dest" name="logradouro_dest" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{{ form.logradouro_dest|default:nfe.dest_xLgr }}">
-                    </div>
-                    <div class="col">
-                        <label for="numero-dest" class="col-sm-6 col-form-label">Número:</label>
-                        <input id="numero-dest" name="numero_dest" type="text" class="form-control form-control-sm" placeholder="Número" aria-label="Numero" value="{{ form.numero_dest|default:nfe.dest_nro }}">
+                        <label for="ie-mun" class="col-sm-9 col-form-label">Inscrição Municipal:</label>
+                        <input id="ie-mun" name="ie_mun" type="text" class="form-control form-control-sm" placeholder="Inscrição Municipal" aria-label="Inscrição Municipal" value="{{ nfe.dest_IM|default:'' }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="cpl-dest" class="col-sm-6 col-form-label">Complemento:</label>
-                        <input id="cpl-dest" name="cpl_dest" type="text" class="form-control form-control-sm" placeholder="Complemento" aria-label="Complemento" value="{% firstof form.cpl_dest nfe.dest_xCpl '' %}">
+                        <label for="cliente" class="col-sm-9 col-form-label">Cliente:</label>
+                        <input id="cliente" name="cliente" type="text" class="form-control form-control-sm" placeholder="Cliente" aria-label="Cliente" value="{{ nfe.dest_xNome|default:'' }}">
                     </div>
                     <div class="col">
-                        <label for="estados" class="col-sm-6 col-form-label">UF:</label>
+                        <label for="info-estrangeira" class="col-sm-9 col-form-label">Informação Estrangeira:</label>
+                        <input id="info-estrangeira" name="info_estrangeira" type="text" class="form-control form-control-sm" placeholder="Informação Estrangeira" aria-label="Informação Estrangeira" value="{{ nfe.dest_idEstrangeiro|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="dest-isuf" class="col-sm-9 col-form-label">Inscr. SUFRAMA:</label>
+                        <input id="dest-isuf" name="dest_isuf" type="text" class="form-control form-control-sm" placeholder="Inscr. SUFRAMA" aria-label="Inscr. SUFRAMA" value="{{ nfe.dest_ISUF|default:'' }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="cep-dest" class="col-sm-9 col-form-label">CEP:</label>
+                        <input id="cep-dest" name="cep_dest" type="text" class="form-control form-control-sm" placeholder="CEP" aria-label="CEP" value="{{ nfe.dest_CEP|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="logradouro-dest" class="col-sm-9 col-form-label">Logradouro:</label>
+                        <input id="logradouro-dest" name="logradouro_dest" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{{ nfe.dest_xLgr|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="numero-dest" class="col-sm-9 col-form-label">Número:</label>
+                        <input id="numero-dest" name="numero_dest" type="text" class="form-control form-control-sm" placeholder="Número" aria-label="Numero" value="{{nfe.dest_nro|default:''}}">
+                    </div>
+                    <div class="col">
+                        <label for="cpl-dest" class="col-sm-9 col-form-label">Complemento:</label>
+                        <input id="cpl-dest" name="cpl_dest" type="text" class="form-control form-control-sm" placeholder="Complemento" aria-label="Complemento" value="{{nfe.dest_xCpl|default:''}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="bairro" class="col-sm-9 col-form-label">Bairro:</label>
+                        <input id="bairro" name="bairro" type="text" class="form-control form-control-sm" placeholder="Bairro" aria-label="Bairro" value="{{nfe.dest_xBairro|default:''}}">
+                    </div>
+                    <div class="col">
+                        <label for="dest-cmun" class="col-sm-9 col-form-label">Cód. IBGE:</label>
+                        <input id="dest-cmun" name="dest_xmun" type="text" class="form-control form-control-sm" placeholder="Cód. IBGE" aria-label="Cód. IBGE" value="{{nfe.dest_cMun|default:''}}">
+                    </div>
+                    <div class="col">
+                        <label for="dest-xmun" class="col-sm-9 col-form-label">Município:</label>
+                        <input id="dest-xmun" name="dest_xmun" type="text" class="form-control form-control-sm" placeholder="Município" aria-label="Município" value="{{nfe.dest_xMun|default:''}}">
+                    </div>
+                    <div class="col">
+                        <label for="estados" class="col-sm-9 col-form-label">UF:</label>
                         <select id="estados" name="estado" class="form-select form-select-sm" aria-label="status">
                             <option value=""></option>
                             {% for estado in estados %}
-                                <option value="{{ estado.UF }}" {% if form.estado|default:nfe.dest_UF == estado.UF %}selected{% endif %}>{{estado.UF}}</option>
+                                <option value="{{ estado.UF }}" {% if nfe.dest_UF == estado.UF %}selected{% endif %}>{{estado.UF}}</option>
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="col">
+                        <label for="dest_cpais" class="col-sm-9 col-form-label">Cód. País:</label>
+                        <input id="dest_cpais" name="dest_cpais" type="text" class="form-control form-control-sm" placeholder="Cód. País" aria-label="Cód. País" value="{{nfe.dest_cPais|default:''}}">
+                    </div>
+                    <div class="col">
+                        <label for="dest-xpais" class="col-sm-9 col-form-label">País:</label>
+                        <input id="dest-xpais" name="dest_xpais" type="text" class="form-control form-control-sm" placeholder="País" aria-label="País" value="{{nfe.dest_xPais|default:''}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="fone-dest" class="col-sm-9 col-form-label">Fone:</label>
+                        <input id="fone-dest" name="fone_dest" type="text" class="form-control form-control-sm" placeholder="Fone" aria-label="Fone" value="{{ nfe.dest_fone|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="opcao-envio-email" class="col-sm-9 col-form-label">Opção Envio E-mail:</label>
+                        <select id="opcao-envio-email" name="opcao_envio_email" class="form-select form-select-sm" aria-label="status">
+                            <option value=""></option>
+                            {% for valor, texto in opcoes_envio_email %}
+                                <option value="{{ valor }}" {% if nfe.ECFRef_mod == valor %}selected{% endif %}>{{texto}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="email-cliente" class="col-sm-9 col-form-label">E-mail:</label>
+                        <input id="email-cliente" name="email_cliente" type="text" class="form-control form-control-sm" placeholder="Email" aria-label="Email" value="{{ nfe.dest_eMail|default:'' }}">
+                    </div>
+                </div>
+            </div>
+            <!-- Totais -->
+            <div class="tab-pane fade" id="total-tab-pane" role="tabpanel" aria-labelledby="total-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="icms-bc" class="col-sm-9 col-form-label">ICMS BC:</label>
+                        <input id="icms-bc" type="text" class="form-control form-control-sm" placeholder="ICMS BC" aria-label="ICMS BC" value="{{nfe.TotalICMS_vBC|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-ipi" class="col-sm-9 col-form-label">Valor IPI:</label>
+                        <input id="valor-ipi" type="text" class="form-control form-control-sm" placeholder="Valor IPI" aria-label="Valor IPI" value="{{nfe.TotalICMS_vIPI|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="outras-despesas" class="col-sm-9 col-form-label">Outras Despesas:</label>
+                        <input id="outras-despesas" type="text" class="form-control form-control-sm" placeholder="Outras Despesas" aria-label="Outras Despesas" value="{{nfe.TotalICMS_vOutro|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-trib" class="col-sm-9 col-form-label">Valor Tributos:</label>
+                        <input id="valor-trib" type="text" class="form-control form-control-sm" placeholder="Valor Tributos" aria-label="Valor Tributos" value="{{nfe.TotalICMS_vTotTrib|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="ibs-cbs-bc" class="col-sm-9 col-form-label">IBS/CBS BC:</label>
+                        <input id="ibs-cbs-bc" type="text" class="form-control form-control-sm" placeholder="IBS/CBS BC" aria-label="IBS/CBS BC" value="{{nfe.IBSCBSTot_vBCIBSCBS|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-nf" class="col-sm-9 col-form-label">Valor NF:</label>
+                        <input id="valor-nf" type="text" class="form-control form-control-sm" placeholder="Valor NF" aria-label="Valor NF" value="{{nfe.TotalICMS_vNF|default:0|currency}}" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="valor-icms" class="col-sm-9 col-form-label">Valor ICMS:</label>
+                        <input id="valor-icms" type="text" class="form-control form-control-sm" placeholder="Valor ICMS" aria-label="Valor ICMS" value="{{nfe.TotalICMS_vICMS|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-pis" class="col-sm-9 col-form-label">Valor PIS:</label>
+                        <input id="valor-pis" type="text" class="form-control form-control-sm" placeholder="Valor PIS" aria-label="Valor PIS" value="{{nfe.TotalICMS_vPIS|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-frete" class="col-sm-9 col-form-label">Valor Frete:</label>
+                        <input id="valor-frete" type="text" class="form-control form-control-sm" placeholder="Valor Frete" aria-label="Valor Frete" value="{{nfe.TotalICMS_vFrete|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="icms-inter-ufdest" class="col-sm-9 col-form-label">ICMS Inter. UF Dest.:</label>
+                        <input id="icms-inter-ufdest" type="text" class="form-control form-control-sm" placeholder="ICMS Inter. UF Dest." aria-label="ICMS Inter. UF Dest." value="{{nfe.TotalICMS_vICMSUFDest_Opc|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-ibsuf" class="col-sm-9 col-form-label">Valor IBS UF:</label>
+                        <input id="valor-ibsuf" type="text" class="form-control form-control-sm" placeholder="Valor IBS UF" aria-label="Valor IBS UF" value="{{nfe.IBSTot_vIBS_UF|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="nf-ibs-cbs" class="col-sm-9 col-form-label">Total NF+IBS+CBS:</label>
+                        <input id="nf-ibs-cbs" type="text" class="form-control form-control-sm" placeholder="Total NF+IBS+CBS" aria-label="Total NF+IBS+CBS" value="{{nfe.totalRTC_vNFTot|default:0|currency}}" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="icms-st-bc" class="col-sm-9 col-form-label">ICMS ST BC:</label>
+                        <input id="icms-st-bc" type="text" class="form-control form-control-sm" placeholder="ICMS ST BC" aria-label="ICMS ST BC" value="{{nfe.TotalICMS_vBCST|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-cofins" class="col-sm-9 col-form-label">Valor COFINS:</label>
+                        <input id="valor-cofins" type="text" class="form-control form-control-sm" placeholder="Valor COFINS" aria-label="Valor COFINS" value="{{nfe.TotalICMS_vCOFINS|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-seguro" class="col-sm-9 col-form-label">Valor Seguro:</label>
+                        <input id="valor-seguro" type="text" class="form-control form-control-sm" placeholder="Valor Seguro" aria-label="Valor Seguro" value="{{nfe.TotalICMS_vSeg|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="icms-inter-ufremet" class="col-sm-9 col-form-label">ICMS Inter. UF Rem.:</label>
+                        <input id="icms-inter-ufremet" type="text" class="form-control form-control-sm" placeholder="ICMS Inter. UF Rem." aria-label="ICMS Inter. UF Rem." value="{{nfe.TotalICMS_vICMSUFRemet_Opc|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-ibs" class="col-sm-9 col-form-label">Valor IBS:</label>
+                        <input id="valor-ibs" type="text" class="form-control form-control-sm" placeholder="Valor IBS" aria-label="Valor IBS" value="{{nfe.IBSTot_vIBS|default:0|currency}}" disabled>
+                    </div>
                     <div class="col"></div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="valor-icms-st" class="col-sm-9 col-form-label">Valor ICMS ST:</label>
+                        <input id="valor-icms-st" type="text" class="form-control form-control-sm" placeholder="Valor ICMS ST" aria-label="Valor ICMS ST" value="{{nfe.TotalICMS_vST|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-produtos" class="col-sm-9 col-form-label">Valor Produtos:</label>
+                        <input id="valor-produtos" type="text" class="form-control form-control-sm" placeholder="Valor Produtos" aria-label="Valor Produtos" value="{{nfe.TotalICMS_vProd|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-desconto" class="col-sm-9 col-form-label">Valor Desconto:</label>
+                        <input id="valor-desconto" type="text" class="form-control form-control-sm" placeholder="Valor Desconto" aria-label="Valor Desconto" value="{{nfe.TotalICMS_vDesc|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="icms-fcp-ufdest" class="col-sm-9 col-form-label">ICMS FCP UF Dest.:</label>
+                        <input id="icms-fcp-ufdest" type="text" class="form-control form-control-sm" placeholder="ICMS FCP UF Dest." aria-label="ICMS FCP UF Dest." value="{{nfe.TotalICMS_vFCPUFDest_Opc|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="valor-cbs" class="col-sm-9 col-form-label">Valor CBS:</label>
+                        <input id="valor-cbs" type="text" class="form-control form-control-sm" placeholder="Valor CBS" aria-label="Valor CBS" value="{{nfe.CBSTot_vCBS|default:0|currency}}" disabled>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <button id="calculoTotais" type="button" class="btn btn-sm btn-primary mt-3">Calcular Totais</button>
+            </div>
+            <!-- Produtos -->
+            <div class="tab-pane fade" id="produtos-tab-pane" role="tabpanel" aria-labelledby="produtos-tab" tabindex="0">
+                <table class="table table-sm table-hover table-bordered table-striped table-responsive mt-2" id="table-produtos">
+                    <thead>
+                        <th><font size="2">N° Item</font></th>
+                        <th><font size="2">CodProd</font></th>
+                        <th><font size="2">Cd. Produto</font></th>
+                        <th><font size="2">Descrição Produto</font></th>
+                        <th><font size="2">NCM</font></th>
+                        <th><font size="2">CFOP</font></th>
+                        <th><font size="2">Unidade</font></th>
+                        <th><font size="2">Qtd</font></th>
+                        <th><font size="2">Vr. Unitário</font></th>
+                        <th><font size="2">Vr. Total</font></th>
+                        <th><font size="2">Und. Tributo</font></th>
+                        <th><font size="2">Qtd Tributo</font></th>
+                        <th><font size="2">Vr. Unt. Trib.</font></th>
+                        <th><font size="2">Vr. Frete</font></th>
+                        <th><font size="2">Origem</font></th>
+                        <th><font size="2">ICMS CST</font></th>
+                        <th><font size="2">ICMS BC</font></th>
+                        <th><font size="2">Aliq. ICMS</font></th>
+                        <th><font size="2">Vr. ICMS</font></th>
+                        <th><font size="2">IPI CST</font></th>
+                        <th><font size="2">IPI BC</font></th>
+                        <th><font size="2">Aliq. IPI</font></th>
+                        <th><font size="2">Vr. IPI</font></th>
+                        <th><font size="2">Cód. Benef.</font></th>
+                        <th><font size="2">Núm. Série</font></th>
+                    </thead>
+                    <tbody>
+                        {% for item in nfe_itens %}
+                        <tr>
+                            <td><font size="2">{{item.det_nItem}}</font></td>
+                            <td><font size="2">{{item.CodProd}}</font></td>
+                            <td><font size="2">{{item.prod_cProd}}</font></td>
+                            <td><font size="2">{{item.prod_xProd}}</font></td>
+                            <td><font size="2">{{item.prod_NCM}}</font></td>
+                            <td><font size="2">{{item.prod_CFOP|floatformat:0}}</font></td>
+                            <td><font size="2">{{item.prod_uCOM}}</font></td>
+                            <td><font size="2">{{item.prod_qCOM|floatformat:0}}</font></td>
+                            <td><font size="2">{{item.prod_vUnCOM|currency}}</font></td>
+                            <td><font size="2">{{item.prod_vProd|currency}}</font></td>
+                            <td><font size="2">{{item.prod_uTrib}}</font></td>
+                            <td><font size="2">{{item.prod_qTrib|floatformat:0}}</font></td>
+                            <td><font size="2">{{item.prod_vUnTrib|currency}}</font></td>
+                            <td><font size="2">{{item.prod_vFrete|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.icms_orig}}</font></td>
+                            <td><font size="2">{{item.icms_CST}}</font></td>
+                            <td><font size="2">{{item.icms_vBC|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.icms_pICMS|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.icms_vICMS|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.IPI_CST}}</font></td>
+                            <td><font size="2">{{item.IPI_vBC|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.IPI_pIPI|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.IPI_vIPI|default:0|currency}}</font></td>
+                            <td><font size="2">{{item.prod_cBenef_Opc|default:''}}</font></td>
+                            <td><font size="2">{{item.NumSerie|default:''}}</font></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- Formas Pagto -->
+            <div class="tab-pane fade" id="pagto-tab-pane" role="tabpanel" aria-labelledby="pagto-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="cobr-nfat" class="col-sm-9 col-form-label">N° Fatura:</label>
+                        <input id="cobr-nfat" name="cobr_nfat" type="text" class="form-control form-control-sm" placeholder="N° Fatura" aria-label="N° Fatura" value="{{ nfe.cobr_nFat|default:'' }}" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="cobr-vliq" class="col-sm-9 col-form-label">Valor Líquido:</label>
+                        <input id="cobr-vliq" name="cobr_vliq" type="text" class="form-control form-control-sm" placeholder="Valor Líquido" aria-label="Valor Líquido" value="{{ nfe.cobr_vLiq|default:0|currency }}" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="cobr-vorig" class="col-sm-9 col-form-label">Valor Total:</label>
+                        <input id="cobr-vorig" name="cobr_vorig" type="text" class="form-control form-control-sm" placeholder="Valor Total" aria-label="Valor Total" value="{{ nfe.cobr_vOrig|default:0|currency }}" disabled>
+                    </div>
+                </div>
+                <table class="table table-sm table-striped table-hover mt-3" id="table-formaspagto">
+                    <thead>
+                        <th>N° Forma</th>
+                        <th>Ind. Forma Pagto.</th>
+                        <th>Forma Pagto</th>
+                        <th>Valor</th>
+                    </thead>
+                    <tbody>
+                        {% for fp in formas_pagto %}
+                        <tr>
+                            <td>{{fp.pagamento_nforma}}</td>
+                            <td>{{fp.indpag}}</td>
+                            <td>{{fp.descricao}}</td>
+                            <td>{{fp.valor|currency}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button id="formasPagto" type="button" class="btn btn-sm btn-primary">Calcular Formas Pagto</button>
             </div>
             <!-- Transportadora -->
             <div class="tab-pane fade" id="transp-tab-pane" role="tabpanel" aria-labelledby="transp-tab" tabindex="0">
                 <div class="row">
                     <div class="col">
-                        <label for="opcao-modfrete" class="col-sm-6 col-form-label">Tipo de Frete:</label>
+                        <label for="opcao-modfrete" class="col-sm-9 col-form-label">Tipo de Frete:</label>
                         <select id="opcao-modfrete" name="opcao_modfrete" class="form-select form-select-sm" aria-label="status">
                             <option value=""></option>
                             {% for valor, texto in opcoes_modfrete %}
-                                <option value="{{ valor }}" {% if form.opcao_modfrete|default:nfe.transp_modFrete == valor %}selected{% endif %}>{{texto}}</option>
+                                <option value="{{ valor }}" {% if nfe.transp_modFrete == valor %}selected{% endif %}>{{texto}}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col">
-                        <label for="cnpj-transp" class="col-sm-6 col-form-label">CNPJ:</label>
-                        <input id="cnpj-transp" name="cnpj_transp" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{% firstof form.cnpj_transp nfe.transporta_CNPJ '' %}">
+                        <label for="cnpj-transp" class="col-sm-9 col-form-label">CNPJ:</label>
+                        <input id="cnpj-transp" name="cnpj_transp" type="text" class="form-control form-control-sm" placeholder="CNPJ" aria-label="CNPJ" value="{{ nfe.transporta_CNPJ|default:'' }}">
                     </div>
                     <div class="col">
-                        <label for="ie-transp" class="col-sm-6 col-form-label">Inscrição Estadual:</label>
-                        <input id="ie-transp" name="ie_transp" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{% firstof form.ie_transp nfe.transporta_IE '' %}">
+                        <label for="nome-transp" class="col-sm-9 col-form-label">Razão Social:</label>
+                        <input id="nome-transp" name="nome_transp" type="text" class="form-control form-control-sm" placeholder="Razão Social" aria-label="Razão Social" value="{{ nfe.transporta_xNome|default:'' }}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="logradouro-transp" class="col-sm-6 col-form-label">Endereço:</label>
-                        <input id="logradouro-transp" name="logradouro_transp" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{% firstof form.logradouro_transp nfe.transporta_xEnder '' %}">
+                        <label for="ie-transp" class="col-sm-9 col-form-label">Inscrição Estadual:</label>
+                        <input id="ie-transp" name="ie_transp" type="text" class="form-control form-control-sm" placeholder="Inscrição Estadual" aria-label="Inscrição Estadual" value="{{ nfe.transporta_IE|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="logradouro-transp" class="col-sm-9 col-form-label">Endereço:</label>
+                        <input id="logradouro-transp" name="logradouro_transp" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{{ nfe.transporta_xEnder|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="municipio-transp" class="col-sm-9 col-form-label">Município:</label>
+                        <input id="municipio-transp" name="municipio_transp" type="text" class="form-control form-control-sm" placeholder="Município" aria-label="Município" value="{{ nfe.transporta_xMun|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="uf-transp" class="col-sm-9 col-form-label">UF:</label>
+                        <input id="uf-transp" name="uf_transp" type="text" class="form-control form-control-sm" placeholder="UF" aria-label="UF" value="{{ nfe.transporta_UF|default:'' }}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-
+                        <label for="vol-qvol" class="col-sm-9 col-form-label">Qtd Volumes:</label>
+                        <input id="vol-qvol" name="vol_qvol" type="text" class="form-control form-control-sm" placeholder="Qtd Volumes" aria-label="Qtd Volumes" value="{{ nfe.vol_qVol|floatformat:0|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="vol-esp" class="col-sm-9 col-form-label">Espécie Volume:</label>
+                        <input id="vol-esp" name="vol_esp" type="text" class="form-control form-control-sm" placeholder="Espécie Volume" aria-label="Espécie Volume" value="{{ nfe.vol_esp|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="vol-marca" class="col-sm-9 col-form-label">Marca:</label>
+                        <input id="vol-marca" name="vol_marca" type="text" class="form-control form-control-sm" placeholder="Marca" aria-label="Marca" value="{{ nfe.vol_marca|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="vol-nvol" class="col-sm-9 col-form-label">N° Volumes:</label>
+                        <input id="vol-nvol" name="vol_nvol" type="text" class="form-control form-control-sm" placeholder="N° Volumes" aria-label="N° Volumes" value="{{ nfe.vol_nVol|floatformat:0|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="vol-pesol" class="col-sm-9 col-form-label">Peso Líquido:</label>
+                        <input id="vol-pesol" name="vol_pesol" type="text" class="form-control form-control-sm" placeholder="Peso Líquido" aria-label="Peso Líquido" value="{{ nfe.vol_pesoL|default:''|floatformat:3 }}">
+                    </div>
+                    <div class="col">
+                        <label for="vol-pesob" class="col-sm-9 col-form-label">Peso Bruto:</label>
+                        <input id="vol-pesob" name="vol_pesob" type="text" class="form-control form-control-sm" placeholder="Peso Bruto" aria-label="Peso Bruto" value="{{ nfe.vol_pesoB|default:''|floatformat:3 }}">
                     </div>
                 </div>
             </div>
@@ -180,29 +615,45 @@
             <div class="tab-pane fade" id="info-adic-tab-pane" role="tabpanel" aria-labelledby="info-adic-tab" tabindex="0">
                 <div class="row">
                     <div class="col">
-                        <label for="adfisco" class="col-sm-6 col-form-label">Informações Adicionais ao Fisco (Máx. 250 caracteres):</label>
-                        <textarea class="form-control" id="adfisco" name="adfisco" rows="5" cols="30">{{form.adfisco|default:nfe.infAdic_infAdFisco}}</textarea>
+                        <label for="adfisco" class="col-sm-9 col-form-label">Informações Adicionais ao Fisco (Máx. 250 caracteres):</label>
+                        <textarea class="form-control" id="adfisco" name="adfisco" rows="5" cols="30">{{nfe.infAdic_infAdFisco|default:''}}</textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="infcpl" class="col-sm-6 col-form-label">Informações Complementares da NF (Máx. 250 caracteres):</label>
-                        <textarea class="form-control" id="infcpl" name="infcpl" rows="5" cols="30">{{form.infcpl|default:nfe.infAdic_infCpl}}</textarea>
+                        <label for="infcpl" class="col-sm-9 col-form-label">Informações Complementares da NF (Máx. 250 caracteres):</label>
+                        <textarea class="form-control" id="infcpl" name="infcpl" rows="5" cols="30">{{nfe.infAdic_infCpl|default:''}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="infcpl" class="col-sm-9 col-form-label">Informações Tributárias:</label>
+                        <textarea class="form-control" id="inftrib" name="inftrib" rows="5" cols="30" readonly>{{nfe.infAdic_infTrib|default:''}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="infcpl" class="col-sm-9 col-form-label">Retorno:</label>
+                        <textarea class="form-control" id="frgxml" name="frgxml" rows="5" cols="30" readonly>{{nfe.frg_xml|default:''}}</textarea>
                     </div>
                 </div>
             </div>
         </div>
+        <hr class="mt-2 mb-0"/>
         <div class="d-flex mt-3">
-            <button type="submit" class="btn btn-success btn-sm me-2">Salvar</button>
-            <a href="{% url 'core_index' %}" class="btn btn-sm btn-secondary">Voltar</a>
+            <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+            <a href="{% url 'core_index' %}" class="btn btn-sm btn-secondary ms-3">Voltar</a>
+            <button type="button" id="btnTransmitir" class="btn btn-primary btn-sm ms-auto" data-url="{% url 'api_transmitir_nfe' %}">Transmitir</button>
+            <button type="button" id="btnCCe" class="btn btn-warning btn-sm ms-3" data-url="{% url 'api_carta_correcao' %}">Carta Correção</button>
+            <button type="button" id="btnCancelar" class="btn btn-danger btn-sm ms-3" data-url="{% url 'api_cancelar_nfe' %}">Cancelar</button>
         </div>
     </form>
 
-    <div class="modal fade" id="modalBoleto" tabindex="-1" aria-labelledby="modalBoletoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
+    <div class="modal fade" id="modalGenerico" tabindex="-1" aria-labelledby="modalGenericoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen" id="dialogModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalBoletoLabel">Boleto</h5>
+                    <h5 class="modal-title" id="modalGenericoLabel">Boleto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                 <div class="modal-body" id="modal-body">
@@ -224,9 +675,17 @@
     var ide_nnf = {{ nfe.ide_nNF }};
     var status_nfe = "{{ nfe.status_sefaz }}";
     var empresa = {{ empresa.EmpresaFilial }};
-    var url_tem_bol = "{% url 'api_tem_boleto' empresa_filial=0 id_nfe=0 %}"
+    var url_danfe = "{% url 'api_gerar_danfe' empresa_filial=0 id_nfe=0 opcao=1 %}"
+    var url_danfe_cce = "{% url 'api_gerar_danfe_cce' empresa_filial=0 id_nfe=0 opcao=1 %}"
+    var url_abrir_xml = "{% url 'api_abrir_xml' %}"
+    var url_cupom = "{% url 'api_gerar_cupom' empresa_filial=0 id_nfe=0 %}"
     var url_boleto = "{% url 'api_gerar_boleto' empresa_filial=0 id_nfe=0 %}"
+    var url_formas_pagto = "{% url 'api_calcular_formas_pagto' %}"
+    var url_calculo_totais = "{% url 'api_calcular_totais_nfe' %}"
 </script>
 <script src="{% static 'js/jquery.mask.min.js' %}"></script>
 <script src="{% static 'js/nfe_edit.js' %}"></script>
+<script id="token-data" type="application/json">
+    "{{ user.auth_token.key }}"
+</script>
 {% endblock %}

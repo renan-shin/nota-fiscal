@@ -315,8 +315,13 @@ def gerar_pdf_orcamento(request, orcamentos, pagamentos, pk):
         Paragraph('<b>+ ICMS ST</b>', estilo_dados_empresa),
         Paragraph(f"<para align='right'>{locale.format_string('%.2f', orcamentos[0]['total_icms_st'], grouping=True)}</para>", estilo_dados_tabelas),
     ])
+    dados_totais.append([
+        None,
+        Paragraph('<b>+ Frete</b>', estilo_dados_empresa),
+        Paragraph(f"<para align='right'>{locale.format_string('%.2f', orcamentos[0]['valor_frete'], grouping=True)}</para>", estilo_dados_tabelas),
+    ])
 
-    total = orcamentos[0]['valor_total']+orcamentos[0]['total_ipi']+orcamentos[0]['total_icms_st']
+    total = orcamentos[0]['valor_total']+orcamentos[0]['total_ipi']+orcamentos[0]['total_icms_st']+orcamentos[0]['valor_frete']
 
     dados_totais.append([
         None,
@@ -1386,6 +1391,483 @@ def gerar_pdf_danfe(empresa, nfe, nfe_itens, boletos):
     # buffer.close()
     # return pdf
 
+def gerar_pdf_cce(empresa, nfe):
+    data_emissao = datetime.strptime(nfe.dhRecbto[0:10], "%Y-%m-%d").strftime("%d/%m/%Y")
+    total_nfe = locale.currency(nfe.TotalICMS_vNF, grouping=True)
+    endereco_destinatario = nfe.dest_xLgr + ", " + nfe.dest_nro + " - " + nfe.dest_xBairro + " - " + nfe.dest_xMun + "/" + nfe.dest_UF
+    num_nfe = nfe.ide_nNF[0:3]+'.'+nfe.ide_nNF[3:6]+'.'+nfe.ide_nNF[6:9]
+    chave_nfe = nfe.chave_acesso[0:4]+' '+nfe.chave_acesso[4:8]+' '+nfe.chave_acesso[8:12]+' '+nfe.chave_acesso[12:16]+' '+nfe.chave_acesso[16:20]+' '+nfe.chave_acesso[20:24]+' '+nfe.chave_acesso[24:28]+' '+nfe.chave_acesso[28:32]+' '+nfe.chave_acesso[32:36]+' '+nfe.chave_acesso[36:40]+' '+nfe.chave_acesso[40:44]
+    protocolo_autorizacao = nfe.nProt+' '+datetime.strptime(nfe.dhRecbto[0:19], "%Y-%m-%dT%H:%M:%S").strftime("%d/%m/%Y %H:%M:%S")
+    cnpj_empresa = f"{empresa.emit_CNPJ[:2]}.{empresa.emit_CNPJ[2:5]}.{empresa.emit_CNPJ[5:8]}/{empresa.emit_CNPJ[8:12]}-{empresa.emit_CNPJ[12:]}"
+
+    if nfe.dest_CNPJ or nfe.dest_CPF == '':
+        cgc_destinatario = f"{nfe.dest_CNPJ[:2]}.{nfe.dest_CNPJ[2:5]}.{nfe.dest_CNPJ[5:8]}/{nfe.dest_CNPJ[8:12]}-{nfe.dest_CNPJ[12:]}"
+    elif nfe.dest_CPF or nfe.dest_CNPJ == '':
+        cgc_destinatario = f"{nfe.dest_CPF[:3]}.{nfe.dest_CPF[3:6]}.{nfe.dest_CPF[6:9]}-{nfe.dest_CPF[9:]}"
+    else:
+        cgc_destinatario = ''
+
+    width, height = A4
+    left_margin = 2*mm
+    right_margin = 2*mm
+    top_margin = 2*mm
+    bottom_margin = 2*mm
+
+    styles = getSampleStyleSheet()
+    centralizado = ParagraphStyle('centralizado', alignment=1, leading=9, fontName='Times-Roman')
+    centralizado_2 = ParagraphStyle('centralizado', alignment=1, leading=15, fontName='Times-Roman')
+    centralizado_3 = ParagraphStyle('centralizado', alignment=1, leading=12, fontName='Times-Roman')
+    centralizado_5 = ParagraphStyle('centralizado', alignment=1, leading=5, fontName='Times-Roman')
+    esquerda = ParagraphStyle('esquerda', alignment=0, leading=9, fontName='Times-Roman')
+    esquerda_2 = ParagraphStyle('esquerda', alignment=0, leading=10, fontName='Times-Roman')
+    esquerda_3 = ParagraphStyle('esquerda', alignment=0, leading=11, fontName='Times-Roman')
+    esquerda_4 = ParagraphStyle('esquerda', alignment=0, leading=0, fontName='Times-Roman')
+    esquerda_5 = ParagraphStyle('esquerda', alignment=0, leading=15, fontName='Times-Roman')
+
+    # Cabeçalho
+    def cabecalho(canvas, doc):
+        canvas.saveState()
+
+        total = getattr(canvas, '_saved_page_states', None)
+        barcode = code128.Code128(nfe.chave_acesso, barHeight=26, barWidth=0.75)
+
+        if total:
+            total_pages = len(total)+1
+        else:
+            total_pages = 1
+
+        tabela_tpnf_dados = [
+            [Paragraph(f"<font size='12'>{nfe.ide_tpNF:.0f}</font>", centralizado_2)],
+        ]
+
+        tabela_tpnf = Table(tabela_tpnf_dados, colWidths=[5 * mm,])
+        tabela_tpnf.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+        ]))
+
+        tabela_nfe_dados = [
+            [
+                Paragraph("<font size='12'>DANFE</font><br/><font size='7'><b>Documento Auxiliar da NOTA FISCAL ELETRÔNICA</b></font>", centralizado),
+                '',
+            ],
+            [
+                Paragraph("<b><font size='6'>0 - ENTRADA<br/>1 - SAÍDA</font></b>", esquerda),
+                tabela_tpnf,
+            ],
+            [
+                Paragraph(f"<font size='12'>Nº {num_nfe}<br/>SÉRIE: {nfe.ide_serie:.0f}</font>", centralizado_3),
+            ],
+        ]
+
+        tabela_nfe = Table(tabela_nfe_dados, colWidths=[23 * mm, 10 * mm])
+
+        tabela_nfe.setStyle(TableStyle([
+            ('SPAN', (0, 0), (-1, 0)),
+            ('SPAN', (0, 2), (-1, 2)),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+            ('TOPPADDING', (0, 0), (0, 0), 0),
+            ('TOPPADDING', (0, 2), (0, 2), 0),
+            ('TOPPADDING', (0, 1), (0, 1), 5),
+            ('TOPPADDING', (0, 1), (1, 1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+            ('LEFTPADDING', (0, 0), (0, 0), 0),
+            ('LEFTPADDING', (0, 0), (0, 2), 0),
+            ('LEFTPADDING', (0, 1), (0, 1), 12),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+        ]))
+
+        logradouro_emitente = empresa.emit_xLgr or ''
+        numero_emitente = ', ' + empresa.emit_nro
+        complemento_emitente = ' - ' + empresa.emit_xCpl if empresa.emit_xCpl else ''
+
+        max_font_size = 9
+        endereco_emitente = logradouro_emitente + numero_emitente + complemento_emitente
+        tamanho_endereco_emitente = ajustar_paragraph(endereco_emitente, 88*mm, max_font_size)
+        logo_path = "static/img/logo-lanmax.png"
+
+        data = [
+            [
+                # Image(logo_path, width=20, height=20, kind='proportional'),
+                Paragraph(
+                    "<b><i><font size='6'>IDENTIFICAÇÃO DO EMITENTE</font></i><br/>" \
+                    f"<font size='12'>{empresa.emit_xNome}</font><br/><br/>" \
+                    f"<font size='{str(tamanho_endereco_emitente)}'>{endereco_emitente}</font><br/>" \
+                    f"<font size='9'>{empresa.emit_xBairro} - {empresa.emit_xMun}/{empresa.emit_UF}</font><br/>" \
+                    f"<font size='9'>CEP: {empresa.emit_CEP[0:5]}-{empresa.emit_CEP[5:]}&nbsp;&nbsp;&nbsp;FONE: " \
+                    f"({empresa.emit_fone[0:2]}) {empresa.emit_fone[2:6]}-{empresa.emit_fone[6:]}</font><br/>" \
+                    "</b>", centralizado_3),
+                tabela_nfe,
+                barcode,
+            ],
+            [
+                '','',
+                Paragraph(
+                    "<i><b><font size='6'>CHAVE DE ACESSO</font></b></i><br/>" \
+                    "<font size='9'>"+chave_nfe+"</font>", esquerda_2)
+            ],
+            [
+                '','',
+                Paragraph(
+                    "<font size='8'><b>Consulta de autenticidade no portal nacional da NF-e<br/>" \
+                    "www.nfe.fazenda.gov.br/portal<br/>" \
+                    "ou no site da Sefaz Autorizadora</b></font>", centralizado)
+            ]
+        ]
+
+        tabela_1 = Table(data, colWidths=[89 * mm, 35 * mm, 82 * mm])
+
+        tabela_1.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+            ('VALIGN', (0, 0), (1, -1), 'TOP'),
+            ('VALIGN', (2, 0), (2, -1), 'CENTER'),
+            ('LEFTPADDING', (0, 0), (0, -1), 0),
+            ('RIGHTPADDING', (0, 0), (0, -1), 0),
+            ('LEFTPADDING', (1, 0), (1, -1), 3),
+            ('RIGHTPADDING', (1, 0), (1, -1), 3),
+            ('SPAN', (0, 0), (0, -1)),
+            ('SPAN', (1, 0), (1, -1)),
+            ('LEFTPADDING', (2, 0), (2, 0), 0),
+            ('LEFTPADDING', (2, 2), (2, 2), 0),
+            ('RIGHTPADDING', (2, 1), (2, -1), 0),
+            ('TOPPADDING', (0, 0), (1, -1), 1),
+            ('TOPPADDING', (2, 1), (2, 1), 0),
+            ('TOPPADDING', (2, 2), (2, 2), 5),
+            ('BOTTOMPADDING', (0, 0), (1, -1), 1),
+            ('BOTTOMPADDING', (2, 1), (2, 1), 0),
+            ('BOTTOMPADDING', (2, 2), (2, 2), 10),
+            ('BOTTOMPADDING', (2, 0), (2, 0), 2),
+        ]))
+
+        data_ie = [
+            [Paragraph("<b><i><font size='4'>INSCRIÇÃO ESTADUAL</font></i></b>", esquerda_4)],
+            [Paragraph(f"<font size='11'>{empresa.emit_IE}</font>", centralizado)],
+        ]
+
+        tabela_ie = Table(data_ie)
+
+        tabela_ie.setStyle(TableStyle([
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+            ('LEFTPADDING', (0, 0), (-1, -1), 0),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+        ]))
+
+        data_protocolo = [
+            [Paragraph("<b><i><font size='4'>PROTOCOLO DE AUTORIZAÇÃO DE USO</font></i></b>", esquerda_4)],
+            [Paragraph(f"<font size='11'>{protocolo_autorizacao}</font>", centralizado_5)],
+        ]
+
+        tabela_protocolo = Table(data_protocolo)
+
+        tabela_protocolo.setStyle(TableStyle([
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+            ('LEFTPADDING', (0, 0), (-1, -1), 0),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+        ]))
+
+        data_cnpj = [
+            [Paragraph("<b><i><font size='4'>CNPJ</font></i></b>", esquerda_4)],
+            [Paragraph(f"<font size='11'>{cnpj_empresa}</font>", centralizado)],
+        ]
+
+        tabela_cnpj = Table(data_cnpj)
+
+        tabela_cnpj.setStyle(TableStyle([
+            ('TOPPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+            ('LEFTPADDING', (0, 0), (-1, -1), 0),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+        ]))
+
+        data = [
+            [
+                Paragraph(f"<b><i><font size='4'>NATUREZA DA OPERAÇÃO</font></i></b><br/><font size='11'>{nfe.ide_natOp}</font>", esquerda_2),
+                '',
+                tabela_protocolo,
+            ],
+            [
+                tabela_ie,
+                Paragraph("<b><i><font size='4'>INSC.EST.DO SUBST.TRIBUTÁRIO</font></i></b>", esquerda_4),
+                tabela_cnpj,
+            ],
+        ]
+
+        tabela_2 = Table(data, colWidths=[70*mm, 61*mm, 75*mm], rowHeights=[18,18])
+
+        tabela_2.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+            ('TOPPADDING', (0, 0), (-1, -1), 1),
+            ('LEFTPADDING', (0, 0), (-1, -1), 3),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+            ('SPAN', (0, 0), (1, 0)),
+        ]))
+
+        data = [
+            [Paragraph("<i><b><font size='6'>DADOS DO PRODUTO/SERVIÇO</font></b></i>", esquerda)],
+        ]
+
+        tabela_3 = Table(data, colWidths=[200*mm,], rowHeights=[15,])
+
+        tabela_3.setStyle(TableStyle())
+
+        w_1, h_1 = tabela_1.wrap(doc.width, doc.topMargin)
+        w_2, h_2 = tabela_2.wrap(doc.width, doc.topMargin)
+        w_3, h_3 = tabela_3.wrap(doc.width, doc.topMargin)
+
+        if canvas.getPageNumber() == 1:
+            tabela_1.drawOn(canvas, doc.leftMargin, height-h_1-top_margin-69)
+            tabela_2.drawOn(canvas, doc.leftMargin, height-h_1-h_2-top_margin-69)
+        else:
+            tabela_1.drawOn(canvas, doc.leftMargin, height - h_1 - top_margin)
+            tabela_2.drawOn(canvas, doc.leftMargin, height - h_1-h_2-top_margin)
+            tabela_3.drawOn(canvas, doc.leftMargin, height - h_1-h_2-h_3-top_margin+3)
+
+        canvas.restoreState()
+
+    # ------------------------------------
+    # Dados de Recebimento (apenas na primeira página)
+    def recebimento(canvas, doc, titulo):
+        canvas.saveState()
+        canvas.setTitle(titulo)
+
+        data = [
+            [
+                Paragraph("<font size='7'>Recebemos de "+empresa.emit_xNome+", os produtos constantes da nota fiscal indicada ao lado: " \
+                    "Data de emissão: "+data_emissao+", Valor Total: "+total_nfe+", Destinatário: "+nfe.dest_xNome+" "+endereco_destinatario+"</font>", esquerda),
+                '',
+                Paragraph("<font size='13'>NF-e<br/>Nº "+num_nfe+"<br/>SÉRIE: "+f"{nfe.ide_serie:.0f}"+"</font>", centralizado_2),
+            ],
+            [
+                Paragraph("<b><i><font size='4'>DATA DE RECEBIMENTO</font></i></b>", esquerda_4),
+                Paragraph("<b><i><font size='4'>IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</font></i></b>", esquerda_4),
+                '',
+            ],
+        ]
+        
+        tabela = Table(
+            data,
+            colWidths=[35 * mm, 138 * mm, 33 * mm],
+            rowHeights=[30,27]
+        )
+        tabela.setStyle(TableStyle([
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+            ('SPAN', (0, 0), (1, 0)),
+            ('SPAN', (2, 0), (2, -1)),
+            ('VALIGN', (0, 0), (1, -1), 'TOP'),
+            ('VALIGN', (2, 0), (2, -1), 'CENTER'),
+            ('LEFTPADDING', (0, 0), (-1, -1), 3),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+            ('TOPPADDING', (0, 0), (-1, 0), 0),
+            ('TOPPADDING', (0, 0), (1, -1), 1),
+            ('BOTTOMPADDING', (0, 0), (0, 0), 0),
+            ('BOTTOMPADDING', (0, 1), (-1, 1), 15),
+        ]))
+
+        w, h = tabela.wrap(doc.width, doc.topMargin)
+
+        if canvas.getPageNumber() == 1:
+            tabela.drawOn(canvas, doc.leftMargin, A4[1] - h - top_margin)
+
+            canvas.setDash(8, 3)  # 4 pts traço, 3 pts espaço
+            canvas.setLineWidth(0.1)
+            canvas.line(left_margin, height-h-top_margin-6, width - right_margin, height-h-top_margin-6)
+            canvas.setDash([])  # volta para linha sólida depois
+
+        canvas.restoreState()
+
+    # Frame para conteúdo (abaixo do cabeçalho)
+    frame_primeira_pagina = Frame(
+        left_margin,
+        7,
+        width - 2*left_margin,
+        height-205,
+        id='framePrimeira'
+    )
+
+    frame_outras_paginas = Frame(
+        left_margin,
+        bottom_margin,
+        width - 2*left_margin,
+        height-142,
+        id='frameOutras'
+    )
+
+    primeira_pagina = PageTemplate(
+        id='PrimeiraPagina',
+        frames=[frame_primeira_pagina],
+        onPage=lambda c, d: (recebimento(c, d, 'DANFE CCe ' + nfe.ide_nNF), cabecalho(c, d)),
+        # onPageEnd=lambda c, d: (rodape(c, d))
+    )
+
+    demais_paginas = PageTemplate(
+        id='DemaisPaginas',
+        frames=[frame_outras_paginas],
+        onPage=cabecalho,
+    )
+
+    # Caminho para salvar no static
+    pasta_destino = os.path.join(settings.BASE_DIR, 'static', 'relatorios')
+    os.makedirs(pasta_destino, exist_ok=True)
+    caminho_pdf = os.path.join(pasta_destino, f'{nfe.ide_nNF}-{nfe.nSeqEvento}-danfeCCe.pdf')
+
+    # Documento
+    doc = BaseDocTemplate(
+        caminho_pdf,
+        pagesize=A4,
+        leftMargin=left_margin,
+        rightMargin=right_margin,
+        topMargin=top_margin,
+        bottomMargin=bottom_margin
+    )
+
+    doc.addPageTemplates([primeira_pagina, demais_paginas])
+
+    # ------------------------------------
+    # Conteúdo
+
+    def ajustar_paragraph(texto, col_width, fonte_base, font_name="Times-Roman"):
+        tamanho = fonte_base
+        while True:
+            largura = pdfmetrics.stringWidth(texto, font_name, tamanho)
+
+            if largura <= col_width or tamanho <= 5:
+                break
+            tamanho -= 1
+            
+        return tamanho
+
+    flow = []
+
+    # Adiciona NextPageTemplate logo após o conteúdo da primeira página
+    flow.append(NextPageTemplate('DemaisPaginas'))
+
+    flow.append(Paragraph("<b><i><font size='6'>DESTINATÁRIO/REMETENTE</font></i></b>", esquerda))
+
+    texto = nfe.dest_xNome
+    max_font_size = 11
+    tamanho = ajustar_paragraph(texto, 141*mm, max_font_size)
+
+    dados_destinatario_1 = [
+        [
+            Paragraph("<b><i><font size='4'>NOME/RAZÃO SOCIAL</font></i></b><br/>" \
+                "<font size='"+str(tamanho)+"'>"+texto+"</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>CNPJ/CPF/IdEstrangeiro</font></i></b><br/>" \
+                f"<font size='11'>{cgc_destinatario}</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>DATA DE EMISSÃO</font></i></b><br/>" \
+                f"<font size='11'>{data_emissao}</font>", esquerda_3),
+        ]
+    ]
+
+    tabela_destinatario_1 = Table(dados_destinatario_1, colWidths=[147*mm, 35*mm, 24*mm], rowHeights=[18,])
+    tabela_destinatario_1.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('TOPPADDING', (0, 0), (-1, -1), 1),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+        ('LEFTPADDING', (0, 0), (-1, -1), 3),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+    ]))
+
+    if nfe.dest_xCpl:
+        texto_endereco = nfe.dest_xLgr + ', ' + nfe.dest_nro + ' - ' + nfe.dest_xCpl
+    else:
+        texto_endereco = nfe.dest_xLgr + ', ' + nfe.dest_nro
+
+    tamanho_fonte_endereco = ajustar_paragraph(texto_endereco, 111*mm, max_font_size)
+
+    texto_bairro = nfe.dest_xBairro
+    tamanho_fonte_bairro = ajustar_paragraph(texto_bairro, 41*mm, max_font_size)
+
+    dados_destinatario_2 = [
+        [
+            Paragraph("<b><i><font size='4'>ENDEREÇO</font></i></b><br/>" \
+                "<font size='"+str(tamanho_fonte_endereco)+"'>"+texto_endereco+"</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>BAIRRO/DISTRITO</font></i></b><br/>" \
+                "<font size='"+str(tamanho_fonte_bairro)+"'>"+texto_bairro+"</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>CEP</font></i></b><br/>" \
+                f"<font size='11'>{nfe.dest_CEP[:5]}-{nfe.dest_CEP[5:]}</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>DATA DE SAÍDA/ENTRADA</font></i></b><br/>" \
+                "<font size='11'></font>", esquerda_3),
+        ]
+    ]
+
+    tabela_destinatario_2 = Table(dados_destinatario_2, colWidths=[116*mm, 46*mm, 20*mm, 24*mm], rowHeights=[18,])
+    tabela_destinatario_2.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('TOPPADDING', (0, 0), (-1, -1), 1),
+        ('LEFTPADDING', (0, 0), (-1, -1), 3),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+    ]))
+
+    texto_municipio = nfe.dest_xMun
+    tamanho_fonte_municipio = ajustar_paragraph(texto_municipio, 86*mm, max_font_size)
+
+    dados_destinatario_3 = [
+        [
+            Paragraph("<b><i><font size='4'>MUNICÍPIO</font></i></b><br/>" \
+                "<font size='"+str(tamanho_fonte_municipio)+"'>"+texto_municipio+"</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>FONE/FAX</font></i></b><br/>" \
+                f"<font size='11'>{nfe.dest_fone or ''}</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>UF</font></i></b><br/>" \
+                f"<font size='11'>{nfe.dest_UF}</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>INSCRIÇÃO ESTADUAL</font></i></b><br/>" \
+                f"<font size='11'>{nfe.dest_IE or ''}</font>", esquerda_3),
+            Paragraph("<b><i><font size='4'>HORA DE SAÍDA</font></i></b><br/>" \
+                "<font size='11'></font>", esquerda_3),
+        ]
+    ]
+
+    tabela_destinatario_3 = Table(dados_destinatario_3, colWidths=[92*mm, 40*mm, 10*mm, 40*mm, 24*mm], rowHeights=[18,])
+    tabela_destinatario_3.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('TOPPADDING', (0, 0), (-1, -1), 1),
+        ('LEFTPADDING', (0, 0), (-1, -1), 3),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+    ]))
+
+    flow.append(tabela_destinatario_1)
+    flow.append(tabela_destinatario_2)
+    flow.append(tabela_destinatario_3)
+    flow.append(Spacer(width=0, height=8))
+
+    dados_cce = []
+
+    texto = "<b><font size='14'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Carta de Correção é disciplinada pelo parágrafo 1o-A do art. 7o do Convênio S/N, de " \
+        "15 de dezembro de 1970 e pode ser utilizada para regularização de erro ocorrido na " \
+        "emissão de documento fiscal, desde que o erro não esteja relacionado com:<br/><br/>" \
+        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - as variaveis que determinam o valor do imposto tais como:<br/>" \
+        "Base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao;<br/><br/>" \
+        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatário;<br/><br/>" \
+        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - a data de emissao ou de saida.<br/><br/>" \
+        "Motivo Correção:<br/><br/></font></b>" \
+        f"<font size='13'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{nfe.xJust}</font>"
+
+    dados_cce = [[Paragraph(texto, esquerda_5),]]
+
+    tabela_cce = Table(dados_cce, colWidths=[583,], rowHeights=[480,])
+    tabela_cce.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('TOPPADDING', (0, 0), (-1, -1), 8),
+        ('LEFTPADDING', (0, 0), (-1, -1), 14),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 14),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+    ]))
+
+    flow.append(tabela_cce)
+
+    canvas_com_nome = partial(NumberedCanvas, report_name='DANFE CCe')
+
+    doc.build(flow, canvasmaker=canvas_com_nome)
+    return caminho_pdf
+
 def desenhar_parcela_boleto(canvas, boleto):
     width, height = A4
     altura_dinamica = 0
@@ -1619,7 +2101,7 @@ def desenhar_parcela_boleto(canvas, boleto):
     barcode.drawOn(canvas, 6*mm, height-265*mm)
 
 def desenhar_cupom(empresa, nfe, nfe_itens, formas_pagto):
-    width, height = 72.2*mm, 420.5*mm
+    width, height = 72.2*mm, 297.4*mm
 
     cnpj_empresa_formatado = f'{empresa.emit_CNPJ[:2]}.{empresa.emit_CNPJ[2:5]}.{empresa.emit_CNPJ[5:8]}/{empresa.emit_CNPJ[8:12]}-{empresa.emit_CNPJ[12:]}'
     dados_empresa = f'CNPJ: {cnpj_empresa_formatado} {empresa.emit_xNome}'
@@ -1633,13 +2115,13 @@ def desenhar_cupom(empresa, nfe, nfe_itens, formas_pagto):
         canvas.saveState()
 
         canvas.setFont('Calibri-Bold', 6)
-        canvas.drawCentredString(width/2, height-4*mm, dados_empresa)
-        canvas.drawCentredString(width/2, height-7*mm, endereco_empresa)
-        canvas.drawCentredString(width/2, height-10*mm, 'DOCUMENTO AUXILIAR DA NOTA FISCAL DE CONSUMIDOR ELETRÔNICA')
+        canvas.drawCentredString(width/2, height-2*mm, dados_empresa)
+        canvas.drawCentredString(width/2, height-5*mm, endereco_empresa)
+        canvas.drawCentredString(width/2, height-8*mm, 'DOCUMENTO AUXILIAR DA NOTA FISCAL DE CONSUMIDOR ELETRÔNICA')
 
         canvas.setDash(8, 3)  # 4 pts traço, 3 pts espaço
         canvas.setLineWidth(0.1)
-        canvas.line(0, height-12*mm, width, height-12*mm)
+        canvas.line(0, height-10*mm, width, height-10*mm)
         canvas.setDash([])  # volta para linha sólida depois
         canvas.setFont('Calibri', 6)
 
@@ -1663,7 +2145,7 @@ def desenhar_cupom(empresa, nfe, nfe_itens, formas_pagto):
     # x, y, largura, altura
     margem = 0*mm
     largura_util = width# - 2*mm
-    altura_frame = height - 15*mm # Descontando o cabeçalho e margem inferior
+    altura_frame = height - 13*mm # Descontando o cabeçalho e margem inferior
 
     quadro_itens = Frame(margem, 5*mm, largura_util, altura_frame, showBoundary=0)
 
@@ -1810,13 +2292,13 @@ def desenhar_cupom(empresa, nfe, nfe_itens, formas_pagto):
 
     dados_consumidor = []
 
-    if nfe.ECFRef_mod == 1:
+    if int(nfe.ECFRef_mod) == 1:
         if nfe.dest_CNPJ and nfe.dest_CNPJ != '':
             cnpj_formatado = f'{nfe.dest_CNPJ[:2]}.{nfe.dest_CNPJ[2:5]}.{nfe.dest_CNPJ[5:8]}/{nfe.dest_CNPJ[8:12]}-{nfe.dest_CNPJ[12:]}'
-            consumidor = 'CONSUMIDOR - ' + cnpj_formatado
+            consumidor = 'CONSUMIDOR - CNPJ - ' + cnpj_formatado
         elif nfe.dest_CPF and nfe.dest_CPF != '':
             cpf_formatado = f'{nfe.dest_CPF[:3]}.{nfe.dest_CPF[3:6]}.{nfe.dest_CPF[6:9]}-{nfe.dest_CPF[9:]}'
-            consumidor = 'CONSUMIDOR - ' + cpf_formatado
+            consumidor = 'CONSUMIDOR - CPF - ' + cpf_formatado
         else:
             consumidor = 'CONSUMIDOR - NÃO IDENTIFICADO'
     else:
