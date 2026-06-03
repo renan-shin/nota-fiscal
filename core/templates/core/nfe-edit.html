@@ -23,6 +23,7 @@
     <button type="button" class="btn btn-warning btn-sm ms-2" id="btnDanfeCCe">DANFE CCe</button>
     <button type="button" class="btn btn-info btn-sm ms-2" id="btnCupom">CUPOM</button>
     <button type="button" class="btn btn-secondary btn-sm ms-2" id="btnXML">XML</button>
+    <button type="button" class="btn btn-secondary btn-sm ms-2" id="btnAcertaNFe">Acerta NF-e</button>
     <hr class="mt-2 mb-0">
     <label class="col-sm-9 col-form-label">Pedido: {{nfe.Pedido}} | NF-e: {{nfe.ide_nNF}} | Empresa: {{empresa.Mnemonico}}</label>
 
@@ -34,6 +35,9 @@
             </li>
             <li class="nav-item">
                 <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente-tab-pane" type="button" role="tab" aria-controls="cliente-tab-pane" aria-selected="false">Cliente</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="endereco-entrega-tab" data-bs-toggle="tab" data-bs-target="#endereco-entrega-tab-pane" type="button" role="tab" aria-controls="endereco-entrega-tab-pane" aria-selected="false">Endereço Entrega</button>
             </li>
             <li class="nav-item">
                 <button class="nav-link" id="total-tab" data-bs-toggle="tab" data-bs-target="#total-tab-pane" type="button" role="tab" aria-controls="total-tab-pane" aria-selected="false">Totais</button>
@@ -344,6 +348,53 @@
                     </div>
                 </div>
             </div>
+            <!-- Endereço Entrega -->
+            <div class="tab-pane fade" id="endereco-entrega-tab-pane" role="tabpanel" aria-labelledby="endereco-entrega-tab" tabindex="0">
+                <div class="row">
+                    <div class="col">
+                        <label for="cliente-entrega" class="col-sm-9 col-form-label">Cliente:</label>
+                        <input id="cliente-entrega" name="cliente_entrega" type="text" class="form-control form-control-sm" placeholder="Cliente" aria-label="Cliente" value="{{ nfe.entrega_xNome|default:'' }}">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="cep-entrega" class="col-sm-9 col-form-label">CEP:</label>
+                        <input id="cep-entrega" name="cep_entrega" type="text" class="form-control form-control-sm" placeholder="CEP" aria-label="CEP" value="{{ nfe.entrega_CEP|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="logradouro-entrega" class="col-sm-9 col-form-label">Logradouro:</label>
+                        <input id="logradouro-entrega" name="logradouro_entrega" type="text" class="form-control form-control-sm" placeholder="Logradouro" aria-label="Logradouro" value="{{ nfe.entrega_xLgr|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="numero-entrega" class="col-sm-9 col-form-label">Número:</label>
+                        <input id="numero-entrega" name="numero_entrega" type="text" class="form-control form-control-sm" placeholder="Número" aria-label="Número" value="{{ nfe.entrega_nro|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="complemento-entrega" class="col-sm-9 col-form-label">Complemento:</label>
+                        <input id="complemento-entrega" name="complemento_entrega" type="text" class="form-control form-control-sm" placeholder="Complemento" aria-label="Complemento" value="{{ nfe.entrega_xCpl|default:'' }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="bairro-entrega" class="col-sm-9 col-form-label">Bairro:</label>
+                        <input id="bairro-entrega" name="bairro_entrega" type="text" class="form-control form-control-sm" placeholder="Bairro" aria-label="Bairro" value="{{ nfe.entrega_xBairro|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="cmun-entrega" class="col-sm-9 col-form-label">Cód. IBGE:</label>
+                        <input id="cmun-entrega" name="cmun_entrega" type="text" class="form-control form-control-sm" placeholder="Cód. IBGE" aria-label="Cód. IBGE" value="{{ nfe.entrega_cMun|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="xmun-entrega" class="col-sm-9 col-form-label">Município:</label>
+                        <input id="xmun-entrega" name="xmun_entrega" type="text" class="form-control form-control-sm" placeholder="Município" aria-label="Município" value="{{ nfe.entrega_xMun|default:'' }}">
+                    </div>
+                    <div class="col">
+                        <label for="uf-entrega" class="col-sm-9 col-form-label">UF:</label>
+                        <input id="uf-entrega" name="uf_entrega" type="text" class="form-control form-control-sm" placeholder="UF" aria-label="UF" value="{{ nfe.entrega_UF|default:'' }}">
+                    </div>
+                </div>
+            </div>
             <!-- Totais -->
             <div class="tab-pane fade" id="total-tab-pane" role="tabpanel" aria-labelledby="total-tab" tabindex="0">
                 <div class="row">
@@ -368,8 +419,8 @@
                         <input id="ibs-cbs-bc" type="text" class="form-control form-control-sm" placeholder="IBS/CBS BC" aria-label="IBS/CBS BC" value="{{nfe.IBSCBSTot_vBCIBSCBS|default:0|currency}}" disabled>
                     </div>
                     <div class="col">
-                        <label for="valor-nf" class="col-sm-9 col-form-label">Valor NF:</label>
-                        <input id="valor-nf" type="text" class="form-control form-control-sm" placeholder="Valor NF" aria-label="Valor NF" value="{{nfe.TotalICMS_vNF|default:0|currency}}" disabled>
+                        <label for="vicms-deson" class="col-sm-9 col-form-label">ICMS Desonerado:</label>
+                        <input id="vicms-deson" type="text" class="form-control form-control-sm" placeholder="ICMS Desonerado" aria-label="ICMS Desonerado" value="{{nfe.TotalICMS_vICMSDeson|default:0|currency}}" disabled>
                     </div>
                 </div>
                 <div class="row">
@@ -394,8 +445,8 @@
                         <input id="valor-ibsuf" type="text" class="form-control form-control-sm" placeholder="Valor IBS UF" aria-label="Valor IBS UF" value="{{nfe.IBSTot_vIBS_UF|default:0|currency}}" disabled>
                     </div>
                     <div class="col">
-                        <label for="nf-ibs-cbs" class="col-sm-9 col-form-label">Total NF+IBS+CBS:</label>
-                        <input id="nf-ibs-cbs" type="text" class="form-control form-control-sm" placeholder="Total NF+IBS+CBS" aria-label="Total NF+IBS+CBS" value="{{nfe.totalRTC_vNFTot|default:0|currency}}" disabled>
+                        <label for="valor-nf" class="col-sm-9 col-form-label">Valor NF:</label>
+                        <input id="valor-nf" type="text" class="form-control form-control-sm" placeholder="Valor NF" aria-label="Valor NF" value="{{nfe.TotalICMS_vNF|default:0|currency}}" disabled>
                     </div>
                 </div>
                 <div class="row">
@@ -419,7 +470,10 @@
                         <label for="valor-ibs" class="col-sm-9 col-form-label">Valor IBS:</label>
                         <input id="valor-ibs" type="text" class="form-control form-control-sm" placeholder="Valor IBS" aria-label="Valor IBS" value="{{nfe.IBSTot_vIBS|default:0|currency}}" disabled>
                     </div>
-                    <div class="col"></div>
+                    <div class="col">
+                        <label for="nf-ibs-cbs" class="col-sm-9 col-form-label">Total NF+IBS+CBS:</label>
+                        <input id="nf-ibs-cbs" type="text" class="form-control form-control-sm" placeholder="Total NF+IBS+CBS" aria-label="Total NF+IBS+CBS" value="{{nfe.totalRTC_vNFTot|default:0|currency}}" disabled>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -682,6 +736,7 @@
     var url_boleto = "{% url 'api_gerar_boleto' empresa_filial=0 id_nfe=0 %}"
     var url_formas_pagto = "{% url 'api_calcular_formas_pagto' %}"
     var url_calculo_totais = "{% url 'api_calcular_totais_nfe' %}"
+    var url_acerta_nfe = "{% url 'api_acerta_nfe' %}"
 </script>
 <script src="{% static 'js/jquery.mask.min.js' %}"></script>
 <script src="{% static 'js/nfe_edit.js' %}"></script>

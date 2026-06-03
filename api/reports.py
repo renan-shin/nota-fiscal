@@ -440,7 +440,7 @@ def gerar_pdf_danfe(empresa, nfe, nfe_itens, boletos):
 
     texto = infNFRef + adfisco + infcpl + inftrib
 
-    paragrafo_info_adc = Paragraph("<b><i><font size='4'>INFORMAÇÕES COMPLEMENTARES</font></i></b><br/><font size='6'>"+texto+"</font>", esquerda)
+    paragrafo_info_adc = Paragraph("<b><i><font size='4'>INFORMAÇÕES COMPLEMENTARES</font></i></b><br/><font size='8'>"+texto+"</font>", esquerda)
     width_paragrafo, height_paragrafo = paragrafo_info_adc.wrap(130*mm, 0)
 
     data_dados_adicionais = [
@@ -1251,7 +1251,7 @@ def gerar_pdf_danfe(empresa, nfe, nfe_itens, boletos):
     vol_pesol = f"{nfe.vol_pesoL or 0:,.3f}".replace(',', 'X').replace('.', ',').replace('X', '.')
     vol_pesob = f"{nfe.vol_pesoB or 0:,.3f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
-    tamanho_especie = ajustar_paragraph(vol_esp, 41*mm, 11)
+    tamanho_especie = ajustar_paragraph(vol_esp, 39*mm, 11)
 
     dados_transp = [
         [
@@ -1349,9 +1349,9 @@ def gerar_pdf_danfe(empresa, nfe, nfe_itens, boletos):
                 Paragraph(f"<font size='7'>{texto_descricao_prod}</font>", esquerda),
                 Paragraph(f"<font size='7'>{item.prod_NCM or ''}</font>", centralizado),
                 Paragraph(f"<font size='7'>{cst}</font>", centralizado),
-                Paragraph(f"<font size='7'>{item.prod_CFOP or '':.0f}</font>", centralizado),
+                Paragraph(f"<font size='7'>{item.prod_CFOP or 0:.0f}</font>", centralizado),
                 Paragraph(f"<font size='7'>{item.prod_uCOM or ''}</font>", centralizado),
-                Paragraph(f"<font size='7'>{item.prod_qCOM or '':.0f}</font>", direita),
+                Paragraph(f"<font size='7'>{item.prod_qCOM or 0:.0f}</font>", direita),
                 Paragraph(f"<font size='7'>{valor_unitario}</font>", direita),
                 Paragraph(f"<font size='7'>{valor_total}</font>", direita),
                 Paragraph(f"<font size='7'>{icms_bc}</font>", direita),

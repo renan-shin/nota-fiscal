@@ -39,22 +39,6 @@
                     <div>
                         <font size="2">{{nfe.frg_xml|default:''}}</font>
                     </div>
-                    <hr/>
-                    {% if nfe.transmitir %}
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm btn-primary btn-transmitir" href="{% url 'core_retransmitir' empresa_filial=nfe.empresa_filial id_nfe=nfe.id_nfe %}">Transmitir</a>
-                    </div>
-                    {% endif %}
-                    {% if nfe.cce %}
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-sm btn-success btn-cce">CC-e</button>
-                    </div>
-                    {% endif %}
-                    {% if nfe.cancelar %}
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-sm btn-danger btn-cancelar">Cancelar</button>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
         </div>

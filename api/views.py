@@ -807,6 +807,9 @@ def transmitir_nfe(request):
         
         if result[0] != 0:
             return JsonResponse({'erro': True, 'status': 0, 'mensagem': result[1]})
+    
+    if int(nfe.Pedido) > 0:
+        atualiza_dimensoes_caixa(nfe)
 
     nfe.Transmitir = True
     nfe.DataEmissao = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -941,7 +944,7 @@ def cancelar_nfe(request):
     except nome_tabela.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Nota Fiscal não encontrada!'})
     
-    if not nfe.xJust:
+    if not justificativa:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Justificativa não foi informada!'})
     
     if 'Aut' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz:
@@ -1005,7 +1008,7 @@ def inutilizar_nfe(request):
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Modelo da nota inválido!'})
     
     if not nfe_inut:
-        nova_inutilizacao = nome_tabela.objects.get_or_create(
+        nfe_inut = nome_tabela.objects.get_or_create(
             status_sefaz = None,
             nProtocoloInut = None,
             dProtocoloInut = None,
@@ -1016,10 +1019,8 @@ def inutilizar_nfe(request):
             nroNFeFinal = num_nfe,
             Modelo = ide_mod
         )
-    else:
-        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Já existe uma inutilização com este número!'})
     
-    status, msg_retorno = inutiliza_nfe(nova_inutilizacao, empresa)
+    status, msg_retorno = inutiliza_nfe(nfe_inut, empresa)
 
     if status == 102:
         return JsonResponse({'erro': False, 'status': status, 'mensagem': 'Inutilização realizada com sucesso!'})
@@ -1536,3 +1537,52 @@ def calcular_totais_nfe(request):
         return JsonResponse({'erro': False, 'mensagem': 'Totais da NF-e calculados com sucesso!', 'nfe': nfe}, safe=False)
     else:
         return JsonResponse({'erro': True, 'mensagem': 'Método não permitido!', 'nfe': {}})
+    
+@csrf_exempt
+def acerta_nfe(request):
+    if request.method == 'POST':
+        id_nfe = request.POST.get('id_nfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('core', empresa.Tabela)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            nfe = nome_tabela.objects.get(id_nfe=id_nfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
+        
+        diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizado').first()
+        xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
+
+        if not Path(xml_autorizado).is_file():
+            return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML não encontrado!'})
+
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario NOT IN(%s,%s) ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa', 'srv-nfe'])
+        result = cursor.fetchone()
+
+        cursor.execute("EXEC AS LOGIN=%s; EXEC Base_NFE.dbo.acertaNFe %s, %s", [result[0], diretorio.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
+        connection.commit()
+
+        nfe.refresh_from_db()
+
+        if int(nfe.ide_mod) == 65:
+            cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF, 65])
+        elif int(nfe.ide_mod) == 55:
+            if int(nfe.Pedido) < 100000000:
+                cursor.execute("EXEC AS LOGIN=%s; EXEC GreenMotor.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+            else:
+                cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+
+        cursor.execute('REVERT;')
+
+        nfe_lista = list(nome_tabela.objects.filter(id_nfe=id_nfe).values('id_nfe', 'status_sefaz', 'cStat', 'xMotivo', 'nProt', 'nProtEvento', 'digVal', 'dhRecbto', 'tpEvento'))
+
+        return JsonResponse({'erro': False, 'mensagem': 'Acerto realizado com sucesso!', 'nfe': nfe_lista[0]}, safe=False)
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método não permitido!'})

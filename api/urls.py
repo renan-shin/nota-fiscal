@@ -25,4 +25,5 @@ urlpatterns = [
     path('enviar-email-nfe/', views.enviar_email_nfe, name='api_enviar_email_nfe'),
     path('calcular-formas-pagto/', views.calcular_formas_pagto, name='api_calcular_formas_pagto'),
     path('calcular-totais-nfe/', views.calcular_totais_nfe, name='api_calcular_totais_nfe'),
+    path('acerta-nfe/', views.acerta_nfe, name='api_acerta_nfe'),
 ]

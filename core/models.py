@@ -428,6 +428,11 @@ class Vialuna_NFE_400(NFe):
         managed = False
         db_table = 'Vialuna_NFE_400'
 
+class Andaluz_NFE_400(NFe):
+    class Meta:
+        managed = False
+        db_table = 'Andaluz_NFE_400'
+
 class NFeItens(models.Model):
     id_item = models.AutoField(primary_key=True)
     id_nfe = models.BigIntegerField(null=True)
@@ -771,6 +776,11 @@ class Rio_MT_NFEItens_400(NFeItens):
     class Meta:
         managed = False
         db_table = 'Rio_MT_NFEItens_400'
+
+class Andaluz_NFEItens_400(NFeItens):
+    class Meta:
+        managed = False
+        db_table = 'Andaluz_NFEItens_400'
 
 class NFe_Inutilizacao(models.Model):
     id_inutilizacao = models.AutoField(primary_key=True)
@@ -1135,3 +1145,17 @@ class TabUF(models.Model):
 
     def __str__(self):
         return str(self.ID)
+    
+class CadastroServicos(models.Model):
+    Codigo = models.BigIntegerField(primary_key=True)
+    Descricao = models.CharField(max_length=250)
+    Cartao = models.IntegerField()
+    CodTransp = models.IntegerField()
+    ValorLimite = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'CadastroServicos'
+
+    def __str__(self):
+        return str(self.Codigo)

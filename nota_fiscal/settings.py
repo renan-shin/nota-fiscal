@@ -94,7 +94,7 @@ DATABASES = {
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server'
         },
-        # 'CONN_MAX_AGE': 60,
+        'CONN_MAX_AGE': 60,
     },
     'greenmotor': {
         'ENGINE': 'mssql',
@@ -107,6 +107,7 @@ DATABASES = {
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server'
         },
+        'CONN_MAX_AGE': 60,
     },
     'lanmax': {
         'ENGINE': 'mssql',
@@ -119,6 +120,7 @@ DATABASES = {
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server'
         },
+        'CONN_MAX_AGE': 60,
     },
 }
 

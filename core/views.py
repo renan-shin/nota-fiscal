@@ -196,6 +196,8 @@ def nfe_edit(request, empresa_filial, id_nfe):
         # cobr_vliq = request.POST.get('cobr_vliq', 0).replace('.', '').replace(',', '.')
         # cobr_vorig = request.POST.get('cobr_vorig', 0).replace('.', '').replace(',', '.')
         xjust = request.POST.get('xjust', '')
+        entrega_nro = request.POST.get('numero_entrega', '')
+        entrega_cpl = request.POST.get('complemento_entrega', '')
 
         if nfe.status_sefaz != 'NFe não enviada' and int(nfe.ide_mod) == 55 and opcao_envio_email not in('0','1','2','3'):
             messages.error(request, 'Opção de envio de e-mail inválida!')
@@ -348,10 +350,12 @@ def nfe_edit(request, empresa_filial, id_nfe):
                 # nfe.cobr_vLiq = float(cobr_vliq)
                 # nfe.cobr_vOrig = float(cobr_vorig)
                 nfe.dest_indIEDest = opcao_contribuinte
-                nfe.transporta_CNPJ = cnpj_transp
+                nfe.transporta_CNPJ = cnpj_transp.replace('/','').replace('.','').replace('-','')
                 nfe.transporta_xEnder = end_transp
                 nfe.transporta_xMun = mun_transp
                 nfe.transporta_UF = uf_transp
+                nfe.entrega_nro = entrega_nro
+                nfe.entrega_xCpl = entrega_cpl
         else:
             if nfe.status_sefaz == 'NFe não enviada':
                 nfe.dest_eMail = email_cliente

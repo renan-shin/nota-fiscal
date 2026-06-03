@@ -11,6 +11,7 @@ let recarregar_pagina = false;
 $('#cpf-dest').mask('000.000.000-00', {reverse: true});
 $('#cnpj-dest').mask('00.000.000/0000-00', {reverse: true});
 $('#cep-dest').mask('00000-000', {reverse: true});
+$('#cep-entrega').mask('00000-000', {reverse: true});
 $('#cnpj-transp').mask('00.000.000/0000-00', {reverse: true});
 
 $('#modalGenerico').on('hidden.bs.modal', function() {
@@ -75,6 +76,60 @@ $('#formasPagto').on('click', function() {
 $('#calculoTotais').on('click', function() {
     calcularTotaisNFe()
 })
+
+$('#btnAcertaNFe').on('click', function() {
+    acertaNFe();
+})
+
+async function acertaNFe() {
+    $('#overlay').fadeIn();
+
+    try {
+        var response = await fetch(url_acerta_nfe, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+                //'X-CSRFToken': csrfToken,
+            },
+            body: "empresa_filial=" + empresa + "&id_nfe=" + id_nfe
+        });
+
+        if(!response.ok) {
+            throw new Error('Erro na requisição!');
+        }
+    } catch(error) {
+        $('#dialogModal').attr('class', 'modal-dialog')
+        $('#modalGenerico .modal-body').append("<p class='text-danger'>" + error + "</p>");
+        $('#overlay').fadeOut();
+        $('#modalGenerico .modal-title').html('Erro Acerta NF-e')
+        $('#modalGenerico').modal('show');
+    } finally {
+        var dados = await response.json();
+        $('#modalGenerico .modal-title').html('');
+
+        if(dados.erro === false) {
+            $('#status-nfe').val(dados.nfe.status_sefaz);
+            $('#protocolo').val(dados.nfe.nProt);
+            $('#protocolo-evento').val(dados.nfe.nProt);
+            $('#digito-validador').val(dados.nfe.digVal);
+            $('#data-horareceb').val(dados.nfe.dhRecbto);
+            $('#tipo-evento').val(dados.nfe.tpEvento);
+
+            $('#dialogModal').attr('class', 'modal-dialog')
+            $('#modalGenerico .modal-body').append("<p class='text-success'>" + dados.mensagem + "</p>");
+            $('#modalGenerico .modal-title').html('Acerta NF-e')
+            $('#modalGenerico').modal('show');
+            recarregar_pagina = true;
+        } else {
+            $('#dialogModal').attr('class', 'modal-dialog')
+            $('#modalGenerico .modal-body').append("<p class='text-danger'>" + dados.mensagem + "</p>");
+            $('#modalGenerico .modal-title').html('Erro Acerta NF-e')
+            $('#modalGenerico').modal('show');
+        }
+
+        $('#overlay').fadeOut();
+    }
+}
 
 async function abrirXML() {
     $('#overlay').fadeIn();
@@ -171,6 +226,7 @@ async function calcularFormasPagto() {
             $('#table-formaspagto tbody').html('');
 
             dados.formas_pagto.forEach(fp => {
+                let nFat = dados.nfe.cobr_nFat === null ? '' : dados.nfe.cobr_nFat;
                 let indPag = fp.pagamento_indPag_Opc === 0 ? 'Pagamento à vista' : 'Pagamento à prazo';
                 let valor = fp.pagamento_vPag.toLocaleString('pt-BR', {
                     minimumFractionDigits: 2,
@@ -182,14 +238,14 @@ async function calcularFormasPagto() {
             });
 
             let cobr_vliq = 0;
-            
+            let cobr_vorig = 0;
+            let cobr_nfat = '';
+
             cobr_vliq = cobr_vliq.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             })
 
-            let cobr_vorig = 0;
-            
             cobr_vorig = cobr_vorig.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -209,7 +265,11 @@ async function calcularFormasPagto() {
                 })
             }
 
-            $('#cobr-nfat').val(dados.nfe.cobr_nFat);
+            if(dados.nfe.cobr_nFat) {
+                cobr_nfat = dados.nfe.cobr_nFat;
+            }
+
+            $('#cobr-nfat').val(cobr_nfat);
             $('#cobr-vliq').val(cobr_vliq);
             $('#cobr-vorig').val(cobr_vorig);
         } else {

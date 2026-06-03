@@ -18,6 +18,51 @@ except Exception as e:
     # traceback.print_exc()
     print(e)
 
+def atualiza_dimensoes_caixa(nfe):
+    if int(nfe.Pedido) < 100000000:
+        db = 'greenmotor'
+    else:
+        db = 'lanmax'
+
+    pedido = Pedido.objects.using(db).get(cod_pedido=int(nfe.Pedido))
+    cadastro_servicos = CadastroServicos.objects.filter(CodTransp=pedido.cod_transp.cod_transp).exists()
+
+    if cadastro_servicos:
+        if nfe.vol_pesoL >= 0.001 and nfe.vol_pesoL <= 1.0:
+            altura = 7
+            largura = 31
+            comprimento = 22
+        elif nfe.vol_pesoL > 1.0 and nfe.vol_pesoL <= 2.0:
+            altura = 5
+            largura = 41
+            comprimento = 68
+        elif nfe.vol_pesoL > 2.0 and nfe.vol_pesoL <= 5.0:
+            altura = 9
+            largura = 9
+            comprimento = 15
+        elif nfe.vol_pesoL > 5.0 and nfe.vol_pesoL <= 10.0:
+            altura = 9
+            largura = 11
+            comprimento = 16
+        elif nfe.vol_pesoL > 10.0 and nfe.vol_pesoL <= 15.0:
+            altura = 20
+            largura = 14
+            comprimento = 20
+        else:
+            altura = 60
+            largura = 70
+            comprimento = 70
+    else:
+        altura = 0
+        largura = 0
+        comprimento = 0
+
+    nfe.Caixa_Altura = altura
+    nfe.Caixa_Largura = largura
+    nfe.Caixa_Comprimento = comprimento
+    nfe.save()
+    nfe.refresh_from_db()
+
 def remove_acentos(texto):
     texto = texto.replace('á','a').replace('Á','A').replace('à','a').replace('À','A').replace('â','a').replace('Â','A').replace('ã','a').replace('Ã','A')
     texto = texto.replace('é','e').replace('É','E').replace('è','e').replace('È','E').replace('ê','e').replace('Ê','E')
@@ -26,6 +71,7 @@ def remove_acentos(texto):
     texto = texto.replace('ú','u').replace('Ú','U').replace('ù','u').replace('Ù','U').replace('û','u').replace('Û','U')
     texto = texto.replace('ç','c').replace('Ç','C')
     texto = texto.replace('º','o').replace('ª','a')
+    texto = texto.replace('&','&amp;')
 
     return texto
 
@@ -327,10 +373,10 @@ def dest(nfe, empresa):
         dest_CNPJ = nfe.dest_CNPJ
         dest_CPF = ''
 
-    if int(nfe.dest_indIEDest) == 1:
-        dest_IE = nfe.dest_IE
-    elif int(nfe.dest_indIEDest) in(2,9):
-        dest_IE = ''
+    # if int(nfe.dest_indIEDest) == 1:
+    #     dest_IE = nfe.dest_IE
+    # elif int(nfe.dest_indIEDest) in(2,9):
+    #     dest_IE = ''
 
     return obj_nfe_util.destinatario310(
         dest_CNPJ,
@@ -349,7 +395,7 @@ def dest(nfe, empresa):
         nfe.dest_xPais if nfe.dest_xPais else '',
         nfe.dest_fone if nfe.dest_fone else '',
         nfe.dest_indIEDest if nfe.dest_indIEDest else 1,
-        dest_IE,
+        nfe.dest_IE if nfe.dest_IE else '',
         nfe.dest_ISUF if nfe.dest_ISUF else '',
         nfe.dest_IM if nfe.dest_IM else '',
         nfe.dest_eMail if nfe.dest_eMail else ''
@@ -845,7 +891,7 @@ def GTotal_NFe(nfe, empresa):
         retTrib,
         nfe.totalRTC_vIS if nfe.totalRTC_vIS else 0,
         IBSCBSTot,
-        nfe.totalRTC_vNFTot if nfe.totalRTC_vNFTot else 0.001
+        nfe.totalRTC_vNFTot if nfe.totalRTC_vNFTot else 0
     )
 
 def TotalIBSCBS(nfe):
@@ -1361,15 +1407,16 @@ def envia_nfe_sincrono(nfe, empresa):
                 elif int(nfe.ide_mod) == 55:
                     cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
 
-            cursor.execute('REVERT;')
-
             nfe.refresh_from_db()
 
             if semNCob(nfe, empresa):
                 if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
-                    cursor.execute('EXEC geraNossoNumero_GM %s', [nfe.Pedido,])
+                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero_GM %s', [result[0], nfe.Pedido,])
                 else:
-                    cursor.execute('EXEC geraNossoNumero %s', [nfe.Pedido,])
+                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero %s', [result[0], nfe.Pedido,])
+
+            cursor.execute('REVERT;')
+            connection.commit()
 
             if Path(xml_autorizado).is_file():
                 pasta_repo_nfe = get_path_repo(nfe, empresa)
@@ -1529,7 +1576,7 @@ def cancela_nfe(nfe, empresa):
                 corpo_email += f'Motivo do cancelamento: {nfe.xJust}'
 
                 email_para = 'tarciana.oliveira@lanmax.com.br'
-                cc = 'amanda@lanmax.com.br,renan@lanmax.com.br'
+                cc = 'amanda@lanmax.com.br,sac03@lanmax.com.br,renan@lanmax.com.br'
                 titulo = f'Cancelamento da Nota Fiscal {nfe.ide_nNF}'
 
                 # cursor.execute("EXEC acertaNFE_Cancelamento %s, %s", [diretorio_cancelado.Diretorio, nfe.ide_nNF + '-procCancNFe.xml'])
@@ -1545,10 +1592,10 @@ def cancela_nfe(nfe, empresa):
         
             if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
                 db = 'greenmotor'
-                cursor.execute("EXEC AS LOGIN=%s;EXEC GreenMotor.dbo.Pedido_09Cancela %s, %s", [result[0], nfe.Pedido, 1])
+                cursor.execute("EXEC AS LOGIN=%s;EXEC GreenMotor.dbo.Pedido_09Cancela %s, %s", ['Renan', nfe.Pedido, 1])
             elif int(nfe.Pedido) >= 100000000:
                 db = 'lanmax'
-                cursor.execute("EXEC AS LOGIN=%s;EXEC Lanmax.dbo.Pedido_09Cancela %s, %s", [result[0], nfe.Pedido, 1])
+                cursor.execute("EXEC AS LOGIN=%s;EXEC Lanmax.dbo.Pedido_09Cancela %s, %s", ['Renan', nfe.Pedido, 1])
             
             cursor.execute('REVERT;')
 

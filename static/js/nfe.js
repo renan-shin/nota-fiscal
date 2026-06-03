@@ -13,7 +13,7 @@ const tabela = new DataTable('#notas-fiscais', {
     },
     colReorder: true,
     responsive: true,
-    processing: true,
+    processing: false,
     serverSide: true,
     scrollY: 335,
     scrollX: true,
@@ -58,6 +58,12 @@ const tabela = new DataTable('#notas-fiscais', {
     },
     initComplete: function () {
         this.api()
+            .on('preXhr', function() {
+                $('#overlay').fadeIn();
+            })
+            .on('xhr', function() {
+                $('#overlay').fadeOut();
+            })
             .columns([0,1,2,3])
             .every(function (index) {
                 let column = this;
