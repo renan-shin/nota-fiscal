@@ -1323,7 +1323,7 @@ def assina_nfce(nfe, empresa):
 
         shutil.copy(caminho_xml, pasta_repo_nfe)
 
-def envia_nfe_sincrono(nfe, empresa):
+def envia_nfe_sincrono(request, nfe, empresa):
     if nfe.ide_mod == 55:
         xml_enviado = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlEnviado').first()
         arquivo_xml = xml_enviado.Diretorio + nfe.ide_nNF + '-nfe.xml'
@@ -1394,26 +1394,26 @@ def envia_nfe_sincrono(nfe, empresa):
 
             cursor = connection.cursor()
 
-            cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario NOT IN(%s,%s) ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa', 'Renan'])
-            result = cursor.fetchone()
+            # cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario NOT IN(%s,%s) ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa', 'Renan'])
+            # result = cursor.fetchone()
 
-            cursor.execute("EXEC AS LOGIN=%s; EXEC acertaNFe %s, %s", [result[0], pasta_autorizado.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
+            cursor.execute("EXEC AS LOGIN=%s; EXEC acertaNFe %s, %s", [request.user.username, pasta_autorizado.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
 
             if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
-                cursor.execute("EXEC AS LOGIN=%s; EXEC GreenMotor.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+                cursor.execute("EXEC AS LOGIN=%s; EXEC GreenMotor.dbo.Pedido_07Fatura %s, %s", [request.user.username, nfe.Pedido, nfe.ide_nNF])
             elif int(nfe.Pedido) >= 100000000:
                 if int(nfe.ide_mod) == 65:
-                    cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF, 65])
+                    cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s, %s", [request.user.username, nfe.Pedido, nfe.ide_nNF, 65])
                 elif int(nfe.ide_mod) == 55:
-                    cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+                    cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [request.user.username, nfe.Pedido, nfe.ide_nNF])
 
             nfe.refresh_from_db()
 
             if semNCob(nfe, empresa):
                 if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
-                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero_GM %s', [result[0], nfe.Pedido,])
+                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero_GM %s', [request.user.username, nfe.Pedido,])
                 else:
-                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero %s', [result[0], nfe.Pedido,])
+                    cursor.execute('EXEC AS LOGIN=%s; EXEC geraNossoNumero %s', [request.user.username, nfe.Pedido,])
 
             cursor.execute('REVERT;')
             connection.commit()
@@ -1431,7 +1431,7 @@ def envia_nfe_sincrono(nfe, empresa):
 
     return cstat, msg_resultado
 
-def gera_cce(nfe, empresa):
+def gera_cce(request, nfe, empresa):
     xml_cce = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlcce').first()
 
     msg_dados = ''
@@ -1497,14 +1497,33 @@ def gera_cce(nfe, empresa):
                 nfe.save()
                 nfe.refresh_from_db()
 
-            # cursor = connection.cursor()
-            # cursor.execute("EXEC acertaNFE_CCE %s, %s", [diretorio_cce.Diretorio, nfe.ide_nNF + '-procCCe.xml'])
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO NFe_Auditoria_400 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    [
+                        request.user.username,
+                        'LANNFE01',
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+                        'Update',
+                        nfe.Pedido,
+                        nfe.ide_serie,
+                        nfe.ide_nNF,
+                        nfe.status_sefaz,
+                        nfe.TotalICMS_vFrete,
+                        nfe.vol_qVol,
+                        nfe.vol_esp,
+                        nfe.vol_marca,
+                        nfe.vol_nVol,
+                        nfe.vol_pesoB,
+                        nfe.xJust,
+                        nfe.ide_mod
+                    ]
+                )
 
             shutil.copy(caminho_xml, get_path_repo(nfe, empresa))
 
     return cStat, msg_resultado
 
-def cancela_nfe(nfe, empresa):
+def cancela_nfe(request, nfe, empresa):
     xml_cancelado = ''
     msg_dados = ''
     msg_ret_ws = ''
@@ -1567,6 +1586,28 @@ def cancela_nfe(nfe, empresa):
                 nfe.nSeqEvento = inf_evento.findtext('nfe:nSeqEvento', namespaces=ns)
                 nfe.save()
                 nfe.refresh_from_db()
+
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO NFe_Auditoria_400 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                    [
+                        request.user.username,
+                        'LANNFE01',
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
+                        'Update',
+                        nfe.Pedido,
+                        nfe.ide_serie,
+                        nfe.ide_nNF,
+                        nfe.status_sefaz,
+                        nfe.TotalICMS_vFrete,
+                        nfe.vol_qVol,
+                        nfe.vol_esp,
+                        nfe.vol_marca,
+                        nfe.vol_nVol,
+                        nfe.vol_pesoB,
+                        nfe.xJust,
+                        nfe.ide_mod
+                    ]
+                )
 
             if int(nfe.Pedido) > 0:
                 cnpj_formatado = f'{empresa.emit_CNPJ[:2]}.{empresa.emit_CNPJ[2:5]}.{empresa.emit_CNPJ[5:8]}/{empresa.emit_CNPJ[8:12]}-{empresa.emit_CNPJ[12:]}'
@@ -1840,7 +1881,7 @@ def envia_gnre(nfe, empresa, receita):
 
     return status
 
-def busca_gnre(nfe, empresa, nro_recibo, receita):
+def busca_gnre(request, nfe, empresa, nro_recibo, receita):
     msg_dados = ''
     msg_retws = ''
     msg_resultado = ''
@@ -1873,12 +1914,12 @@ def busca_gnre(nfe, empresa, nro_recibo, receita):
                 arquivo.write(base64_pdf)
                 arquivo.close()
 
-        inserir_dados_gnre(nfe, arquivo_gnre, base64_pdf)
+        inserir_dados_gnre(request, nfe, base64_pdf)
         converter_base64_pdf(caminho_gnre, nome_pdf, base64_pdf)
 
     return status
 
-def inserir_dados_gnre(nfe, arquivo, base64_pdf):
+def inserir_dados_gnre(request, nfe, base64_pdf):
     root = ET.fromstring(base64_pdf)
     ns = {'gnre': 'http://www.gnre.pe.gov.br'}
     nro_recibo_tag = root.find('.//gnre:numeroRecibo', ns)
@@ -2050,13 +2091,13 @@ def inserir_dados_gnre(nfe, arquivo, base64_pdf):
 
     cursor = connection.cursor()
     
-    cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status Like %s AND usuario <> %s AND usuario NOT LIKE %s ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'Aut%', 'sa', 'NT SERVICE%'])
-    result = cursor.fetchone()
+    # cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status Like %s AND usuario <> %s AND usuario NOT LIKE %s ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'Aut%', 'sa', 'NT SERVICE%'])
+    # result = cursor.fetchone()
 
     if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
-        cursor.execute("EXEC as login=%s;EXEC GreenMotor.dbo.GNRE_Gera %s,%s,%s,%s", [result[0], nfe.Pedido, tipo, nro_recibo, num_controle,])
+        cursor.execute("EXEC as login=%s;EXEC GreenMotor.dbo.GNRE_Gera %s,%s,%s,%s", [request.user.username, nfe.Pedido, tipo, nro_recibo, num_controle,])
     else:
-        cursor.execute("EXEC as login=%s;EXEC Lanmax.dbo.GNRE_Gera %s,%s,%s,%s", [result[0], nfe.Pedido, tipo, nro_recibo, num_controle,])
+        cursor.execute("EXEC as login=%s;EXEC Lanmax.dbo.GNRE_Gera %s,%s,%s,%s", [request.user.username, nfe.Pedido, tipo, nro_recibo, num_controle,])
 
     cursor.execute('REVERT;')
 

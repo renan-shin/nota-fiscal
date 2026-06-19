@@ -690,7 +690,7 @@ def transmitir_nfce(request):
     if status_chave_acesso == 5601:
         gera_xml(nfe, nfe_itens, empresa)
         assina_nfce(nfe, empresa)
-        status_retorno, msg_retorno = envia_nfe_sincrono(nfe, empresa)
+        status_retorno, msg_retorno = envia_nfe_sincrono(request, nfe, empresa)
 
         if status_retorno == 100:
             gera_qrcode(nfe, empresa)
@@ -794,6 +794,7 @@ def transmitir_nfe(request):
             return JsonResponse({'erro': True, 'status': 0, 'mensagem': result[0]})
     
     if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
+        pedido = Pedido.objects.using('greenmotor').get(cod_pedido=nfe.Pedido)
         cursor.execute('EXEC dbo.ajustaVencto_GM %s', [int(nfe.Pedido),])
 
         result = cursor.fetchone()
@@ -801,6 +802,7 @@ def transmitir_nfe(request):
         if result[0] != 0:
             return JsonResponse({'erro': True, 'status': 0, 'mensagem': result[1]})
     elif int(nfe.Pedido) >= 100000000:
+        pedido = Pedido.objects.using('lanmax').get(cod_pedido=nfe.Pedido)
         cursor.execute('EXEC dbo.ajustaVencto %s', [int(nfe.Pedido),])
 
         result = cursor.fetchone()
@@ -809,7 +811,8 @@ def transmitir_nfe(request):
             return JsonResponse({'erro': True, 'status': 0, 'mensagem': result[1]})
     
     if int(nfe.Pedido) > 0:
-        atualiza_dimensoes_caixa(nfe)
+        if pedido.cod_oper in(1,3,8,14):
+            atualiza_dimensoes_caixa(nfe)
 
     nfe.Transmitir = True
     nfe.DataEmissao = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -824,7 +827,7 @@ def transmitir_nfe(request):
 
     if status_chave_acesso == 5601:
         gera_xml(nfe, nfe_itens, empresa)
-        status_retorno, msg_retorno = envia_nfe_sincrono(nfe, empresa)
+        status_retorno, msg_retorno = envia_nfe_sincrono(request, nfe, empresa)
 
         if status_retorno == 100:
             if tem_gnre(id_nfe, empresa.ide_serie):
@@ -912,7 +915,7 @@ def carta_correcao(request):
     nfe.save()
     nfe.refresh_from_db()
 
-    status, msg_retorno = gera_cce(nfe, empresa)
+    status, msg_retorno = gera_cce(request, nfe, empresa)
 
     if status == 135:
         nfe.CCe = False
@@ -961,7 +964,7 @@ def cancelar_nfe(request):
     nfe.save()
     nfe.refresh_from_db()
     
-    status, msg_retorno = cancela_nfe(nfe, empresa)
+    status, msg_retorno = cancela_nfe(request, nfe, empresa)
 
     if status == 135:
         nfe.Cancelar = False
@@ -1119,7 +1122,7 @@ def gerar_gnre(request):
 
             # time.sleep(5)
 
-            status_busca_gnre = busca_gnre(nfe, empresa, nro_recibo, receita)
+            status_busca_gnre = busca_gnre(request, nfe, empresa, nro_recibo, receita)
 
             if status_busca_gnre == 402:
                 return JsonResponse({'erro': False, 'status': 100, 'mensagem': 'GNRE gerado com sucesso!'})
@@ -1543,6 +1546,7 @@ def acerta_nfe(request):
     if request.method == 'POST':
         id_nfe = request.POST.get('id_nfe', 0)
         empresa_filial = request.POST.get('empresa_filial', '')
+        tipo = request.POST.get('tipo', '')
 
         try:
             empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
@@ -1554,32 +1558,57 @@ def acerta_nfe(request):
             nfe = nome_tabela.objects.get(id_nfe=id_nfe)
         except nome_tabela.DoesNotExist:
             return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal não encontrada!'})
-        
-        diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizado').first()
-        xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
-
-        if not Path(xml_autorizado).is_file():
-            return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML não encontrado!'})
 
         cursor = connection.cursor()
 
         cursor.execute("SELECT TOP 1 usuario FROM NFe_Auditoria_400 WHERE pedido = %s AND NF = %s AND Status = %s AND usuario NOT IN(%s,%s) ORDER BY data_historico DESC", [nfe.Pedido, nfe.ide_nNF, 'NFe não enviada', 'sa', 'srv-nfe'])
         result = cursor.fetchone()
 
-        cursor.execute("EXEC AS LOGIN=%s; EXEC Base_NFE.dbo.acertaNFe %s, %s", [result[0], diretorio.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
+        if tipo.lower() == 'autorizado':
+            if nfe.status_sefaz != 'NFe não enviada' and 'Lote' not in nfe.status_sefaz and 'Aut' not in nfe.status_sefaz:
+                return JsonResponse({'erro': True, 'mensagem': 'Não foi possível acertar a NF-e! Verifique o status da NF-e!'})
+
+            diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlAutorizado').first()
+            xml_autorizado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procNFe.xml')
+
+            if not Path(xml_autorizado).is_file():
+                return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML Autorizado não encontrado!'})
+            
+            cursor.execute("EXEC AS LOGIN=%s; EXEC Base_NFE.dbo.acertaNFe %s, %s", [result[0], diretorio.Diretorio, nfe.ide_nNF + '-procNFe.xml'])
+
+            if int(nfe.ide_mod) == 65:
+                cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF, 65])
+            elif int(nfe.ide_mod) == 55:
+                if int(nfe.Pedido) < 100000000:
+                    cursor.execute("EXEC AS LOGIN=%s; EXEC GreenMotor.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+                else:
+                    cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
+        elif tipo.lower() == 'cce':
+            if 'Aut' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz:
+                return JsonResponse({'erro': True, 'mensagem': 'Não foi possível acertar a NF-e! Verifique o status da NF-e!'})
+            
+            diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlcce').first()
+            xml_cce = Path(diretorio.Diretorio + nfe.ide_nNF + '-procCCe.xml')
+
+            if not Path(xml_cce).is_file():
+                return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML CC-e não encontrado!'})
+            
+            cursor.execute("EXEC AS LOGIN=%s; EXEC Base_NFE.dbo.acertaNFe_CCE %s, %s", [result[0], diretorio.Diretorio, nfe.ide_nNF + '-procCCe.xml'])
+        elif tipo.lower() == 'cancelado':
+            if 'Aut' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz and 'Canc' not in nfe.status_sefaz:
+                return JsonResponse({'erro': True, 'mensagem': 'Não foi possível acertar a NF-e! Verifique o status da NF-e!'})
+            
+            diretorio = Diretorio.objects.filter(CNPJ=empresa.emit_CNPJ, TipoArquivo='xmlCancelado').first()
+            xml_cancelado = Path(diretorio.Diretorio + nfe.ide_nNF + '-procCancNFe.xml')
+
+            if not Path(xml_cancelado).is_file():
+                return JsonResponse({'erro': True, 'mensagem': 'Arquivo XML Cancelado não encontrado!'})
+            
+            cursor.execute("EXEC AS LOGIN=%s; EXEC Base_NFE.dbo.acertaNFe_Cancelamento %s, %s", [result[0], diretorio.Diretorio, nfe.ide_nNF + '-procCancNFe.xml'])
+
         connection.commit()
-
-        nfe.refresh_from_db()
-
-        if int(nfe.ide_mod) == 65:
-            cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF, 65])
-        elif int(nfe.ide_mod) == 55:
-            if int(nfe.Pedido) < 100000000:
-                cursor.execute("EXEC AS LOGIN=%s; EXEC GreenMotor.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
-            else:
-                cursor.execute("EXEC AS LOGIN=%s; EXEC Lanmax.dbo.Pedido_07Fatura %s, %s", [result[0], nfe.Pedido, nfe.ide_nNF])
-
         cursor.execute('REVERT;')
+        nfe.refresh_from_db()
 
         nfe_lista = list(nome_tabela.objects.filter(id_nfe=id_nfe).values('id_nfe', 'status_sefaz', 'cStat', 'xMotivo', 'nProt', 'nProtEvento', 'digVal', 'dhRecbto', 'tpEvento'))
 

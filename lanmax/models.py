@@ -77,6 +77,7 @@ class Pedido(models.Model):
     gnre_protocolo = models.CharField(max_length=20, null=True, db_column='GNRE_Protocolo')
     difal_protocolo = models.CharField(max_length=20, null=True, db_column='DIFAL_Protocolo')
     fcp_protocolo = models.CharField(max_length=20, null=True, db_column='FCP_Protocolo')
+    cod_oper = models.IntegerField(null=False, default=True, db_column='CodOper')
 
     class Meta:
         managed = False

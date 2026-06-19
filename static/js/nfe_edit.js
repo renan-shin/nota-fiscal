@@ -78,10 +78,53 @@ $('#calculoTotais').on('click', function() {
 })
 
 $('#btnAcertaNFe').on('click', function() {
-    acertaNFe();
+    $('#dialogModal').attr('class', 'modal-dialog');
+    $('#pdfFrame').remove();
+    $('#nfeAutorizado').remove();
+    $('#nfeCCe').remove();
+    $('#nfeCancelamento').remove();
+    $('#modalGenerico .modal-body').append(
+        "<div class 'form-check'>" +
+            "<input class='form-check-input' type='radio' name='acertaNFe' id='nfeAutorizado' value='Autorizado'>" +
+            "<label class='form-check-label' for='nfeAutorizado'>&nbsp;Autorizado</label>" +
+        "</div>" +
+        "<div class 'form-check'>" +
+            "<input class='form-check-input' type='radio' name='acertaNFe' id='nfeCCe' value='CCe'>" +
+            "<label class='form-check-label' for='nfeCCe'>&nbsp;CC-e</label>" +
+        "</div>" +
+        "<div class 'form-check'>" +
+            "<input class='form-check-input' type='radio' name='acertaNFe' id='nfeCancelamento' value='Cancelado'>" +
+            "<label class='form-check-label' for='nfeCancelamento'>&nbsp;Cancelado</label>" +
+        "</div>"
+    )
+    $('#modalGenericoLabel').html('Pedido ' + pedido + ' NF-e ' + ide_nnf);
+    $('#btnAcerta').remove();
+
+    const botaoAcerta = document.createElement('button');
+    const footerModal = document.getElementById('footerModal');
+
+    botaoAcerta.textContent = 'Acertar';
+    botaoAcerta.id = 'btnAcerta';
+    botaoAcerta.className = 'btn btn-success';
+
+    botaoAcerta.addEventListener('click', function() {
+        const tipoAcerta = $("input[name='acertaNFe']:checked").val();
+        acertaNFe(tipoAcerta);
+    })
+
+    footerModal.prepend(botaoAcerta);
+    $('#modalGenerico').modal('show');
 })
 
-async function acertaNFe() {
+async function acertaNFe(tipo) {
+    if(!tipo) {
+        $('#modalGenerico .modal-body .text-danger').remove();
+        $('#modalGenerico .modal-body .text-success').remove();
+        $('#modalGenerico .modal-body').append("<p class='text-danger'>Selecione uma opção!</p>");
+        $('#modalGenerico .modal-title').html('Erro Acerta NF-e');
+        return;
+    }
+
     $('#overlay').fadeIn();
 
     try {
@@ -91,18 +134,18 @@ async function acertaNFe() {
                 'Content-type': 'application/x-www-form-urlencoded',
                 //'X-CSRFToken': csrfToken,
             },
-            body: "empresa_filial=" + empresa + "&id_nfe=" + id_nfe
+            body: "empresa_filial=" + empresa + "&id_nfe=" + id_nfe + "&tipo=" + tipo
         });
 
         if(!response.ok) {
             throw new Error('Erro na requisição!');
         }
     } catch(error) {
-        $('#dialogModal').attr('class', 'modal-dialog')
+        $('#modalGenerico .modal-body .text-danger').remove();
+        $('#modalGenerico .modal-body .text-success').remove();
         $('#modalGenerico .modal-body').append("<p class='text-danger'>" + error + "</p>");
         $('#overlay').fadeOut();
         $('#modalGenerico .modal-title').html('Erro Acerta NF-e')
-        $('#modalGenerico').modal('show');
     } finally {
         var dados = await response.json();
         $('#modalGenerico .modal-title').html('');
@@ -115,16 +158,16 @@ async function acertaNFe() {
             $('#data-horareceb').val(dados.nfe.dhRecbto);
             $('#tipo-evento').val(dados.nfe.tpEvento);
 
-            $('#dialogModal').attr('class', 'modal-dialog')
+            $('#modalGenerico .modal-body .text-danger').remove();
+            $('#modalGenerico .modal-body .text-success').remove();
             $('#modalGenerico .modal-body').append("<p class='text-success'>" + dados.mensagem + "</p>");
             $('#modalGenerico .modal-title').html('Acerta NF-e')
-            $('#modalGenerico').modal('show');
             recarregar_pagina = true;
         } else {
-            $('#dialogModal').attr('class', 'modal-dialog')
+            $('#modalGenerico .modal-body .text-danger').remove();
+            $('#modalGenerico .modal-body .text-success').remove();
             $('#modalGenerico .modal-body').append("<p class='text-danger'>" + dados.mensagem + "</p>");
             $('#modalGenerico .modal-title').html('Erro Acerta NF-e')
-            $('#modalGenerico').modal('show');
         }
 
         $('#overlay').fadeOut();

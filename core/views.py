@@ -178,6 +178,7 @@ def nfe_edit(request, empresa_filial, id_nfe):
         logradouro_dest = request.POST.get('logradouro_dest', '')
         numero_dest = request.POST.get('numero_dest', '')
         cpl_dest = request.POST.get('cpl_dest', '')
+        bairro_dest = request.POST.get('bairro', '')
         estado = request.POST.get('estado', '')
         opcao_modfrete = request.POST.get('opcao_modfrete', '')
         cnpj_transp = request.POST.get('cnpj_transp', '')
@@ -198,6 +199,8 @@ def nfe_edit(request, empresa_filial, id_nfe):
         xjust = request.POST.get('xjust', '')
         entrega_nro = request.POST.get('numero_entrega', '')
         entrega_cpl = request.POST.get('complemento_entrega', '')
+        entrega_cmun = request.POST.get('cmun_entrega', '')
+        entrega_xmun = request.POST.get('xmun_entrega', '')
 
         if nfe.status_sefaz != 'NFe não enviada' and int(nfe.ide_mod) == 55 and opcao_envio_email not in('0','1','2','3'):
             messages.error(request, 'Opção de envio de e-mail inválida!')
@@ -329,6 +332,7 @@ def nfe_edit(request, empresa_filial, id_nfe):
             nfe.dest_nro = numero_dest
             nfe.dest_xCpl = cpl_dest
             nfe.dest_fone = fone_dest
+            nfe.dest_xBairro = bairro_dest
             nfe.dest_CEP = cep_dest.replace('-','')
             nfe.status_sefaz = status
             nfe.Transmitir = transmitir
@@ -356,6 +360,8 @@ def nfe_edit(request, empresa_filial, id_nfe):
                 nfe.transporta_UF = uf_transp
                 nfe.entrega_nro = entrega_nro
                 nfe.entrega_xCpl = entrega_cpl
+                nfe.entrega_cMun = entrega_cmun
+                nfe.entrega_xMun = entrega_xmun
         else:
             if nfe.status_sefaz == 'NFe não enviada':
                 nfe.dest_eMail = email_cliente
