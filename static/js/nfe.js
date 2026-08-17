@@ -139,11 +139,11 @@ tabela.on('click', 'tbody tr', (e) => {
 })
 
 $('#notas-fiscais tbody').on('dblclick', 'tr', function() {
-    const prefixo_url = url.split('/').slice(0, 1).join('/');
+    const prefixo_url = url.split('/').slice(0, 2).join('/');
     let id_nfe = tabela.row(this).id();
     let empresa_filial = empresas.value;
 
-    window.open(prefixo_url + '/' + empresa_filial + '/' + id_nfe + '/nfe-edit/', '_blank');
+    window.open(prefixo_url + '/' + empresa_filial + '/' + id_nfe + '/edit/', '_blank');
 })
 
 empresas.addEventListener('change', function() {
@@ -160,7 +160,7 @@ function limpaFiltros() {
 function atualizaDataTable(cod_empresa) {
     tabela.ajax.url('../api/notas-fiscais/' + cod_empresa).load();
 
-    fetch('../api/status-disponiveis/' + cod_empresa)
+    fetch('../api/status-disponiveis/n/' + cod_empresa)
     .then(res => {return res.json();})
     .then(dados => {
         var lista_status = document.getElementById('status')
@@ -194,7 +194,7 @@ $('#btnStatus').on('click', function() {
 async function consulta_status() {
     //var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
     var empresa = empresas.value;
-    var url = 'api/consulta-status/' + empresa;
+    var url = '../api/consulta-status/' + empresa + '/n';
 
     $('#overlay').fadeIn();
 

@@ -180,7 +180,7 @@ def consulta_webhook():
     conta_lanmax = Conta.objects.using('lanmax').get(Conta='Infin-I')
     # url = "https://secure.api.itau/pix_recebimentos/v2/cob/39af27ad2d4a46a8bc51c0d6caa2ce4f"
     # url = "https://secure.api.itau/pix_recebimentos/v2/pix/0c27c10e292743c7a981b202f1217059"
-    url = "https://secure.api.itau/pix_recebimentos/v2/webhook/33833717000173"
+    url = "https://secure.gateway.api.itau/pix_recebimentos/v2/webhook/33833717000173"
     token_itau = get_token_itau(6100)
 
     headers = {
@@ -196,10 +196,10 @@ def consulta_webhook():
     print(r.status_code, r.text)
 
 def consulta_pix_by_id():
-    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Starte-I')
+    conta_lanmax = Conta.objects.using('lanmax').get(Conta='Lib-I')
     # url = "https://secure.api.itau/pix_recebimentos/v2/cob/20253646000209F64A4DA4C29B4B7860E6F"
-    url = "https://secure.api.itau/pix_recebimentos/v2/pix/2025369373EB666B8111046F682CC8F94F2"
-    token_itau = get_token_itau(1001)
+    url = "https://secure.gateway.api.itau/pix_recebimentos/v2/pix/2026341224F30724B800B441DA30765807F"
+    token_itau = get_token_itau(2800)
 
     headers = {
         'Content-Type': 'application/json',
@@ -212,16 +212,16 @@ def consulta_pix_by_id():
     print(r.status_code, r.text)
 
     if r.status_code == 200:
-        with open("C:\\Users\\rmizukosi\\Desktop\\pix_consulta.txt", 'w', encoding='utf-8') as f:
+        with open("C:\\Users\\rmizukosi.GRUPOLANMAX\\Desktop\\pix_consulta.txt", 'w', encoding='utf-8') as f:
             f.write(r.text)
 
 def consulta_pix(conta):
     conta_lanmax = Conta.objects.using('lanmax').get(Conta=conta)
     # empresa = EmpresaFilial.objects.using('lanmax').get(empresa_filial=conta_lanmax.Empresa)
     # id_conta = f'60701190{str(conta_lanmax.Ag).zfill(4)}{str(conta_lanmax.CC).zfill(13)}'
-    url = "https://secure.api.itau/pix_recebimentos/v2/pix?inicio=2025-08-25T00:00:00Z&fim=2025-08-31T23:59:59Z"
-    # url = "https://secure.api.itau/pix_recebimentos/v2/cobv?inicio=2025-08-25T07:00:00Z&fim=2025-08-25T23:59:59Z"
-    # url = "https://secure.api.itau/pix_recebimentos_conciliacoes/v2/lancamentos_pix?id_conta="+id_conta+"&chaves="+empresa.cnpj+"&data_criacao_lancamento=2025-08-25T07:00,2025-08-25T23:59"
+    url = "https://secure.gateway.api.itau/pix_recebimentos/v2/pix?inicio=2025-08-25T00:00:00Z&fim=2025-08-31T23:59:59Z"
+    # url = "https://secure.gateway.api.itau/pix_recebimentos/v2/cobv?inicio=2025-08-25T07:00:00Z&fim=2025-08-25T23:59:59Z"
+    # url = "https://secure.gateway.api.itau/pix_recebimentos_conciliacoes/v2/lancamentos_pix?id_conta="+id_conta+"&chaves="+empresa.cnpj+"&data_criacao_lancamento=2025-08-25T07:00,2025-08-25T23:59"
     token_itau = get_token_itau(conta_lanmax.Empresa)
     
     headers = {
@@ -270,7 +270,7 @@ def gerar_chave_pix(cod_pedido, num_parcela):
 
         txid = f'{str(cod_pedido)}{uuid.uuid4().hex[:26].upper()}'
         conta_lanmax = Conta.objects.using('lanmax').get(Conta=titulo_pix.get('conta'))
-        url = "https://secure.api.itau/pix_recebimentos/v2/cobv/" + txid
+        url = "https://secure.gateway.api.itau/pix_recebimentos/v2/cobv/" + txid
         token_itau = get_token_itau(conta_lanmax.Empresa)
 
         vencimento_formatado = titulo_pix.get('vencimento').strftime('%Y-%m-%d')
@@ -308,7 +308,7 @@ def gerar_chave_pix(cod_pedido, num_parcela):
 
 def cancelar_chave_pix():
     conta_lanmax = Conta.objects.using('lanmax').get(Conta='Lib-I')
-    url = "https://secure.api.itau/pix_recebimentos/v2/cob/202611557AB5B0369231941D2B3312FF36B"
+    url = "https://secure.gateway.api.itau/pix_recebimentos/v2/cob/202611557AB5B0369231941D2B3312FF36B"
     token_itau = get_token_itau(2800)
 
     print(url)

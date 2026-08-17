@@ -1,0 +1,456 @@
+MDFe_Util.DLL - Bibilioteca de utilidades para o MDF-e
+
+4.0.0a  - 2026-06-18
+
+  - correção na geração dos indicadores operacionais - ANTT_InfIndicadoresOperacionais
+  - correção da geração do número do CIOT no ambiente de produção  - ANTT_GeraCIOT
+
+4.0.0   - 2026-06-05
+
+- CNPJ alfanumérico
+  - public int CriaChaveNFe2G(string cUF, string Ano, string Mes, string CNPJ, string modelo, string serie, string numero, string tpEmis, string codigoSeguranca, out string msgResultado, out string cNF, out string cDV, out string chaveNFe)
+  - Código Barras chave de acesso com CNPJ alfanumérico
+
+  - ANTT_GeraCIOT - gerar número do CIOT
+     string ANTT_GeraCIOT(int tpAmb, string nomeCertificado, string CpfCnpj, out int cStat, out string msgResultado, out string msgDados, out string CIOT, out string DataGeracao, out string Mensagem)
+
+   - ANTT_ConsultaSitTransp - consultar situação da Transportadora
+
+     string ANTT_ConsultaSitTransp(int tpAmb, string nomeCertificado, string CpfCnpjInteressado, string CpfCnpjTransportador, string RNTRCTransportador, out int cStat, out string msgResultado, out string msgDados, out string NomeRazaoSocialTransportador, out string RNTRCAtivo, out string Mensagem, out string Procotolo, out string Codigo, out string TipoTransportador, out string EquiparadoTAC)
+
+   - ANTT_ConsultaFrotaTransp - consultar frota da Transportadora
+
+     string ANTT_ConsultaFrotaTransp(int tpAmb, string nomeCertificado, string CpfCnpjInteressado, string CpfCnpjTransportador, string RNTRCTransportador, string Placas, out int cStat, out string msgResultado, out string msgDados, out string NomeRazaoSocialTransportador, out string RNTRCAtivo, out string Mensagem, out string Procotolo, out string Codigo, out string Frota)
+
+   - ANTT_DeclaraOpeTransp - declarar operação de transporte
+
+     string ANTT_DeclaraOpeTransp(int tpAmb, string nomeCertificado, string Declaracao, out int cStat, out string msgResultado, out string msgDados, out string IdOperacaoTransporte, out string CodigoVerificador, out string Protocolo, out string Codigo, out string Mensagem, out string AvisoTransportador)
+
+   - ANTT_CancelaOpeTransp - cancelar operação de transporte
+
+     string ANTT_CancelaOpeTransp(int tpAmb, string nomeCertificado, string CIOT16, string MotivoCancelamento, out int cStat, out string msgResultado, out string msgDados, out string DataCancelamento, out string Protocolo, out string Codigo, out string Mensagem)
+
+   - ANTT_RetificaOpeTransp - retificar operação de transporte
+
+     string ANTT_RetificaOpeTransp(int tpAmb, string nomeCertificado, string Retificacao, out int cStat, out string msgResultado, out string msgDados, out string DataRetificacao, out string Protocolo, out string Codigo, out string Mensagem)
+
+   - ANTT_EncerraOpeTransp - encerrar operação de transporte
+
+     string ANTT_EncerraOpeTransp(int tpAmb, string nomeCertificado, string Encerramento, out int cStat, out string msgResultado, out string msgDados, out string DataEncerramento, out string Protocolo, out string Codigo, out string Mensagem)
+
+   - ANTT_ConsultaExcecao - consultar exceção
+
+     string ANTT_ConsultaExcecao(int tpAmb, string nomeCertificado, string CpfCnpjTransportador, out int cStat, out string msgResultado, out string msgDados, out string Flag,out string Codigo, out string Mensagem)
+
+   - ANTT_ConsultaCIOTGerado - consultar CIOT gerado
+
+     string ANTT_ConsultaCIOTGerado(int tpAmb, string nomeCertificado, string CIOT12, int AnoDeclaracao, out int cStat, out string msgResultado, out string msgDados, out string Mensagem, out string Codigo, out string CIOT16)
+
+  - cria dados do veículo
+
+     string ANTT_Veiculo(string Placa, string RNTRC, string NumeroEixos)
+
+  - cria grupo de informações da origem e destino da carga
+
+     string ANTT_OrigemDestino(string CodigoMunicipioOrigem, string CepOrigem, string LatitudeOrigem, string LongitudeOrigem, string CodigoMunicipioDestino, string CepDestino, string LatitudeDestino, string LongitudeDestino, string DistanciaPercorrida)
+
+  - cria grupo de dados da carga
+
+     string ANTT_DadosCarga(string CodigoNaturezaCarga, string PesoCarga, string CodigoTipoCarga, string ContratantesCargFrac)
+
+  - cria grupo de informações do pagamento do frete
+
+     string ANTT_InfPagamento(string TipoPagamento, string CodigoInstituicaoFinanceira, string NumeroAgencia, string NumeroConta, string ChavePix, string CpfCnpjCreditado, string CodigoPagamento, string IdentificadorPix, string IndPagamento, string NumeroParcela, string DataVencimento, string ValorParcela)
+
+   - cria grupo de indicadores operacionais
+
+     string ANTT_InfIndicadoresOperacionais(string IndAltoDesempenho, string IndRetornoVazio, string ComposicaoVeicular)
+
+   - cria declaração de operação de transporte
+
+     string ANTT_Declaracao(string IdOperacaoTransporte, string TipoOperacao, string CpfCnpjContratado, string RNTRCContratado, string CpfCnpjContratante, string RNTRCContratante,
+
+   - cria informação de retificação
+
+     string ANTT_Retificacao(string CIOT16, string ValorFrete, string DataFimViagem, string OrigemDestino, string CodigoNaturezaCarga, string PesoCarga, string CodigoTipoCarga)
+
+    - cria grupo origem destino para retificação
+
+     string ANTT_OrigemDestinoRetificacao(string CodigoMunicipioOrigem, string CepOrigem, string LatitudeOrigem, string LongitudeOrigem, string CodigoMunicipioDestino, string CepDestino, string LatitudeDestino, string LongitudeDestino)
+
+    - cria informação de encerramento
+
+     string ANTT_Encerramento(string CIOT16, string OrigemDestinoEncerramento, string PesoTotalCarga)
+
+    - cria grupo origem destino para encerramento
+
+     string ANTT_OrigemDestinoEncerramento(string CodigoMunicipioOrigem, string CepOrigem, string LatitudeOrigem, string LongitudeOrigem, string CodigoMunicipioDestino, string CepDestino, string LatitudeDestino, string LongitudeDestino, string DistanciaPercorrida, string QtdViagens)
+
+    - formata Json
+
+     string formataJson(string Json)]
+
+     - [MOSTRACIOT] -> geraPDFDAMDFE - opção para mostrar o(s) CIOT(s) no quadro de observações
+
+     - RNTRC - eliminação do limite máximo de 8 dígitos
+
+3.0.10f - 2026-04-08
+
+       - remoção do limite de 12 dígitos do CIOT do grupo infCIOT 
+
+3.0.10e - 2025-12-01
+
+      - correção para não gerar o CIOT quando não informado nenhum conteúdo
+
+3.0.10d - 2025-09-29
+
+      - alteração da validação do schema XML
+
+3.0.10c - 2025-07-03
+
+      - alteração para não tratar o cStat=301 e cStat=302 como denegação de uso no enviaMDFe
+      - atualização dos schemas XML
+
+3.0.10b - 2025-03-13
+
+      - correção para gerar a tag idCSRT com 3 dígitos no infRespTec2
+
+3.0.10a - 2025-01-08
+
+     - correção da path de localização do SumatraPDF na visualização/impresssão do DANFE
+
+3.0.10  - 2024-11-08
+
+     - infCTe para aceitar o grupo de informação das NFe entregues na prestação parcial do CT-e
+
+       string infCTe_NT2024002(string chCTe, string SegCodBarra_Opc, string indReentrega_Opc, string infUnidTransp_Grupo_Opc, string peri_Grupo_Opc, string infEntregaParcial_Opc, string infNFePrestParcial_Opc)
+
+     - informa chave da NFe entregues na prestação parcial do CTe
+
+       string infNFePrestParcial(string chNFe)
+
+3.0.9.a - 2024-08-16
+
+    - mudança na formatação de valores
+
+3.0.9 - 2024-06-12
+
+    - criaProcMDFe -> tenta montar o procMDFe a partir do MDFe assinado.
+
+      string CriaProcMDFe(string siglaWS, ref string MDFeAssinado, out string protocolo, out int resultado, string nomeCertificado, out string msgResultado, string proxy, string usuario, string senha)
+
+    - [RELACIONADFE]´-> listar as NF-e e CT-e no DAMDFE
+
+    - mostra o RNTRC de veículo próprio no DAMDFE
+
+3.0.8e - 2024-05-06
+
+ - eliminação da validação do tipo autorizador do nRec do buscaMDFe
+
+
+3.0.8d - 2024-04-19
+
+ - alteração da compactação gZip para tratar caracteres multibyte
+
+3.0.8c - 2023-02-16
+
+ - inclusão do separador de milhar na quantidade da carga (vCarga). 
+ - alteração para o MontaProcMDFe aceitar a versão 3.00
+
+
+3.0.8b - 2022-07-29
+
+ - alteração para forçar o algoritmo de assinatura para sha1 no processo de assinatura digital
+ 
+3.0.8a - 2022-06-02
+
+ - alteração para forçar o digest method = sha1 no processo de assinatura digital
+
+3.0.8 - 2022-03-09 NT 2022/001
+
+ - acréscimo das tags NroContrato e vContraGlobal no grupo infContrato
+
+   infCont_NT2022001(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string NroContrato, double vContratoGlobal)
+
+ - acréscimo das tags indAntecipaAdiant e tpAntecip no grupo infPag
+
+   infPag_NT2022001(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string Comp, double vContrato, string indPag, string infPrazo, string codBanco, string codAgencia, string CNPJIPEF, string PIX, string indAltoDesemp_Opc, double vAdiant_Opc, string indAntecipaAdiant_Opc, string tpAntecip_Opc)
+
+ - evento confirmação do Serviço de transporte
+
+   confServ(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string chaveMDFe, string nProt, string dhEvento, int nSeq, out string nProtConfServ, out string dProtConfServ, string proxy, string usuario, string senha, string licenca)
+
+ - evento alteração do pagamento do serviço de transporte
+
+   altPagtoOper(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string chaveMDFe, string nProt, string infPag, string dhEvento, int nSeq, out string nProtAltPagtoOper, out string dProtAltPagtoOper, string proxy, string usuario, string senha, string licenca)
+
+
+ 3.0.7b - 2021-11-16 - DAMDFE
+
+  - Alteração para gerar o DAMDFE emitido em contingência com autorização de uso.
+
+  - modificação no schema XML do MDF-e para validar os modais.
+
+ 3.0.7a - 2021-05-26 - NT 2021/002
+
+  - alteração para vAdiant não ser gerada quando valor <=0  no grupo infPag
+
+    infPag_NT2021002(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string Comp, double vContrato, string indPag, string infPrazo, string codBanco, string codAgencia, string CNPJIPEF, string PIX, string indAltoDesemp_Opc, double vAdiant_Opc)
+
+ 3.0.7 - 2021-04-21 - NT 2021/002
+
+  - acréscimo das tags: vAdiant  no grupo infPag
+
+    infPag_NT2021002(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string Comp, double vContrato, string indPag, string infPrazo, string codBanco, string codAgencia, string CNPJIPEF, string PIX, string indAltoDesemp_Opc, double vAdiant)
+
+ 3.0.6 - 2021-03-23 - NT 2021/001
+
+   Novas funcionalidades para atender as alterações da Nota Técnica 2021.001
+
+   - acréscimo da tag: tpValePed  no grupo disp
+
+     string disp_NT2021001(string CNPJForn,string CNPJPg,string CPFPg, string nCompra, string vValePed,  string tpValePed)
+
+   - acréscimo da tag: categCombVeic  no grupo valePed
+  
+     string valePed_NT2021001(string disp,string categCombVeic_Opc)
+
+   - alteração no tratamento do valePed no grupo infANTT
+
+     string infANTT_NT2021001(string RNTRC_Opc, string infCIOT_Grupo_Opc, string valePed_Grupo_Opc, string infContratnte_Grupo_Opc, string infPag_Grupo_Opc)
+
+   - acréscimo das tags: PIX e indAltoDesemp  no grupo infPag
+  
+     string infPag_NT2021001(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string Comp, double vContrato, string indPag, string infPrazo, string codBanco, string codAgencia, string CNPJIPEF, string PIX,string indAltoDesemp_Opc)
+
+   - alteração para não gerar a tag UF quando não informada
+
+     string veicReboque_v3(string cInt_Opc, string placa, string RENAVAM_Opc, string tara, string capKG, string capM3_Opc, string prop_Grupo_Opc, string tpCar, string UF)
+	
+   - alteração para não gerar a tag UF quando não informada
+  
+     string veicReboque_v3(string cInt_Opc, string placa, string RENAVAM_Opc, string tara, string capKG, string capM3_Opc, string prop_Grupo_Opc, string tpCar, string UF)
+
+ 3.0.5c - 2020-08-11
+
+         - correção na validação de CPF que é válido como CNPJ quando informado com 14 dígitos
+
+ 3.0.5b - 2020-07-14
+
+         - correção na exibição dos dados do vale pedágio do DAMDFE 
+ 
+ 3.05a - 2020-03-12
+
+         - correção na geração do evento incPagtoOper
+         - alteração para sempre gerar o grupo infPag
+         - alteração para sempre gerar a tag indPag
+
+ 3.05  - 2020-02-25
+
+         Novas funcionalidades para atender a Nota Técnica 2020.001
+
+         1. grupo prodPred
+         =========================================================================================
+
+         string infLotacao(string LC_CEP, double LC_latitude, double LC_longitude, string LD_CEP, double LD_latitude, double LD_longitude)
+         string prodPred(string tpCarga, string xProd, string cEAN_Opc, string NCM_Opc,  string infLotacao_Opc)
+         string MDFe_NT2020001(string versao, string Id, string ide_Grupo, string emit_Grupo, string infModal_Grupo, string infDoc_Grupo, string seg_Grupo_Opc, string tot_Grupo, string lacres_Grupo_Opc, string autXML_Grupo_Opc, string infAdic_Grupo_Opc, string infRespTec_Opc, string infMDFeSupl_Opc, string prodPred_Opc)
+
+         2. grupo infContratante
+         =========================================================================================
+
+         String infCont_NT2020001(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro)
+
+         3. grupo infpag
+         =========================================================================================
+
+         string Comp(string tpComp, double vComp, string xComp_Opc)
+         string infPrazo(string nParcela_Opc,DateTime dVenc_Opc, double vParcela)
+         string infPag(string xNome_Opc, string CPF, string CNPJ, string idEstrangeiro, string Comp, double vContrato, string indPag, string infPrazo, string codBanco, string codAgencia, string CNPJIPEF)
+         string infANTT_NT2020001(string RNTRC_Opc, string infCIOT_Grupo_Opc, string valePed_Grupo_Opc, string infContratnte_Grupo_Opc, string infPag_Grupo_Opc)
+
+         4. evento Pagamento da Operação de Transporte
+         =========================================================================================
+
+         string incPagtoOper(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string chaveMDFe, string nProt, int qtdViagens, int nroViagem, string infPag_Opc, string dhEvento, int nSeq, out string nProtPagtoOper, out string dProtPagtoOper, string proxy, string usuario, string senha, string licenca)
+
+
+ 3.0.4f - 2020-02-01
+
+     . correção no DAMDFE do modal aquaviário
+
+ 3.0.4e - 2019-10-14
+
+     . acrescentado opção para gerar pdf do DAMDFE do modal aquaviário
+
+ 3.0.4d - 2019-09-17
+
+     . acrescentado opção para gerar pdf do DAMDFE do modal áereo
+
+     . tratamento na geração do DAMDFE para quando inexistir infAdic no XML
+
+
+
+ 3.0.4c - 2019-09-17
+
+     . opção para gerar pdf do DAMDFE do modal rodoviário
+
+       int geraPdfDAMDFE(string XML, string logo, string visualizar, string parametros, out string msgResultado);
+
+ 3.0.4b - 2019-07-25
+
+     . correção da validação da licença no envioMDFe
+
+
+ 3.0.4a - 2019-07-24
+
+     . correção da funcionalidade com acréscimo do grupo infRespTec
+
+       string MDFe_v3a(string versao, string Id, string ide_Grupo, string emit_Grupo, string infModal_Grupo, string infDoc_Grupo, string seg_Grupo_Opc, string tot_Grupo, string lacres_Grupo_Opc, string autXML_Grupo_Opc, string infAdic_Grupo_Opc, string infRespTec_Opc, string infMDFeSupl_Opc);
+
+
+ 3.0.4 -  2019-07-23
+
+     . nova funcionalidade para gerar o grupo ide com as novas tags indCanalVerde e indCarregaPosterior
+
+        string ide_v3a(int cUF, int tpAmb, int tpEmit, string tpTransp_opc, int mod, int serie, int nMDF, int cMDF, int cDV, int modal, string dhEmi, int tpEmis, string procEmi, string verProc, string UFIni, string UFFim, string infMunCarrega_Grupo, string infPercurso_Grupo_Opc, string dhIniViagem_Opc, string indCanalVerde_Opc, string indCarregaPosterior_Opc);
+
+     . nova funcionalidade para gerar o grupo infMDFeSupl (qrCode)
+
+        string infMDFeSupl(string URL, string chaveMDFe, int tpAmb, string nomeCertificado, out string qrCode, out int resultado, out string msgResultado);
+
+     . nova funcionalidade para consolidar o MDF-e aceitando o grupo infMDFeSupl (qrCode)
+
+        string MDFe_v3a(string versao, string Id, string ide_Grupo, string emit_Grupo, string infModal_Grupo, string infDoc_Grupo, string seg_Grupo_Opc, string tot_Grupo, string lacres_Grupo_Opc, string autXML_Grupo_Opc, string infAdic_Grupo_Opc, string infMDFeSupl_Opc);
+
+     . nova funcionalidade para gerar a tag hashCSRT a partir da chave de acesso do MDFe
+
+        string infRespTec2(string CNPJ, string xContato, string email, string fone, string idCSRT, string CSRT, string chaveMDFe);
+
+     . implementado WS de envio Sincrono de MDFe
+
+        string EnviaMDFeSincrono(string siglaWS, string MDFe, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, out string protocolo, out string nroProtocolo, out string dhProtocolo, out string MDFeAssinado, string proxy, string usuario, string senha, string licenca);
+
+     . implementado o evento de inclusão de DF-e
+
+
+        string IncDFeMDFe(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string chaveMDFe, string nProt, string cMunCarrega, string xMunCarrega, string infDoc, string dhEvento, int nSeq, out string nProtocoloInc, out string dProtocoloInc, string proxy, string usuario, string senha, string licenca);
+       
+        string infDoc_v3a(string cMunDescarga, string xMunDescarga, string chNFe);
+    
+
+ 3.0.3b - 2018-10-04
+
+    . alteração para aceitar cUF=99 no evento de encerramento de MDF-e
+
+ 3.0.3a - 2018-09-20
+
+    . correção na validação do CNPJ nos casos em que o 11 dígitos da direita do CNPJ é CPF válido
+
+ 3.0.3 - 2018-09-08 - implementação das alterações previstas na NT 2018.002
+ 
+    . aceitar o uso do CPF (emissor PF) no WS do MDF-e
+    . aceitar CPF na geração do grupo emit do MDF-e
+    . grupo infEntregaParcial
+        string infEntregaParcial(string qtdTotal, string qtdParcial)
+    . grupo infCTe_NT2018002 alterado para aceitar infEntregaParcial
+        string infCTe_NT2018002(string chCTe, string SegCodBarra_Opc, string indReentrega_Opc, string infUnidTransp_Grupo_Opc, string peri_Grupo_Opc, string infEntregaParcial_Opc)
+    . grupo infRespTec
+        string infRespTec(string CNPJ, string xContato, string email, string fone, string idCSRT_Opc, string hashCSRT_Opc)
+    . grupo MDFe_NT2018002 para aceitar infEmpresaSoft
+        string MDFe_NT2018002(string versao, string Id, string ide_Grupo, string emit_Grupo, string infModal_Grupo, string infDoc_Grupo, string seg_Grupo_Opc, string tot_Grupo, string lacres_Grupo_Opc, string autXML_Grupo_Opc, string infAdic_Grupo_Opc, string infRespTec_Opc)
+    . aceitar CPF na cricao da chave de acesso - CriaChaveDFe
+    . não aceitar espaço em branco no proxy
+    . atualização do schema XML (NT 2018/002)
+
+ 3.0.2  - 2018-01-14
+
+   . alteração para suportar  o TLS 1.2
+
+ 3.0.1c - 2017-05-18
+
+   . correção para gerar a tag nLacre no grupo lacRod
+   . alteração para elminar os caracteres especiais de quebra de linha da assinatura nos XML obtidos no distNSU
+   . correção para gerar as tags CNPJPg e CPFPg no grupo disp
+
+ 3.0.1b - 2017-04-12
+
+   . correção da tag infMDFe para infMDFeTransp no grupo de documentos vinculados
+   . Atualização do pacote de scehma XML
+   . correção para não gerar a tag CNPJ da seguradora quando não for informado o CNPJ
+   . correção para não gerar a tag RNTRC do grupo infANTT quando não for informado o RNTRC
+   . correção para gerar a tag de grupo do lacrerodoviários como lacRodo ao invés de lacRod
+
+ 3.01a - 2017-03-10
+
+   . correção da seguinte funcionalidades:
+
+     string infMunDescarga(string cMunDescarga, string xMunDescarga, string infCTe_Grupo_Opc, string infNFe_Grupo_Opc, string infMDFe_Grupo_Opc)
+
+ 3.01 - 2017-03-10
+
+   . acrécismo das seguintes funcionalidades:
+
+     string veicPrincipal_v3(string cInt_Opc, string placa, string RENAVAM_Opc, string tara, string capKG_Opc, string capM3_Opc, string prop_Grupo_Opc, string condutor_Grupo, string tpRod, string tpCar, string UF)
+     string veicReboque_v3(string cInt_Opc, string placa, string RENAVAM_Opc, string tara, string capKG, string capM3_Opc, string prop_Grupo_Opc, string tpCar, string UF)
+
+ 3.00 - 2017-02-24
+
+   . atualização para a versão 3.00 do leiaute da MDF-e
+
+ 1.2a - 2015-07-10
+
+  . atualização de schema XML - PL_MDFe_100a_NT032015.zip;
+  . alteração das URL dos WS;
+ 
+ 1.2   - 2015-01-03
+
+  . acréscimo da funcionalidade para consultar os MDF-e não encerrados
+
+  string ConsMDFeNaoEnc(string siglaWS, string siglaUF, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string CNPJ, out string cUF, out int qtdeMDFe, string proxy, string usuario, string senha, string licenca)
+
+ 1.1b  - 2014-02-21
+ 
+  . correção para informar o nSeq correto no XML do pedido de inclusão do condutor quando o nSeq for > 1 no IncCondutorMDFe
+  
+ 1.1a  - 2013-12-19
+  
+  . correção para gerar a tag qCarga do grupo tot com 4 decimais
+ 
+ 1.00a - 2013-11-07
+
+  . atualização do schema XML para NT_2013/004
+  . acréscimo das seguintes funcionalidades para geração do modal rodoviário:
+     string prop_v10a(string CPF, string CNPJ, string RNTRC, string xNome, string IE_Opc, string UF_Opc, int tpProp)
+     string veicPrincipal_v10a(string cInt_Opc, string placa, string tara, string capKG_Opc, string capM3_Opc, string prop_Grupo_Opc, string condutor_Grupo, string tpRod, string tpCar, string UF)
+     string veicReboque_v10a(string cInt_Opc, string placa, string tara, string capKG, string capM3_Opc, string prop_Grupo_Opc, string tpCar, string UF)
+  . acréscimo de novo evento de inclusão de condutor
+     string IncCondutorMDFe(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int resultado, out string msgResultado, string chaveMDFe, string nProtocolo, string CPF, string xNome, string dhEvento, int nSeq, out string nProtocoloInc, out string dProtocoloInc, string proxy, string usuario, string senha, string licenca)
+
+Versão: 1.00  - 2013/06/03
+
+  . atualização do schema XML para NT_2013/002
+  . alteração do nome da tag para veicPrincipal para veicTracao
+  .  acréscimo de novas funcionalidades para geração do grupo infUnidTransp
+      string infUnidTransp(string _tpUnidTransp, string _idUnidTransp, string _lacUnidTransp_Opc, string _infUnidCarga_Opc, string _qtdRat_Opc)
+      string lacUnidTransp(string _nLacre)
+      string infUnidCarga(string _tpUnidCarga, string _idUnidCarga, string _lacUnidCarga_Opc, string _qtdRat_Opc)
+      string lacUnidCarga(string _nLacre)
+      string infNFNovo(string _CNPJ, string _UF, string _nNF, string _serie, DateTime _dEmi, double _vNF, string _PIN_Opc, string _infUnidTransp_Opc)
+      string infNFeNovo(string _chNFe, string _SegCodBarra_Opc, string _infUnidTransp_Opc)
+      string infCTNovo(string _nCT, string _serie, string _subser_Opc, DateTime _dEmi, double _vCarga, string _infUnidTransp_Opc)
+      string infCTeNovo(string _chCTe, string _SegCodBarra_Opc, string _infUnidTransp_Opc)
+
+Versão: 0.00b - 2013-03-20
+
+   . atualização do schema XML - NT 2013/001
+
+
+Versão: 0.00a - 2012-11-27
+
+   . correção do tratamento do retorno do evento de cancelamento e encerramento.
+   . correção na geração da tag cMDF para considerar os zeros não significativos.
+
+Versão: 0.00 - 2012-10-15 - versão preliminar
+
+

@@ -1,0 +1,3 @@
+@echo registrando MDFe....
+%windir%\Microsoft.NET\Framework\v4.0.30319\regasm "%~dp0\MDFe_Util.dll" /tlb:"%~dp0\MDFe_Util.tlb"
+@pause

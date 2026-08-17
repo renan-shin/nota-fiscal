@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--                                                                         -->
+<!--  Tabela de url dos WS de Recepcao do MDF-e                              -->
+<!--                                                                         -->
+<!--  No momento o RS atende todas as UF                                     -->
+<!--                                                                         -->
+<!--                                                                         -->
+
+<URL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<FlexDocs>
+   <empresa>FlexDocs Documentos Eletronicos</empresa>
+   <versao>v1.03</versao>
+   <data>22-07-2019</data>
+   <gravaLog>true</gravaLog>
+   <validaCertificadoWS>false</validaCertificadoWS>
+</FlexDocs>
+<WS>
+<UF>
+    <sigla>RS</sigla>
+    <soapVersion>1.2</soapVersion>
+    <timeOut>300000</timeOut>
+    <homologacao>
+      <Recepcao>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFerecepcao/MDFeRecepcao.asmx</Recepcao>
+      <RetRecepcao>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeRetRecepcao/MDFeRetRecepcao.asmx</RetRecepcao>
+      <Consulta>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx</Consulta>
+      <StatusServico>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx</StatusServico>
+      <Evento>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeRecepcaoEvento/MDFeRecepcaoEvento.asmx</Evento>
+      <ConsMDFeNaoEnc>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeConsNaoEnc/MDFeConsNaoEnc.asmx</ConsMDFeNaoEnc>
+	  <RecepcaoSinc>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeRecepcaoSinc/MDFeRecepcaoSinc.asmx</RecepcaoSinc>
+    </homologacao>
+    <producao>
+      <Recepcao>https://mdfe.svrs.rs.gov.br/ws/MDFerecepcao/MDFeRecepcao.asmx</Recepcao>
+      <RetRecepcao>https://mdfe.svrs.rs.gov.br/ws/MDFeRetRecepcao/MDFeRetRecepcao.asmx</RetRecepcao>
+      <Consulta>https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx</Consulta>
+      <StatusServico>https://mdfe.svrs.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx</StatusServico>
+      <Evento>https://mdfe.svrs.rs.gov.br/ws/MDFeRecepcaoEvento/MDFeRecepcaoEvento.asmx</Evento>
+      <ConsMDFeNaoEnc>https://mdfe.svrs.rs.gov.br/ws/MDFeConsNaoEnc/MDFeConsNaoEnc.asmx</ConsMDFeNaoEnc>
+	  <RecepcaoSinc>https://mdfe.svrs.rs.gov.br/ws/MDFeRecepcaoSinc/MDFeRecepcaoSinc.asmx</RecepcaoSinc>
+    </producao>
+</UF>
+</WS>
+</URL>

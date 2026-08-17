@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<retConsStatServMDFe xmlns="http://www.portalfiscal.inf.br/mdfe" versao="1.00">
+  <tpAmb>2</tpAmb>
+  <verAplic>RS20120203160344</verAplic>
+  <cStat>107</cStat>
+  <xMotivo>Servico em Operacao</xMotivo>
+  <cUF>35</cUF>
+  <dhRecbto>2012-10-01T15:06:33</dhRecbto>
+  <tMed>1</tMed>
+</retConsStatServMDFe>

@@ -28,11 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'nfe_util',
     'api',
     'accounts',
     'lanmax',
     'utils',
+    'mdfe_util',
     'rest_framework',
     'rest_framework.authtoken', # Sistema de tokens nativo do DRF
 ]

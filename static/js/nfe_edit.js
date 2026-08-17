@@ -476,8 +476,14 @@ async function calcularTotaisNFe() {
     }
 }
 
-async function acaoNFe(url, token, acao) {
+async function acaoNFe(url, token, tem_justificativa) {
     $('#overlay').fadeIn();
+
+    if(tem_justificativa) {
+        parametros = 'empresa=' + empresa + '&id=' + id_nfe + '&justificativa=' + $('#justificativa').val();
+    } else {
+        parametros = 'empresa=' + empresa + '&id=' + id_nfe
+    }
 
     try {
         var response = await fetch(url, {
@@ -487,7 +493,7 @@ async function acaoNFe(url, token, acao) {
                 'Authorization': 'Token ' + token,
                 //'X-CSRFToken': csrfToken,
             },
-            body: "empresa=" + empresa + "&id=" + id_nfe
+            body: parametros
         });
 
         if(!response.ok) {
@@ -495,48 +501,69 @@ async function acaoNFe(url, token, acao) {
         }
         
     } catch(error) {
-        $('#dialogModal').attr('class', 'modal-dialog')
-        $('#modalGenerico .modal-body').append("<p class='text-danger'>" + error + "</p>");
+        alert(error);
         $('#overlay').fadeOut();
-        $('#modalGenerico .modal-title').html('Erro ' + acao)
-        $('#modalGenerico').modal('show');
+        $('#modalAcao').modal('hide');
     } finally {
         var dados = await response.json();
-        $('#modalGenerico .modal-title').html('');
-        $('#dialogModal').attr('class', 'modal-dialog')
 
-        if(dados.erro === false) {
-            $('#modalGenerico .modal-title').html('Retorno')
-            $('#modalGenerico .modal-body').append("<p class='text-success fw-bold'>" + dados.mensagem + "</p>");
-            $('#modalGenerico').modal('show');
-            recarregar_pagina = true;
+        alert(dados.mensagem);
+
+        if(!dados.erro) {
+            location.reload();
         } else {
-            $('#modalGenerico .modal-title').html('Erro ' + acao)
-            $('#modalGenerico .modal-body').append("<p class='text-danger fw-bold'>" + dados.mensagem + "</p>");
-            $('#modalGenerico').modal('show');
+            $('#overlay').fadeOut();
+            $('#modalAcao').modal('hide');
         }
-
-        $('#overlay').fadeOut();
     }
 }
 
 $('#btnTransmitir').on('click', function() {
-    const url = $(this).data('url');
-    const tokenElement = document.getElementById('token-data');
-    const token = JSON.parse(tokenElement.textContent);
-    acaoNFe(url, token, "Emissão");
+    $('#modalAcaoLabel').attr('class', 'modal-title text-primary');
+    $('#modalAcaoLabel').text('Transmitir NF-e');
+    $('#modal-body-acao').html('<label class="fw-bold">Deseja transmitir a NF-e?</label>')
+    $('#acao').attr('class', 'btn btn-primary');
+    $('#acao').attr('data-url', url_transmitir);
+    $('#acao').text('Transmitir');
+    $('#modalAcao').modal('show');
 })
 
 $('#btnCCe').on('click', function() {
-    const url = $(this).data('url');
-    const tokenElement = document.getElementById('token-data');
-    const token = JSON.parse(tokenElement.textContent);
-    acaoNFe(url, token, 'CC-e');
+    $('#modalAcaoLabel').attr('class', 'modal-title text-warning');
+    $('#modalAcaoLabel').text('Carta de Correção');
+    $('#modal-body-acao').html('<div>' +
+        '<label for="justificativa" class="form-label">Justificativa (15 a 1000 caracteres):</label>' +
+        '<input type="text" class="form-control" id="justificativa" aria-describedby="justificativa">' +
+        '<div id="justificativa" class="form-text"></div></div>')
+    $('#acao').attr('class', 'btn btn-warning');
+    $('#acao').attr('data-url', url_cce);
+    $('#acao').text('Carta Correção');
+    $('#modalAcao').modal('show');
 })
 
 $('#btnCancelar').on('click', function() {
-    const url = $(this).data('url');
+    $('#modalAcaoLabel').attr('class', 'modal-title text-danger');
+    $('#modalAcaoLabel').text('Cancelar NF-e');
+    $('#modal-body-acao').html('<div>' +
+        '<label for="justificativa" class="form-label">Justificativa (15 a 1000 caracteres):</label>' +
+        '<input type="text" class="form-control" id="justificativa" aria-describedby="justificativa">' +
+        '<div id="justificativa" class="form-text"></div></div>')
+    $('#acao').attr('class', 'btn btn-danger');
+    $('#acao').attr('data-url', url_cancelar);
+    $('#acao').text('Cancelar');
+    $('#modalAcao').modal('show');
+})
+
+$('#acao').on('click', function() {
+    const url = $(this).attr('data-url');
     const tokenElement = document.getElementById('token-data');
     const token = JSON.parse(tokenElement.textContent);
-    acaoNFe(url, token, 'Cancelamento');
+
+    if(url === url_cce || url === url_cancelar) {
+        tem_justificativa = true;
+    } else {
+        tem_justificativa = false;
+    }
+
+    acaoNFe(url, token, tem_justificativa);
 })

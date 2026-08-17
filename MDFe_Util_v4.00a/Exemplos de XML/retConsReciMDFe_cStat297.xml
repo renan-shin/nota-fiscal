@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<retConsReciMDFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/mdfe">
+  <tpAmb>2</tpAmb>
+  <verAplic>RS20121001094405</verAplic>
+  <nRec>359000000001681</nRec>
+  <cStat>104</cStat>
+  <xMotivo>Arquivo processado</xMotivo>
+  <cUF>35</cUF>
+  <protMDFe versao="1.00">
+    <infProt Id="MDFe011020121511002620">
+      <tpAmb>2</tpAmb>
+      <verAplic>RS20121001094405</verAplic>
+      <chMDFe>35121010142785000190580010000000011491283029</chMDFe>
+      <dhRecbto>2012-10-01T15:11:00</dhRecbto>
+      <digVal />
+      <cStat>297</cStat>
+      <xMotivo>Rejeição: Assinatura difere do calculado</xMotivo>
+    </infProt>
+  </protMDFe>
+</retConsReciMDFe>

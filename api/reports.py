@@ -10,7 +10,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from core.models import *
+from nfe_util.models import *
 from lanmax.models import *
 from io import BytesIO
 from utils.pdf import NumberedCanvas, CheckBox, RadioButton
@@ -1880,7 +1880,11 @@ def desenhar_parcela_boleto(canvas, boleto):
     # QRCode Bolecode
     # qrcode_bolecode = f'{path_bolecode.Constante}bolecode_{boleto['cod_pedido']}_{boleto['nosso_num']}.jpg'
 
-    instr_local_pagto = InstrBol.objects.get(CodInstr=1)
+    if boleto['conta'] == 'Ometz-I':
+        instr_local_pagto = InstrBol.objects.get(CodInstr=8)
+    else:
+        instr_local_pagto = InstrBol.objects.get(CodInstr=1)
+
     data_documento = datetime.now().strftime("%d/%m/%Y")
 
     str_numero = f'{boleto['ag']}{boleto['cc']}{boleto['carteira']}{boleto['nosso_num']}'
@@ -1890,13 +1894,18 @@ def desenhar_parcela_boleto(canvas, boleto):
     linha_digitavel = fncLinhaDigitavel(cod_barra)
 
     valor_doc = locale.currency(boleto['valor'], grouping=True)
+    juros_mora = f'{float(boleto['valor'])*0.3/100:.2f}'
 
-    instr1 = InstrBol.objects.get(CodInstr=2)
-    instr2 = InstrBol.objects.get(CodInstr=3)
-    instr3 = InstrBol.objects.get(CodInstr=4)
-    instr4 = InstrBol.objects.get(CodInstr=5)
-    instr5 = InstrBol.objects.get(CodInstr=6)
-    instr6 = InstrBol.objects.get(CodInstr=7)
+    if boleto['conta'] == 'Ometz-I':
+        instr5 = InstrBol.objects.get(CodInstr=6)
+        instr6 = InstrBol.objects.get(CodInstr=7)
+
+        instr1 = instr5.Instrucao + juros_mora.replace('.', ',') + instr6.Instrucao
+    else:
+        instr1 = InstrBol.objects.get(CodInstr=2)
+        instr2 = InstrBol.objects.get(CodInstr=3)
+        instr3 = InstrBol.objects.get(CodInstr=4)
+        instr4 = InstrBol.objects.get(CodInstr=5)
 
     valor_multa = f'{float(boleto['valor'])*0.00333:.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
 
@@ -2051,13 +2060,16 @@ def desenhar_parcela_boleto(canvas, boleto):
         canvas.drawString(9.5*mm, height - (62+altura_dinamica)*mm, 'Instruções (Todas informações deste bloqueto são de exclusiva responsabilidade do cedente)')
 
         canvas.setFont('Calibri-Bold', 8)
-        canvas.drawString(12*mm, height - (69+altura_dinamica)*mm, instr1.Instrucao)
 
-        canvas.drawString(12*mm, height - (74+altura_dinamica)*mm, instr2.Instrucao)
-        canvas.drawString(12*mm, height - (79+altura_dinamica)*mm, f'{instr3.Instrucao} {valor_multa} {instr4.Instrucao}')
-        canvas.drawString(12*mm, height - (84+altura_dinamica)*mm, 'ATENÇÃO! ESTE É DE LIQUIDAÇÃO EXCLUSIVA POR COMPENSAÇÃO BANCÁRIA. O DEPÓSITO EM')
-        canvas.drawString(12*mm, height - (87.5+altura_dinamica)*mm, 'C/C, TED OU TRANSFERÊNCIA, NÃO SÃO IDENTIFICADOS, PORTANTO NÃO QUITAM O(S)')
-        canvas.drawString(12*mm, height - (91+altura_dinamica)*mm, 'DÉBITO(S).')
+        if boleto['conta'] != 'Ometz-I':
+            canvas.drawString(12*mm, height - (69+altura_dinamica)*mm, instr1.Instrucao)
+            canvas.drawString(12*mm, height - (74+altura_dinamica)*mm, instr2.Instrucao)
+            canvas.drawString(12*mm, height - (79+altura_dinamica)*mm, f'{instr3.Instrucao} {valor_multa} {instr4.Instrucao}')
+            canvas.drawString(12*mm, height - (84+altura_dinamica)*mm, 'ATENÇÃO! ESTE É DE LIQUIDAÇÃO EXCLUSIVA POR COMPENSAÇÃO BANCÁRIA. O DEPÓSITO EM')
+            canvas.drawString(12*mm, height - (87.5+altura_dinamica)*mm, 'C/C, TED OU TRANSFERÊNCIA, NÃO SÃO IDENTIFICADOS, PORTANTO NÃO QUITAM O(S)')
+            canvas.drawString(12*mm, height - (91+altura_dinamica)*mm, 'DÉBITO(S).')
+        else:
+            canvas.drawString(12*mm, height - (69+altura_dinamica)*mm, instr1)
 
         canvas.setFont('Calibri', 8)
         canvas.drawString(9.5*mm, height - (102+altura_dinamica)*mm, 'Pagador/Avalista')

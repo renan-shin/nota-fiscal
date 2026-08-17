@@ -2,12 +2,16 @@ from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    path('consulta-status/<str:cod_empresa>', views.consulta_status, name='api_consulta_status'),
+    path('consulta-status/<str:cod_empresa>/<str:tipo>', views.consulta_status, name='api_consulta_status'),
     path('consulta-empresa/<int:cod_pedido>', views.consulta_empresa, name='api_consulta_empresa'),
     re_path(r'^notas-fiscais/(?P<cod_empresa>-?\d+)?/?$', views.notas_fiscais, name='api_notas_fiscais'),
-    re_path(r'^status-disponiveis/(?P<cod_empresa>-?\d+)?/?$', views.status_disponiveis, name='api_status_disponiveis'),
+    re_path(r'^manifestos/(?P<cod_empresa>-?\d+)?/?$', views.manifestos, name='api_manifestos'),
+    re_path(r'^criar-manifesto/(?P<cod_empresa>-?\d+)?/?$', views.criar_manifesto, name='api_criar_manifesto'),
+    re_path(r'^consultar-manifesto/(?P<cod_empresa>-?\d+)?/?$', views.consultar_manifesto, name='api_consultar_manifesto'),
+    re_path(r'^status-disponiveis/(?P<tipo>[nm])/(?P<cod_empresa>-?\d+)?/?$', views.status_disponiveis, name='api_status_disponiveis'),
     path('gerar-pix/', views.gerar_pix, name='api_gerar_pix'),
     path('consulta-pix/<str:conta>/<str:inicio>/<str:fim>', views.consulta_pix, name='api_consulta_pix'),
+    path('consulta-boletos/<str:conta>/<str:data>', views.consulta_boletos, name='api_consulta_boletos'),
     path('cancelar-pix/', views.cancelar_pix, name='api_cancelar_pix'),
     re_path(r'^gerar-orcamento-pdf/(?P<cod_pedido>-?\d+)/$', views.gerar_orcamento_pdf, name='api_gerar_orcamento_pdf'),
     re_path(r'^gerar-danfe/(?P<empresa_filial>-?\d+)/(?P<id_nfe>\d+)/(?:(?P<opcao>[01])/)?$', views.gerar_danfe, name='api_gerar_danfe'),
@@ -26,4 +30,13 @@ urlpatterns = [
     path('calcular-formas-pagto/', views.calcular_formas_pagto, name='api_calcular_formas_pagto'),
     path('calcular-totais-nfe/', views.calcular_totais_nfe, name='api_calcular_totais_nfe'),
     path('acerta-nfe/', views.acerta_nfe, name='api_acerta_nfe'),
+    path('inserir-nfe-manifesto/', views.inserir_nfe_manifesto, name='api_inserir_nfe_manifesto'),
+    path('excluir-nfe-manifesto/<int:id>/', views.excluir_nfe_manifesto, name='api_excluir_nfe_manifesto'),
+    path('inserir-percurso-manifesto/', views.inserir_percurso_manifesto, name='api_inserir_percurso_manifesto'),
+    path('excluir-percurso-manifesto/<int:id>/', views.excluir_percurso_manifesto, name='api_excluir_percurso_manifesto'),
+    path('alterar-motorista-manifesto/', views.alterar_motorista_manifesto, name='api_alterar_motorista_manifesto'),
+    path('alterar-veiculo-manifesto/', views.alterar_veiculo_manifesto, name='api_alterar_veiculo_manifesto'),
+    path('transmitir-manifesto/', views.transmitir_manifesto, name='api_transmitir_manifesto'),
+    path('encerrar-manifesto/', views.encerrar_manifesto, name='api_encerrar_manifesto'),
+    path('cancelar-manifesto/', views.cancelar_manifesto, name='api_cancelar_manifesto'),
 ]

@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+
+{% load filters %}
+{% load static %}
+
+{% block title %}MDF-e | Editar{% endblock %}
+
+{% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    {% include 'partials/_messages.html' %}
+</div>
+<div class="container-fluid">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="d-flex">
+                <h5 class="card-title">Dados Manifesto</h5>
+                <button type="button" class="btn btn-sm btn-success ms-auto" id="transmitir" {% if mdfe.status != "MDFe não enviada" %}disabled{% endif %}>Transmitir</button>
+                <button type="button" class="btn btn-sm btn-warning ms-3" id="encerrar" {% if "Aut" not in mdfe.status %}disabled{% endif %}>Encerrar</button>
+                <button type="button" class="btn btn-sm btn-danger ms-3" id="cancelar" {% if "Aut" not in mdfe.status %}disabled{% endif %}>Cancelar</button>
+            </div>
+            <hr/>
+            <div class="row">
+                <div style="width: 9rem;">
+                    <label for="num-manifesto" class="col-form-label fw-bold" style="font-size: 0.8rem;">Núm. Manifesto:</label>
+                    <input id="num-manifesto" name="chave-ref" type="text" class="form-control form-control-sm" value="{{ mdfe.ide_nMDF|default:'' }}" disabled>
+                </div>
+                
+                <div style="width: 15rem;">
+                    <label for="status" class="col-form-label fw-bold" style="font-size: 0.8rem;">Status:</label>
+                    <input id="status" type="text" class="form-control form-control-sm" value="{{ mdfe.status|default:'' }}" disabled>
+                </div>
+
+                <div style="width: 6rem;">
+                    <label for="uf-inicio" class="col-form-label fw-bold" style="font-size: 0.8rem;">UF Ini.:</label>
+                    <input id="uf-inicio" type="text" class="form-control form-control-sm" value="{{ mdfe.ide_UFIni|default:'' }}" disabled>
+                </div>
+
+                <div style="width: 6rem;">
+                    <label for="uf-fim" class="col-form-label fw-bold" style="font-size: 0.8rem;">UF Fim:</label>
+                    <input id="uf-fim" type="text" class="form-control form-control-sm" value="{{ mdfe.ide_UFFim|default:'' }}" disabled>
+                </div>
+
+                <div style="width: 11rem;">
+                    <label for="total-valor" class="col-form-label fw-bold" style="font-size: 0.8rem;">Valor Total Carga:</label>
+                    <input id="total-valor" type="text" class="form-control form-control-sm" value="{{ mdfe.total_vCarga|currency|default:'' }}" disabled>
+                </div>
+
+                <div style="width: 11rem;">
+                    <label for="total-peso" class="col-form-label fw-bold" style="font-size: 0.8rem;">Peso Total Carga:</label>
+                    <input id="total-peso" type="text" class="form-control form-control-sm" value="{{ mdfe.total_qCarga|floatformat:'4g'|default:'' }}" disabled>
+                </div>
+
+                <div style="width: 26rem;">
+                    <label for="chave-acesso" class="col-form-label fw-bold" style="font-size: 0.8rem;">Chave Acesso:</label>
+                    <input id="chave-acesso" type="text" class="form-control form-control-sm" value="{{ mdfe.chave_acesso|default:'' }}" disabled>
+                </div>
+                <div style="width: 18rem;">
+                    <label for="digval" class="col-form-label fw-bold" style="font-size: 0.8rem;">digVal:</label>
+                    <input id="digval" type="text" class="form-control form-control-sm" value="{{ mdfe.digVal|default:'' }}" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div style="width: 15rem;">
+                    <label for="dh-recbto" class="col-form-label fw-bold" style="font-size: 0.8rem;">Data/Hora Recebimento:</label>
+                    <input id="dh-recbto" type="text" class="form-control form-control-sm" value="{{ mdfe.dhRecbto|default:'' }}" disabled>
+                </div>
+                <div style="width: 12rem;">
+                    <label for="protocolo" class="col-form-label fw-bold" style="font-size: 0.8rem;">Protocolo:</label>
+                    <input id="protocolo" type="text" class="form-control form-control-sm" value="{{ mdfe.nProt|default:'' }}" disabled>
+                </div>
+                <div style="width: 15rem;">
+                    <label for="dh-canc" class="col-form-label fw-bold" style="font-size: 0.8rem;">Data/Hora Canc.:</label>
+                    <input id="dh-canc" type="text" class="form-control form-control-sm" value="{{ mdfe.dProtocoloCanc|default:'' }}" disabled>
+                </div>
+                <div style="width: 12rem;">
+                    <label for="prot-canc" class="col-form-label fw-bold" style="font-size: 0.8rem;">Protocolo Canc.:</label>
+                    <input id="prot-canc" type="text" class="form-control form-control-sm" value="{{ mdfe.nProtocoloCanc|default:'' }}" disabled>
+                </div>
+                <div style="width: 15rem;">
+                    <label for="dh-enc" class="col-form-label fw-bold" style="font-size: 0.8rem;">Data/Hora Enc.:</label>
+                    <input id="dh-enc" type="text" class="form-control form-control-sm" value="{{ mdfe.dProtocoloEnc|default:'' }}" disabled>
+                </div>
+                <div style="width: 12rem;">
+                    <label for="prot-enc" class="col-form-label fw-bold" style="font-size: 0.8rem;">Protocolo Enc.:</label>
+                    <input id="prot-enc" type="text" class="form-control form-control-sm" value="{{ mdfe.nProtocoloEnc|default:'' }}" disabled>
+                </div>
+                <div style="width: 7rem;">
+                    <label for="tp-evento" class="col-form-label fw-bold" style="font-size: 0.8rem;">Tipo Evento:</label>
+                    <input id="tp-evento" type="text" class="form-control form-control-sm" value="{{ mdfe.tpEvento|default:'' }}" disabled>
+                </div>
+                <div style="width: 7rem;">
+                    <label for="seq-evento" class="col-form-label fw-bold" style="font-size: 0.8rem;">Seq. Evento:</label>
+                    <input id="seq-evento" type="text" class="form-control form-control-sm" value="{{ mdfe.nSeqEvento|default:'' }}" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div style="width: 60rem;">
+                    <label for="info-compl" class="col-form-label fw-bold" style="font-size: 0.8rem;">Informações Complementares:</label>
+                    <input id="info-compl" type="text" class="form-control form-control-sm" value="{{ mdfe.infCpl_Opc|default:'' }}" disabled>
+                </div>
+                <div style="width: 55rem;">
+                    <label for="justificativa" class="col-form-label fw-bold" style="font-size: 0.8rem;">Justificativa:</label>
+                    <input id="justificativa" name="chave-ref" type="text" class="form-control form-control-sm" value="{{ mdfe.xJust|default:'' }}" disabled>
+                </div>
+            </div>
+            <div class="row">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="width: 20rem;">
+            <div class="card shadow-lg mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Percurso</h5>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="input-group input-group-sm mt-2">
+                                <span class="input-group-text">UF</span>
+                                <select id="select-uf" class="form-select form-select-sm" aria-label="uf" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>
+                                    <option value=""></option>
+                                    {% for uf in ufs %}
+                                    <option value="{{uf.UF}}" {% if uf.UF == request.POST.uf %}selected{% endif %}>{{uf.UF}}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn btn-primary btn-sm" id="btnAdicionar" type="button" data-url="{% url 'api_inserir_percurso_manifesto' %}" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>Adicionar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <div class="col-md-2">
+                            <table class="table table-sm table-striped table-hover mt-3" style="font-size: 0.75rem" id="ufs">
+                                <thead class="table-dark">
+                                    <th>Excluir</th>
+                                    <th>UF</th>
+                                    <th>Ordem</th>
+                                </thead>
+                                <tbody>
+                                    {% for perc in percurso %}
+                                    <tr>
+                                        <td><button type="button" class="btn btn-sm btn-danger btn-excluir" data-id="{{ perc.id }}" data-url="{% url 'api_excluir_percurso_manifesto' perc.id %}" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>X</button></td>
+                                        <td>{{perc.uf}}</td>
+                                        <td>{{perc.ordem}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 61rem;">
+            <div class="card shadow-lg mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">NF-e</h5>
+                    <hr/>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm mt-2">
+                            <span class="input-group-text">Pedido</span>
+                            <input id="pedido" type="text" class="form-control form-control-sm" aria-label="Pedido" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>
+                            <button class="btn btn-primary btn-sm" id="btnPesquisar" type="button" data-url="{% url 'api_inserir_nfe_manifesto' %}" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>Pesquisar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-hover mt-3" style="font-size: 0.75rem" id="chaves_nfe">
+                            <thead class="table-dark">
+                                <th>Excluir</th>
+                                <th>Chave NF-e</th>
+                                <th>Código Mun.</th>
+                                <th>Mun. Carga</th>
+                                <th>Código Mun.</th>
+                                <th>Mun. Descarga</th>
+                                <th>Valor NF-e</th>
+                                <th>Peso NF-e</th>
+                            </thead>
+                            <tbody>
+                                {% for chave in chaves_nfe %}
+                                <tr>
+                                    <td><button type="button" class="btn btn-sm btn-danger btn-excluir" data-id="{{ chave.id }}" data-url="{% url 'api_excluir_nfe_manifesto' chave.id %}" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>X</button></td>
+                                    <td>{{chave.chave_nfe}}</td>
+                                    <td>{{chave.cMunCarrega}}</td>
+                                    <td>{{chave.xMunCarrega}}</td>
+                                    <td>{{chave.cMunDescarrega}}</td>
+                                    <td>{{chave.xMunDescarrega}}</td>
+                                    <td>{{chave.ValorNFe|currency}}</td>
+                                    <td>{{chave.PesoNFe|floatformat:"4g"}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 36rem;">
+            <div class="card shadow-lg mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Motorista/Veículo</h5>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="motorista" class="col-form-label fw-bold" style="font-size: 0.8rem;">Motorista:</label>
+                            <select id="motorista" name="motorista" data-url="{% url 'api_alterar_motorista_manifesto' %}" class="form-select form-select-sm" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>
+                                <option value=""></option>
+                                {% for motorista in motoristas %}
+                                <option value="{{motorista.id}}" {% if motorista.id == mdfe.id_condutor.id %}selected{% endif %}>{{motorista.nome}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="veiculo" class="col-form-label fw-bold" style="font-size: 0.8rem;">Veículo:</label>
+                            <select id="veiculo" name="veiculo" data-url="{% url 'api_alterar_veiculo_manifesto' %}" class="form-select form-select-sm" {% if mdfe.status != 'MDFe não enviada' %}disabled{% endif %}>
+                                <option value=""></option>
+                                {% for v in veiculos %}
+                                <option value="{{v.id}}" {% if v.id == mdfe.id_veiculo.id %}selected{% endif %}>{{v.marca}}/{{v.modelo}} | {{v.placa}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalGenerico" tabindex="-1" aria-labelledby="modalGenericoLabel" aria-hidden="true">
+        <div class="modal-dialog" id="dialogModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalGenericoLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Dados -->
+                </div>
+                <div class="modal-footer" id="footerModal">
+                    <button type="button" id="acao"></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var empresa = {{ empresa.EmpresaFilial }};
+    var id_mdfe = {{ mdfe.id_mdfe }};
+    var url_transmitir = "{% url 'api_transmitir_manifesto' %}";
+    var url_encerrar = "{% url 'api_encerrar_manifesto' %}";
+    var url_cancelar = "{% url 'api_cancelar_manifesto' %}";
+</script>
+<script src="{% static 'js/mdfe_edit.js' %}"></script>
+<script id="token-data" type="application/json">
+    "{{ user.auth_token.key }}"
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 (x64) (http://www.altova.com) by Marcia Regina Miyuki Kato (MRM) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="URL">
+		<xs:annotation>
+			<xs:documentation>ws</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FlexDocs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="empresa">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="FlexDocs Documentos Eletronicos"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="versao" type="xs:string"/>
+							<xs:element name="data" type="xs:string"/>
+							<xs:element name="gravaLog" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="WS" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="soapVersion" type="xs:string"/>
+							<xs:element name="timeOut" type="xs:string"/>
+							<xs:element name="validaCertificadoWS" type="xs:boolean"/>
+							<xs:element name="protocoloSeguranca"/>
+							<xs:element name="servico" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="nomeServico"/>
+										<xs:element name="metodo"/>
+										<xs:element name="nameSpace"/>
+										<xs:element name="soapAction"/>
+										<xs:element name="xmlEntrada"/>
+										<xs:element name="xmlSaida"/>
+										<xs:element name="urlHomologacao"/>
+										<xs:element name="urlProducao"/>
+									</xs:sequence>
+									<xs:attribute name="IdServico" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="siglaWS" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

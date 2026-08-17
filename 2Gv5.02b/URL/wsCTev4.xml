@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--                                                                         -->
+<!--Tabela de url dos WS dO CT-e Nacional                                    -->
+<!--                                                                         -->
+<!--  acrescente novos WS                                                    -->
+<!--                                                                         -->
+
+<!--
+
+               Gabarito
+
+-->
+<!--
+
+<WS siglaWS="">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="">
+      <nomeServico></nomeServico> <== <service name="">
+      <metodo></metodo>           <== <operation name="">
+      <nameSpace></nameSpace>     <== <definition targetNamespace="">
+      <soapAction></soapAction>   <== <soapAction="">
+      <xmlEntrada></xmlEntrada>
+      <xmlSaida></xmlSaida>
+      <urlHomologacao></urlHomologacao>
+      <urlProducao></urlProducao>
+   </servico>
+</WS>
+
+-->
+
+<URL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<FlexDocs>
+   <empresa>FlexDocs Documentos Eletronicos</empresa>
+   <versao>v4.01i-001</versao>
+   <data>17-01-2024</data>
+   <gravaLog>true</gravaLog>
+</FlexDocs>
+<WS siglaWS="MG">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeStatusServicoV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeStatusServicoV4</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsultaCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4/cteConsultaCT</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeConsultaV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeConsultaV4</urlProducao>
+   </servico>
+      <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeRecepcaoEventoV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeRecepcaoEventoV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4/cteRecepcao</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeRecepcaoSincV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeRecepcaoSincV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoOS">
+      <nomeServico>CTeRecepcaoOSV4</nomeServico>
+      <metodo>cteRecepcaoOS</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4/cteRecepcaoOS</soapAction>
+      <xmlEntrada>CTeOS</xmlEntrada>
+      <xmlSaida>retCTeOS</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeRecepcaoOSV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeRecepcaoOSV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoGTVe">
+      <nomeServico>CTeRecepcaoGTVeV4</nomeServico>
+      <metodo>cteRecepcaoGTVe</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4/cteRecepcaoGTVe</soapAction>
+      <xmlEntrada>GTVe</xmlEntrada>
+      <xmlSaida>retGTVe</xmlSaida>
+      <urlHomologacao>https://hcte.fazenda.mg.gov.br/cte/services/CTeRecepcaoGTVeV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.mg.gov.br/cte/services/CTeRecepcaoGTVeV4</urlProducao>
+   </servico>
+</WS>
+<WS siglaWS="MS">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.ms.gov.br/ws/CTeStatusServicoV4</urlHomologacao>
+      <urlProducao>https://producao.cte.ms.gov.br/ws/CTeStatusServicoV4</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsultaCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4/cteConsultaCT</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.ms.gov.br/ws/CTeConsultaV4</urlHomologacao>
+      <urlProducao>https://producao.cte.ms.gov.br/ws/CTeConsultaV4</urlProducao>
+   </servico>
+      <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4Service"</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.ms.gov.br/ws/CTeRecepcaoEventoV4</urlHomologacao>
+      <urlProducao>https://producao.cte.ms.gov.br/ws/CTeRecepcaoEventoV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4Service</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4/cteRecepcao</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.ms.gov.br/ws/CTeRecepcaoSincV4</urlHomologacao>
+      <urlProducao>https://producao.cte.ms.gov.br/ws/CTeRecepcaoSincV4</urlProducao>
+   </servico>
+</WS>
+<WS siglaWS="MT">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CTeStatusServicoV4</urlHomologacao>
+      <urlProducao>https://cte.sefaz.mt.gov.br/ctews2/services/CTeStatusServicoV4</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsulta</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CteConsulta/CTeConsultaV4</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CTeConsultaV4</urlHomologacao>
+      <urlProducao>	https://cte.sefaz.mt.gov.br/ctews2/services/CTeConsultaV4</urlProducao>
+   </servico>
+      <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4"</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoEventoV4</urlHomologacao>
+      <urlProducao>https://cte.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoEventoV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4/cteRecepcao</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoSincV4</urlHomologacao>
+      <urlProducao>https://cte.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoSincV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoOS">
+      <nomeServico>CTeRecepcaoOSV4</nomeServico>
+      <metodo>cteRecepcaoOS</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4/cteRecepcaoOS</soapAction>
+      <xmlEntrada>CTeOS</xmlEntrada>
+      <xmlSaida>retCTeOS</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews/services/CTeRecepcaoOSV4</urlHomologacao>
+      <urlProducao>https://cte.sefaz.mt.gov.br/ctews/services/CTeRecepcaoOSV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoGTVe">
+      <nomeServico>CTeRecepcaoGTVeV4</nomeServico>
+      <metodo>cteRecepcaoGTVe</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4/cteRecepcaoGTVe</soapAction>
+      <xmlEntrada>GTVe</xmlEntrada>
+      <xmlSaida>retGTVe</xmlSaida>
+      <urlHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoGTVeV4</urlHomologacao>
+      <urlProducao>https://cte.sefaz.mt.gov.br/ctews2/services/CTeRecepcaoGTVeV4</urlProducao>
+   </servico>
+</WS>
+<WS siglaWS="PR">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeStatusServicoV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeStatusServicoV4</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsultaCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4/cteConsultaCT</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeConsultaV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeConsultaV4</urlProducao>
+   </servico>
+      <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>hhttp://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeRecepcaoEventoV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeRecepcaoEventoV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4/cteRecepcao</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeRecepcaoSincV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeRecepcaoSincV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoOS">
+      <nomeServico>CTeRecepcaoOSV4</nomeServico>
+      <metodo>cteRecepcaoOS</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4/cteRecepcaoOS</soapAction>
+      <xmlEntrada>CTeOS</xmlEntrada>
+      <xmlSaida>retCTeOS</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeRecepcaoOSV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeRecepcaoOSV4</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoGTVe">
+      <nomeServico>CTeRecepcaoGTVeV4</nomeServico>
+      <metodo>cteRecepcaoGTVe</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4/cteRecepcaoGTVe</soapAction>
+      <xmlEntrada>GTVe</xmlEntrada>
+      <xmlSaida>retGTVe</xmlSaida>
+      <urlHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte4/CTeRecepcaoGTVeV4</urlHomologacao>
+      <urlProducao>https://cte.fazenda.pr.gov.br/cte4/CTeRecepcaoGTVeV4</urlProducao>
+   </servico>
+</WS>
+<WS siglaWS="RS">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeStatusServicoV4/CTeStatusServicoV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeStatusServicoV4/CTeStatusServicoV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsultaCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4/cteConsultaCT</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeConsultaV4/CTeConsultaV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeConsultaV4/CTeConsultaV4.asmx</urlProducao>
+   </servico>
+      <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeRecepcaoEventoV4/CTeRecepcaoEventoV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeRecepcaoEventoV4/CTeRecepcaoEventoV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4/cteRecepcao</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeRecepcaoSincV4/CTeRecepcaoSincV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeRecepcaoSincV4/CTeRecepcaoSincV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoOS">
+      <nomeServico>CTeRecepcaoOSV4</nomeServico>
+      <metodo>cteRecepcaoOS</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4/cteRecepcaoOS</soapAction>
+      <xmlEntrada>CTeOS</xmlEntrada>
+      <xmlSaida>retCTeOS</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeRecepcaoOSV4/CTeRecepcaoOSV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeRecepcaoOSV4/CTeRecepcaoOSV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoGTVe">
+      <nomeServico>CTeRecepcaoGTVeV4</nomeServico>
+      <metodo>cteRecepcaoGTVe</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4/cteRecepcaoGTVe</soapAction>
+      <xmlEntrada>GTVe</xmlEntrada>
+      <xmlSaida>retGTVe</xmlSaida>
+      <urlHomologacao>https://cte-homologacao.svrs.rs.gov.br/ws/CTeRecepcaoGTVeV4/CTeRecepcaoGTVeV4.asmx</urlHomologacao>
+      <urlProducao>https://cte.svrs.rs.gov.br/ws/CTeRecepcaoGTVeV4/CTeRecepcaoGTVeV4.asmx</urlProducao>
+   </servico>
+</WS>
+<WS siglaWS="SP">
+   <soapVersion>1.2</soapVersion>
+   <timeOut>120000</timeOut>
+   <validaCertificadoWS>false</validaCertificadoWS>
+   <protocoloSeguranca>TLS12</protocoloSeguranca>
+   <servico IdServico="StatusServico">
+      <nomeServico>CTeStatusServicoV4</nomeServico>
+      <metodo>cteStatusServicoCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeStatusServicoV4/cteStatusServicoCT</soapAction>
+      <xmlEntrada>consStatServCTe</xmlEntrada>
+      <xmlSaida>retConsStatServCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeStatusServicoV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeStatusServicoV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="Consulta">
+      <nomeServico>CTeConsultaV4</nomeServico>
+      <metodo>cteConsultaCT</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeConsultaV4/cteConsultaCT</soapAction>
+      <xmlEntrada>consSitCTe</xmlEntrada>
+      <xmlSaida>retConsSitCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeConsultaV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeConsultaV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="Evento">
+      <nomeServico>CTeRecepcaoEventoV4</nomeServico>
+      <metodo>cteRecepcaoEvento</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>eventoCTe</xmlEntrada>
+      <xmlSaida>retEventoCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoEventoV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoEventoV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoSinc">
+      <nomeServico>CTeRecepcaoSincV4</nomeServico>
+      <metodo>cteRecepcao</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoSincV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoEventoV4/cteRecepcaoEvento</soapAction>
+      <xmlEntrada>CTe</xmlEntrada>
+      <xmlSaida>retCTe</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoSincV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoSincV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoOS">
+      <nomeServico>CTeRecepcaoOSV4</nomeServico>
+      <metodo>cteRecepcaoOS</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoOSV4/cteRecepcaoOS</soapAction>
+      <xmlEntrada>CTeOS</xmlEntrada>
+      <xmlSaida>retCTeOS</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoOSV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoOSV4.asmx</urlProducao>
+   </servico>
+   <servico IdServico="RecepcaoGTVe">
+      <nomeServico>CTeRecepcaoGTVeV4</nomeServico>
+      <metodo>cteRecepcaoGTVe</metodo>
+      <nameSpace>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4</nameSpace>
+      <soapAction>http://www.portalfiscal.inf.br/cte/wsdl/CTeRecepcaoGTVeV4/cteRecepcaoGTVe</soapAction>
+      <xmlEntrada>GTVe</xmlEntrada>
+      <xmlSaida>retGTVe</xmlSaida>
+      <urlHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoGTVeV4.asmx</urlHomologacao>
+      <urlProducao>https://nfe.fazenda.sp.gov.br/CTeWS/WS/CTeRecepcaoGTVeV4.asmx</urlProducao>
+   </servico>
+</WS>
+</URL>

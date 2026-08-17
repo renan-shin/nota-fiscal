@@ -78,6 +78,8 @@ class Pedido(models.Model):
     difal_protocolo = models.CharField(max_length=20, null=True, db_column='DIFAL_Protocolo')
     fcp_protocolo = models.CharField(max_length=20, null=True, db_column='FCP_Protocolo')
     cod_oper = models.IntegerField(null=False, default=True, db_column='CodOper')
+    valor_total = models.DecimalField(max_digits=21, decimal_places=2, null=False, db_column='ValorTotal')
+    vdnf = models.DecimalField(null=False, max_digits=21, decimal_places=2, default=0.0, db_column='VDNF')
 
     class Meta:
         managed = False

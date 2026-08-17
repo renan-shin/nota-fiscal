@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<retConsSitMDFe xmlns="http://www.portalfiscal.inf.br/mdfe" versao="1.00">
+  <tpAmb>2</tpAmb>
+  <verAplic>RS20120203153602</verAplic>
+  <cStat>100</cStat>
+  <xMotivo>Autorizado o uso do MDF-e</xMotivo>
+  <cUF>35</cUF>
+  <protMDFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/mdfe">
+    <infProt Id="MDFe935120000000020">
+      <tpAmb>2</tpAmb>
+      <verAplic>RS20121001094405</verAplic>
+      <chMDFe>35121010142785000190580010000000011491283029</chMDFe>
+      <dhRecbto>2012-10-01T15:03:57</dhRecbto>
+      <nProt>935120000000020</nProt>
+      <digVal>tl8XoXHE+pMJ5hCZUl3PshBCQrc=</digVal>
+      <cStat>100</cStat>
+      <xMotivo>Autorizado o uso do MDF-e</xMotivo>
+    </infProt>
+  </protMDFe>
+</retConsSitMDFe>

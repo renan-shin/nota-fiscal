@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<retEnviMDFe xmlns="http://www.portalfiscal.inf.br/mdfe" versao="1.00">
+  <tpAmb>2</tpAmb>
+  <cUF>35</cUF>
+  <verAplic>RS20120211214917</verAplic>
+  <cStat>103</cStat>
+  <xMotivo>Arquivo recebido com sucesso</xMotivo>
+  <infRec>
+    <nRec>359000000001681</nRec>
+    <dhRecbto>2012-10-01T15:11:00</dhRecbto>
+    <tMed>1</tMed>
+  </infRec>
+</retEnviMDFe>

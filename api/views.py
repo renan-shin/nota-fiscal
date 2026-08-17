@@ -5,20 +5,23 @@ from django.apps import apps
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.clickjacking import xframe_options_exempt
-from core.models import *
+from nfe_util.models import *
+from mdfe_util.models import *
 from lanmax.models import *
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from .reports import *
 from pathlib import Path
-from nfe_util_2g.utils import *
+from nfe_util.utils import *
+from mdfe_util.utils import *
 from datetime import datetime, time
 from io import BytesIO
 import shutil, requests, os
 from .pix import *
 from email_validator import validate_email, EmailNotValidError
 from rest_framework.decorators import api_view
-from celery import shared_task
+from django.db.models import Max, Sum
+from django.forms.models import model_to_dict
 
 empresas_greenmotor = [-3102, -3101, -3131, -2003, -2002, -2001, -1033, -1003, -1002, -1001, 8001, 8003, 8004, 8005, 8006, 8007]
 
@@ -71,15 +74,22 @@ def gerar_orcamento_pdf(request, cod_pedido):
         return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao gerar o Orçamento PDF!'})
 
 @login_required
-def consulta_status(request, cod_empresa):
+def consulta_status(request, cod_empresa, tipo):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': -1, 'mensagem': 'Empresa inexistente!'})
 
     try:
-        status = consulta_status_2g(empresa)
-        return JsonResponse({'erro': False, 'status': status[0], 'titulo': 'Status SEFAZ/'+empresa.emit_UF, 'mensagem': status[3]})
+        if tipo.lower() == 'n':
+            status = consulta_status_2g(empresa)
+            titulo = f'Status SEFAZ/{empresa.emit_UF} (NF-e)'
+        elif tipo.lower() == 'm':
+            status = consulta_status_mdfe_2g(empresa)
+            titulo = f'Status SEFAZ/{empresa.emit_UF} (MDF-e)'
+        else:
+            return JsonResponse({'erro': True, 'status': 0, 'titulo': 'Erro', 'mensagem': 'Tipo informado inválido!'})
+        return JsonResponse({'erro': False, 'status': status[0], 'titulo': titulo, 'mensagem': status[3]})
     except:
         return JsonResponse({'erro': True, 'status': -1, 'titulo': '', 'mensagem': 'Erro!'})
 
@@ -106,9 +116,9 @@ def notas_fiscais(request, cod_empresa=None):
         try:
             empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
         except Empresa.DoesNotExist:
-            return JsonResponse('Empresa inexistente!')
+            return JsonResponse({'mensagem': 'Empresa inexistente!'})
 
-        modelo_nfe = apps.get_model('core', empresa.Tabela)
+        modelo_nfe = apps.get_model('nfe_util', empresa.Tabela)
 
         if int(cod_empresa) in empresas_greenmotor:
             pedidos = list(Pedido.objects.using('greenmotor').filter(empresa_filial=cod_empresa, cod_pedido__gte=2400000).values_list('cod_pedido', flat=True))
@@ -158,19 +168,93 @@ def notas_fiscais(request, cod_empresa=None):
     return JsonResponse(response)
 
 @login_required
-def status_disponiveis(request, cod_empresa=None):
+def manifestos(request, cod_empresa=None):
+    draw = int(request.GET.get('draw', 1))
+    start = int(request.GET.get('start', 0))
+    length = int(request.GET.get('length', 10))
+    search_value = request.GET.get('search[value]', '')
+
+    columns = ['id_mdfe', 'ide_nMDF', 'status', 'ide_serie', 'data_criacao', 'UFIni', 'UFFim']
+    order_column_index = int(request.GET.get("order[0][column]", 5))
+    order_column = columns[order_column_index]
+    order_dir = request.GET.get("order[0][dir]", "desc")
+
+    if order_dir == "desc":
+        order_column = f"-{order_column}"
+
+    filtro_id = request.GET.get('id_mdfe', '')
+    filtro_mdfe = request.GET.get('ide_nMDF', '').strip()
+    filtro_status = request.GET.get('status', '').strip()
+
     if cod_empresa:
         try:
             empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
         except Empresa.DoesNotExist:
-            return JsonResponse('Empresa inexistente!')
+            return JsonResponse({'mensagem': 'Empresa inexistente!'})
 
-        modelo_nfe = apps.get_model('core', empresa.Tabela)
-        status = list(modelo_nfe.objects.all().values('status_sefaz').distinct().order_by('status_sefaz'))
+        modelo_mdfe = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        queryset = modelo_mdfe.objects.all().values_list('id_mdfe', 'ide_nMDF', 'status', 'ide_serie', 'data_criacao', 'ide_UFIni', 'ide_UFFim')
+
+        if filtro_id:
+            queryset = queryset.filter(id_mdfe=filtro_id)
+
+        if filtro_mdfe:
+            queryset = queryset.filter(ide_nMDF__icontains=filtro_mdfe)
+
+        if filtro_status:
+            queryset = queryset.filter(status=filtro_status)
+
+        total_filtrado = queryset.count()
+        queryset = queryset.order_by(order_column)[start:start+length]
+
+        data = [
+            {
+                'id_mdfe': mdfe[0],
+                'ide_nMDF': mdfe[1].strip() if mdfe[1] else '0',
+                'ide_serie': mdfe[3] if mdfe[3] != 0 else 'COB',
+                'status': mdfe[2].strip() if mdfe[2] else 'NFe não enviada',
+                'data_criacao': mdfe[4].strftime('%d/%m/%Y %H:%M:%S') if mdfe[4] else '',
+                'UFIni': mdfe[5],
+                'UFFim': mdfe[6]
+            } for mdfe in queryset
+        ]
+
+        response = {
+            'draw': draw,
+            'recordsTotal': modelo_mdfe.objects.count(),
+            'recordsFiltered': total_filtrado,
+            'data': data
+        }
     else:
-        status = []
+        response = {
+            'draw': draw,
+            'recordsTotal': 0,
+            'recorsFiltered': 0,
+            'data': []
+        }
 
-    return JsonResponse({'status_disponiveis': status})
+    return JsonResponse(response)
+
+@login_required
+def status_disponiveis(request, tipo, cod_empresa=None):
+    if cod_empresa:
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa inexistente!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+        if tipo.lower() == 'n':
+            modelo_nfe = apps.get_model('nfe_util', empresa.Tabela)
+            status = list(modelo_nfe.objects.all().values('status_sefaz').distinct().order_by('status_sefaz'))
+        elif tipo.lower() == 'm':
+            modelo_mdfe = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+            status = list(modelo_mdfe.objects.all().values('status').distinct().order_by('status'))
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Tipo informado inválido!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Empresa não informada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    return JsonResponse({'erro': False, 'status_disponiveis': status}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
 @login_required
 def consulta_empresa(request, cod_pedido):
@@ -186,8 +270,8 @@ def consulta_empresa(request, cod_pedido):
 def gerar_danfe(request, empresa_filial, id_nfe, opcao=None):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
-        nome_tabela_itens = apps.get_model('core', empresa.TabelaItens)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
+        nome_tabela_itens = apps.get_model('nfe_util', empresa.TabelaItens)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -219,22 +303,43 @@ def gerar_danfe(request, empresa_filial, id_nfe, opcao=None):
 
     if nfe.ide_idDest != 3:
         with connection.cursor() as cursor:
-            if int(nfe.Pedido) <= 9999999:
-                cursor.execute(
-                    "SELECT Vencimento, Valor_ FROM GreenMotor.dbo.Pagamentos WHERE CodPedido = %s AND Forma = %s AND Conta NOT LIKE %s AND CONTA NOT LIKE %s AND Status IS NULL ORDER BY Vencimento",
-                    [nfe.Pedido, 'BOL', '%-Rio%', 'Ometz%']
-                )
-            else:
-                cursor.execute(
-                    "SELECT Vencimento, Valor_ FROM Lanmax.dbo.Pagamentos WHERE CodPedido = %s AND Forma = %s AND Conta NOT LIKE %s AND CONTA NOT LIKE %s AND Status IS NULL ORDER BY Vencimento",
-                    [nfe.Pedido, 'BOL', '%Rio%', 'Ometz%']
-                )
+            if int(nfe.Pedido) <= 9999999 and int(nfe.Pedido) > 0:
+                pedido = Pedido.objects.using('greenmotor').get(cod_pedido=nfe.Pedido)
+                qtd_boletos = Pagamento.objects.using('greenmotor').filter(cod_pedido=nfe.Pedido, forma='BOL').count()
+                qtd_nao_boletos = Pagamento.objects.using('greenmotor').filter(cod_pedido=nfe.Pedido).exclude(forma='BOL').count()
+                
+                if pedido.valor_total == pedido.vdnf and qtd_boletos > 0 and qtd_nao_boletos > 0:
+                    cursor.execute(
+                        'SELECT Vencimento, Valor_ FROM GreenMotor.dbo.Pagamentos WHERE CodPedido = %s AND Forma NOT IN(%s, %s, %s) AND (Status IS NULL OR Status <> %s) ORDER BY Vencimento',
+                        [nfe.Pedido, 'PIX', 'Debito', 'DIN', 'Canc',]
+                    )
+                else:
+                    cursor.execute(
+                        "SELECT Vencimento, Valor_ FROM GreenMotor.dbo.Pagamentos WHERE CodPedido = %s AND Forma = %s AND Conta NOT LIKE %s AND CONTA NOT LIKE %s AND Status IS NULL ORDER BY Vencimento",
+                        [nfe.Pedido, 'BOL', '%-Rio%', 'Ometz%']
+                    )
+            elif int(nfe.Pedido) > 9999999:
+                pedido = Pedido.objects.using('lanmax').get(cod_pedido=nfe.Pedido)
+                qtd_boletos = Pagamento.objects.using('lanmax').filter(cod_pedido=nfe.Pedido, forma='BOL').count()
+                qtd_nao_boletos = Pagamento.objects.using('lanmax').filter(cod_pedido=nfe.Pedido).exclude(forma='BOL').count()
 
-            rows = cursor.fetchall()
-            keys = ('vencimento', 'valor')
+                if pedido.valor_total == pedido.vdnf and qtd_boletos > 0 and qtd_nao_boletos > 0:
+                    cursor.execute(
+                        'SELECT Vencimento, Valor_ FROM Lanmax.dbo.Pagamentos WHERE CodPedido = %s AND Forma NOT IN(%s, %s, %s) AND (Status IS NULL OR Status <> %s) ORDER BY Vencimento',
+                        [nfe.Pedido, 'PIX', 'Debito', 'DIN', 'Canc',]
+                    )
+                else:
+                    cursor.execute(
+                        "SELECT Vencimento, Valor_ FROM Lanmax.dbo.Pagamentos WHERE CodPedido = %s AND Forma = %s AND Conta NOT LIKE %s AND CONTA NOT LIKE %s AND Status IS NULL ORDER BY Vencimento",
+                        [nfe.Pedido, 'BOL', '%Rio%', 'Ometz%']
+                    )
 
-            for row in rows:
-                boletos.append(dict(zip(keys, row)))
+            if int(nfe.Pedido) > 0:
+                rows = cursor.fetchall()
+                keys = ('vencimento', 'valor')
+
+                for row in rows:
+                    boletos.append(dict(zip(keys, row)))
 
     pdf = gerar_pdf_danfe(empresa, nfe, nfe_itens, list(boletos))
     caminho_pdf = Path(pdf)
@@ -297,7 +402,7 @@ def gerar_danfe(request, empresa_filial, id_nfe, opcao=None):
 def gerar_danfe_cce(request, empresa_filial, id_nfe, opcao=None):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -374,7 +479,7 @@ def abrir_xml(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -418,7 +523,7 @@ def abrir_xml(request):
 def gerar_boleto(request, empresa_filial, id_nfe):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
 
@@ -459,12 +564,16 @@ def gerar_boleto(request, empresa_filial, id_nfe):
     if len(boletos) == 0:
         return JsonResponse({'erro': True, 'arquivo': None, 'mensagem': 'Pedido sem boleto ou sem Nosso Número gerado ou já foram pagos!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
     
-    pasta_repo = get_path_repo(nfe, empresa)
+    if not controleInterno(int(nfe.Pedido)):
+        pasta_repo = get_path_repo(nfe, empresa)
 
-    if not Path(pasta_repo).is_dir():
-        Path(pasta_repo).mkdir(parents=True, exist_ok=True)
+        if not Path(pasta_repo).is_dir():
+            Path(pasta_repo).mkdir(parents=True, exist_ok=True)
 
-    nome_boleto = pasta_repo + 'boletos_' + nfe.ide_nNF + '.pdf'
+        nome_boleto = pasta_repo + 'boletos_' + nfe.ide_nNF + '.pdf'
+    else:
+        pasta_boletos = os.path.join(settings.BASE_DIR, 'static', 'boletos')
+        nome_boleto = os.path.join(pasta_boletos, f'boleto_{nfe.ide_nNF}.pdf')
 
     c = canvas.Canvas(nome_boleto, pagesize=A4)
     c.setTitle(f'Boleto {nfe.ide_nNF}')
@@ -626,6 +735,33 @@ def consulta_pix(request, conta, inicio, fim):
             f.write(r.text)
 
         return JsonResponse({'erro': False, 'mensagem': 'Sucesso!'})
+    
+@csrf_exempt
+def consulta_boletos(request, conta, data):
+    conta_lanmax = Conta.objects.using('lanmax').get(Conta=conta)
+    empresa = EmpresaFilial.objects.using('lanmax').get(empresa_filial=conta_lanmax.Empresa)
+    id_francesa = f'{str(conta_lanmax.Ag).zfill(4)}{str(conta_lanmax.CC).zfill(7)}{conta_lanmax.Digito}'
+    url = f"https://boletos.cloud.itau.com.br/boletos/v3/francesas/{id_francesa}/movimentacoes?data={data}&tipoMovimentacao=liquidacoes&nossoNumero=70545354"
+    print(url)
+    token_itau = get_token_itau(conta_lanmax.Empresa)
+
+    headers = {
+        'x-itau-apikey': '96decebf-5c47-4410-95bf-0c4b803e4bb2',
+        'x-itau-correlationID': 'e75590c2-057c-4697-b993-317aa2e1591e',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token_itau
+    }
+
+    r = requests.get(url, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
+
+    print(r.status_code, r.text)
+
+    if r.status_code == 200:
+        with open('C:\\Users\\rmizukosi.GRUPOLANMAX\\Desktop\\consulta.txt', 'w', encoding='utf-8') as f:
+            f.write(r.text)
+
+        return JsonResponse({'erro': False, 'mensagem': 'Sucesso!'})
 
 @csrf_exempt
 def cancelar_pix(request):
@@ -644,8 +780,8 @@ def transmitir_nfce(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
-        nome_tabela_itens = apps.get_model('core', empresa.TabelaItens)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
+        nome_tabela_itens = apps.get_model('nfe_util', empresa.TabelaItens)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
 
@@ -751,8 +887,8 @@ def transmitir_nfe(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
-        nome_tabela_itens = apps.get_model('core', empresa.TabelaItens)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
+        nome_tabela_itens = apps.get_model('nfe_util', empresa.TabelaItens)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
 
@@ -859,7 +995,7 @@ def transmitir_nfe(request):
 def tem_boleto(request, empresa_filial, id_nfe):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -885,7 +1021,7 @@ def carta_correcao(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
 
@@ -938,7 +1074,7 @@ def cancelar_nfe(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
 
@@ -956,8 +1092,8 @@ def cancelar_nfe(request):
     if 'Canc' in nfe.status_sefaz:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'NF-e já foi cancelada!'})
 
-    if len(justificativa) < 20:
-        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Justificativa deve ter no mínimo 20 caracteres!'})
+    if len(justificativa) < 15:
+        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Justificativa deve ter no mínimo 15 caracteres!'})
 
     nfe.Cancelar = True
     nfe.xJust = remove_acentos(justificativa.strip())
@@ -966,7 +1102,7 @@ def cancelar_nfe(request):
     
     status, msg_retorno = cancela_nfe(request, nfe, empresa)
 
-    if status == 135:
+    if status == 135 or status == 155:
         nfe.Cancelar = False
         nfe.save()
         nfe.refresh_from_db()
@@ -987,7 +1123,7 @@ def inutilizar_nfe(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.TabelaInut)
+        nome_tabela = apps.get_model('nfe_util', empresa.TabelaInut)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
     
@@ -1011,7 +1147,7 @@ def inutilizar_nfe(request):
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Modelo da nota inválido!'})
     
     if not nfe_inut:
-        nfe_inut = nome_tabela.objects.get_or_create(
+        nfe_inut, criado = nome_tabela.objects.get_or_create(
             status_sefaz = None,
             nProtocoloInut = None,
             dProtocoloInut = None,
@@ -1022,6 +1158,9 @@ def inutilizar_nfe(request):
             nroNFeFinal = num_nfe,
             Modelo = ide_mod
         )
+
+        if not criado:
+            return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Ocorreu um erro ao criar um novo registro!'})
     
     status, msg_retorno = inutiliza_nfe(nfe_inut, empresa)
 
@@ -1045,7 +1184,7 @@ def gerar_gnre(request):
 
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa não encontrada!'})
 
@@ -1144,7 +1283,7 @@ def enviar_email_nfe(request):
     
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -1168,7 +1307,7 @@ def enviar_email_nfe(request):
             info = validate_email(e.strip(), check_deliverability=False)
         # email_cliente = info.normalized
     except EmailNotValidError as e:
-        if 'shopee+' in nfe.dest_eMail or nfe.dest_eMail == 'NaoInformado' or nfe.dest_eMail == '@':
+        if 'shopee+' in nfe.dest_eMail or 'magalu+' in nfe.dest_eMail or 'ml+' in nfe.dest_eMail or nfe.dest_eMail == 'NaoInformado' or nfe.dest_eMail == '@':
             nfe.ECFRef_mod = 0
         else:
             nfe.ECFRef_mod = 3
@@ -1178,8 +1317,7 @@ def enviar_email_nfe(request):
         
         return JsonResponse({'erro': True, 'mensagem': str(e)})
     
-    pag_ometz = Pagamento.objects.using(db).filter(cod_pedido=nfe.Pedido, conta='Ometz-I', forma='BOL')
-    pag_nao_ometz = Pagamento.objects.using(db).filter(cod_pedido=nfe.Pedido, forma='BOL').exclude(conta='Ometz-I')
+    # pag_ometz = Pagamento.objects.using(db).filter(cod_pedido=nfe.Pedido, conta='Ometz-I', forma='BOL')
     pagto = Pagamento.objects.using(db).filter(cod_pedido=nfe.Pedido)
 
     if controleInterno(int(nfe.Pedido)) and not pagto.exists():
@@ -1189,8 +1327,8 @@ def enviar_email_nfe(request):
 
         return JsonResponse({'erro': False, 'mensagem': 'Controle Interno sem forma de pagamento!'})
 
-    if pag_ometz.exists() and not pagto.exists():
-        return JsonResponse({'erro': True, 'mensagem': 'Pedido só com boleto Ometz!'})
+    # if pag_ometz.exists() and not pagto.exists():
+    #     return JsonResponse({'erro': True, 'mensagem': 'Pedido só com boleto Ometz!'})
     
     cursor = connection.cursor()
 
@@ -1284,9 +1422,9 @@ def enviar_email_nfe(request):
                 cursor = connection.cursor()
 
                 if int(nfe.Pedido) < 100000000 and int(nfe.Pedido) > 0:
-                    cursor.execute('SELECT * FROM GreenMotor.dbo.boletos WHERE CodPedido = %s AND Conta NOT LIKE %s ORDER BY NossoNum', [nfe.Pedido, 'Ometz%',])
+                    cursor.execute('SELECT * FROM GreenMotor.dbo.boletos WHERE CodPedido = %s ORDER BY NossoNum', [nfe.Pedido,])
                 else:
-                    cursor.execute('SELECT * FROM Lanmax.dbo.boletos WHERE CodPedido = %s AND Conta NOT LIKE %s ORDER BY NossoNum', [nfe.Pedido, 'Ometz%',])
+                    cursor.execute('SELECT * FROM Lanmax.dbo.boletos WHERE CodPedido = %s ORDER BY NossoNum', [nfe.Pedido,])
 
                 rows = cursor.fetchall()
                 keys = (
@@ -1370,8 +1508,8 @@ def enviar_email_nfe(request):
 def gerar_cupom(request, empresa_filial, id_nfe):
     try:
         empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-        nome_tabela = apps.get_model('core', empresa.Tabela)
-        nome_tabela_itens = apps.get_model('core', empresa.TabelaItens)
+        nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
+        nome_tabela_itens = apps.get_model('nfe_util', empresa.TabelaItens)
     except Empresa.DoesNotExist:
         return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
 
@@ -1458,7 +1596,7 @@ def calcular_formas_pagto(request):
 
         try:
             empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-            nome_tabela = apps.get_model('core', empresa.Tabela)
+            nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
         except Empresa.DoesNotExist:
             return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!', 'formas_pagto': {}})
         
@@ -1474,7 +1612,12 @@ def calcular_formas_pagto(request):
             return JsonResponse({'erro': True, 'mensagem': 'Nota Fiscal já foi emitida!', 'formas_pagto': {}})
         
         cursor = connection.cursor()
-        cursor.execute("EXEC Base_NFE.dbo.setFormasPagto_NFE %s, %s", [id_nfe, empresa.ide_serie])
+
+        if int(nfe.Pedido) < 100000000:
+            cursor.execute("EXEC Base_NFE.dbo.setFormasPagto_NFE_GM %s, %s", [id_nfe, empresa.ide_serie])
+        else:
+            cursor.execute("EXEC Base_NFE.dbo.setFormasPagto_NFE %s, %s", [id_nfe, empresa.ide_serie])
+
         result = cursor.fetchone()
         connection.commit()
 
@@ -1499,7 +1642,7 @@ def calcular_totais_nfe(request):
 
         try:
             empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-            nome_tabela = apps.get_model('core', empresa.Tabela)
+            nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
         except Empresa.DoesNotExist:
             return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!', 'formas_pagto': {}})
         
@@ -1550,7 +1693,7 @@ def acerta_nfe(request):
 
         try:
             empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-            nome_tabela = apps.get_model('core', empresa.Tabela)
+            nome_tabela = apps.get_model('nfe_util', empresa.Tabela)
         except Empresa.DoesNotExist:
             return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
         
@@ -1615,3 +1758,436 @@ def acerta_nfe(request):
         return JsonResponse({'erro': False, 'mensagem': 'Acerto realizado com sucesso!', 'nfe': nfe_lista[0]}, safe=False)
     else:
         return JsonResponse({'erro': True, 'mensagem': 'Método não permitido!'})
+
+@login_required
+def criar_manifesto(request, cod_empresa=None):
+    if cod_empresa:
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa inexistente!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+        modelo_mdfe = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        mdfe_maximo = str(int(modelo_mdfe.objects.aggregate(Max('ide_nMDF'))['ide_nMDF__max'])+1).zfill(9)
+
+        novo_manifesto = modelo_mdfe.objects.get_or_create(
+            ide_serie = empresa.ide_serie,
+            ide_nMDF = mdfe_maximo
+        )
+    else:
+        return JsonResponse({'erro': True, 'mensagem': f'Empresa não informada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+    return JsonResponse({'erro': False, 'mensagem': f'Manifesto {mdfe_maximo} criado!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+@csrf_exempt
+def consultar_manifesto(request, cod_empresa):
+    if request.method == 'POST':
+        chave_acesso = request.POST.get('chave_acesso', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=cod_empresa)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Empresa inexistente!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+        if chave_acesso:
+            status, xml, retorno = consulta_mdfe(empresa, chave_acesso)
+
+            return JsonResponse({'erro': False, 'status': status, 'mensagem': retorno}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Chave de Acesso não informada!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválida!'}, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+
+@csrf_exempt
+def inserir_nfe_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+        cod_pedido = request.POST.get('pedido', '')
+
+        if int(cod_pedido) < 100000000 and int(cod_pedido) > 0:
+            db = 'greenmotor'
+        else:
+            db = 'lanmax'
+
+        try:
+            pedido = Pedido.objects.using(db).get(cod_pedido=cod_pedido)
+        except Pedido.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Pedido não encontrado!'})
+
+        try:
+            empresa_pedido = Empresa.objects.get(EmpresaFilial=pedido.empresa_filial.empresa_filial)
+            tabela_nfe = apps.get_model('nfe_util', empresa_pedido.Tabela)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            tabela_mdfe = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+
+        try:
+            nfe = tabela_nfe.objects.filter(Pedido=cod_pedido).first()
+        except tabela_nfe.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'NF-e não encontrada!'})
+
+        if 'Autorizado' not in nfe.status_sefaz and 'Carta' not in nfe.status_sefaz:
+            return JsonResponse({'erro': True, 'mensagem': 'NF-e não foi emitida!'})
+        
+        try:
+            mdfe = tabela_mdfe.objects.get(id_mdfe=id_mdfe)
+        except tabela_mdfe.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        nova_chave_mdfe, created = MDFe_ChaveNFe.objects.get_or_create(
+            id_mdfe = mdfe.id_mdfe,
+            ide_serie = mdfe.ide_serie,
+            chave_nfe = nfe.chave_acesso,
+            cMunCarrega = empresa.emit_cMun,
+            xMunCarrega = empresa.emit_xMun,
+            cMunDescarrega = nfe.dest_cMun,
+            xMunDescarrega = nfe.dest_xMun,
+            ValorNFe = nfe.TotalICMS_vNF,
+            PesoNFe = nfe.vol_pesoB,
+        )
+
+        novo_registro = model_to_dict(nova_chave_mdfe)
+
+        if created:
+            nfes = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie)
+            total_nfe = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie).aggregate(valor_total=Sum('ValorNFe'))['valor_total'] or 0
+            peso_total = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie).aggregate(peso_total=Sum('PesoNFe'))['peso_total'] or 0
+            qtd_nfe = 0
+            infcpl = ''
+
+            total_nfe = f"{total_nfe:,.2f}"
+            peso_total = f"{peso_total:,.4f}"
+
+            for n in nfes:
+                qtd_nfe += 1
+                infcpl += 'NFE - ' + n.chave_nfe + ' / '
+
+            mdfe.total_qNFe_Opc = qtd_nfe
+            mdfe.total_vCarga = total_nfe
+            mdfe.total_qCarga = peso_total
+            mdfe.infCpl_Opc = infcpl
+            mdfe.save()
+            mdfe.refresh_from_db()
+
+            total_nfe_formatado = total_nfe.replace(',', '#').replace('.', ',').replace('#', '.')
+            peso_total_formatado = peso_total.replace(',', '#').replace('.', ',').replace('#', '.')
+
+            return JsonResponse({'erro': False, 'registro': novo_registro, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'mensagem': 'NF-e inserida no manifesto!'})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao criar um novo registro!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def excluir_nfe_manifesto(request, id):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        try:
+            nfe_mdfe = MDFe_ChaveNFe.objects.get(id=id)
+        except MDFe_ChaveNFe.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'NF-e não encontrada!'})
+
+        qtd_deletada, detalhes = nfe_mdfe.delete()
+
+        nfes = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie)
+        total_nfe = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie).aggregate(valor_total=Sum('ValorNFe'))['valor_total'] or 0
+        peso_total = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie).aggregate(peso_total=Sum('PesoNFe'))['peso_total'] or 0
+        qtd_nfe = 0
+        infcpl = ''
+
+        total_nfe = f"{total_nfe:,.2f}"
+        peso_total = f"{peso_total:,.4f}"
+
+        for n in nfes:
+            qtd_nfe += 1
+            infcpl += 'NFE - ' + n.chave_nfe + ' / '
+
+        mdfe.total_qNFe_Opc = qtd_nfe
+        mdfe.total_vCarga = total_nfe
+        mdfe.total_qCarga = peso_total
+        mdfe.infCpl_Opc = infcpl
+        mdfe.save()
+        mdfe.refresh_from_db()
+
+        if qtd_deletada > 0:
+            total_nfe_formatado = total_nfe.replace(',', '#').replace('.', ',').replace('#', '.')
+            peso_total_formatado = peso_total.replace(',', '#').replace('.', ',').replace('#', '.')
+            
+            return JsonResponse({'erro': False, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'mensagem': 'NF-e excluída com sucesso!'})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': detalhes})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def inserir_percurso_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+        uf = request.POST.get('uf', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            tabela_mdfe = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+            tabela_nfe = apps.get_model('nfe_util', empresa.Tabela)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = tabela_mdfe.objects.get(id_mdfe=id_mdfe)
+        except tabela_mdfe.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        proxima_ordem = int(MDFe_Percursos.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=mdfe.ide_serie).aggregate(Max('ordem'))['ordem__max'] or 0)+1
+
+        nova_percurso, created = MDFe_Percursos.objects.get_or_create(
+            id_mdfe = mdfe.id_mdfe,
+            ide_serie = mdfe.ide_serie,
+            uf = uf,
+            ordem = proxima_ordem,
+        )
+
+        novo_registro = model_to_dict(nova_percurso)
+
+        if created:
+           return JsonResponse({'erro': False, 'registro': novo_registro, 'mensagem': 'NF-e inserida no manifesto!'})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao criar um novo registro!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def excluir_percurso_manifesto(request, id):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        try:
+            percurso_mdfe = MDFe_Percursos.objects.get(id=id)
+        except MDFe_Percursos.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Percurso não encontrado!'})
+
+        qtd_deletada, detalhes = percurso_mdfe.delete()
+
+        if qtd_deletada > 0:
+            return JsonResponse({'erro': False, 'mensagem': 'Percurso excluído com sucesso!'})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': detalhes})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def alterar_motorista_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+        motorista = request.POST.get('motorista', 0)
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        if motorista == '':
+            mdfe.id_condutor = None
+        else:
+            try:
+                motorista_mdfe = MDFe_Motoristas.objects.get(id=motorista)
+            except MDFe_Motoristas.DoesNotExist:
+                return JsonResponse({'erro': True, 'mensagem': 'Motorista não encontrado!'})
+
+            mdfe.id_condutor = motorista_mdfe
+
+        mdfe.save()
+        mdfe.refresh_from_db()
+
+        return JsonResponse({'erro': False, 'mensagem': 'Motorista alterado com sucesso!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def alterar_veiculo_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+        veiculo = request.POST.get('veiculo', 0)
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        if veiculo == '':
+            mdfe.id_veiculo = None
+        else:
+            try:
+                veiculo_mdfe = MDFe_Veiculos.objects.get(id=veiculo)
+            except MDFe_Veiculos.DoesNotExist:
+                return JsonResponse({'erro': True, 'mensagem': 'Veículo não encontrado!'})
+
+            mdfe.id_veiculo = veiculo_mdfe
+
+        mdfe.save()
+        mdfe.refresh_from_db()
+
+        return JsonResponse({'erro': False, 'mensagem': 'Veículo alterado com sucesso!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def transmitir_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if mdfe.status != 'MDFe não enviada':
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        mdfe_chaves = MDFe_ChaveNFe.objects.filter(id_mdfe=id_mdfe, ide_serie=empresa.ide_serie)
+
+        if mdfe_chaves.count() == 0:
+            return JsonResponse({'erro': True, 'mensagem': 'Nenhuma NF-e foi informada!'})
+
+        mdfe_percurso = MDFe_Percursos.objects.filter(id_mdfe=id_mdfe, ide_serie=empresa.ide_serie)
+
+        if mdfe_percurso.count() == 0:
+            return JsonResponse({'erro': True, 'mensagem': 'Percurso não foi informado!'})
+
+        if not mdfe.id_condutor_id:
+            return JsonResponse({'erro': True, 'mensagem': 'Motorista não foi informado!'})
+
+        if not mdfe.id_veiculo_id:
+            return JsonResponse({'erro': True, 'mensagem': 'Veículo não foi informado!'})
+        
+        return JsonResponse({'erro': False, 'mensagem': 'Transmissão realizada com sucesso!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def encerrar_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if 'Aut' not in mdfe.status:
+            return JsonResponse({'erro': True, 'mensagem': 'Não é possível encerrar um manifesto que não está com status AUTORIZADO!'})
+
+        status = encerrar_mdfe(empresa, mdfe)
+
+        if status == 135:
+            return JsonResponse({'erro': False, 'mensagem': 'Encerramento realizado com sucesso!'})
+        else:
+            return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao tentar encerrar o manifesto!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def cancelar_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        if 'Aut' not in mdfe.status:
+            return JsonResponse({'erro': True, 'mensagem': 'Não é possível cancelar um manifesto que não está com status AUTORIZADO!'})
+
+        status = cancelar_mdfe(empresa, mdfe)
+
+        if status == 135:
+            pass
+        
+        return JsonResponse({'erro': False, 'mensagem': 'Cancelamento realizado com sucesso!'})
+    else:
+        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})

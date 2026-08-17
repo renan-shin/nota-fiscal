@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load filters %}
+{% load static %}
+
+{% block title %}Gerar Chave Acesso{% endblock %}
+
+{% block conteudo %}
+<div id="overlay">
+    <div class="cv-spinner">
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-2">
+    {% include 'partials/_messages.html' %}
+</div>
+<div class="container">
+    <form action="{% url 'nfe_util_gerar_chave_acesso' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-group mt-2">
+                <span class="input-group-text">Empresa</span>
+                <select id="empresa" name="empresa" class="form-select form-select-sm" aria-label="status" required>
+                    <option value=""></option>
+                    {% for empresa in empresas %}
+                    <option value="{{empresa.EmpresaFilial}}" {% if empresa.EmpresaFilial|stringformat:'s' == request.POST.empresa %}selected{% endif %}>{{empresa.Mnemonico}}</option>
+                    {% endfor %}
+                </select>
+                <span class="input-group-text">Modelo</span>
+                <select id="modelo" name="modelo" class="form-select form-select-sm" aria-label="status" required>
+                    <option value=""></option>
+                    <option value="55" {% if request.POST.modelo == '55' %}selected{% endif %}>NF-e</option>
+                    <option value="65" {% if request.POST.modelo == '65' %}selected{% endif %}>Cupom</option>
+                </select>
+                <span class="input-group-text">Número:</span>
+                <input type="number" name="numero" aria-label="Número" class="form-control" value="{{request.POST.numero}}" min="1" max="999999999" required>
+                <span class="input-group-text">Mês:</span>
+                <input type="number" name="mes" aria-label="Mês" class="form-control" value="{{request.POST.mes}}" min="1" max="12" required>
+                <span class="input-group-text">Ano:</span>
+                <input type="number" name="ano" aria-label="Ano" class="form-control" value="{{request.POST.ano}}" min="1" max="99" required>
+                <button class="btn btn-primary btn-sm" type="submit">Gerar</button>
+            </div>
+        </div>
+    </form>
+
+    <hr/>
+    <label><b>Status:</b> {{status}}</label><br/>
+    <label><b>Retorno:</b> {{msg_resultado}}</label><br/>
+    <label><b>Chave Acesso:</b> {{chave_nfe}}</label>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/faturados.js' %}"></script>
+{% endblock %}
