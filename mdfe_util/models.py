@@ -24,6 +24,7 @@ class MDFe_Veiculos(models.Model):
     modelo = models.CharField(null=False, max_length=255)
     renavam = models.CharField(null=False, max_length=11)
     placa = models.CharField(null=False, max_length=7)
+    tara = models.BigIntegerField(null=False)
     capacidade_kg = models.IntegerField(null=True)
     capacidade_m3 = models.IntegerField(null=True)
     tipo_rodado = models.CharField(null=False, max_length=2)

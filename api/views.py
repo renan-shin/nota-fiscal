@@ -728,7 +728,7 @@ def consulta_pix(request, conta, inicio, fim):
 
     r = requests.get(url, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
 
-    print(r.status_code, r.text)
+    print(r.status_code, r.text, url)
 
     if r.status_code == 200:
         with open('C:\\Users\\rmizukosi.GRUPOLANMAX\\Desktop\\consulta.txt', 'w', encoding='utf-8') as f:
@@ -1130,9 +1130,6 @@ def inutilizar_nfe(request):
     if num_nfe == '':
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Não foi informado o número a ser inutilizado!'})
     
-    if num_nfe == '':
-        return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Não foi informado o número a ser inutilizado!'})
-    
     if not num_nfe.isdigit():
         return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Número da nota inválido!'})
     
@@ -1241,7 +1238,7 @@ def gerar_gnre(request):
         if not data_pagamento:
             return JsonResponse({'erro': True, 'status': 0, 'mensagem': 'Necessário informar data de pagamento!'})
 
-        gera_xmlgnre(nfe, empresa, detalhamento_receita, data_vencimento, data_pagamento)
+        gera_xmlgnre(nfe, empresa, receita, detalhamento_receita, data_vencimento, data_pagamento)
         status_envia_gnre = envia_gnre(nfe, empresa, receita)
 
         if status_envia_gnre == 100:
@@ -1840,6 +1837,11 @@ def inserir_nfe_manifesto(request):
         except tabela_mdfe.DoesNotExist:
             return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
 
+        chave_nfe = MDFe_ChaveNFe.objects.filter(id_mdfe=mdfe.id_mdfe, ide_serie=empresa.ide_serie, chave_nfe=nfe.chave_acesso).count()
+
+        if chave_nfe > 0:
+            return JsonResponse({'erro': True, 'mensagem': 'NF-e já existe nesse manifesto!'})
+
         if mdfe.status != 'MDFe não enviada':
             return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
 
@@ -1851,8 +1853,8 @@ def inserir_nfe_manifesto(request):
             xMunCarrega = empresa.emit_xMun,
             cMunDescarrega = nfe.dest_cMun,
             xMunDescarrega = nfe.dest_xMun,
-            ValorNFe = nfe.TotalICMS_vNF,
-            PesoNFe = nfe.vol_pesoB,
+            ValorNFe = round(nfe.TotalICMS_vNF, 2),
+            PesoNFe = round(nfe.vol_pesoB, 4),
         )
 
         novo_registro = model_to_dict(nova_chave_mdfe)
@@ -1864,24 +1866,24 @@ def inserir_nfe_manifesto(request):
             qtd_nfe = 0
             infcpl = ''
 
-            total_nfe = f"{total_nfe:,.2f}"
-            peso_total = f"{peso_total:,.4f}"
-
             for n in nfes:
                 qtd_nfe += 1
                 infcpl += 'NFE - ' + n.chave_nfe + ' / '
 
             mdfe.total_qNFe_Opc = qtd_nfe
-            mdfe.total_vCarga = total_nfe
-            mdfe.total_qCarga = peso_total
+            mdfe.total_vCarga = round(total_nfe, 2)
+            mdfe.total_qCarga = round(peso_total, 4)
             mdfe.infCpl_Opc = infcpl
             mdfe.save()
             mdfe.refresh_from_db()
 
+            total_nfe = f"{total_nfe:,.2f}"
+            peso_total = f"{peso_total:,.4f}"
+
             total_nfe_formatado = total_nfe.replace(',', '#').replace('.', ',').replace('#', '.')
             peso_total_formatado = peso_total.replace(',', '#').replace('.', ',').replace('#', '.')
 
-            return JsonResponse({'erro': False, 'registro': novo_registro, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'mensagem': 'NF-e inserida no manifesto!'})
+            return JsonResponse({'erro': False, 'registro': novo_registro, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'info_compl': infcpl, 'mensagem': 'NF-e inserida no manifesto!'})
         else:
             return JsonResponse({'erro': True, 'mensagem': 'Ocorreu um erro ao criar um novo registro!'})
     else:
@@ -1920,25 +1922,26 @@ def excluir_nfe_manifesto(request, id):
         qtd_nfe = 0
         infcpl = ''
 
-        total_nfe = f"{total_nfe:,.2f}"
-        peso_total = f"{peso_total:,.4f}"
-
         for n in nfes:
             qtd_nfe += 1
             infcpl += 'NFE - ' + n.chave_nfe + ' / '
 
+        print(round(total_nfe, 2), round(peso_total, 4))
+
         mdfe.total_qNFe_Opc = qtd_nfe
-        mdfe.total_vCarga = total_nfe
-        mdfe.total_qCarga = peso_total
+        mdfe.total_vCarga = round(total_nfe, 2)
+        mdfe.total_qCarga = round(peso_total, 4)
         mdfe.infCpl_Opc = infcpl
         mdfe.save()
         mdfe.refresh_from_db()
 
         if qtd_deletada > 0:
+            total_nfe = f"{total_nfe:,.2f}"
+            peso_total = f"{peso_total:,.4f}"
             total_nfe_formatado = total_nfe.replace(',', '#').replace('.', ',').replace('#', '.')
             peso_total_formatado = peso_total.replace(',', '#').replace('.', ',').replace('#', '.')
             
-            return JsonResponse({'erro': False, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'mensagem': 'NF-e excluída com sucesso!'})
+            return JsonResponse({'erro': False, 'valor_total': total_nfe_formatado, 'peso_total': peso_total_formatado, 'info_compl': infcpl, 'mensagem': 'NF-e excluída com sucesso!'})
         else:
             return JsonResponse({'erro': True, 'mensagem': detalhes})
     else:
@@ -2019,82 +2022,6 @@ def excluir_percurso_manifesto(request, id):
         return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
 
 @csrf_exempt
-def alterar_motorista_manifesto(request):
-    if request.method == 'POST':
-        id_mdfe = request.POST.get('id_mdfe', 0)
-        empresa_filial = request.POST.get('empresa_filial', '')
-        motorista = request.POST.get('motorista', 0)
-
-        try:
-            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
-        except Empresa.DoesNotExist:
-            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
-        
-        try:
-            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
-        except nome_tabela.DoesNotExist:
-            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
-
-        if mdfe.status != 'MDFe não enviada':
-            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
-
-        if motorista == '':
-            mdfe.id_condutor = None
-        else:
-            try:
-                motorista_mdfe = MDFe_Motoristas.objects.get(id=motorista)
-            except MDFe_Motoristas.DoesNotExist:
-                return JsonResponse({'erro': True, 'mensagem': 'Motorista não encontrado!'})
-
-            mdfe.id_condutor = motorista_mdfe
-
-        mdfe.save()
-        mdfe.refresh_from_db()
-
-        return JsonResponse({'erro': False, 'mensagem': 'Motorista alterado com sucesso!'})
-    else:
-        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
-
-@csrf_exempt
-def alterar_veiculo_manifesto(request):
-    if request.method == 'POST':
-        id_mdfe = request.POST.get('id_mdfe', 0)
-        empresa_filial = request.POST.get('empresa_filial', '')
-        veiculo = request.POST.get('veiculo', 0)
-
-        try:
-            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
-            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
-        except Empresa.DoesNotExist:
-            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
-        
-        try:
-            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
-        except nome_tabela.DoesNotExist:
-            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
-
-        if mdfe.status != 'MDFe não enviada':
-            return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
-
-        if veiculo == '':
-            mdfe.id_veiculo = None
-        else:
-            try:
-                veiculo_mdfe = MDFe_Veiculos.objects.get(id=veiculo)
-            except MDFe_Veiculos.DoesNotExist:
-                return JsonResponse({'erro': True, 'mensagem': 'Veículo não encontrado!'})
-
-            mdfe.id_veiculo = veiculo_mdfe
-
-        mdfe.save()
-        mdfe.refresh_from_db()
-
-        return JsonResponse({'erro': False, 'mensagem': 'Veículo alterado com sucesso!'})
-    else:
-        return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
-
-@csrf_exempt
 def transmitir_manifesto(request):
     if request.method == 'POST':
         id_mdfe = request.POST.get('id_mdfe', 0)
@@ -2113,6 +2040,12 @@ def transmitir_manifesto(request):
 
         if mdfe.status != 'MDFe não enviada':
             return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+
+        if mdfe.ide_UFIni is None or mdfe.ide_UFIni == '':
+            return JsonResponse({'erro': True, 'mensagem': 'UF Início não foi informada!'})
+
+        if mdfe.ide_UFFim is None or mdfe.ide_UFFim == '':
+            return JsonResponse({'erro': True, 'mensagem': 'UF Fim não foi informada!'})
 
         mdfe_chaves = MDFe_ChaveNFe.objects.filter(id_mdfe=id_mdfe, ide_serie=empresa.ide_serie)
 
@@ -2191,3 +2124,32 @@ def cancelar_manifesto(request):
         return JsonResponse({'erro': False, 'mensagem': 'Cancelamento realizado com sucesso!'})
     else:
         return JsonResponse({'erro': True, 'mensagem': 'Método de requisição inválido!'})
+
+@csrf_exempt
+def consolida_manifesto(request):
+    if request.method == 'POST':
+        id_mdfe = request.POST.get('id_mdfe', 0)
+        empresa_filial = request.POST.get('empresa_filial', '')
+
+        try:
+            empresa = Empresa.objects.get(EmpresaFilial=empresa_filial)
+            nome_tabela = apps.get_model('mdfe_util', empresa.Tabela_MDFe)
+        except Empresa.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Empresa não encontrada!'})
+        
+        try:
+            mdfe = nome_tabela.objects.get(id_mdfe=id_mdfe)
+        except nome_tabela.DoesNotExist:
+            return JsonResponse({'erro': True, 'mensagem': 'Manifesto não encontrado!'})
+
+        # if mdfe.status != 'MDFe não enviada':
+        #     return JsonResponse({'erro': True, 'mensagem': 'Manifesto já foi emitido!'})
+        
+        consolida_mdfe(empresa, mdfe)
+
+        return JsonResponse({'erro': False, 'mensagem': 'sucesso'})
+
+        # if status == 5601:
+        #     return JsonResponse({'erro': False, 'mensagem': msg_resultado, 'chave_mdfe': chave_mdfe})
+        # else:
+        #     return JsonResponse({'erro': True, 'mensagem': msg_resultado})

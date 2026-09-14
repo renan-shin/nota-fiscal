@@ -632,7 +632,26 @@ def det_prod(nfe, nfe_itens, empresa):
         det_obsContItem = obj_nfe_util.obsCont('', '')
         det_obsFiscoItem = obj_nfe_util.obsCont('', '')
 
-        if item.chaveAcessoRef:
+        if nfe.ide_finNFe == 4 and nfe.referenciar_NF == 1 and nfe.ide_NFRefs:
+            tabela_cabec = apps.get_model('mdfe_util', empresa.Tabela)
+            tabela_itens = apps.get_model('mdfe_util', empresa.TabelaItens)
+            
+            try:
+                nfe_original = tabela_cabec.objects.filter(chave_acesso=nfe.ide_NFRefs).first()
+            except tabela_cabec.DoesNotExist:
+                return produtos
+
+            for item in nfe_itens:
+                try:
+                    item_nfe_original = tabela_itens.objects.filter(id_nfe=nfe_original.id_nfe, det_nItem=item.det_nItem).first()
+                except tabela_itens.DoesNotExist:
+                    return produtos
+
+                nfe_itens.chaveAcessoRef = nfe_original.chave_acesso
+                nfe_itens.ref_nItem = item_nfe_original.det_nItem
+                nfe_itens.save()
+                nfe_itens.refresh_from_db()
+
             det_DFeReferenciado = DFeReferenciado(item)
         else:
             det_DFeReferenciado = ''
@@ -1703,7 +1722,7 @@ def inutiliza_nfe(inutilizacao, empresa):
         inutilizacao.Modelo,
         empresa.ide_serie,
         inutilizacao.nroNFeInicial,
-        inutilizacao.nroNFeInicial,
+        inutilizacao.nroNFeFinal,
         justificativa,
         num_protocolo,
         data_protocolo,
@@ -1724,6 +1743,7 @@ def inutiliza_nfe(inutilizacao, empresa):
                 arquivo.write(xml_inutilizado)
                 arquivo.close()
 
+        inutilizacao.status_sefaz = 'Inutilizacao de numero homologado'
         inutilizacao.nProtocoloInut = num_protocolo
         inutilizacao.dProtocoloInut = data_protocolo
         inutilizacao.procInutNFe = xml_inutilizado
@@ -1733,21 +1753,17 @@ def inutiliza_nfe(inutilizacao, empresa):
 
     return status, msg_resultado
 
-def gera_xmlgnre(nfe, empresa, detalhamento_receita, data_vencimento, data_pagamento):
-    if tem_gnre(nfe.id_nfe, empresa.ide_serie):
-        receita = '100099'
+def gera_xmlgnre(nfe, empresa, receita, detalhamento_receita, data_vencimento, data_pagamento):
+    if receita == 100099 and tem_gnre(nfe.id_nfe, empresa.ide_serie):
         valor = nfe.TotalICMS_vST if nfe.TotalICMS_vST else 0
         prefixo_arquivo = 'gnre_'
-    elif gera_difal(nfe.id_nfe, empresa.ide_serie):
-        receita = '100102'
+    elif receita == 100102 and gera_difal(nfe.id_nfe, empresa.ide_serie):
         valor = nfe.TotalICMS_vICMSUFDest_Opc if nfe.TotalICMS_vICMSUFDest_Opc else 0
         prefixo_arquivo = 'difal_'
-    elif gera_fcp(nfe.id_nfe, empresa.ide_serie):
-        receita = '100129'
+    elif receita == 100129 and gera_fcp(nfe.id_nfe, empresa.ide_serie):
         valor = nfe.TotalICMS_vFCPUFDest_Opc if nfe.TotalICMS_vFCPUFDest_Opc else 0
         prefixo_arquivo = 'fcp_'
     else:
-        receita = ''
         prefixo_arquivo = ''
 
     endereco_emitente = empresa.emit_xLgr + ', ' + (empresa.emit_nro if empresa.emit_nro else 'S/N')
@@ -1794,7 +1810,7 @@ def gera_xmlgnre(nfe, empresa, detalhamento_receita, data_vencimento, data_pagam
 
     valor_gnre = valor
 
-    if receita == '100102':
+    if receita == '100102' and nfe.dest_UF == 'RJ':
         gnre_receitas = GNRE_Receitas.objects.filter(UF=nfe.dest_UF, Codigo=100129).first()
         valor_fcp = nfe.TotalICMS_vFCPUFDest_Opc if nfe.TotalICMS_vFCPUFDest_Opc else 0
 

@@ -34,9 +34,8 @@ urlpatterns = [
     path('excluir-nfe-manifesto/<int:id>/', views.excluir_nfe_manifesto, name='api_excluir_nfe_manifesto'),
     path('inserir-percurso-manifesto/', views.inserir_percurso_manifesto, name='api_inserir_percurso_manifesto'),
     path('excluir-percurso-manifesto/<int:id>/', views.excluir_percurso_manifesto, name='api_excluir_percurso_manifesto'),
-    path('alterar-motorista-manifesto/', views.alterar_motorista_manifesto, name='api_alterar_motorista_manifesto'),
-    path('alterar-veiculo-manifesto/', views.alterar_veiculo_manifesto, name='api_alterar_veiculo_manifesto'),
     path('transmitir-manifesto/', views.transmitir_manifesto, name='api_transmitir_manifesto'),
     path('encerrar-manifesto/', views.encerrar_manifesto, name='api_encerrar_manifesto'),
     path('cancelar-manifesto/', views.cancelar_manifesto, name='api_cancelar_manifesto'),
+    path('consolida-manifesto/', views.consolida_manifesto, name='api_consolida_manifesto'),
 ]

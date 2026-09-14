@@ -13,8 +13,6 @@ $('#ufs').on('click', '.btn-excluir', function() {
     var url = $botao.data('url');
     var id = $botao.data('id');
 
-    console.log(id);
-
     if(confirm('Tem certeza que deseja excluir esta UF do percurso?')) {
         excluir_percurso_manifesto(url, id)
     }
@@ -73,7 +71,7 @@ async function inserir_percurso_manifesto(url) {
     }
 }
 
-async function excluir_percurso_manifesto(url) {
+async function excluir_percurso_manifesto(url, id) {
     $('#overlay').fadeIn();
 
     try {
@@ -204,6 +202,7 @@ async function inserir_nfe_manifesto(url) {
 
             $('#total-valor').val(valor_total_nfe)
             $('#total-peso').val(peso_total_nfe)
+            $('#info-compl').val(dados.info_compl)
 
             $('#chaves_nfe tbody').append(novo_registro);
         }
@@ -270,71 +269,8 @@ async function excluir_nfe_manifesto(url, id) {
                 $(this).remove();
                 $('#total-valor').val(valor_total_nfe);
                 $('#total-peso').val(peso_total_nfe);
+                $('#info-compl').val(dados.info_compl);
             })
-        }
-
-        $('#overlay').fadeOut();
-    }
-}
-
-async function alterar_motorista_manifesto(url) {
-    $('#overlay').fadeIn();
-
-    try {
-        var response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/x-www-form-urlencoded',
-                    //'X-CSRFToken': csrfToken,
-                },
-                body: "empresa_filial=" + empresa + "&id_mdfe=" + id_mdfe + '&motorista=' + $('#motorista').val()
-            });
-
-            if(!response.ok) {
-                throw new Error('Erro na requisição!');
-            }
-    } catch(error) {
-        //divRetorno.className = 'alert alert-danger';
-        //divRetorno.textContent = '-1 - ' + error;
-        alert(error);
-        $('#overlay').fadeOut();
-    } finally {
-        var dados = await response.json();
-
-        if(dados.erro) {
-            alert(dados.mensagem);
-        }
-
-        $('#overlay').fadeOut();
-    }
-}
-
-async function alterar_veiculo_manifesto(url) {
-    $('#overlay').fadeIn();
-
-    try {
-        var response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/x-www-form-urlencoded',
-                    //'X-CSRFToken': csrfToken,
-                },
-                body: "empresa_filial=" + empresa + "&id_mdfe=" + id_mdfe + '&veiculo=' + $('#veiculo').val()
-            });
-
-            if(!response.ok) {
-                throw new Error('Erro na requisição!');
-            }
-    } catch(error) {
-        //divRetorno.className = 'alert alert-danger';
-        //divRetorno.textContent = '-1 - ' + error;
-        alert(error);
-        $('#overlay').fadeOut();
-    } finally {
-        var dados = await response.json();
-
-        if(dados.erro) {
-            alert(dados.mensagem);
         }
 
         $('#overlay').fadeOut();
@@ -366,18 +302,6 @@ async function acao_manifesto(url) {
         location.reload();
     }
 }
-
-$('#motorista').on('change', function() {
-    const url = $(this).data('url');
-
-    alterar_motorista_manifesto(url);
-})
-
-$('#veiculo').on('change', function() {
-    const url = $(this).data('url');
-
-    alterar_veiculo_manifesto(url);
-})
 
 $('#transmitir').on('click', function() {
     $('#modalGenericoLabel').attr('class', 'modal-title text-success');

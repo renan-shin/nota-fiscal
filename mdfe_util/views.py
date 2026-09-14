@@ -49,3 +49,100 @@ def mdfe_edit(request, empresa_filial, id_mdfe):
                 'veiculos': veiculos,
                 'ufs': ufs
             })
+
+    if request.method == 'POST':
+        motorista = request.POST.get('motorista', '')
+        veiculo = request.POST.get('veiculo', '')
+        uf_inicio = request.POST.get('uf_inicio', '')
+        uf_fim = request.POST.get('uf_fim', '')
+
+        if mdfe.status != 'MDFe não enviada':
+            messages.error(request, 'Opção de envio de e-mail inválida!')
+
+            return render(request, 'mdfe_util/edit.html', {
+                'empresa': empresa,
+                'mdfe': mdfe,
+                'chaves_nfe': chaves_nfe,
+                'percurso': percurso,
+                'motoristas': motoristas,
+                'veiculos': veiculos,
+                'ufs': ufs,
+                'form': request.POST
+            })
+
+        if motorista is None or motorista == '':
+            messages.error(request, 'Motorista não informado!')
+            return render(request, 'mdfe_util/edit.html', {
+                'empresa': empresa,
+                'mdfe': mdfe,
+                'chaves_nfe': chaves_nfe,
+                'percurso': percurso,
+                'motoristas': motoristas,
+                'veiculos': veiculos,
+                'ufs': ufs,
+                'form': request.POST
+            })
+
+        if veiculo is None or veiculo == '':
+            messages.error(request, 'Veículo não informado!')
+            return render(request, 'mdfe_util/edit.html', {
+                'empresa': empresa,
+                'mdfe': mdfe,
+                'chaves_nfe': chaves_nfe,
+                'percurso': percurso,
+                'motoristas': motoristas,
+                'veiculos': veiculos,
+                'ufs': ufs,
+                'form': request.POST
+            })
+
+        try:
+            mdfe_motorista = MDFe_Motoristas.objects.get(id=motorista)
+        except MDFe_Motoristas.DoesNotExist:
+            messages.error(request, 'Motorista não encontrado!')
+
+            return render(request, 'mdfe_util/edit.html', {
+                'empresa': empresa,
+                'mdfe': mdfe,
+                'chaves_nfe': chaves_nfe,
+                'percurso': percurso,
+                'motoristas': motoristas,
+                'veiculos': veiculos,
+                'ufs': ufs,
+                'form': request.POST
+            })
+
+        try:
+            mdfe_veiculo = MDFe_Veiculos.objects.get(id=veiculo)
+        except MDFe_Veiculos.DoesNotExist:
+            messages.error(request, 'Veículo não encontrado!')
+            
+            return render(request, 'mdfe_util/edit.html', {
+                'empresa': empresa,
+                'mdfe': mdfe,
+                'chaves_nfe': chaves_nfe,
+                'percurso': percurso,
+                'motoristas': motoristas,
+                'veiculos': veiculos,
+                'ufs': ufs,
+                'form': request.POST
+            })
+
+        mdfe.ide_UFIni = uf_inicio
+        mdfe.ide_UFFim = uf_fim
+        mdfe.id_condutor = mdfe_motorista
+        mdfe.id_veiculo = mdfe_veiculo
+        mdfe.save()
+        mdfe.refresh_from_db()
+        messages.success(request, 'Dados salvos com sucesso!')
+
+        return render(request, 'mdfe_util/edit.html', {
+            'empresa': empresa,
+            'mdfe': mdfe,
+            'chaves_nfe': chaves_nfe,
+            'percurso': percurso,
+            'motoristas': motoristas,
+            'veiculos': veiculos,
+            'ufs': ufs,
+            'form': request.POST
+        })

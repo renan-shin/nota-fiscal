@@ -41,6 +41,8 @@ def get_token_itau(empresa_filial):
     r = requests.post(url, data=form, headers=headers, cert=(conta_lanmax.caminho_arquivo_crt, conta_lanmax.caminho_arquivo_key))
     token_details = json.loads(r.text)
 
+    # print(token_details, r.status_code)
+
     if r.status_code == 200:
         return token_details['access_token']
     
